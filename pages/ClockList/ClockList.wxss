@@ -1,0 +1,15 @@
+.goal_list{
+  display: flex;
+  width:90%;
+  height:1000rpx;
+  border:2rpx solid rgba(107, 143, 197, 0.867);
+}
+.goal{
+  display: block;
+  
+}
+.piece_of_goal{
+  width:85%;
+  line-height:20rpx;
+  border:1rpx solid rgba(107, 143, 197, 0.867);
+}

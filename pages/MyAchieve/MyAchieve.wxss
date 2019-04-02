@@ -1,0 +1,40 @@
+
+.my_achieve{
+  display:flex;
+  top: 50rpx;
+  width:600rpx;
+  height:1000rpx;
+  border: 5px solid blue;
+  border-radius: 50rpx;
+}
+.font{
+  text-align: cneter;
+  margin-left: 200rpx;
+  color:red;
+  font-size: 60rpx;
+  
+}
+.medal{
+ border:0px solid #dadada;
+  
+  width: 98%;
+  margin-left: 1%;
+}
+.tr{
+  width:100%;
+  
+  display:flex;
+  justify-content: space-between;
+}
+.td{
+  padding: 10px;
+  
+  text-align: center;
+  width: 100%;
+  font-size: 20rpx;
+  color: #ec9480;
+}
+.td1,.td2,.td3{
+  width:150rpx;
+  height:150rpx;
+}

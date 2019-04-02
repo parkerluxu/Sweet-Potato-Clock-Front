@@ -1,0 +1,39 @@
+{
+  "pages":[
+    
+    "pages/index/index",
+    "pages/ClockList/ClockList",
+    "pages/ClockStart/ClockStart",
+    
+    "pages/GroupList/GroupList",
+    "pages/ClockGoal/ClockGoal",
+    "pages/MyInfo/MyInfo",
+    "pages/logs/logs",
+    "pages/MyAchieve/MyAchieve"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar":{
+    "color":"#bfbfbf",
+    "seletedColor":"#1296db",
+    "borderStyle":"white",
+    "list":[{
+      "seletedlconPath":"pages/images/bottomGroupSeleted.png",
+      "iconPath":"pages/images/bottomGroupUnseleted.png",
+      "pagePath":"pages/GroupList/GroupList"
+      
+    },{
+      "selectedlconPath": "pages/images/bottomAddSeleted.png",
+      "iconPath": "pages/images/bottomAddUnseleted.png",
+      "pagePath": "pages/ClockGoal/ClockGoal"
+    },{
+        "selectedlconPath": "pages/images/bottomPersonSeleted.png",
+        "iconPath": "pages/images/bottomPersonUnseleted.png",
+        "pagePath": "pages/MyInfo/MyInfo"
+    }]
+  }
+}

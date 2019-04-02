@@ -1,0 +1,25 @@
+/*搜索框样式*/
+.search{
+   display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  width:70%;
+  height:60rpx;
+  background-color:whitesmoke;
+  margin-top: 5%;
+  border:1rpx solid whitesmoke;
+  border-radius: 5rpx;
+}
+/*搜索框提示文字样式*/
+.search input{
+    font-size:27rpx;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left:30rpx; 
+}
+/*搜索框小图标*/
+.search image{
+    width:40rpx;
+  height:40rpx;
+  padding-right:20rpx;
+}

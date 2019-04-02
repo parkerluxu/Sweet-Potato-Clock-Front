@@ -1,0 +1,25 @@
+.title_goal{
+  display: flex;
+  width:70%;
+  border:2px solid rgba(25, 145, 192, 0.671);
+  border-radius: 10rpx;
+}
+.time_area{
+  height:600rpx;
+  margin-top: 20rpx; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:90%;
+  border:8px solid rgba(25, 145, 192, 0.671);
+  border-radius: 50%;
+}
+ .text_time .time{
+  
+  display:block;
+}
+.slider{
+  width:90%;
+  margin-top: 20rpx;
+  height:100rpx;
+}

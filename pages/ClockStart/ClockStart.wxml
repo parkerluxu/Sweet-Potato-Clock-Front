@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="title_goal">
+    <text>目标：</text>
+    </view>
+  <view class="time_area">
+    <text class="text_time">请设定时间：</text>
+     <text class="time">{{minutes}}:{{seconds}}</text>
+    
+   </view>
+   <slider class="slider" min="0" max="120" step="5" bindchanging="goal_of_time" value="{{minutes}}"></slider>
+    <view class="btn-area">
+      <button class="button" bindtap="clock_start">开始</button></view>
+</view>
