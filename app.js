@@ -36,7 +36,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    text_goal_list:[],   //目标数组
-    goal_list_compeletion:[]  //目标数组对应的完成度数组
+    text_goal_list:["sda"],   //目标数组
+    goal_list_compeletion:["asdas"]  //目标数组对应的完成度数组
   }
 })
