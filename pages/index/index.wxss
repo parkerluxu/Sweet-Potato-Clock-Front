@@ -1,6 +1,7 @@
 /*搜索框样式*/
 .search{
-   display: flex;
+  margin-top: 0rpx;
+  display: flex;
   flex-direction: row;
   justify-content:space-between;
   align-items: center;
@@ -23,3 +24,29 @@
   height:40rpx;
   padding-right:20rpx;
 }
+/*开始打卡按钮*/
+.button_area{
+  
+
+
+}
+._button{
+  width: 50%;
+  margin-top: 40rpx;
+  background-color: rgb(162, 235, 140);
+  color: rgb(143, 250, 149);
+  box-shadow: 0rpx 10rpx 50rpx 10rpx rgba(85, 85, 85, 0.10);
+}
+.goal_list{
+  margin-top:40rpx;
+  width:80%;
+  border: 5rpx solid rgba(119, 181, 231, 0.867);
+  border-radius: 5rpx;
+  height:600rpx;
+  text-align: left;
+  padding-top:20rpx;
+  padding-bottom: 20rpx;
+  padding-right: 20rpx;
+  padding-left:20rpx;
+}
+
