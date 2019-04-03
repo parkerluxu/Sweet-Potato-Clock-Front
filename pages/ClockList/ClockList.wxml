@@ -1,9 +1,9 @@
 <view class= "container">
   <view class="goal_list">
-    <block wx:for="{{text_goal_list_new}}">
+    <block wx:for="{{text_goal_list}}">
         <view class="piece_of_goal">
-          <text class="goal">目标{{index+1}}</text>
-          <view class="goal" bindtap='change_to_clock_start'>{{item}}</view>
+          <text class="goal">目标{{ index+1 }}</text>
+          <view class="goal" bindtap='change_to_clock_start'>{{ item }}</view>
         </view>
     </block>
   </view>

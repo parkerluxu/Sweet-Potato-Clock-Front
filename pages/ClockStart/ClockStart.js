@@ -19,25 +19,20 @@ Page({
 
   countDown: function () {
     var that = this;
-    var countdownnum = that.data.minutes * 60 + that.data.seconds;
+    that.setData({
 
+    })
     this.data.intervarID = setInterval(function () {
-      if (countdownnum == 0) {    //时间结束,打卡完成
+      if (countDownNum == 0) {    //时间结束
         clearInterval(that.data.intervarID);
-        wx.showToast({
-          title: '打卡成功',
-          content: '../images/clock_success.png',
-          
-        })
-        return null;
       }
-      countdownnum--;
-      var m = Math.floor(countdownnum / 60);
-      var s = countdownnum % 60;
+      countDownNum--;
+      let m = Math.floor(countDownNum / 60);
+      let s = countDownNum % 60;
       that.setData({
         minutes: m,
         seconds: s,
-      });
+      })
     }, 1000)
   }
 
