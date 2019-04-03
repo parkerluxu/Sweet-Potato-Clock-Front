@@ -1,12 +1,11 @@
-
-Pages({
-  data: {
-    text_goal_list: ["asd", "asd", "asdas"]
+const app=getApp();
+Page({
+  data:{
+    text_goal_list_new:["asd","asdas","adasd"]
   },
-  change_to_clock_start: function () {
+  change_to_clock_start:function(){
     wx.navigateTo({
-      url: 'pages/ClockStart/ClockStart',// 
-    })
+    url: '../ClockStart/ClockStart',
+})
   }
-
 })
