@@ -1,6 +1,6 @@
 <!--groupList.wxml-->
 <view class="windows">
-  <navigator wx:for="{{items}}" hover-class='navigator-hover'>
+  <navigator wx:for="{{items}}" hover-class='navigator-hover' url='../groupDetail/groupDetail'>
     <view class='group_list'>
       <view class="group_list_text">{{item.groupName}}</view>
       <view class="group_list_text">{{item.groupDay}}</view>
