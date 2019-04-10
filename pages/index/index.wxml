@@ -2,7 +2,7 @@
 <!--搜索框-->
   <view class="search">
     <input type="text" placeholder='请输入小组名称' confirm-type='search' value="{{inputValue}}" bindinput='inputBind' bindconfirm='query'></input>
-    <image class="" src='images/search.png' bindtap='query'></image> 
+    <image class="" src='../images/search.png' bindtap='query'></image> 
       </view>
 <!--开始打卡按钮-->
   <view class="click_clock">
