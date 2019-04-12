@@ -22,16 +22,17 @@
     "seletedColor":"#1296db",
     "borderStyle":"white",
     "list":[{
-      "seletedlconPath":"pages/images/bottomGroupSeleted.png",
-      "iconPath":"pages/images/bottomGroupUnseleted.png",
-      "pagePath":"pages/ClockList/ClockList"
+       "selectedIconPath": "pages/images/index_2.png",
+        "iconPath": "pages/images/index_1.png",
+        "pagePath": "pages/index/index"
+        
       
     },{
-      "selectedlconPath": "pages/images/bottomAddSeleted.png",
+      "selectedIconPath": "pages/images/bottomAddSeleted.png",
       "iconPath": "pages/images/bottomAddUnseleted.png",
       "pagePath": "pages/ClockGoal/ClockGoal"
     },{
-        "selectedlconPath": "pages/images/bottomPersonSeleted.png",
+        "selectedIconPath": "pages/images/bottomPersonSeleted.png",
         "iconPath": "pages/images/bottomPersonUnseleted.png",
         "pagePath": "pages/MyInfo/MyInfo"
     }]
