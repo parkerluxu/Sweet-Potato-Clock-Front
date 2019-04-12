@@ -1,37 +1,42 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/ClockList/ClockList",
     "pages/ClockStart/ClockStart",
     "pages/GroupList/GroupList",
     "pages/ClockGoal/ClockGoal",
     "pages/MyInfo/MyInfo",
-    
     "pages/MyAchieve/MyAchieve"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
-  "tabBar":{
-    "color":"#bfbfbf",
-    "seletedColor":"#1296db",
-    "borderStyle":"white",
-    "list":[{
-      "seletedlconPath":"pages/images/bottomGroupSeleted.png",
-      "iconPath":"pages/images/bottomGroupUnseleted.png",
-      "pagePath":"pages/GroupList/GroupList"
-      
-    },{
-      "selectedlconPath": "pages/images/bottomAddSeleted.png",
-      "iconPath": "pages/images/bottomAddUnseleted.png",
-      "pagePath": "pages/ClockGoal/ClockGoal"
-    },{
-        "selectedlconPath": "pages/images/bottomPersonSeleted.png",
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "pages/images/index_2.png",
+        "iconPath": "pages/images/index_1.png",
+        "pagePath": "pages/index/index",
+        "text":""
+      },
+      {
+        "selectedIconPath": "pages/images/bottomAddSeleted.png",
+        "iconPath": "pages/images/bottomAddUnseleted.png",
+        "pagePath": "pages/ClockGoal/ClockGoal"
+        
+      },
+      {
+        "selectedIconPath": "pages/images/bottomPersonSeleted.png",
         "iconPath": "pages/images/bottomPersonUnseleted.png",
         "pagePath": "pages/MyInfo/MyInfo"
-    }]
+        
+      }
+    ]
   }
 }

@@ -9,8 +9,8 @@
     <button class="_button" type="default" bindtap="clock_start">开始打卡</button>
     
 <!--打卡目标概要-->
-    <view class="goal_list">
+    <scroll-view scroll-y="true" class="goal_list">
       <block wx:for="{{text_goal_list_new}}">
-        <text style="">{{item}}</text>
+        <text style="display:block">{{item}}</text>
       </block>
-      </view></view>
+      </scroll-view></view>

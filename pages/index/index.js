@@ -2,7 +2,7 @@
 const app=getApp();
 Page({
   data:{
-    text_goal_list_new:['sad'],
+    text_goal_list_new:['sad','sda','sadc','scsw','sdas','eewr','fgfg','fd','zcxzc','cvdfv','yrty'],
     inputValue:"" ,
     src_route:'../images/search.png'  //搜索值
   },
