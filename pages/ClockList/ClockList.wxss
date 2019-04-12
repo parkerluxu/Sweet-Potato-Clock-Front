@@ -1,3 +1,11 @@
+page{
+  height: 100%;
+}
+/*整个页面样式*/
+.container{
+  height: 100%;
+  overflow: hidden;
+}
 .goal_list{
   display: flex;
   width:90%;
