@@ -7,20 +7,17 @@ page{
   overflow: hidden;
 }
 .goal_list{
-  justify-content: center;
-  display: block;
-  align-items: center; 
+  display: flex;
   width:90%;
-  height:900rpx;
+  height:1000rpx;
   border:2rpx solid rgba(107, 143, 197, 0.867);
-  align-content: center;
 }
-
+.goal{
+  display: block;
+  
+}
 .piece_of_goal{
-  text-align: center;
-  margin-left: 10%;
-  margin-top: 100rpx;
-  width:80%;
-  border:2rpx solid rgba(107, 143, 197, 0.867);
-  border-radius: 50rpx;
+  width:85%;
+  line-height:20rpx;
+  border:1rpx solid rgba(107, 143, 197, 0.867);
 }

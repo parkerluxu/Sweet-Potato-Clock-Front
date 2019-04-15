@@ -1,12 +1,15 @@
 {
-  "pages": [
+  "pages":[
+
     "pages/index/index",
     "pages/ClockList/ClockList",
     "pages/ClockStart/ClockStart",
     "pages/GroupList/GroupList",
     "pages/ClockGoal/ClockGoal",
-    "pages/MyInfo/MyInfo",
-    "pages/MyAchieve/MyAchieve"
+    "pages/MyInfo/MyInfo"，
+    "pages/logs/logs",
+    "pages/MyAchieve/MyAchieve",
+    "pages/groupDetail/groupDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
