@@ -1,0 +1,39 @@
+<!--pages/MyInfo/MyInfo.wxml-->
+
+<view class="windows">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <!--<image src="{{userInformation.motto}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>-->
+      </view>
+      <view class="weui-cell__bd">昵称</view>
+      <view class="weui-cell__ft">{{userInformation.userNickName}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">积分</view>
+      <view class="weui-cell__ft">{{userInformation.score}}</view>
+    </view>
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">打卡天数</view>
+      <view class="weui-cell__ft">{{userInformation.daySum}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">打卡时长</view>
+      <view class="weui-cell__ft">{{userInformation.minutesSum}}</view>
+    </view><view class="weui-cell">
+      <view class="weui-cell__bd">连续天数</view>
+      <view class="weui-cell__ft">{{userInformation.continueDays}}</view>
+    </view>
+  </view>
+   <view class="page__bd page__bd_spacing">
+   <button class="weui-btn" type="primary" bindtap="toForestPage">森林</button>
+   <button class="weui-btn" type="primary" bindtap="toAchievement">成就</button>
+   <button class="weui-btn" type="primary" bindtap="toRankingList">排行榜</button>
+   <button class="weui-btn" type="primary" bindtap="toMyRecord">记录</button>
+   </view>
+</view>

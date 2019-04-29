@@ -1,0 +1,14 @@
+<!--pages/MyAchieve/MyAchieve.wxml-->
+<view class="container">
+  <view class="my_achieve">
+    <view class="font">勋章墙</view>
+    <view class="medal">
+      <view class="tr" wx:for="{{3}}">
+        <image class="td td1" src='../images/achieve_unreceive.png'></image>
+        <image class="td td2" src='../images/achieve_unreceive.png'></image>  
+        <image class="td td3" src='../images/achieve_unreceive.png'></image> 
+        </view>
+    </view>
+
+  </view>
+    </view>

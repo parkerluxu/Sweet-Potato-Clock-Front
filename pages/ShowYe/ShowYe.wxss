@@ -1,0 +1,60 @@
+page{
+  height: 100%;
+}
+/*整个页面样式*/
+.container{
+  height: 100%;
+  overflow: hidden;
+}
+/*搜索框样式*/
+.search{
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  width:70%;
+  height:60rpx;
+  background-color:whitesmoke;
+  margin-top: 5%;
+  border:1rpx solid whitesmoke;
+  border-radius: 5rpx;
+}
+/*搜索框提示文字样式*/
+.search input{
+    font-size:27rpx;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left:30rpx; 
+}
+/*搜索框小图标*/
+.search image{
+    width:40rpx;
+  height:40rpx;
+  padding-right:20rpx;
+}
+/*开始打卡按钮*/
+.button_area{
+  
+
+
+}
+._button{
+  width: 50%;
+  margin-top: 40rpx;
+  background-color: rgb(162, 235, 140);
+  color: rgb(143, 250, 149);
+  box-shadow: 0rpx 10rpx 50rpx 10rpx rgba(85, 85, 85, 0.10);
+}
+.goal_list{
+  margin-top:40rpx;
+  width:80%;
+  border: 5rpx solid rgba(119, 181, 231, 0.867);
+  border-radius: 5rpx;
+  height:300rpx;
+  text-align: left;
+  padding-top:20rpx;
+  padding-bottom: 20rpx;
+  padding-right: 20rpx;
+  padding-left:20rpx;
+}
+

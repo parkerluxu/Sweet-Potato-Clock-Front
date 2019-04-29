@@ -1,0 +1,11 @@
+<!--pages/ClockList/ClockList.wxml-->
+<view class= "container">
+  <scroll-view scroll-y="true" class="goal_list">
+    <block wx:for="{{text_goal_list}}">
+        <view class="piece_of_goal">
+          <text class="goal">目标{{ index+1 }}</text>
+          <view class="goal" bindtap='change_to_clock_start'>{{ item }}</view>
+        </view>
+    </block>
+  </scroll-view>
+</view>

@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/ShowYe/ShowYe",
+    "pages/ClockGoal/ClockGoal",
+    "pages/ClockList/ClockList",
+    "pages/ClockStart/ClockStart",
+    "pages/GroupDetail/GroupDetail",
+    "pages/GroupList/GroupList",
+    "pages/GroupMange/GroupMange",
+    "pages/MyAchieve/MyAchieve",
+    "pages/MyInfo/MyInfo",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "seletedColor": "#dddd",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "pages/images/index_2.png",
+        "iconPath": "pages/images/index_1.png",
+        "pagePath": "pages/ShowYe/ShowYe",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "pages/images/bottomGroupSeleted.png",
+        "iconPath": "pages/images/bottomGroupUnseleted.png",
+        "pagePath": "pages/GroupList/GroupList",
+        "text": "小组"
+      },
+      {
+        "selectedIconPath": "pages/images/bottomAddSeleted.png",
+        "iconPath": "pages/images/bottomAddUnseleted.png",
+        "pagePath": "pages/ClockGoal/ClockGoal",
+        "text": "新建目标"
+      },
+      {
+        "selectedIconPath": "pages/images/bottomPersonSeleted.png",
+        "iconPath": "pages/images/bottomPersonUnseleted.png",
+        "pagePath": "pages/MyInfo/MyInfo",
+        "text": "个人信息"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

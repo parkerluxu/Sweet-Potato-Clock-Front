@@ -1,0 +1,50 @@
+<!--pages/GroupDetail/GroupDetail.wxml-->
+<!--groupDetail-->
+<view class="windows">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="group_name">
+      <view class="group_name_text">{{group.groupName}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">组长</view>
+      <view class="weui-cell__ft">{{group.groupCaptain}}</view>
+    </view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__hd">
+      <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+    </view>
+    <view class="weui-cell__bd">人数</view>
+    <view class="weui-cell__ft">{{group.groupNumber}}</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__hd">
+      <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+    </view>
+    <view class="weui-cell__bd">成员</view>
+    <view class="weui-cell__ft">{{group.groupMates}}</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__hd">
+      <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+    </view>
+    <view class="weui-cell__bd">时长</view>
+    <view class="weui-cell__ft">{{group.groupTime}}</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__hd">
+      <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+    </view>
+    <view class="weui-cell__bd">天数</view>
+    <view class="weui-cell__ft">{{group.groupDays}}</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__hd">
+      <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+    </view>
+    <view class="weui-cell__bd" bindtap='groupRank'>排行榜</view>
+  </view>
+</view>

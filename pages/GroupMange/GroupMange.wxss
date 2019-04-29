@@ -1,0 +1,9 @@
+/* pages/GroupMange/GroupMange.wxss */
+.is_private_text {
+  margin-top: 0.77em;
+  margin-bottom: 0.3em;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #999;
+  font-size: 16px;
+}
