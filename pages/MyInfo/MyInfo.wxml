@@ -1,39 +1,36 @@
-<!--pages/MyInfo/MyInfo.wxml-->
-
-<view class="windows">
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__hd">
-        <!--<image src="{{userInformation.motto}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>-->
+<view class='page'>
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="userinfo-btn"> 点击微信授权 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="navs">
+    <block wx:for-items="{{orderItems}}" wx:key="name">
+      <view class="nav-item" catchtap="toOrder" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+        <text>{{item.name}}</text>
+        <text>{{item.content}}</text>
       </view>
-      <view class="weui-cell__bd">昵称</view>
-      <view class="weui-cell__ft">{{userInformation.userNickName}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__hd">
-        <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-      </view>
-      <view class="weui-cell__bd">积分</view>
-      <view class="weui-cell__ft">{{userInformation.score}}</view>
-    </view>
+    </block>
   </view>
   <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">打卡天数</view>
-      <view class="weui-cell__ft">{{userInformation.daySum}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">打卡时长</view>
-      <view class="weui-cell__ft">{{userInformation.minutesSum}}</view>
-    </view><view class="weui-cell">
-      <view class="weui-cell__bd">连续天数</view>
-      <view class="weui-cell__ft">{{userInformation.continueDays}}</view>
-    </view>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">森林</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">成就</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">排行榜</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">记录</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <button bindtap='requestTest'>测试</button>
   </view>
-   <view class="page__bd page__bd_spacing">
-   <button class="weui-btn" type="primary" bindtap="toForestPage">森林</button>
-   <button class="weui-btn" type="primary" bindtap="toAchievement">成就</button>
-   <button class="weui-btn" type="primary" bindtap="toRankingList">排行榜</button>
-   <button class="weui-btn" type="primary" bindtap="toMyRecord">记录</button>
-   </view>
 </view>
