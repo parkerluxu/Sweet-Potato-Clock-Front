@@ -1,11 +1,15 @@
-<!--pages/GroupList/GroupList.wxml-->
-<!--groupList.wxml-->
 <view class="windows">
-  <navigator wx:for="{{items}}" hover-class='navigator-hover' url='../GroupDetail/GroupDetail'>
+<view class='group_list'>
+      <text class="group_list_text">名称</text>
+      <text class="group_list_text">标签</text>
+      <text class="group_list_text">人数</text>
+    </view>
+  <navigator wx:for="{{groupList}}" hover-class='navigator-hover' url='../GroupDetail/GroupDetail'>
     <view class='group_list'>
-      <view class="group_list_text">{{item.groupName}}</view>
-      <view class="group_list_text">{{item.groupDay}}</view>
-      <view class="group_list_text">{{item.groupNumber}}</view>
+      <text class="group_list_text">{{item.groupName}}</text>
+      <text class="group_list_text">{{item.tag}}</text>
+      <text class="group_list_text">{{item.memberNumber}}</text>
     </view>
   </navigator>
 </view>
+

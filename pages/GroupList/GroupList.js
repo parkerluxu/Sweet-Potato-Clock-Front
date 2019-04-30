@@ -5,10 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: [
-      { groupName: "Clock1", groupDay: "7", groupNumber: 1 },
-      { groupName: "Clock2", groupDay: "7", groupNumber: 2 },
-    ]
+   userId:"sda",
+   groupList:[]
   },
 
   /**
@@ -29,7 +27,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      var that=this;
+      wx.request({
+        url: 'http://127.0.0.1:8080/goalcomplete/displaygoal',
+        method:"GET",
+        data:{"userId":that.data.userId},
+        success:function(res){
+          var groupList=res.data.groupList;
+          if(groupList==null){
+            var toastText='获取小组列表失败';
+            wx.showToast({
+              title: toastText,
+              icon:'cancel',
+              duration:2000
+            })
+          }
+          else{
+            that.setData({
+              groupList:groupList
+            });
+          }
+        }
+      })
   },
 
   /**

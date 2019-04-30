@@ -1,14 +1,27 @@
-/* pages/GroupList/GroupList.wxss */
-
-.group_list{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+.window{
+  height:100%;
+  display:table;
   align-items: center;
-  flex-wrap: nowrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-top:10rpx;
+  padding-bottom: 10rpx;
+  text-align: center;
+
+}
+.group_list{
+ text-align: center;
+  position:relative;
+  margin-top:5rpx;
+  margin-bottom: 5rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  padding-left: 150rpx;
+  padding-right: 40rpx;
+  border:#ddd 1px solid;
 }
 
 .group_list_text{
-  font-size: 20px;
-  margin-left: 30px;
+ width:4rem;
+ display:table-cell;
 }
