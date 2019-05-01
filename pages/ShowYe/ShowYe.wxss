@@ -45,16 +45,21 @@ page{
   color: rgb(143, 250, 149);
   box-shadow: 0rpx 10rpx 50rpx 10rpx rgba(85, 85, 85, 0.10);
 }
-.goal_list{
-  margin-top:40rpx;
-  width:80%;
-  border: 5rpx solid rgba(119, 181, 231, 0.867);
-  border-radius: 5rpx;
-  height:300rpx;
-  text-align: left;
-  padding-top:20rpx;
-  padding-bottom: 20rpx;
-  padding-right: 20rpx;
-  padding-left:20rpx;
+.group_list{
+ text-align: center;
+  position:relative;
+  margin-top:5rpx;
+  margin-bottom: 5rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  padding-left: 150rpx;
+  padding-right: 40rpx;
+  border:#ddd 1px solid;
 }
+
+.group_list_text{
+ width:4rem;
+ display:table-cell;
+}
+
 
