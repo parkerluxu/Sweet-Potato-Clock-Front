@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-   userId:"sda",
+   userId:'1',
    groupList:[]
   },
 
@@ -31,7 +31,9 @@ Page({
       wx.request({
         url: 'http://127.0.0.1:8080/goalcomplete/displaygoal',
         method:"GET",
-        data:{"userId":that.data.userId},
+        data: {
+          userid: that.data.userId
+        },
         success:function(res){
           var groupList=res.data.groupList;
           if(groupList==null){

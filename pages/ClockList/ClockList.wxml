@@ -5,9 +5,9 @@
 
     <text class="group_list_text">完成度</text>
   </view>
-  <text class="group_list_text">{{string}}</text>
-  <view wx:for="{{groupList}}">
-    <navigator class='group_list' hover-class='navigator-hover' url="../ClockStart/ClockStart?clockName={{item.name}}&minutesLimit={{item.minutes}}">
+  <view class="group_list_text" hidden='{{isBindExpert}}'>{{string}}</view>
+  <view wx:for="{{clockList}}">
+    <navigator class='group_list' hover-class='navigator-hover' url="../ClockStart/ClockStart?clockName='{{item.name}}'&minutesLimit='{{item.minutes}}'">
       <text class="group_list_text">{{item.name}}</text>
       <text class="group_list_text">{{item.completion}}</text>
     </navigator>

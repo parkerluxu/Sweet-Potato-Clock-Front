@@ -6,11 +6,15 @@ Page({
    */
   data: {
     string: null,
+    isBindExpert:false,
     clockList: [],
+    list_1: [],
+    list_2: [],
     listItem: {
       name: null,
       isClock: null,
-      minutes:null
+      minutes: null,
+      completion: null
     }
   },
 
@@ -32,36 +36,53 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that=this;
     wx.request({
       url: 'http://127.0.0.1:8080/goalcomplete/displaygoal',
+      method: 'GET',
       data: {
         userid: '1'
       },
-      method: 'GET',
       success: function(res) {
-        var list_1 = res.data.groupList;
-        var list_2 = res.data.goalList;
+        var list1 = res.data.groupList;
+        var list2 = res.data.goalList;
+        that.setData({
+          list_1: list1,
+          list_2: list2
+        })
         var list_3 = [];
-        if (list_2 == null) {
+        if (list2 == null) {
           that.setData({
+            isBindExpert:false,
             string: "您还没有任何的打卡目标"
           })
         } else {
-          for (var i = 0; i < list_1.length; i++) {
+          for (var i = 0; i < list1.length; i++) {
+            var _k1 = 'listItem.name';
+            var _k2 = 'listItem.minutes';
+            var _k3 = 'listItem.isClock';
+            var _k4 = 'listItem.completion';
+            var _k5 = 'list_1[i].groupName';
+            var _k6 = 'list_1[i].minutes';
+            var _k7 = 'list_2[i].isClocked';
+            var _k8 = 'list_2[i].completion';
             that.setData({
-              [groupItem.name]: list_1[i].groupName,
-              [groupItem.minutes]:list_1[i].minutes,
-              [groupItem.is_clock]: list_2[i].isClocked
-            })
-            if (that.data.groupItem.is_clock == 0) {
-              var groupItem = that.data.groupItem;
-              list_3.push(groupItem);
+              [_k1]: that.data.list_1[i].groupName,
+              [_k2]: that.data.list_1[i].minutes ,
+              [_k3]: that.data.list_2[i].isClocked,
+              [_k4]: that.data.list_2[i].completion
+            });
+            if (that.data.list_2[i].isClocked== 0) {
+              var listItem = that.data.listItem;
+              list_3.push(listItem);
             } else
               continue;
           }
           that.setData({
-            groupList: list_3
+            isBindExpert: true,
+            clockList: list_3
           })
+          wx.setStorageSync('clockList', list_3);
         }
       }
     })

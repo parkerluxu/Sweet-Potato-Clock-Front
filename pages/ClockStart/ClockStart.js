@@ -5,18 +5,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    clockName:null,
-    minutesLimit:null,
+    clockName:"",
+    minutesLimit:0,
     intervarID: '', //定时器名字
     minutes: 0,
     seconds: 0,
-    countDownNum: 0
+    countDownNum: 0,
+    x:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (option) {
+
+      this.setData({
+        clockName:option.clockName,
+        
+      });
+    var clockList = (wx.getStorageSync('clockList') || []);
+
+    for (var i = 0; i < clockList.length; i++) {
+      if (clockList[i].name == this.data.clockName) {
+        this.setData({
+          minutesLimit: clockList[i].minutes
+        });
+        break;
+      } else
+        continue;
+    }
+      console.log(option.query)
+
 
   },
 
@@ -31,7 +50,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    
   },
 
   /**

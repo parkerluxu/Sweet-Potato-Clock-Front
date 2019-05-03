@@ -15,7 +15,7 @@
       <text class="group_list_text">今天是否完成打卡</text>
       <text class="group_list_text">完成度</text>
     </view>
-    <text class="group_list_text">{{string}}</text>
+    <view class="group_list_text" hidden='{{isBindExpert}}'>{{string}}</view>
     <navigator wx:for="{{groupList}}" hover-class='navigator-hover' url='../GroupDetail/GroupDetail'>
       <view class='group_list'>
         <text class="group_list_text">{{item.name}}</text>
