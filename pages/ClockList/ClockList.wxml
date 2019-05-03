@@ -7,7 +7,7 @@
   </view>
   <view class="group_list_text" hidden='{{isBindExpert}}'>{{string}}</view>
   <view wx:for="{{clockList}}">
-    <navigator class='group_list' hover-class='navigator-hover' url="../ClockStart/ClockStart?clockName='{{item.name}}'&minutesLimit='{{item.minutes}}'">
+    <navigator class='group_list' hover-class='navigator-hover' url="../ClockStart/ClockStart?clockName={{item.name}}&minutesLimit={{item.minutes}}">
       <text class="group_list_text">{{item.name}}</text>
       <text class="group_list_text">{{item.completion}}</text>
     </navigator>

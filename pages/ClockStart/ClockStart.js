@@ -21,20 +21,10 @@ Page({
 
       this.setData({
         clockName:option.clockName,
-        
+        minutesLimit:option.minutesLimit
       });
-    var clockList = (wx.getStorageSync('clockList') || []);
-
-    for (var i = 0; i < clockList.length; i++) {
-      if (clockList[i].name == this.data.clockName) {
-        this.setData({
-          minutesLimit: clockList[i].minutes
-        });
-        break;
-      } else
-        continue;
-    }
-      console.log(option.query)
+  
+      console.log(option.query);
 
 
   },
