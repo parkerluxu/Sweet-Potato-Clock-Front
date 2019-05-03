@@ -13,6 +13,7 @@ Page({
       name: null,
       completion: null,
       is_clock: null,
+      
     },
     groupList: [],
     string: null

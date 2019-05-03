@@ -38,6 +38,17 @@ page{
 
 
 }
+.window{
+  height:100%;
+  display:table;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-top:10rpx;
+  padding-bottom: 10rpx;
+  text-align: center;
+
+}
 ._button{
   width: 50%;
   margin-top: 40rpx;

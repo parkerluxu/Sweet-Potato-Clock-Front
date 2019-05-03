@@ -1,24 +1,29 @@
 /* pages/ClockList/ClockList.wxss */
-page{
-  height: 100%;
-}
-/*整个页面样式*/
-.container{
-  height: 100%;
-  overflow: hidden;
-}
-.goal_list{
-  display: flex;
-  width:90%;
-  height:1000rpx;
-  border:2rpx solid rgba(107, 143, 197, 0.867);
-}
-.goal{
-  display: block;
+.window{
+  height:100%;
+  display:table;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-top:10rpx;
+  padding-bottom: 10rpx;
+  text-align: center;
   
+
 }
-.piece_of_goal{
-  border-left: 50rpx;
-  line-height:50rpx;
- 
+.group_list{
+ text-align: center;
+  position:relative;
+  margin-top:5rpx;
+  margin-bottom: 5rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  padding-left: 150rpx;
+  padding-right: 40rpx;
+  border:#ddd 1px solid;
+}
+
+.group_list_text{
+ width:4rem;
+ display:table-cell;
 }

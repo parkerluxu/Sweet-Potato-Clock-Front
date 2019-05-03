@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    clockName:null,
+    minutesLimit:null,
     intervarID: '', //定时器名字
     minutes: 0,
     seconds: 0,
