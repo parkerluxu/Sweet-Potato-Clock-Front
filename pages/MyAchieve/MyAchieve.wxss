@@ -2,33 +2,27 @@
 
 
 .font{
-  text-align: cneter;
-  margin-left: 200rpx;
+  text-align: center;
   color:red;
   font-size: 60rpx;
-  
 }
 .medal{
  border:0px solid #dadada;
-  
-  width: 98%;
+  width: 100%;
   margin-left: 1%;
 }
 .tr{
-  width:100%;
-  
-  display:flex;
-  justify-content: space-between;
+padding: 0 6rpx;
+text-align: center;
+display: inline-block;
+
 }
-.td{
-  padding: 10px;
-  
-  text-align: center;
-  width: 100%;
-  font-size: 20rpx;
-  color: #ec9480;
+.td .td1{
+   margin-left:20rpx; 
+ text-align: center;
+ color:#FF0000;
+  font-size:50rpx;
+ width: 200rpx;
+ height: 200rpx;
 }
-.td1,.td2,.td3{
-  width:150rpx;
-  height:150rpx;
-}
+

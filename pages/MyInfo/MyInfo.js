@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userId:'1',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
