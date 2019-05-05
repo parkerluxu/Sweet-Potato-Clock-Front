@@ -31,6 +31,5 @@
       <view class="weui-cell__bd">记录</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
-    <button bindtap='requestTest'>测试</button>
   </view>
 </view>

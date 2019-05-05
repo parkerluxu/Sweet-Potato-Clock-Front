@@ -1,1 +1,150 @@
-/* pages/ClockGoal/ClockGoal.wxss */
+page {
+  height: 100%;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  height: 60rpx;
+  background-color: whitesmoke;
+  margin-top: 5%;
+  margin-left: 15%;
+  border: 1rpx solid whitesmoke;
+  border-radius: 5rpx;
+}
+
+.search input {
+  font-size: 27rpx;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 30rpx;
+}
+
+.search image {
+  width: 40rpx;
+  height: 40rpx;
+  padding-right: 20rpx;
+}
+
+.tag_list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 20%;
+  line-height: 3;
+  border-top: 1rpx solid #d9d9d9;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+  width: 105px;
+  font-size: 17px;
+}
+
+.tag_select {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 17px;
+}
+
+.input_tag_name {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-right: 70px;
+  font-size: 17px;
+  width: 120px;
+}
+
+.on {
+  display: inline;
+}
+
+.off {
+  display: none;
+}
+
+.duration_list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  line-height: 3;
+  border-top: 1rpx solid #d9d9d9;
+}
+
+.duration_select {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 17px;
+}
+
+.dayNumber_list {
+  position: relative;
+  border-bottom: 1rpx solid #d9d9d9;
+  border-top: 1rpx solid #d9d9d9;
+  margin-top: 0;
+  line-height: 3;
+}
+
+.dayNumber_input {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 30%;
+  padding-left: 15px;
+  width: 120px;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 17px;
+}
+
+.unit_select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15px;
+  margin-left: 20%;
+  height: 100rpx;
+  line-height: 80rpx;
+}
+
+.button{
+  display:flex;
+}
+
+
+.button-hover{
+  opacity: 0.7;
+  transform: scale(0.96,0.96);
+
+}
+
+.btn {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40%;
+  margin-left:20px;
+  width: 35%;
+  height:50px;
+  background-color:#fff;
+}
+
+
+
