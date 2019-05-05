@@ -1,76 +1,67 @@
-page{
-  height: 100%;
-}
 /*整个页面样式*/
-.container{
+
+.page {
   height: 100%;
-  overflow: hidden;
 }
+
+
 /*搜索框样式*/
-.search{
+
+.search {
   top: 0;
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
-  width:70%;
-  height:60rpx;
-  background-color:whitesmoke;
-  margin-top: 5%;
-  border:1rpx solid whitesmoke;
+  width: 500rpx;
+  height: 60rpx;
+  background-color: whitesmoke;
+  margin-top: -100rpx;
+  border: 1rpx solid whitesmoke;
   border-radius: 5rpx;
 }
+
 /*搜索框提示文字样式*/
-.search input{
-    font-size:27rpx;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding-left:30rpx; 
+
+.search input {
+  font-size: 27rpx;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 30rpx;
 }
+
 /*搜索框小图标*/
-.search image{
-    width:40rpx;
-  height:40rpx;
-  padding-right:20rpx;
+
+.search image {
+  width: 40rpx;
+  height: 40rpx;
+  padding-right: 20rpx;
 }
+
 /*开始打卡按钮*/
-.button_area{
-  
 
-
-}
-.window{
-  height:100%;
-  display:table;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding-top:10rpx;
-  padding-bottom: 10rpx;
-  text-align: center;
-
-}
-._button{
+.click_clock {
   width: 50%;
-  margin-top: 40rpx;
+  margin-top: 30rpx;
   background-color: rgb(162, 235, 140);
   color: rgb(143, 250, 149);
-  box-shadow: 0rpx 10rpx 50rpx 10rpx rgba(85, 85, 85, 0.10);
 }
-.group_list{
- text-align: center;
-  position:relative;
-  margin-top:5rpx;
+
+.windows {
+  margin-top: 100rpx;
+}
+
+.group_list {
+  text-align: center;
+  margin-top: 5rpx;
   margin-bottom: 5rpx;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   padding-left: 150rpx;
   padding-right: 40rpx;
-  border:#ddd 1px solid;
+  border: #ddd 1px solid;
 }
 
-.group_list_text{
- width:4rem;
- display:table-cell;
+.group_list_text {
+  width: 4rem;
+  display: table-cell;
 }
-
-
