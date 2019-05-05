@@ -130,5 +130,10 @@ Page({
     wx.navigateTo({
       url: "../ClockList/ClockList",
     })
+  },
+  query:function(){
+    wx.navigateTo({
+      url:"../GroupDetail/GroupDetail"
+    })
   }
 })
