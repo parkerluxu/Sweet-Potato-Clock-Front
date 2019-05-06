@@ -21,7 +21,7 @@
   <navigator wx:for="{{groupList}}" hover-class='navigator-hover' url='../GroupDetail/GroupDetail'>
     <view class='group_list'>
       <text class="group_list_text">{{item.name}}</text>
-      <text class="group_list_text">{{item.is_clock}}</text>
+      <text class="group_list_text">{{item.isClock}}</text>
       <text class="group_list_text">{{item.completion}}</text>
     </view>
   </navigator>
