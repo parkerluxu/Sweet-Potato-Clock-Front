@@ -1,0 +1,23 @@
+
+<i-row i-class="demo-row">
+    <i-col span="8" i-class="demo-col">小组名称</i-col>
+    <i-col span="8" i-class="demo-col light">小组排名</i-col>
+    <i-col span="8" i-class="demo-col">森林排名</i-col>
+</i-row>
+
+<i-row i-class="demo-row">
+    <i-col span="8" i-class="col-class">日</i-col>
+    <i-col span="8" i-class="col-class">月</i-col>
+    <i-col span="8" i-class="col-class">年</i-col>
+</i-row>
+
+
+
+<i-panel class="cell-panel-demo">
+    <i-cell title="1.昵称" value="打卡时长">
+        <i-icon type="like_fill" slot="icon" />
+    </i-cell>
+    <i-cell title="2." value="">
+        <i-icon type="like_fill" slot="icon" />
+    </i-cell>
+</i-panel>
