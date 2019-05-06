@@ -4,6 +4,8 @@
     "pages/ClockGoal/ClockGoal",
     "pages/ClockList/ClockList",
     "pages/ClockStart/ClockStart",
+    "pages/ClockSearch/ClockSearch",
+    "pages/AddGroup/AddGroup",
     "pages/GroupDetail/GroupDetail",
     "pages/GroupList/GroupList",
     "pages/GroupMange/GroupMange",

@@ -1,29 +1,23 @@
-<view class="container">
-  <!--搜索框-->
-
+<!--搜索框-->
+<view class="search_area">
   <view class="search">
-    <input type="text" placeholder='请输入小组名称' confirm-type='search' value="{{inputValue}}" bindinput='inputBind' bindconfirm='query'></input>
+    <input type="text" placeholder='请输入小组名称' confirm_type='search' value="{{inputVal}}" bindinput='inputBind' bindconfirm='query'></input>
     <image class="" src='../images/search.png' bindtap='query'></image>
   </view>
-  <!--开始打卡按钮-->
-  <view class="click_clock">
-    <button type="default" bindtap="clock_start">开始打卡</button>
-  </view>
+</view>
+
+<!--开始打卡按钮-->
+<button type="default" bindtap="clock_start" plain="true" style=" width:50%; margin-top:30rpx; color:#77b5e7;border-color:#77b5e7;" hover-class="button-hover">开始打卡</button>
+
 
 <!--打卡目标概要-->
 <view class="windows">
-  <view class='group_list'>
-    <text class="group_list_text">名称</text>
-    <text class="group_list_text">今天是否完成打卡</text>
-    <text class="group_list_text">完成度</text>
-  </view>
   <view class="group_list_text" hidden='{{isBindExpert}}'>{{string}}</view>
   <navigator wx:for="{{groupList}}" hover-class='navigator-hover' url='../GroupDetail/GroupDetail'>
     <view class='group_list'>
       <text class="group_list_text">{{item.name}}</text>
       <text class="group_list_text">{{item.isClock}}</text>
-      <text class="group_list_text">{{item.completion}}</text>
+      <text class="group_list_text">{{item.showCompletion}}%</text>
     </view>
   </navigator>
-</view>
 </view>

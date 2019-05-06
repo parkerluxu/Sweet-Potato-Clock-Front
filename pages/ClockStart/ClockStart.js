@@ -5,13 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttonValue:"开始",
     clockName:"",
     minutesLimit:0,
     intervarID: '', //定时器名字
     minutes: 0,
     seconds: 0,
-    countDownNum: 0,
-    x:null
+    sum: 0,
+    x:null,
+    is_disabled:false
   },
 
   /**
@@ -55,7 +57,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+   
   },
 
   /**
@@ -86,23 +88,65 @@ Page({
 
     })
   },
+  button_distinguish:function(){
+    var that=this;
+    if(that.data.buttonValue=="开始"){
+      that.clock_start();
+    }else{
+      that.clock_cancel();
+    }
+  },
   //开始打卡
   clock_start: function () {
     var that = this;
-    var sum = that.data.minutes * 60;
-    this.data.intervarID = setInterval(function () {
-      if (sum == 0) {
-
+    that.setData({
+      buttonValue:"取消",
+      sum : that.data.minutes * 60
+    })
+    
+    that.data.intervarID = setInterval(function () {
+      if (that.data.sum == 0) {
+        var toastText="打卡成功";
+        wx.showToast({
+          title: toast,
+          icon:'success',
+          duration:2000
+        });
+        //打卡成功后发送后台请求
+        wx.request({
+          url: '',
+        })
         clearInterval(that.data.intervarID);
       }
-      let m = Math.floor(sum / 60);
-      let s = sum % 60;
-      sum--;
+     that.setData({
+       sum:that.data.sum-1
+     })
+      let m = Math.floor(that.data.sum / 60);
+      let s = that.data.sum % 60;
       that.setData({
         minutes: m,
         seconds: s
       })
     }, 1000)
+  },
+  clock_cancel:function(){
+    var that=this;
+    wx.showModal({
+      title: '提示',
+      content: '取消打卡将受到惩罚',
+      success:function(sm){
+        if(sm.confirm){
+            that.setData({
+              minutes:'0',
+              seconds:'0',
+              buttonValue:"开始",
+              sum:0,
+              is_disabled:true
+            })
+          clearInterval(that.data.intervarID);
+        }
+      }
+    })
   }
 
 })

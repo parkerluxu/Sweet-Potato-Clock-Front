@@ -10,5 +10,6 @@
    </view>
    <slider class="slider" min="{{minutesLimit}}" max="120" step="5" bindchanging="goal_of_time" value="{{minutes}}"></slider>
     <view class="btn-area">
-      <button class="button" bindtap="clock_start">开始</button></view>
+      <button class="button" bindtap="button_distinguish" disabled='{{is_disabled}}'>{{buttonValue}}</button></view>
 </view>
+

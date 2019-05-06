@@ -1,0 +1,58 @@
+/* pages/ClockSearch/ClockSearch.wxss */
+
+.group_list {
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 18px;
+  border-top: 1rpx solid #d9d9d9;
+}
+
+.lable1 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5%;
+  padding-bottom: 10px;
+  width: 45%;
+}
+
+.groupS1 {
+  display: inline-block;
+  color: #999;
+}
+
+.groupS2 {
+  display: inline-block;
+  color: #fff;
+  padding: 4px;
+  background-color: #77b5e7;
+  border: 1rpx solid #77b5e7;
+  border-radius: 5rpx;
+}
+
+.lable2 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5%;
+  width: 33%;
+}
+
+.lable3 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 3%;
+  width: 27%;
+}
+
+.groupS3 {
+  display: inline-block;
+  color: #999;
+}

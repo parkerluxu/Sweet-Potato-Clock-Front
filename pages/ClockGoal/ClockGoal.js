@@ -115,7 +115,7 @@ Page({
 
   clock_search: function () {
     wx.navigateTo({
-      url: '../clockSearch/clockSearch',
+      url: '../ClockSearch/ClockSearch',
     })
   },
 
