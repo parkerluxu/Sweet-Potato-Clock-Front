@@ -58,10 +58,12 @@ Page({
             var _k1 = 'groupList[' + i + '].name';
             var _k3 = 'groupList[' + i + '].isClock';
             var _k4 = 'groupList[' + i + '].completion';
+            var _k5='groupList['+i+'].showCompletion';
             that.setData({
               [_k1]: that.data.list_1[i].groupName,
               [_k3]: that.data.list_2[i].isClocked,
-              [_k4]: that.data.list_2[i].completion
+              [_k4]: that.data.list_2[i].completion,
+              [_k5]: that.data.list_2[i].completion*100,
             });
             if (that.data.list_2[i].isClocked == 0) {
               that.setData({
