@@ -1,29 +1,79 @@
 /* pages/ClockList/ClockList.wxss */
-.window{
+page{
   height:100%;
-  display:table;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding-top:10rpx;
-  padding-bottom: 10rpx;
-  text-align: center;
-  
 
-}
-.group_list{
- text-align: center;
-  position:relative;
-  margin-top:5rpx;
-  margin-bottom: 5rpx;
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
-  padding-left: 150rpx;
-  padding-right: 40rpx;
-  border:#ddd 1px solid;
 }
 
 .group_list_text{
  width:4rem;
  display:table-cell;
 }
+.group_list {
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 18px;
+  border-bottom: 1rpx solid #d9d9d9;
+}
+
+.lable1 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15%;
+  padding-bottom: 1px;
+  width: 100%;
+  margin-bottom: 1%;
+}
+
+.groupS1 {
+  font-size: 70rpx;
+  display: inline-block;
+  
+}
+
+
+.lable2 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15%;
+  width: 25%;
+}
+.lable3 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 1%;
+  width: 25%;
+}
+.groupS2 {
+  font-size: 30rpx;
+}
+
+.groupS3 {
+  font-size: 30rpx;
+}
+.lable4 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 2%;
+  
+}
+.groupS4{
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100rpx;
+  height:30px;
+  background-color:#beedff;
+}
+

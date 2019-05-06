@@ -16,7 +16,7 @@
     </block>
   </view>
   <view class="weui-cells weui-cells_after-title">
-    <navigator url="../MyAchieve/MyAchieve?userId={{userId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator url="../MyForest/MyForest" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__bd">森林</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>

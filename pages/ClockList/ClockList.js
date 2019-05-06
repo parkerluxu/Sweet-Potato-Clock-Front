@@ -63,11 +63,13 @@ Page({
               var _k2 = 'clockList[' + x + '].minutes';
               var _k3 = 'clockList[' + x + '].isClock';
               var _k4 = 'clockList[' + x + '].completion';
+              var _k5 = 'clockList[' + x + '].showCompletion';
               that.setData({
                 [_k1]: that.data.list_1[i].groupName,
                 [_k2]: that.data.list_1[i].minutes,
                 [_k3]: that.data.list_2[i].isClocked,
-                [_k4]: that.data.list_2[i].completion
+                [_k4]: that.data.list_2[i].completion,
+                [_k5]: that.data.list_2[i].completion*100
               });
               x++;
             }
