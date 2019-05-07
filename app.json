@@ -2,8 +2,8 @@
   "pages": [
     "pages/Login/Login",
     "pages/ShowYe/ShowYe",
-    "pages/ClockGoal/ClockGoal",
     "pages/ClockList/ClockList",
+    "pages/ClockGoal/ClockGoal",
     "pages/ClockStart/ClockStart",
     "pages/ClockSearch/ClockSearch",
     "pages/AddGroup/AddGroup",
