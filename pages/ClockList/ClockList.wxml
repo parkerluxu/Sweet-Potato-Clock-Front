@@ -14,7 +14,7 @@
           <view class="groupS3">完成度：{{item.showCompletion}}%</view>
         </view>
         <view class="lable4">
-          <button class="groupS4" bindtap="changeToClockStart">开始</button>
+          <button class="groupS4" bindtap="changeToClockStart" data-clockName="{{item.name}}" data-minutesLimit="{{item.minutes}}">开始</button>
         </view>
       </view>
     </view>
