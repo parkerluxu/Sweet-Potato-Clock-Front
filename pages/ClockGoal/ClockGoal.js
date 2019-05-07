@@ -12,7 +12,12 @@ Page({
     reply: false,
     duration: "00:10",
     unit: ["天", "周", "月"],
-    unitIndex: 0
+    unitIndex: 0,
+    requestData:{
+      tag:String,
+      days:Number,
+      minutes:Number
+    }
   },
 
   inputBind: function (e) {
@@ -114,12 +119,26 @@ Page({
 
 
   clock_search: function () {
+    var that=this
+    wx.request({
+      url: 'http://127.0.0.1:8080/group/getgroupbygroupid',
+      method:'GET',
+      data:{
+        tag:tag[tagIndex],
+        minutes:duration,
+        days:unit
+      },
+      success:function(res){
+        
+      }
+    })
     wx.navigateTo({
       url: '../ClockSearch/ClockSearch',
     })
   },
 
   group_detail: function () {
+    
     wx.navigateTo({
       url: '../GroupDetail/GroupDetail',
     })
