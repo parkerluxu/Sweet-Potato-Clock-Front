@@ -1,11 +1,11 @@
 <!--pages/ClockStart/ClockStart.wxml-->
-
+<view class="area">
 <view class="title_goal">
   <text>目标:{{clockName}}</text>
 </view>
 <view class="time_area">
   <text class="time">{{minutes}}:{{seconds}}</text>
-
+</view>
 </view>
 
 <view class="slider_area">
