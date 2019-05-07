@@ -1,6 +1,6 @@
 {
   "pages": [
-  
+    "pages/Login/Login",
     "pages/ShowYe/ShowYe",
     "pages/ClockGoal/ClockGoal",
     "pages/ClockList/ClockList",

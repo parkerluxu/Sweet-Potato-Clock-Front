@@ -67,7 +67,7 @@ Page({
               [_k4]: that.data.list_2[i].completion,
               [_k5]: that.data.list_2[i].completion*100,
             });
-            if (that.data.list_2[i].isClocked == 0) {
+            if (that.data.list_2[i].isClocked == 1) {
               that.setData({
                 [_k3]: '已打卡',
                 [_k6]:"#beedff"
