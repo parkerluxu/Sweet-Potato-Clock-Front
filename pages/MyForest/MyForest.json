@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+
+  "navigationBarTitleText": "我的森林",
+  "usingComponents": {
+
+  }
 }
