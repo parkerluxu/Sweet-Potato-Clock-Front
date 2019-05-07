@@ -27,11 +27,11 @@ page{
   padding-left: 15%;
   padding-bottom: 1px;
   width: 100%;
-  margin-bottom: 1%;
+  margin-bottom: 0rpx;
 }
 
 .groupS1 {
-  font-size: 70rpx;
+  font-size: 60rpx;
   display: inline-block;
 }
 
@@ -42,7 +42,7 @@ page{
   justify-content: center;
   align-items: center;
   padding-left: 15%;
-  width: 20%;
+  width: 25%;
   margin-top: 1%;
 }
 
@@ -52,28 +52,30 @@ page{
   justify-content: center;
   align-items: center;
   padding-left: 3%;
-  width: 20%;
+  width: 30%;
   margin-top: 5%;
+  margin-left: 1%;
    
 }
 .groupS3 {
   display: inline-block;
   color: #999;
-font-size: 10px;
+font-size: 40rpx;
 }
 .lable4 {
   display: inline-block;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-left: 9%;
+  padding-left: 5%;
   width: 20%;
+  margin-top: -5%
    
 }
 .groupS4 {
   display: inline-block;
-  color: rgb(245, 233, 233);
-font-size: 15px;
-background-color: rgb(35, 223, 119);
-
+  
+  font-size: 15px;
+  color:#77b5e7;
+  border-color:#77b5e7;
 }

@@ -6,11 +6,11 @@ Page({
    */
   data: {
     buttonValue:"开始",
-    clockName:"",
+    clockName:"dasdfsafsa",
     minutesLimit:0,
     intervarID: '', //定时器名字
-    minutes: 0,
-    seconds: 0,
+    minutes: "00",
+    seconds: "00",
     sum: 0,
     x:null,
     is_disabled:false

@@ -1,18 +1,18 @@
 <!--pages/ClockStart/ClockStart.wxml-->
-<view class="area">
+
 <view class="title_goal">
-  <text>目标:{{clockName}}</text>
+  <text>{{clockName}}</text>
 </view>
 <view class="time_area">
-  <text class="time">{{minutes}}:{{seconds}}</text>
+  <text class="time" style="font-size:80rpx">{{minutes}}:{{seconds}}</text>
 </view>
-</view>
+
 
 <view class="slider_area">
   <slider class="slider" min="{{minutesLimit}}" max="120" step="5" bindchanging="goal_of_time" value="{{minutes}}"></slider>
-  <text>120</text>
+  <view style="margin-top:3%; display: inline-block; font-size=10rpx;margin-right:1%;">120</view>
    </view>
 
     <view class="btn-area">
-      <button class="button" bindtap="button_distinguish" disabled='{{is_disabled}}'>{{buttonValue}}</button>
+      <button class="button" bindtap="button_distinguish" disabled="{{is_disabled}}" hover-class="button-hover" plain="true" style="color: #77b5e7; border-color: #77b5e7;" >{{buttonValue}}</button>
       </view>

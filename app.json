@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/Login/Login",
     "pages/ShowYe/ShowYe",
     "pages/ClockList/ClockList",
@@ -32,12 +33,6 @@
         "iconPath": "pages/images/index_1.png",
         "pagePath": "pages/ShowYe/ShowYe",
         "text": "首页"
-      },
-      {
-        "selectedIconPath": "pages/images/bottomGroupSeleted.png",
-        "iconPath": "pages/images/bottomGroupUnseleted.png",
-        "pagePath": "pages/GroupList/GroupList",
-        "text": "小组"
       },
       {
         "selectedIconPath": "pages/images/bottomAddSeleted.png",
