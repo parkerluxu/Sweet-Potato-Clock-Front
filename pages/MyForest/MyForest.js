@@ -1,9 +1,6 @@
-// pages/MyForest/MyForest.js
-Page({
+// pages/MyForest/l.js
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
 
   },
@@ -62,5 +59,6 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
 })

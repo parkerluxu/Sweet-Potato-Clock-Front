@@ -1,4 +1,5 @@
 // pages/ClockList/ClockList.js
+var app=getApp()
 Page({
 
   /**
@@ -41,10 +42,10 @@ Page({
     var that = this;
     wx.request({
       url: 'http://127.0.0.1:8080/goalcomplete/displaygoal',
-      method: 'GET',
       data: {
-        userid: '1'
+        userid: wx.getStorageSync('openid'),
       },
+      method: 'GET',
       success: function (res) {
         var list1 = res.data.groupList;
         var list2 = res.data.goalList;

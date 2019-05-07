@@ -1,4 +1,8 @@
 /* pages/GroupDetail/GroupDetail.wxss */
+.page{
+   line-height: 2.0;
+}
+
 .weui-cells {
   position: relative;
   margin-top: 1.17647059em;
@@ -12,7 +16,7 @@
 }
 
 .weui-cell {
-  padding: 10px 15px;
+  padding: 10px 25px;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -39,4 +43,9 @@
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  height: 50px;
+}
+
+.group_name_text{
+  font-size: 25px
 }

@@ -38,7 +38,7 @@ Page({
     wx.request({
       url: 'http://127.0.0.1:8080/goalcomplete/displaygoal',
       data: {
-        userid: '1'
+        userid: wx.getStorageSync('openid')
       },
       method: 'GET',
       success: function (res) {
