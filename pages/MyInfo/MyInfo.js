@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userId:'1',
+    userId:String,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -34,7 +34,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -47,12 +47,19 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    var that = this;
+  onShow: function (e) {
+    var that=this
+    app.getUserInfo(function (userInfo) {
+      that.setData({
+        userName: getApp().globalData.userInfo.nickName,
+        userId: userInfo.openId
+      })
+      console.log('用户openid', that.data.userId)
+    })
     wx.request({
       url: 'http://127.0.0.1:8080/userinformation/getuserinformationbyuserid',
       data: {
-        userid: '1'
+        userid: that.data.userId
       },
       method: 'GET',
       success: function (res) {
@@ -102,15 +109,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  //getUserInfo
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
   },
 })
