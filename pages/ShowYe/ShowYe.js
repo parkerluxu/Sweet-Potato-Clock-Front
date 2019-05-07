@@ -48,7 +48,6 @@ Page({
           list_1: list1,
           list_2: list2,
         })
-        console.log(that.data.list_1[0].groupId)
         if (list2 == null) {
           that.setData({
             isBindExpert: false,
@@ -69,7 +68,6 @@ Page({
               [_k5]: that.data.list_2[i].completion*100,
               [_k7]: that.data.list_1[i].groupId,
             });
-            console.log(that.data.groupList[0].groupId)
             if (that.data.list_2[i].isClocked == 1) {
               that.setData({
                 [_k3]: '已打卡',

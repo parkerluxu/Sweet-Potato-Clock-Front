@@ -45,9 +45,9 @@
     </view>
   </view>
   <view wx:if="{{isCaptain}}">
-    <button type="default" bindtap="clock_start" plain="true" style=" width:50%; margin-top:30rpx; color:#77b5e7;border-color:#77b5e7;" hover-class="button-hover">管理小组</button>
+    <button type="default" bindtap="toGroupMange" plain="true" style=" width:50%; margin-top:30rpx; color:#77b5e7;border-color:#77b5e7;" hover-class="button-hover">管理小组</button>
   </view>
   <view wx:if="{{!isMember}}">
-     <button type="default" bindtap="clock_start" plain="true" style=" width:50%; margin-top:30rpx; color:#77b5e7;border-color:#77b5e7;" hover-class="button-hover">加入小组</button>
+     <button type="default" bindtap="joinGroup" plain="true" style=" width:50%; margin-top:30rpx; color:#77b5e7;border-color:#77b5e7;" hover-class="button-hover">加入小组</button>
   </view>
 </view>
