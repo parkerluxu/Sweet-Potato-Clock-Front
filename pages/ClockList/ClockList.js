@@ -125,9 +125,11 @@ Page({
       url: '../ClockStart/ClockStart', // 
     })
   },
-  changeToClockStart:function(){
+  changeToClockStart:function(e){
+    var x = e.target.dataset.clockName;
+    var y = e.target.dataset.minutes;
     wx.navigateTo({
-      url:"../ClockStart/ClockStart"
+      url:"../ClockStart/ClockStart?clockName=x&minutesLimits=y"
     })
   }
 })

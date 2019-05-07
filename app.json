@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/ClockList/ClockList",
+  
     "pages/ShowYe/ShowYe",
     "pages/ClockGoal/ClockGoal",
-    
+    "pages/ClockList/ClockList",
     "pages/ClockStart/ClockStart",
     "pages/ClockSearch/ClockSearch",
     "pages/AddGroup/AddGroup",
