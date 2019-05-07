@@ -14,6 +14,7 @@ Page({
     groupList: [],
     string: null,
     isBindExpert: false,
+    
   },
   /**
    * 生命周期函数--监听页面加载
@@ -59,6 +60,7 @@ Page({
             var _k3 = 'groupList[' + i + '].isClock';
             var _k4 = 'groupList[' + i + '].completion';
             var _k5='groupList['+i+'].showCompletion';
+            var _k6 = 'groupList[' + i + '].color';
             that.setData({
               [_k1]: that.data.list_1[i].groupName,
               [_k3]: that.data.list_2[i].isClocked,
@@ -67,11 +69,13 @@ Page({
             });
             if (that.data.list_2[i].isClocked == 0) {
               that.setData({
-                [_k3]: '否'
+                [_k3]: '已打卡',
+                [_k6]:"#beedff"
               });
             } else {
               that.setData({
-                [_k3]: '是'
+                [_k3]: '未打卡',
+                [_k6]:"#999"
               });
             }
           }

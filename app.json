@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/ClockList/ClockList",
     "pages/ShowYe/ShowYe",
     "pages/ClockGoal/ClockGoal",
-    "pages/ClockList/ClockList",
+    
     "pages/ClockStart/ClockStart",
     "pages/ClockSearch/ClockSearch",
     "pages/AddGroup/AddGroup",
@@ -11,6 +12,7 @@
     "pages/GroupMange/GroupMange",
     "pages/MyAchieve/MyAchieve",
     "pages/MyInfo/MyInfo",
+    "pages/MyForest/MyForest",
     "pages/index/index",
     "pages/logs/logs"
   ],

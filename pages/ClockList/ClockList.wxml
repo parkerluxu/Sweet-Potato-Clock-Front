@@ -1,15 +1,22 @@
 <!--pages/ClockList/ClockList.wxml-->
-<view class="windows">
-  <view class='group_list'>
-    <text class="group_list_text">名称</text>
 
-    <text class="group_list_text">完成度</text>
-  </view>
   <view class="group_list_text" hidden='{{isBindExpert}}'>{{string}}</view>
-  <view wx:for="{{clockList}}">
-    <navigator class='group_list' hover-class='navigator-hover' url="../ClockStart/ClockStart?clockName={{item.name}}&minutesLimit={{item.minutes}}">
-      <text class="group_list_text">{{item.name}}</text>
-      <text class="group_list_text">{{item.completion}}</text>
-    </navigator>
-  </view>
-</view>
+  <scroll-view scroll-y="true" style="width:100%;">
+    <view wx:for="{{clockList}}"  >
+     <view class="group_list" style="color:{{item.color}};">
+        <view class="lable1">
+          <text class="groupS1">{{item.name}}</text>
+        </view>
+        <view class="lable2">
+          <view class="groupS3">{{item.minutes}}分钟</view>
+        </view>
+        <view class="lable3">
+          <view class="groupS3">完成度：{{item.showCompletion}}%</view>
+        </view>
+        <view class="lable4">
+          <button class="groupS4" bindtap="changeToClockStart">开始</button>
+        </view>
+      </view>
+    </view>
+    </scroll-view>
+

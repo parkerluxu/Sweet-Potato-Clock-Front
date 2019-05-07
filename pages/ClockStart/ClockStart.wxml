@@ -4,7 +4,7 @@
     <text>目标:{{clockName}}</text>
     </view>
   <view class="time_area">
-    <text class="text_time">请设定时间：</text>
+    
      <text class="time">{{minutes}}:{{seconds}}</text>
     
    </view>

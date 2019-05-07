@@ -6,13 +6,13 @@
   border-radius: 10rpx;
 }
 .time_area{
-  height:600rpx;
+  height:400rpx;
   margin-top: 20rpx; 
   display: flex;
   align-items: center;
   justify-content: center;
-  width:90%;
-  border:8px solid rgba(25, 145, 192, 0.671);
+  width:400rpx;
+  border:3px solid rgba(129, 208, 240, 0.671);
   border-radius: 50%;
 }
  .text_time .time{

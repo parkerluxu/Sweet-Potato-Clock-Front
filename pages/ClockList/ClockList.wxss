@@ -1,29 +1,79 @@
 /* pages/ClockList/ClockList.wxss */
-.window{
+page{
   height:100%;
-  display:table;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding-top:10rpx;
-  padding-bottom: 10rpx;
-  text-align: center;
-  
 
-}
-.group_list{
- text-align: center;
-  position:relative;
-  margin-top:5rpx;
-  margin-bottom: 5rpx;
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
-  padding-left: 150rpx;
-  padding-right: 40rpx;
-  border:#ddd 1px solid;
 }
 
 .group_list_text{
  width:4rem;
  display:table-cell;
+}
+.group_list {
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 18px;
+  border-bottom: 1rpx solid #d9d9d9;
+}
+
+.lable1 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15%;
+  padding-bottom: 1px;
+  width: 100%;
+  margin-bottom: 1%;
+}
+
+.groupS1 {
+  font-size: 70rpx;
+  display: inline-block;
+}
+
+
+.lable2 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15%;
+  width: 20%;
+  margin-top: 1%;
+}
+
+.lable3 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 3%;
+  width: 20%;
+  margin-top: 5%;
+   
+}
+.groupS3 {
+  display: inline-block;
+  color: #999;
+font-size: 10px;
+}
+.lable4 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 9%;
+  width: 20%;
+   
+}
+.groupS4 {
+  display: inline-block;
+  color: rgb(245, 233, 233);
+font-size: 15px;
+background-color: rgb(35, 223, 119);
+
 }
