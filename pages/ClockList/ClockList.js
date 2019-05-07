@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    x:"a",
+    y:10,
     string: null,
     isBindExpert: false,
     clockList: [],
@@ -120,16 +122,11 @@ Page({
   onShareAppMessage: function () {
 
   },
-  change_to_clock_start: function () {
+  changeToClockStart:function(event){
+    var that=this;
+ 
     wx.navigateTo({
-      url: '../ClockStart/ClockStart', // 
-    })
-  },
-  changeToClockStart:function(e){
-    var x = e.target.dataset.clockName;
-    var y = e.target.dataset.minutes;
-    wx.navigateTo({
-      url:"../ClockStart/ClockStart?clockName=x&minutesLimits=y"
+      url: '../ClockStart/ClockStart?clockName=' + event.currentTarget.dataset.clockName + '&minutesLimit=' + event.currentTarget.dataset.minutesLimit ,
     })
   }
 })

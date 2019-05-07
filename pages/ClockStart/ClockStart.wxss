@@ -1,4 +1,8 @@
 /* pages/ClockStart/ClockStart.wxss */
+
+page{
+  height: 100%;
+}
 .title_goal{
   display: flex;
   width:70%;
@@ -23,4 +27,9 @@
   width:90%;
   margin-top: 20rpx;
   height:100rpx;
+}
+
+.slider_area{
+display: inline-block;
+  flex-direction: row;
 }
