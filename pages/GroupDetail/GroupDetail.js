@@ -7,12 +7,13 @@ Page({
   data: {
     
       group: {
-        groupName: "Clock1",
-        groupCaptain: "Luxu",
-        groupNumber: 20,
-        groupMates: ["Luxu", "Lwz"],
-        groupTime: "30mins",
-        groupDays: "7天",
+        groupId:Number,
+        groupName: String,
+        groupCaptain: String,
+        groupNumber: Number,
+        groupMates: [],
+        groupTime: Number,
+        groupDays: Number,
       }
       
   },
@@ -21,7 +22,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that=this;
+    console.log(options.groupid)
+    wx.request({
+      url: 'http://127.0.0.1:8080/group/getgroupbygroupid',
+      method:'GET',
+      data:{
+        groupid:options.groupid,
+      },
+      success:function(res){
+        console.log(res.data);
+        var group=res.data.groupInfo;
+        var groupMember=res.data.groupMember;
+        var captain=res.data.captain;
+        that.setData({
+          ['group.groupCaptain']: captain,
+          ['group.groupDays']: group.days,
+          ['group.groupName']: group.groupName,
+          ['group.groupNumber']:group.memberNumber,
+          ['group.groupTime']:group.minutes,
+          ['group.groupMates']:groupMember,
+        })
+      }
+    })
   },
 
   /**

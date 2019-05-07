@@ -46,9 +46,9 @@ Page({
         var list2 = res.data.goalList;
         that.setData({
           list_1: list1,
-          list_2: list2
+          list_2: list2,
         })
-
+        console.log(that.data.list_1[0].groupId)
         if (list2 == null) {
           that.setData({
             isBindExpert: false,
@@ -61,12 +61,15 @@ Page({
             var _k4 = 'groupList[' + i + '].completion';
             var _k5='groupList['+i+'].showCompletion';
             var _k6 = 'groupList[' + i + '].color';
+            var _k7 = 'groupList[' + i + '].groupId'
             that.setData({
               [_k1]: that.data.list_1[i].groupName,
               [_k3]: that.data.list_2[i].isClocked,
               [_k4]: that.data.list_2[i].completion,
               [_k5]: that.data.list_2[i].completion*100,
+              [_k7]: that.data.list_1[i].groupId,
             });
+            console.log(that.data.groupList[0].groupId)
             if (that.data.list_2[i].isClocked == 1) {
               that.setData({
                 [_k3]: '已打卡',
@@ -130,6 +133,14 @@ Page({
       url: "../ClockList/ClockList",
     })
   },
+
+  toGroupDetail:function(e){
+    console.log(e.currentTarget.dataset.groupid)
+    wx.navigateTo({
+      url: '../GroupDetail/GroupDetail?groupid=' + e.currentTarget.dataset.groupid,
+    })
+  },
+
   query: function () {
     var that = this;
     wx.request({

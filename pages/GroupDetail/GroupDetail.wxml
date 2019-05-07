@@ -32,7 +32,7 @@
     <view class="weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">时长</view>
-        <view class="weui-cell__ft">{{group.groupTime}}</view>
+        <view class="weui-cell__ft">{{group.groupTime}}分钟</view>
       </view>
     </view>
   </view>
@@ -40,7 +40,7 @@
     <view class="weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">天数</view>
-        <view class="weui-cell__ft">{{group.groupDays}}</view>
+        <view class="weui-cell__ft">{{group.groupDays}}天</view>
       </view>
     </view>
   </view>

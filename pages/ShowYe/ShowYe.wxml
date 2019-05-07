@@ -8,7 +8,7 @@
 <!--打卡目标概要-->
 <view class="windows">
   <view class="group_list_text" hidden='{{isBindExpert}}'>{{string}}</view>
-  <navigator wx:for="{{groupList}}" hover-class='navigator-hover' url='../GroupDetail/GroupDetail'>
+  <view wx:for="{{groupList}}" hover-class='navigator-hover' bindtap='toGroupDetail' data-groupid="{{item.groupId}}">
     <view class="group_list" style="color:{{item.color}};">
         <view class="lable1">
           <text class="groupS1">{{item.name}}</text>
@@ -21,7 +21,7 @@
         </view>
        
       </view>
-  </navigator>
+  </view>
 </view>
 
 

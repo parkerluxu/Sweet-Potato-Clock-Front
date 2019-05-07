@@ -26,6 +26,11 @@ Page({
         typeId: 2,
         name: '连续天数',
         content: Number
+      },
+      {
+        typeId: 3,
+        name: '个人积分',
+        content: Number
       }
     ],
   },
@@ -68,10 +73,12 @@ Page({
         var item0 = 'orderItems[' + 0 + '].content';
         var item1 = 'orderItems[' + 1 + '].content';
         var item2 = 'orderItems[' + 2 + '].content';
+        var item3 = 'orderItems[' + 3 + '].content';
           that.setData({
             [item0]:value.daysSum,
             [item1]:value.score,
-            [item2]:value.minutesSum
+            [item2]:value.minutesSum,
+            [item3]:value.score,
           })
       },
     })
