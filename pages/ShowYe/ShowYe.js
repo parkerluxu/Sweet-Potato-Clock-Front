@@ -135,7 +135,6 @@ Page({
   },
 
   toGroupDetail:function(e){
-    console.log(e.currentTarget.dataset.groupid)
     wx.navigateTo({
       url: '../GroupDetail/GroupDetail?groupid=' + e.currentTarget.dataset.groupid,
     })

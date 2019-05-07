@@ -14,7 +14,10 @@ Page({
         groupMates: [],
         groupTime: Number,
         groupDays: Number,
-      }
+      },
+      isCaptain:false,
+      isMember:false,
+      
       
   },
 
@@ -23,26 +26,40 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    console.log(options.groupid)
+    var openid = wx.getStorageSync('openid');
+    console.log(openid);
     wx.request({
       url: 'http://127.0.0.1:8080/group/getgroupbygroupid',
       method:'GET',
       data:{
         groupid:options.groupid,
+        userid:openid,
       },
       success:function(res){
         console.log(res.data);
-        var group=res.data.groupInfo;
+        var groupres=res.data.groupInfo;
         var groupMember=res.data.groupMember;
         var captain=res.data.captain;
+        var isMember = res.data.isGroupMember;
         that.setData({
           ['group.groupCaptain']: captain,
-          ['group.groupDays']: group.days,
-          ['group.groupName']: group.groupName,
-          ['group.groupNumber']:group.memberNumber,
-          ['group.groupTime']:group.minutes,
+          ['group.groupDays']: groupres.days,
+          ['group.groupName']: groupres.groupName,
+          ['group.groupNumber']: groupres.memberNumber,
+          ['group.groupTime']: groupres.minutes,
           ['group.groupMates']:groupMember,
         })
+        if(groupres.captainId=openid){
+          that.setData({
+            isCaptain:true,
+          })
+        }
+        console.log(isMember);
+        if(isMember==1){
+          that.setData({
+            isMember:true,
+          })
+        }
       }
     })
   },
