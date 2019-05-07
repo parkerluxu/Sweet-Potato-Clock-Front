@@ -124,5 +124,10 @@ Page({
     wx.navigateTo({
       url: '../ClockStart/ClockStart', // 
     })
+  },
+  changeToClockStart:function(){
+    wx.navigateTo({
+      url:"../ClockStart/ClockStart"
+    })
   }
 })
