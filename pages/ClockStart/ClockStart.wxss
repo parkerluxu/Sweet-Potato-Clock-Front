@@ -4,10 +4,11 @@ page{
   height: 100%;
 }
 .title_goal{
+  justify-content:center; 
+  align-items:center;
   display: flex;
-  width:70%;
-  border:2px solid rgba(158, 165, 168, 0.671);
-  border-radius: 10rpx;
+  width:70%;  
+  align-items: center;
   margin-left: 15%;
 }
 .time_area{

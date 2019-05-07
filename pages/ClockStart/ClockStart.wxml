@@ -1,7 +1,7 @@
 <!--pages/ClockStart/ClockStart.wxml-->
 
 <view class="title_goal">
-  <text>{{clockName}}</text>
+  <view>{{clockName}}</view>
 </view>
 <view class="time_area">
   <text class="time" style="font-size:80rpx">{{minutes}}:{{seconds}}</text>

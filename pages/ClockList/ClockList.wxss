@@ -31,7 +31,7 @@ page{
 }
 
 .groupS1 {
-  font-size: 60rpx;
+  font-size: 17px;
   display: inline-block;
 }
 
@@ -52,7 +52,7 @@ page{
   justify-content: center;
   align-items: center;
   padding-left: 3%;
-  width: 30%;
+  width: 27%;
   margin-top: 5%;
   margin-left: 1%;
    
@@ -60,7 +60,7 @@ page{
 .groupS3 {
   display: inline-block;
   color: #999;
-font-size: 40rpx;
+font-size: 12px;
 }
 .lable4 {
   display: inline-block;
@@ -69,13 +69,13 @@ font-size: 40rpx;
   align-items: center;
   padding-left: 5%;
   width: 20%;
-  margin-top: -5%
-   
+  margin-top: -5%;
+  margin-left:1%;
 }
 .groupS4 {
   display: inline-block;
   
-  font-size: 15px;
+  font-size: 20px;
   color:#77b5e7;
   border-color:#77b5e7;
 }
