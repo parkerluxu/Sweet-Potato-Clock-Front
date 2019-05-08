@@ -1,4 +1,3 @@
-
 var app = getApp()
 Page({
 
@@ -6,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    inputVal: "",
+    inputValue: "",
     tag: ["学习", "运动", "工作", "自定义"],
     tagIndex: 0,
     hiddenName: false,
@@ -14,10 +13,10 @@ Page({
     duration: "00:10",
     unit: ["3天", "7天", "30天"],
     unitIndex: 0,
-    requestData:{
-      tag:String,
-      days:Number,
-      minutes:Number
+    requestData: {
+      tag: String,
+      days: Number,
+      minutes: Number
     }
   },
 
@@ -120,16 +119,16 @@ Page({
 
 
   clock_search: function () {
-    var that=this
+    var that = this
     wx.request({
       url: 'http://127.0.0.1:8080/group/getgroupbygroupid',
-      method:'GET',
-      data:{
-        tag:tag[tagIndex],
-        minutes:duration,
-        days:unit
+      method: 'GET',
+      data: {
+        tag: tag[tagIndex],
+        minutes: duration,
+        days: unit
       },
-      success:function(res){
+      success: function (res) {
       }
     })
     wx.navigateTo({
@@ -138,9 +137,44 @@ Page({
   },
 
   group_detail: function () {
-    
+
     wx.navigateTo({
       url: '../GroupDetail/GroupDetail',
+    })
+  },
+  query: function () {
+    var that = this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/search/searchbygroupname',
+      method: 'GET',
+      data: {
+        groupName: that.data.inputValue
+      },
+      success: function (res) {
+        var localGroupList = res.data.groupList;
+        if (localGroupList == null) {
+          var tosatText = "搜索结果不存在";
+          wx.showToast({
+            title: toastText,
+            icon: '',
+            duration: 2000
+          });
+        } else {
+          that.setData({
+            localGroupList: localGroupList
+          });
+          var arrays = JSON.stringify(that.data.localGroupList);
+          wx.navigateTo({
+            url: '../ClockSearch/ClockSearch?groupList=' + arrays,
+          })
+        }
+      }
+    })
+  },
+  inputBind: function (e) {
+    var value = e.detail.value;
+    this.setData({
+      inputValue: value
     })
   }
 })

@@ -7,17 +7,16 @@ page {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 70%;
-  height: 60rpx;
+  width: 90%;
+  height: 7%;
   background-color: whitesmoke;
-  margin-top: 5%;
-  margin-left: 15%;
+  margin-top: 6rpx;
+  margin-left: 5%;
   border: 1rpx solid whitesmoke;
   border-radius: 5rpx;
 }
-
 .search input {
-  font-size: 27rpx;
+  font-size: 40rpx;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding-left: 30rpx;
 }

@@ -1,4 +1,4 @@
-<!--pages/MyForest/MyForest.wxml-->
+1<!--pages/MyForest/MyForest.wxml-->
 
 
 <view class='imagesize'>
@@ -17,18 +17,21 @@
   </view>
 </view>
 
+
 <view class='setting' bindtap='jumpLogin'>
   <text style="font-size:1.2rem;color:rgb(13, 13, 14)">购买树苗 :</text>
   <image class='btnImg' src='../images/tree.png' style="width:100rpx;height:100rpx;"></image>
   <text style="font-size:1.2rem;color:rgb(13, 13, 14)">X   </text>
  <view class="section">
-    <input  name='inputNumber' class="input" type="number" value="" focus="true" bindinput="showScore">
+    <input  name='inputNumber' class="input" type="number" value=""  bindinput="showScore">
     </input>
 </view>
 </view>
+
 <view class='setting' bindtap='jumpLogin'>
-  <text style="font-size:1rem;color:#0AAAF6"justify-content='center'align-items= "center">需要{{totalScore}}积分</text>
+  <text style="font-size:1rem;color:#0AAAF6"justify-content='center'align-items= "center">需要{{number*10}}积分</text>
 </view>
+
 
 
 <button type="default" bindtap="success_buy" plain="true" style=" width:50%; margin-top:10%; color:#77b5e7;border-color:#77b5e7;"hover-class="button-hover"border-radius="30%">确定购买</button>

@@ -21,13 +21,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-
       this.setData({
         clockName:option.clockName,
         minutesLimit:option.minutesLimit,
         groupId:option.id,
       });
-  
       console.log(option.query);
 
 

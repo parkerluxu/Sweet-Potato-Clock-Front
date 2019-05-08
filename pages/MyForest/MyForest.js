@@ -2,10 +2,10 @@
 
 Page({
   data: {
-    number:null,
+    number:0,
     area:0,
     sum:0,
-    totalScore:0
+    
   },
 
   /**
@@ -69,7 +69,7 @@ Page({
       url: 'http://127.0.0.1:8080/buytrees/buytrees',
       method: 'GET',
       data: {
-        userid: wx.getStorageSync('openid'),
+        userId: wx.getStorageSync('openid'),
         number: that.data.number
       },
       success:function(res){
@@ -81,10 +81,11 @@ Page({
             duration:2000
           })
         }else{
-          var toastText = "积分不足，购买失败";
+          var toastText = "积分不足";
           wx.showToast({
             title: toastText,
-            icon: "cancel",
+            image: '../images/关闭.png',
+            icon:'loading',
             duration: 2000
           })
         }
@@ -92,12 +93,11 @@ Page({
     })
   },
   showScore:function(e){
-    var that=this;
-    that.setData({
+    
+    this.setData({
       number:e.detail.value,
-      totalScore:that.data.number*10
-    })
+     
+  })
   }
-
 
 })

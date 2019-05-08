@@ -1,6 +1,6 @@
 <!--搜索框-->
   <view class="search">
-    <input type="text" placeholder='请输入小组名称' confirm_type='search' value="{{inputVal}}" bindinput='inputBind' bindconfirm='query'></input>
+    <input type="text" placeholder='请输入小组名称' confirm_type='search' value="{{inputValue}}" bindinput='inputBind' ></input>
     <image class="" src='../images/search.png' bindtap='query'></image>
   </view>
 

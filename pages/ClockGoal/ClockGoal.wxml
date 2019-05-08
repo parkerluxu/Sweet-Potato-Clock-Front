@@ -1,7 +1,7 @@
-<view class="search">
-  <input type="text" placeholder='搜索' confirm_type='search' value="{{inputVal}}" bindinput='inputBind' bindconfirm='query'></input>
-  <image class="" src='../images/search.png' bindtap='query'></image>
-</view>
+  <view class="search">
+    <input type="text" placeholder='搜索' confirm_type='search' value="{{inputValue}}" bindinput='inputBind' ></input>
+    <image class="" src='../images/search.png' bindtap='query'></image>
+  </view>
 
 <view class="tag_list">
   <view class="weui-cell__hd ">
