@@ -142,15 +142,15 @@ Page({
     var that=this;
     wx.showModal({
       title: '提示',
-      content: '取消打卡将受到惩罚',
+      content: '是否取消打卡',
       success:function(sm){
         if(sm.confirm){
             that.setData({
-              minutes:'0',
-              seconds:'0',
+              minutes:'00',
+              seconds:'00',
               buttonValue:"开始",
               sum:0,
-              is_disabled:true
+             
             })
           clearInterval(that.data.intervarID);
         }
