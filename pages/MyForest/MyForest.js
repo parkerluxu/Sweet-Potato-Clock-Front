@@ -26,15 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that=this;
-    wx.request({
-      url: 'http://127.0.0.1/buytrees/buytrees',
-      method:'GET',
-      data:{
-        userid: wx.getStorageSync('openid'),
-        number:that.data.number
-      }
-    })
+   
   },
 
   /**
@@ -75,10 +67,27 @@ Page({
     var that = this;
     wx.request({
       url: 'http://127.0.0.1/buytrees/buytrees',
-      method: 'POST',
+      method: 'GET',
       data: {
         userid: wx.getStorageSync('openid'),
         number: that.data.number
+      },
+      success:function(res){
+        if(res.data.success==1){
+          var toastText="购买成功";
+          wx.showToast({
+            title: toastText,
+            icon:"success",
+            duration:2000
+          })
+        }else{
+          var toastText = "积分不足，购买失败";
+          wx.showToast({
+            title: toastText,
+            icon: "cancel",
+            duration: 2000
+          })
+        }
       }
     })
   },
@@ -86,8 +95,9 @@ Page({
     var that=this;
     that.setData({
       number:e.detail.value,
-
+      totalScore:that.data.number*10
     })
   }
+
 
 })
