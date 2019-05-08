@@ -130,7 +130,6 @@ Page({
         days:unit
       },
       success:function(res){
-        
       }
     })
     wx.navigateTo({

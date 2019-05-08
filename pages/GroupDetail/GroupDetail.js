@@ -146,7 +146,6 @@ Page({
 
   toGroupMange:function(e){
     var that=this
-    console.log(that.data.groupId);
     wx.navigateTo({
       url: '../GroupMange/GroupMange?groupid=' + that.data.groupId,
     })
