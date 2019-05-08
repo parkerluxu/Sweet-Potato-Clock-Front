@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
   "navigationBarTitleText": "新建目标",
   "usingComponents": {}
+=======
+  "usingComponents": {},
+  "navigationBarTitleText": "新建目标"
+>>>>>>> master
 }

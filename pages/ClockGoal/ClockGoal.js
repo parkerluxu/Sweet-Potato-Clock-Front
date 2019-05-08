@@ -16,8 +16,13 @@ Page({
     minuteIndex: 0,
     unit: [3, 7, 30],
     unitIndex: 0,
+<<<<<<< HEAD
     groupId: Number,
     isPrivateBool: Boolean
+=======
+
+
+>>>>>>> master
   },
 
   inputBind: function (e) {
@@ -180,11 +185,16 @@ Page({
   },
 
   group_detail: function () {
+<<<<<<< HEAD
     var that = this;
     var minutesHour = that.data.hourIndex * 60
     var minutes1 = that.data.minuteIndex;
     var minutesSum = Number(minutes1) + Number(minutesHour);
     console.log(minutesSum)
+=======
+
+    var that=this;
+>>>>>>> master
     wx.request({
       url: 'http://127.0.0.1:8080/creategroup',
       method: 'POST',
@@ -203,6 +213,10 @@ Page({
           url: '../GroupDetail/GroupDetail?groupid=' + res.data.groupId,
         })
       }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     })
   },
 

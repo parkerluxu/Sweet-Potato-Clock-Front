@@ -6,13 +6,13 @@
     .swiper-tab-list{  font-size: 10px;  
         display: inline-block;  
         width: 50%;  
-        color: #777777;  
+        color: rgb(33, 37, 36);  
     }  
     .on{ color: #0AAAF6;  
-        border-bottom: 5pxc solid #0AAAF6;}
+        border-bottom: 5pxc solid rgba(22, 235, 153, 0.63);}
     .swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden; }  
     .swiper-box view{  
-        text-align: center;  
+        text-align: space-between;  
     }  
     
 .button{

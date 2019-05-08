@@ -5,12 +5,21 @@
 
 <view class="weui-cells weui-cells_after-title">
 
+<<<<<<< HEAD
   <view class="list">
     <view class="label">标签</view>
     <view class="input_tag_name {{reply?'on':'off'}}">
       <input type="text" name="other" placeholder="请输入标签名称" />
     </view>
     <view class="weui-cell__bd">
+=======
+<view class="tag_list">
+  <view class="weui-cell__hd ">
+    <view class="label">标签</view> 
+  </view>
+  <view class="weui-cell__bd">
+    <view hidden="{{hiddenName}}">
+>>>>>>> master
       <picker mode="selector" value="{{tagIndex}}" range="{{tag}}" bindchange="bindTagChange">
         <view class="select1" hidden="{{hiddenName}}">{{tag[tagIndex]}}</view>
         <image class="p" src='../images/return.png' hidden="{{!hiddenName}}"></image>
