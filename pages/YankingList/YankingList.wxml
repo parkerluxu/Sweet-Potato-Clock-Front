@@ -1,23 +1,20 @@
+<view class="button">
+  <button class="btn" type="default" plain="true" style="color: #77b5e7; border-color: #77b5e7;" hover-class="button-hover" bindtap="clock_search">组名</button>
+  <button class="btn" type="default" plain="true" style="color: #77b5e7; border-color: #77b5e7;"hover-class="button-hover" bindtap="group_detail">组排</button>
+  <button class="btn" type="default" plain="true" style="color: #77b5e7; border-color: #77b5e7;" hover-class="button-hover" bindtap="group_detail">森林</button>
+</view>
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">日</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">周</view>
+</view>
 
-<i-row i-class="demo-row">
-    <i-col span="8" i-class="demo-col">小组名称</i-col>
-    <i-col span="8" i-class="demo-col light">小组排名</i-col>
-    <i-col span="8" i-class="demo-col">森林排名</i-col>
-</i-row>
-
-<i-row i-class="demo-row">
-    <i-col span="8" i-class="col-class">日</i-col>
-    <i-col span="8" i-class="col-class">月</i-col>
-    <i-col span="8" i-class="col-class">年</i-col>
-</i-row>
-
-
-
-<i-panel class="cell-panel-demo">
-    <i-cell title="1.昵称" value="打卡时长">
-        <i-icon type="like_fill" slot="icon" />
-    </i-cell>
-    <i-cell title="2." value="">
-        <i-icon type="like_fill" slot="icon" />
-    </i-cell>
-</i-panel>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+  <!-- 我是哈哈 -->
+  <swiper-item>
+    <view>我是哈哈</view>
+  </swiper-item>
+  <!-- 我是呵呵 -->
+  <swiper-item>
+    <view>我是呵呵</view>
+  </swiper-item>
+</swiper>

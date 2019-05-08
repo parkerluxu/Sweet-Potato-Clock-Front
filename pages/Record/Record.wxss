@@ -1,0 +1,43 @@
+/* pages/Record/Record.wxss */
+.windows {
+  margin-top: 100rpx;
+  /*border: #f3f4f5 5px solid;*/
+}
+
+.group_list {
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9
+}
+
+.lable1 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10%;
+  padding-bottom: 1px;
+  width: 100%;
+}
+
+.groupS1 {
+  font-size: 40rpx;
+  display: inline-block;
+  
+}
+
+
+.lable2 {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10%;
+  width: 40%;
+}
