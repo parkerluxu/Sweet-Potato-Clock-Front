@@ -45,7 +45,9 @@ Page({
    */
   onShow: function () {
     var that = this;
-    
+    that.setData({
+      minutes:that.data.minutesLimit
+    })
   },
 
   /**
