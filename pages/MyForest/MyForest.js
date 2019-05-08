@@ -3,9 +3,9 @@
 Page({
   data: {
     number:null,
-    area:null,
-    sum:null,
-    totalScore:null,
+    area:0,
+    sum:0,
+    totalScore:0
   },
 
   /**
@@ -66,7 +66,7 @@ Page({
   success_buy:function(){
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1/buytrees/buytrees',
+      url: 'http://127.0.0.1:8080/buytrees/buytrees',
       method: 'GET',
       data: {
         userid: wx.getStorageSync('openid'),
