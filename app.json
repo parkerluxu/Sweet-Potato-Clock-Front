@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/Login/Login",
     "pages/ShowYe/ShowYe",
     "pages/ClockList/ClockList",
@@ -15,7 +14,8 @@
     "pages/MyInfo/MyInfo",
     "pages/MyForest/MyForest",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/Record/Record"
   ],
   "window": {
     "backgroundTextStyle": "light",

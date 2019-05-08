@@ -1,0 +1,14 @@
+<!--pages/Record/Record.wxml-->
+<view class="windows">
+  <view class="group_list" style="color:{{item.color}};">
+    <view class="lable1">
+      <text class="groupS1">小组名称</text>
+    </view>
+    <view class="lable2">
+      <view class="groupS3">打卡时长</view>
+    </view>
+    <view class="lable2">
+      <view class="groupS3">完成度：{{item.showCompletion}}%</view>
+    </view>
+  </view>
+</view>
