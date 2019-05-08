@@ -13,11 +13,6 @@ Page({
     duration: "00:10",
     unit: ["3天", "7天", "30天"],
     unitIndex: 0,
-<<<<<<< HEAD
-=======
-
-
->>>>>>> master
   },
 
   inputBind: function (e) {
