@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    logged:false
   },
 
   /**
@@ -74,7 +74,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that=this
+    that.setData({
+      logged:wx.getStorageSync('logged')
+    })
+    if (that.data.logged==true){
+      setTimeout(
+        wx.switchTab({
+          url: '../ShowYe/ShowYe',
+        }),2000
+      )
+    }
   },
 
   /**

@@ -111,7 +111,7 @@ Page({
       if (that.data.sum == 0) {
         var toastText="打卡成功";
         wx.showToast({
-          title: toast,
+          title: toastText,
           icon:'success',
           duration:2000
         });
@@ -120,9 +120,9 @@ Page({
           url: 'http://127.0.0.1:8080/record/completegoal',
           method:'POST',
           data:{
-            userid:that.data.openid,
+            userId:openid,
             minutes: that.data.minutes,
-            groupid: that.data.groupId,
+            groupId: that.data.groupId,
           }
         })
         clearInterval(that.data.intervarID);
