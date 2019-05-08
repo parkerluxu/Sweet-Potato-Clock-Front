@@ -9,11 +9,11 @@
 <view class="weui-cells weui-cells_after-title">
   <view class="weui-cell">
     <view class="weui-cell__bd">面积</view>
-    <view class="weui-cell__ft">**平方米</view>
+    <view class="weui-cell__ft">{{area}}平方米</view>
   </view>
   <view class="weui-cell">
     <view class="weui-cell__bd">树木量</view>
-    <view class="weui-cell__ft">**棵</view>
+    <view class="weui-cell__ft">{{sum}}棵</view>
   </view>
 </view>
 
@@ -22,13 +22,14 @@
   <image class='btnImg' src='../images/tree.png' style="width:100rpx;height:100rpx;"></image>
   <text style="font-size:1.2rem;color:rgb(13, 13, 14)">X   </text>
  <view class="section">
-    <input class="input" type="number"  />
+    <input  name='inputNumber' class="input" type="number" value="" focus="true" bindinput="showScore">
+    </input>
 </view>
 </view>
 <view class='setting' bindtap='jumpLogin'>
-  <text style="font-size:1rem;color:#0AAAF6"justify-content='center'align-items= "center">需要xx积分</text>
+  <text style="font-size:1rem;color:#0AAAF6"justify-content='center'align-items= "center">需要{{totalScore}}积分</text>
 </view>
 
 
-<button type="default" bindtap="clock_start" plain="true" style=" width:50%; margin-top:10%; color:#77b5e7;border-color:#77b5e7;"hover-class="button-hover"border-radius="30%">确定购买</button>
+<button type="default" bindtap="success_buy" plain="true" style=" width:50%; margin-top:10%; color:#77b5e7;border-color:#77b5e7;"hover-class="button-hover"border-radius="30%">确定购买</button>
   

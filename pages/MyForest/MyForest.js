@@ -2,7 +2,10 @@
 
 Page({
   data: {
-
+    number:null,
+    area:null,
+    sum:null,
+    totalScore:null,
   },
 
   /**
@@ -23,7 +26,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    wx.request({
+      url: 'http://127.0.0.1/buytrees/buytrees',
+      method:'GET',
+      data:{
+        userid: wx.getStorageSync('openid'),
+        number:that.data.number
+      }
+    })
   },
 
   /**
@@ -60,5 +71,23 @@ Page({
   onShareAppMessage: function () {
 
   },
+  success_buy:function(){
+    var that = this;
+    wx.request({
+      url: 'http://127.0.0.1/buytrees/buytrees',
+      method: 'POST',
+      data: {
+        userid: wx.getStorageSync('openid'),
+        number: that.data.number
+      }
+    })
+  },
+  showScore:function(e){
+    var that=this;
+    that.setData({
+      number:e.detail.value,
+
+    })
+  }
 
 })
