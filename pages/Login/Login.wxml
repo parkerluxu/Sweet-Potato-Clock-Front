@@ -12,8 +12,7 @@
    <button type="default" plain="true" style=" width:50%; margin-top:30rpx; color:#77b5e7;border-color:#77b5e7;" hover-class="button-hover" open-type='getUserInfo'bindtap="login">确认授权</button>
   </view>
   <view class="logged" wx:else>
-    <image class="logged-icon" src="../../images/iconfont-weixin.png" />
-    <view class="logged-text">近期你已经授权登陆过{{title}}</view>
+    <view class="logged-text">近期你已经授权登陆过番薯打卡</view>
     <view class="logged-text">自动登录中</view>
   </view>
 </view>

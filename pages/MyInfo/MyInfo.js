@@ -54,17 +54,10 @@ Page({
    */
   onShow: function (e) {
     var that=this
-    app.getUserInfo(function (userInfo) {
-      that.setData({
-        userName: getApp().globalData.userInfo.nickName,
-        userId: userInfo.openId
-      })
-      console.log('用户openid', that.data.userId)
-    })
     wx.request({
       url: 'http://127.0.0.1:8080/userinformation/getuserinformationbyuserid',
       data: {
-        userid: that.data.userId
+        userid: wx.getStorageSync('openid'),
       },
       method: 'GET',
       success: function (res) {

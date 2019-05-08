@@ -61,11 +61,12 @@ Page({
             var _k5='groupList['+i+'].showCompletion';
             var _k6 = 'groupList[' + i + '].color';
             var _k7 = 'groupList[' + i + '].groupId'
+            var completeRate = that.data.list_2[i].completion * 100
             that.setData({
               [_k1]: that.data.list_1[i].groupName,
               [_k3]: that.data.list_2[i].isClocked,
               [_k4]: that.data.list_2[i].completion,
-              [_k5]: that.data.list_2[i].completion*100,
+              [_k5]:completeRate.toFixed(2),
               [_k7]: that.data.list_1[i].groupId,
             });
             if (that.data.list_2[i].isClocked == 1) {
