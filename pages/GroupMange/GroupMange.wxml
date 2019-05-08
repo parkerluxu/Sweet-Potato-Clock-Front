@@ -1,20 +1,17 @@
 <!--pages/GroupMange/GroupMange.wxml-->
 <!--groupMange.wxml-->
-<view class="weui-cells__title">小组名称</view>
 <view class="weui-cells weui-cells_after-title">
   <view class="weui-cell weui-cell_input">
     <view class="weui-cell__bd">
-      <input class="weui-input" placeholder="小组名称" />
+      <input class="weui-input" placeholder="{{groupInfo.name}}" bindinput="getName" />
     </view>
   </view>
-</view>
-<view class="weui-cells__title">成员管理</view>
-<view class="group_member_list">
-  <view class="group_member_icon" wx:for="{{items}}">{{item.nickname}}</view>
-</view>
  <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__bd">
-      <switch bindchange ='switchChange'class="is_private_text">设为私密</switch> 
-    </view>
+      <text class="font">设为私密</text>
+      <switch bindchange ='switchChange'class="is_private_text" checked='{{isPrivateBool}}' />
   </view>
-<button class="weui-btn" type="default" disabled="true" plain="true" bindtap='deleteGroup'>解散小组</button>
+</view>
+  <view class="button">
+  <button class="btn" type="default" plain="true" style="color: #77b5e7; border-color: #77b5e7;" hover-class="button-hover" bindtap="saveChange">保存更改</button>
+  <button class="btn" type="default" plain="true" style="color: #77b5e7; border-color: #77b5e7;" hover-class="button-hover" bindtap="deleteGroup">解散小组</button>
+</view>

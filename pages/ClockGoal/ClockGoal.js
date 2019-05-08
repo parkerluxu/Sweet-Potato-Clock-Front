@@ -13,11 +13,14 @@ Page({
     duration: "00:10",
     unit: ["3天", "7天", "30天"],
     unitIndex: 0,
+<<<<<<< Updated upstream
     requestData: {
       tag: String,
       days: Number,
       minutes: Number
     }
+=======
+>>>>>>> Stashed changes
   },
 
   inputBind: function (e) {
@@ -55,10 +58,10 @@ Page({
 
   bindUnitChange: function (e) {
     console.log('picker发生选择改变，携带值为', e.detail.value);
-
     this.setData({
       unitIndex: e.detail.value
     })
+   
   },
 
   /**
@@ -137,9 +140,25 @@ Page({
   },
 
   group_detail: function () {
+<<<<<<< Updated upstream
 
     wx.navigateTo({
       url: '../GroupDetail/GroupDetail',
+=======
+    var that=this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/creategroup',
+      method: 'POST',
+      data: {
+        captainId: wx.getStorageSync('openid'),
+        tag: that.data.tag[that.data.tagIndex],
+        days: that.data.duration,
+        minutes: that.data.unit[that.data.unitIndex],
+      },
+      success:function(res){
+        console.log(res.data);
+      }
+>>>>>>> Stashed changes
     })
   },
   query: function () {

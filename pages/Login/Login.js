@@ -34,7 +34,7 @@ Page({
               data: {
                 encryptedData: res.encryptedData,
                 iv: res.iv,
-                code: code
+                code: code,
               },
               method: "POST",
               success: function(result) {
