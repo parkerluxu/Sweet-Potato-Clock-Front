@@ -126,10 +126,11 @@ Page({
           }
         })
         clearInterval(that.data.intervarID);
-      }
+      }else{
      that.setData({
        sum:that.data.sum-1
      })
+      }
       let m = Math.floor(that.data.sum / 60);
       let s = that.data.sum % 60;
       that.setData({
