@@ -132,10 +132,6 @@ Page({
   },
 
   group_detail: function () {
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     var that=this;
     wx.request({
       url: 'http://127.0.0.1:8080/creategroup',
@@ -149,10 +145,6 @@ Page({
       success:function(res){
         console.log(res.data);
       }
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     })
   },
   query: function () {

@@ -24,7 +24,7 @@ page{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-left: 15%;
+  padding-left: 10%;
   padding-bottom: 1px;
   width: 100%;
   margin-bottom: 0rpx;
@@ -41,8 +41,8 @@ page{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-left: 15%;
-  width: 25%;
+  padding-left: 10%;
+  width: 24%;
   margin-top: 1%;
 }
 
@@ -52,7 +52,7 @@ page{
   justify-content: center;
   align-items: center;
   padding-left: 3%;
-  width: 27%;
+  width: 33%;
   margin-top: 5%;
   margin-left: 1%;
    
@@ -60,7 +60,7 @@ page{
 .groupS3 {
   display: inline-block;
   color: #999;
-font-size: 12px;
+font-size: 14px;
 }
 .lable4 {
   display: inline-block;
@@ -74,7 +74,7 @@ font-size: 12px;
 }
 .groupS4 {
   display: inline-block;
-  font-size: 18px;
+  font-size: 14px;
   color:#77b5e7;
   border-color:#77b5e7;
   background-color: #FFFFFF
