@@ -3,9 +3,11 @@
 Page({
   data: {
     number: 0,
-    area: 0,
-    sum: 0,
-
+    information:{
+      userId:null,
+      area:0,
+      treeNumber:0
+    }
   },
 
   /**
@@ -26,7 +28,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that=this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/maketrees/maketrees',
+      method:'GET',
+      data:{
+        userid: wx.getStorageSync('openid')
+      },
+      success:function(res){
+        that.setData({
+          information:res.data.makeTrees
+        })
 
+      }
+    })
   },
 
   /**

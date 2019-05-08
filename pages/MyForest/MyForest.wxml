@@ -9,11 +9,11 @@
 <view class="weui-cells weui-cells_after-title">
   <view class="weui-cell">
     <view class="weui-cell__bd">面积</view>
-    <view class="weui-cell__ft">{{area}}平方米</view>
+    <view class="weui-cell__ft">{{information.area}}平方米</view>
   </view>
   <view class="weui-cell">
     <view class="weui-cell__bd">树木量</view>
-    <view class="weui-cell__ft">{{sum}}棵</view>
+    <view class="weui-cell__ft">{{information.treeNumber}}棵</view>
   </view>
 </view>
 
