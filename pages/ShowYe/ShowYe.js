@@ -14,7 +14,7 @@ Page({
     groupList: [],
     string: null,
     isBindExpert: false,
-    
+    localGroupList:[]
   },
   /**
    * 生命周期函数--监听页面加载
@@ -152,16 +152,26 @@ Page({
         if (localGroupList == null) {
           var tosatText = "搜索结果不存在";
           wx.showToast({
-            title: 'toastText',
+            title: toastText,
             icon: '',
             duration: 2000
           });
         } else {
+            that.setData({
+              localGroupList:localGroupList
+            });
+            var arrays=JSON.stringify(that.data.localGroupList);
           wx.navigateTo({
-            url: '../GroupList/GroupList?groupList=localGroupList',
+            url: '../ClockSearch/ClockSearch?groupList='+arrays,
           })
         }
       }
+    })
+  },
+  inputBind:function(e){
+    var value=e.detail.value;
+    this.setData({
+      inputValue:value
     })
   }
 })

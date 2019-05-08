@@ -1,22 +1,22 @@
 <!--pages/ClockSearch/ClockSearch.wxml-->
 <view class="windows">
   <view class="weui-cells weui-cells_after-title">
-    <navigator wx:for="{{items}}" url='../AddGroup/AddGroup'>
+    <navigator wx:for="{{groupList}}" url='../AddGroup/AddGroup'>
       <view class="group_list">
         <view class="lable1">名称:
           <view class="groupS1">{{item.groupName}}</view>
         </view>
         <view class="lable1">标签:
-          <view class="groupS2">{{item.groupTag}}</view>
+          <view class="groupS2">{{item.tag}}</view>
         </view>
         <view class="lable2">时长:
-          <view class="groupS3">{{item.groupDuration}}</view>
+          <view class="groupS3">{{item.minutes}}</view>
         </view>
         <view class="lable3">天数:
-          <view class="groupS3">{{item.groupDays}}</view>
+          <view class="groupS3">{{item.days}}</view>
         </view>
         <view class="lable3">人数:
-          <view class="groupS3">{{item.groupMember}}</view>
+          <view class="groupS3">{{item.memberNumber}}</view>
         </view>
       </view>
     </navigator>
