@@ -13,14 +13,6 @@ Page({
     duration: "00:10",
     unit: ["3天", "7天", "30天"],
     unitIndex: 0,
-<<<<<<< Updated upstream
-    requestData: {
-      tag: String,
-      days: Number,
-      minutes: Number
-    }
-=======
->>>>>>> Stashed changes
   },
 
   inputBind: function (e) {
@@ -140,11 +132,6 @@ Page({
   },
 
   group_detail: function () {
-<<<<<<< Updated upstream
-
-    wx.navigateTo({
-      url: '../GroupDetail/GroupDetail',
-=======
     var that=this;
     wx.request({
       url: 'http://127.0.0.1:8080/creategroup',
@@ -158,7 +145,6 @@ Page({
       success:function(res){
         console.log(res.data);
       }
->>>>>>> Stashed changes
     })
   },
   query: function () {

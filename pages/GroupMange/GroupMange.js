@@ -7,7 +7,7 @@ Page({
   data: {
     groupId: Number,
     groupInfo: [],
-    isPrivateBool:false
+    isPrivateBool: false
   },
 
   /**
@@ -43,9 +43,9 @@ Page({
           ['groupInfo.name']: res.data.groupInfo.groupName,
           ['groupInfo.isPrivate']: res.data.groupInfo.isPrivate,
         })
-        if(that.data.groupInfo.isPrivate==1){
+        if (that.data.groupInfo.isPrivate == 1) {
           that.setData({
-            isPrivateBool:true,
+            isPrivateBool: true,
           })
         }
       },
@@ -101,66 +101,75 @@ Page({
   switchChange: function(e) {
     console.log("switch value:", e.detail.value)
     this.setData({
-      isPrivateBool:e.detail.value,
+      isPrivateBool: e.detail.value,
     })
-    if(e.detail.value=true){
+    if (e.detail.value = true) {
       this.setData({
-        ['groupInfo.isPrivate']:1,
+        ['groupInfo.isPrivate']: 1,
       })
-    }else{
+    } else {
       this.setData({
         ['groupInfo.isPrivate']: 0,
       })
     }
   },
 
-  getName:function(e){
+  getName: function(e) {
     this.setData({
-      ['groupInfo.name']:e.detail.value,
+      ['groupInfo.name']: e.detail.value,
     })
   },
 
-  saveChange:function(){
-    var that=this;
+  saveChange: function() {
+    var that = this;
     wx.request({
       url: 'http://127.0.0.1:8080/group/updateGroupInfo',
-      method:'GET',
-      data:{
-        groupid:that.data.groupId,
-        groupname:that.data.groupInfo.name,
-        isprivate:that.data.groupInfo.isPrivate,
+      method: 'GET',
+      data: {
+        groupid: that.data.groupId,
+        groupname: that.data.groupInfo.name,
+        isprivate: that.data.groupInfo.isPrivate,
       },
-      success:function(){
+      success: function() {
+        var pages = getCurrentPages(); //当前页面栈
+        if (pages.length > 1) {
+          var beforePage = pages[pages.length - 2]; //获取上一个页面实例对象
+          console.log(that.data.groupId)
+          beforePage.setData({//如果需要传参，可直接修改A页面的数据，若不需要，则可省去这一步
+            groupId: that.data.groupId,
+          })
+          beforePage.changeData(); //触发父页面中的方法
+        }
         wx.navigateBack({
-          delta:1,
+          delta: 1
         })
       }
     })
   },
 
   deleteGroup: function(e) {
-    var that=this;
+    var that = this;
     wx.showModal({
       title: '确认删除',
       content: '是否确认删除小组',
-      success(res){
-        if(res.confirm==true){
+      success(res) {
+        if (res.confirm == true) {
           wx.request({
             url: 'http://127.0.0.1:8080/deletegroup',
             method: 'GET',
             data: {
               groupid: that.data.groupId
             },
-            success: function (res) {
+            success: function(res) {
               if (res.data.success == '1') {
                 wx.showToast({
                   title: '删除成功',
                   duration: 2000,
                 })
-                wx.navigateBack({
-                  delta: 2,
+                wx.switchTab({
+                  url: '../ShowYe/ShowYe',
                 })
-              }else{
+              } else {
                 wx.showToast({
                   title: '删除失败',
                   duration: 2000,
@@ -174,6 +183,6 @@ Page({
         }
       }
     })
-    
+
   }
 })

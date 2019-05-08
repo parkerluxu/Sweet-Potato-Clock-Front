@@ -65,15 +65,16 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
+
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -108,6 +109,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  changeData: function () {
+    var options = { 'groupid': this.data.groupId }
+    this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
   },
 
   joinGroup:function(){
