@@ -68,14 +68,14 @@ font-size: 12px;
   justify-content: center;
   align-items: center;
   padding-left: 5%;
-  width: 20%;
+  width: -25%;
   margin-top: -5%;
   margin-left:1%;
 }
 .groupS4 {
   display: inline-block;
-  
-  font-size: 20px;
+  font-size: 18px;
   color:#77b5e7;
   border-color:#77b5e7;
+  background-color: #FFFFFF
 }
