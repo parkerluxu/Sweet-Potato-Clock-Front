@@ -36,9 +36,6 @@
 <view class="dayNumber_list">
   <view class="weui-cell weui-cell_select">
     <view class="label">连续天数</view>
-    <view class="weui-cell__hd">
-      <input class="dayNumber_input" placeholder="点击输入" />
-    </view>
     <view class="weui-cell__bd">
       <picker mode="selector" value="{{unitIndex}}" range="{{unit}}" bindchange="bindUnitChange">
         <view class="weui-select unit_select">{{unit[unitIndex]}}</view>
