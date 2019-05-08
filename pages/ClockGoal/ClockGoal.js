@@ -12,7 +12,7 @@ Page({
     hiddenName: false,
     reply: false,
     duration: "00:10",
-    unit: ["天", "周", "月"],
+    unit: ["3天", "7天", "30天"],
     unitIndex: 0,
     requestData:{
       tag:String,
