@@ -41,7 +41,7 @@ Page({
               if (result.data.status == 1) {
                 console.log(result.data.userInfo.openId);
                 app.globalData.userInfo = result.data.userInfo;
-                wx.setStorageSync('user', result.data.status);
+                wx.setStorageSync('logged', true);
                 wx.setStorageSync('openid', result.data.userInfo.openId);
               } else {
                 console.log('解密失败')

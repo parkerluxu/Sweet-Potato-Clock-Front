@@ -5,16 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+      groupId: Number,
       group: {
-        groupId:Number,
         groupName: String,
         groupCaptain: String,
         groupNumber: Number,
         groupMates: [],
         groupTime: Number,
         groupDays: Number,
-      }
+      },
+      isCaptain:false,
+      isMember:false,
+      
       
   },
 
@@ -23,26 +25,38 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    console.log(options.groupid)
+    var openid = wx.getStorageSync('openid');
     wx.request({
       url: 'http://127.0.0.1:8080/group/getgroupbygroupid',
       method:'GET',
       data:{
         groupid:options.groupid,
+        userid:openid,
       },
       success:function(res){
-        console.log(res.data);
-        var group=res.data.groupInfo;
+        var groupres=res.data.groupInfo;
         var groupMember=res.data.groupMember;
         var captain=res.data.captain;
+        var isMember = res.data.isGroupMember;
         that.setData({
+          groupId: groupres.groupId,
           ['group.groupCaptain']: captain,
-          ['group.groupDays']: group.days,
-          ['group.groupName']: group.groupName,
-          ['group.groupNumber']:group.memberNumber,
-          ['group.groupTime']:group.minutes,
+          ['group.groupDays']: groupres.days,
+          ['group.groupName']: groupres.groupName,
+          ['group.groupNumber']: groupres.memberNumber,
+          ['group.groupTime']: groupres.minutes,
           ['group.groupMates']:groupMember,
         })
+        if(groupres.captainId=openid){
+          that.setData({
+            isCaptain:true,
+          })
+        }
+        if(isMember==1){
+          that.setData({
+            isMember:true,
+          })
+        }
       }
     })
   },
@@ -95,9 +109,45 @@ Page({
   onShareAppMessage: function () {
 
   },
-    groupRank: function () {
-      wx.navigateTo({
-        url: '',
-      })
-    }
+
+  joinGroup:function(){
+    var that=this;
+    var openid = wx.getStorageSync('openid');
+    wx.request({
+      url: 'http://127.0.0.1:8080/joinGroup',
+      method:'GET',
+      data:{
+        groupid: that.data.groupId,
+        userid:openid,
+      },
+      success:function(res){
+        if(res.data.success==1){
+        wx.showToast({
+          title: '加入成功',
+          url: '../GroupDetail/GroupDetail?groupid=' + that.data.groupId,
+        })
+        }
+        else{
+          wx.showToast({
+            title: '添加失败',
+            url: '../GroupDetail/GroupDetail?groupid=' + that.data.groupId,
+          })
+        }
+      },
+      fail:function(){
+        wx.showToast({
+          title: '添加失败',
+          url: '../GroupDetail/GroupDetail?groupid=' + that.data.groupId,
+        })
+      }
+    })
+
+  },
+
+  toGroupMange:function(e){
+    var that=this
+    wx.navigateTo({
+      url: '../GroupMange/GroupMange?groupid=' + that.data.groupId,
+    })
+  }
 })

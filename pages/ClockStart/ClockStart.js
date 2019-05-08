@@ -13,7 +13,8 @@ Page({
     seconds: "00",
     sum: 0,
     x:null,
-    is_disabled:false
+    is_disabled:false,
+    groupId:Number
   },
 
   /**
@@ -23,7 +24,8 @@ Page({
 
       this.setData({
         clockName:option.clockName,
-        minutesLimit:option.minutesLimit
+        minutesLimit:option.minutesLimit,
+        groupId:option.id,
       });
   
       console.log(option.query);
@@ -99,6 +101,7 @@ Page({
   //开始打卡
   clock_start: function () {
     var that = this;
+    var openid=wx.getStorageSync('openid')
     that.setData({
       buttonValue:"取消",
       sum : that.data.minutes * 60
@@ -114,7 +117,13 @@ Page({
         });
         //打卡成功后发送后台请求
         wx.request({
-          url: '',
+          url: 'http://127.0.0.1:8080/record/completegoal',
+          method:'POST',
+          data:{
+            userid:that.data.openid,
+            minutes: that.data.minutes,
+            groupid: that.data.groupId,
+          }
         })
         clearInterval(that.data.intervarID);
       }
