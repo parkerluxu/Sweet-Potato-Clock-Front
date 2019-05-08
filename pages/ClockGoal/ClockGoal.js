@@ -10,14 +10,14 @@ Page({
     tagIndex: 0,
     hiddenName: false,
     reply: false,
-    duration: "00:10",
-    unit: ["3天", "7天", "30天"],
+    hours: [0, 1, 2],
+    hourIndex: 0,
+    minutes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+    minuteIndex: 0,
+    unit: [3, 7, 30],
     unitIndex: 0,
-<<<<<<< HEAD
-=======
-
-
->>>>>>> master
+    groupId: Number,
+    isPrivateBool: Boolean
   },
 
   inputBind: function (e) {
@@ -39,6 +39,7 @@ Page({
     } else {
       this.setData({
         reply: false,
+        hiddenName: false
 
       })
     }
@@ -47,18 +48,28 @@ Page({
     })
   },
 
-  bindDurationChange: function (e) {
+  bindMinuteChange: function (e) {
+    console.log('picker发生选择改变，携带值为', e.detail.value);
+
     this.setData({
-      duration: e.detail.value
+      minuteIndex: e.detail.value
+    })
+  },
+
+  bindHourChange: function (e) {
+    console.log('picker发生选择改变，携带值为', e.detail.value);
+
+    this.setData({
+      hourIndex: e.detail.value
     })
   },
 
   bindUnitChange: function (e) {
     console.log('picker发生选择改变，携带值为', e.detail.value);
+
     this.setData({
       unitIndex: e.detail.value
     })
-   
   },
 
   /**
@@ -117,49 +128,84 @@ Page({
 
   },
 
+  switchChange: function (e) {
+    console.log("switch value:", e.detail.value)
+    this.setData({
+      isPrivateBool: e.detail.value,
+    })
+    if (e.detail.value = true) {
+      this.setData({
+        ['groupInfo.isPrivate']: 1,
+      })
+    } else {
+      this.setData({
+        ['groupInfo.isPrivate']: 0,
+      })
+    }
+  },
 
   clock_search: function () {
     var that = this
+    var minutesHour = that.data.hourIndex * 60
+    var minutes1 = that.data.minuteIndex;
+    var minutesSum = Number(minutes1) + Number(minutesHour);
     wx.request({
-      url: 'http://127.0.0.1:8080/group/getgroupbygroupid',
+      url: 'http://127.0.0.1:8080/group/findgroupbyconditions',
       method: 'GET',
       data: {
-        tag: tag[tagIndex],
-        minutes: duration,
-        days: unit
+        tag: that.data.tag[that.data.tagIndex],
+        minutes: minutesSum,
+        days: that.data.unit[that.data.unitIndex],
       },
       success: function (res) {
+        var localGroupList = res.data.groupListByConditions;
+        if (localGroupList == null) {
+          var tosatText = "搜索结果不存在";
+          wx.showToast({
+            title: toastText,
+            icon: '',
+            duration: 2000
+          });
+        } else {
+          that.setData({
+            localGroupList: localGroupList
+          });
+          var arrays = JSON.stringify(that.data.localGroupList);
+          wx.navigateTo({
+            url: '../ClockSearch/ClockSearch?groupList=' + arrays,
+          })
+        }
       }
-    })
-    wx.navigateTo({
-      url: '../ClockSearch/ClockSearch',
     })
   },
 
   group_detail: function () {
-<<<<<<< HEAD
-=======
-
->>>>>>> master
-    var that=this;
+    var that = this;
+    var minutesHour = that.data.hourIndex * 60
+    var minutes1 = that.data.minuteIndex;
+    var minutesSum = Number(minutes1) + Number(minutesHour);
+    console.log(minutesSum)
     wx.request({
       url: 'http://127.0.0.1:8080/creategroup',
       method: 'POST',
       data: {
-        captainId: wx.getStorageSync('openid'),
         tag: that.data.tag[that.data.tagIndex],
-        days: that.data.duration,
-        minutes: that.data.unit[that.data.unitIndex],
+        minutes: minutesSum,
+        days: that.data.unit[that.data.unitIndex],
+        captainId: wx.getStorageSync('openid')
       },
-      success:function(res){
-        console.log(res.data);
+      success: function (res) {
+        that.setData({
+          groupId: res.data.groupId,
+        })
+        console.log(res.data.groupId)
+        wx.navigateTo({
+          url: '../GroupDetail/GroupDetail?groupid=' + res.data.groupId,
+        })
       }
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     })
   },
+
   query: function () {
     var that = this;
     wx.request({
@@ -189,6 +235,7 @@ Page({
       }
     })
   },
+
   inputBind: function (e) {
     var value = e.detail.value;
     this.setData({

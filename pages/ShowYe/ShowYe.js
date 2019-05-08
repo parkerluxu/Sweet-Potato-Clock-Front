@@ -110,6 +110,7 @@ Page({
 
   },
 
+
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -123,6 +124,63 @@ Page({
   onShareAppMessage: function () {
 
   },
+
+  changeData: function () {
+    var that=this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/goalcomplete/displaygoal',
+      data: {
+        userid: wx.getStorageSync('openid')
+      },
+      method: 'GET',
+      success: function (res) {
+        var list1 = res.data.groupList;
+        var list2 = res.data.goalList;
+        that.setData({
+          list_1: list1,
+          list_2: list2,
+        })
+        if (list2 == null) {
+          that.setData({
+            isBindExpert: false,
+            string: "您还未加入任何小组"
+          })
+        } else {
+          for (var i = 0; i < that.data.list_2.length; i++) {
+            var _k1 = 'groupList[' + i + '].name';
+            var _k3 = 'groupList[' + i + '].isClock';
+            var _k4 = 'groupList[' + i + '].completion';
+            var _k5 = 'groupList[' + i + '].showCompletion';
+            var _k6 = 'groupList[' + i + '].color';
+            var _k7 = 'groupList[' + i + '].groupId'
+            var completeRate = that.data.list_2[i].completion * 100
+            that.setData({
+              [_k1]: that.data.list_1[i].groupName,
+              [_k3]: that.data.list_2[i].isClocked,
+              [_k4]: that.data.list_2[i].completion,
+              [_k5]: completeRate.toFixed(2),
+              [_k7]: that.data.list_1[i].groupId,
+            });
+            if (that.data.list_2[i].isClocked == 1) {
+              that.setData({
+                [_k3]: '已打卡',
+                [_k6]: "#beedff"
+              });
+            } else {
+              that.setData({
+                [_k3]: '未打卡',
+                [_k6]: "000000"
+              });
+            }
+          }
+          that.setData({
+            isBindExpert: true,
+          })
+        }
+      }
+    })
+  },
+
 
   query: function () { //搜索函数
 

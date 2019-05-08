@@ -162,6 +162,11 @@ Page({
                   title: '删除成功',
                   duration: 2000,
                 })
+                var pages = getCurrentPages(); //当前页面栈
+                if (pages.length > 1) {
+                  var beforePage = pages[pages.length-3]; //获取首页实例对象
+                  beforePage.changeData(); //触发父页面中的方法
+                }
                 wx.switchTab({
                   url: '../ShowYe/ShowYe',
                 })
