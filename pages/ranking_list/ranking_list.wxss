@@ -1,1 +1,122 @@
-/* pages/ranking_list/ranking_list.wxss */
+
+.on {
+  color: #0aaaf6;
+  border-bottom: 5pxc solid rgba(22, 235, 153, 0.63);
+}
+
+
+.button {
+  display: flex;
+  height: 80px；
+}
+
+.btn2{
+   margin-left: 10%;
+  margin-top: 5%;
+  height: 100rpx;
+  line-height: 70rpx;
+   font-size: 100rpx;
+  padding-right:0rpx; 
+  background-color: #fff;
+}
+.btn2::after{
+  border:0;
+}
+.button1{
+  margin-left: 20%;
+  margin-top: 7%;
+  height: 60rpx;
+  font-size: 30rpx;
+  line-height: 60rpx;
+  padding-top: -5rpx;
+  
+}
+.button2{
+  margin-left: 0%;
+  margin-top: 7%;
+  height: 60rpx;
+font-size: 30rpx;
+line-height: 60rpx;
+padding-top: -5rpx;
+
+}
+.name{
+  margin-left: 10px;
+}
+.divLine{
+  background: rgb(194, 191, 191);
+ width: 100%;
+ height: 3rpx;
+ margin-top: 3%;
+}
+
+.list {
+  height: 100%;
+}
+
+.list .item {
+  display: flex;
+  padding: 20rpx 40rpx;
+  border-bottom: 1rpx solid #eee;
+  cursor: pointer;
+}
+.index{
+ margin-top: 5%;
+ margin-left: 0%;
+}
+.index text{ 
+  width: 50rpx;
+  font-size: 50rpx;
+  font-weight: bold;
+  text-align: center;
+ 
+  color: #f66a0c;
+  padding: 10rpx;
+  border-radius: 20rpx;
+}
+.list .item .poster {
+  height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.list .item .meta {
+  flex: 1;
+  margin-left: 4%;
+  margin-top: 4%;
+}
+
+.list .item .meta .title,
+.list .item .meta .sub-title {
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.list .item .meta .title {
+  font-size: 32rpx;
+}
+
+.list .item .meta .sub-title {
+  font-size: 22rpx;
+  color: #c0c0c0;
+}
+
+.list .item .meta .artists {
+  font-size: 24rpx;
+  color: #999;
+}
+.rating{
+  margin-left: 20%;
+   margin-top: 6%;
+}
+.list .item .rating text {
+  width: 40rpx;
+  font-size: 35rpx;
+  font-weight: bold;
+  text-align: center;
+ 
+  color: #fa9857;
+  padding: 10rpx;
+  border-radius: 20rpx;
+}
+

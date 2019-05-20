@@ -5,6 +5,30 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userId: String,
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    orderItems: [
+      {
+        typeId: 0,
+        name: '打卡天数',
+        content: Number,
+        contentText: String
+      },
+      {
+        typeId: 1,
+        name: '打卡时长',
+        content: Number,
+        contentText: String
+      },
+      {
+        typeId: 2,
+        name: '树木量',
+        content: Number,
+        contentText: String
+      },
+    ],
 
   },
 
@@ -26,7 +50,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    /*var that = this
+    wx.request({
+      url: 'https://clock.dormassistant.wang:8080/userinformation/getuserinformationbyuserid',
+      data: {
+        userid: wx.getStorageSync('openid'),
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data.userinformation);
+        var value = res.data.userinformation;
+        var daysSum = value.daysSum + '天';
+        var minutesSum = value.minutesSum + '分钟';
+        var score = value.score + '分';
+        var item0 = 'orderItems[' + 0 + '].contentText';
+        var item1 = 'orderItems[' + 1 + '].contentText';
+        var item2 = 'orderItems[' + 2 + '].contentText';
+        var item2 = 'orderItems[' + 2 + '].contentText';
+        that.setData({
+          [item0]: daysSum,
+          [item1]: minutesSum,
+          [item2]: score,
+        })
+      },
+    })*/
   },
 
   /**

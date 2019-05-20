@@ -1,2 +1,27 @@
-<!--pages/personal_information/personal_information.wxml-->
-<text>pages/personal_information/personal_information.wxml</text>
+<view class='page'>
+  <view class="userinfo">
+    <view class='userinfo-avatar'>
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+      <open-data type="userNickName" class="userinfo-nickname"></open-data>
+  </view>
+  <view class="navs">
+    <block wx:for-items="{{orderItems}}" wx:key="name">
+      <view class="nav-item" catchtap="toOrder" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+        <text>{{item.name}}</text>
+        <text>{{item.contentText}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+    <navigator url="../my_forest/my_forest" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">森林</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+   
+    <navigator url="../record/record?userId={{userId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">记录</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+</view>

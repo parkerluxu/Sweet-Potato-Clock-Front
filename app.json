@@ -1,8 +1,12 @@
 {
   "pages": [
+    "pages/group_information/group_information",
+    "pages/home_page/home_page",
+    
+    
     "pages/index/index",
     "pages/logs/logs",
-    "pages/home_page/home_page",
+    
     "pages/clock/clock",
     "pages/group/group",
     "pages/new_group/new_group",
@@ -10,7 +14,7 @@
     "pages/my_forest/my_forest",
     "pages/record/record",
     "pages/ranking_list/ranking_list",
-    "pages/group_information/group_information",
+    
     "pages/member_anagement/member_anagement"
   ],
   "window": {
@@ -19,5 +23,30 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
+    "tabBar": {
+      "color": "#bfbfbf",
+      "selectedColor": "#e0620d",
+      "borderStyle": "white",
+      "list": [
+        {
+          "selectedIconPath": "pages/images/index_2.png",
+          "iconPath": "pages/images/index_1.png",
+          "pagePath": "pages/home_page/home_page",
+          "text": "首页"
+        },
+        {
+          "selectedIconPath": "pages/images/bottomAddSeleted.png",
+          "iconPath": "pages/images/bottomAddUnseleted.png",
+          "pagePath": "pages/group/group",
+          "text": "小组"
+        },
+        {
+          "selectedIconPath": "pages/images/bottomPersonSeleted.png",
+          "iconPath": "pages/images/bottomPersonUnseleted.png",
+          "pagePath": "pages/personal_information/personal_information",
+          "text": "个人信息"
+        }
+      ]
+    },
   "sitemapLocation": "sitemap.json"
 }

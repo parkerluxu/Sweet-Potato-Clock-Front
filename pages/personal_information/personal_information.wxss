@@ -1,1 +1,76 @@
-/* pages/personal_information/personal_information.wxss */
+/* pages/MyInfo/MyInfo.wxss */
+    
+.page{
+   line-height: 1.6;
+}
+
+.userinfo {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    background: #f66a0c;   
+    width: 100%; 
+    height: 300rpx;
+}
+
+.userinfo-btn{  
+    margin-top: 50rpx;  
+    background: none !important;  
+    color: #000000 !important;  
+    font-size: 40rpx;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.userinfo-nickname {  
+    color: #000000;
+}
+
+.navs {  
+    display: flex;
+    justify-content: center;
+}
+
+.nav-item {  
+    width: 25%;  
+    display: flex;  
+    align-items: center;  
+    flex-direction: column;  
+    padding: 20rpx;
+}
+
+.nav-item .nav-image {  
+    width: 55rpx;  
+    height: 55rpx;  
+    margin: 5rpx;
+}
+
+.nav-item text {  
+    margin-top: 20rpx;  
+    font-size: 30rpx;  
+    color: gray;
+}
+
+.weui-cells {
+  position: relative;
+  margin-top: 1.17647059em;
+  background-color: #fff;
+  line-height: 2;
+  font-size: 17px;
+
+}
+.weui-cell{
+  margin-top: 5%;
+  border: 3px solid  #fff;
+  width: 80%;
+  background-color: #f66a0c;
+  margin-left: 5%;
+  border-radius: 30rpx;
+  padding-left: 5%;
+}
