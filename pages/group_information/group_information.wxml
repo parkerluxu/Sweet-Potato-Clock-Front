@@ -1,14 +1,14 @@
 
-<div class="weui-cells__title">小组名称</div>
-<view wx:if="{{!isCapatain}}" class="weui-cells">
-  <view class="weui-cell">
+<div class="weui-cells__title wcss0">小组名称</div>
+<view wx:if="{{!isCapatain}}" class="weui-cells wcss1" >
+  <view class="weui-cell wcss2">
         <div class="weui-article__p text ">
             cell standard
         </div>
   </view>
 </view>
-<view wx:if="{{isCapatain}}" class="weui-cells">
-  <view class="weui-cell">
+<view wx:if="{{isCapatain}}" class="weui-cells wcss1">
+  <view class="weui-cell wcss2">
         <div class="weui-cell__bd ">
            <input class="weui-input" placeholder="小组名称"/>
         </div>
@@ -17,7 +17,7 @@
 <view class='divLine'>
 </view>
 <view class="weui-cells__title">小组公告</view>
- <view class="weui-cells">
+ <view class="weui-cells wcss3">
            <view class="weui-article__p my_text_2" bindtap=''>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

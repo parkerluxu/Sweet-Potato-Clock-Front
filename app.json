@@ -1,9 +1,10 @@
 {
   "pages": [
-
+    "pages/member_anagement/anagement",
+"pages/group_information/group_information",
     "pages/record/record",
 
-    "pages/group_information/group_information",
+    
     "pages/home_page/home_page",
     "pages/index/index",
     "pages/logs/logs",

@@ -21,3 +21,24 @@ page{
 .text{
   margin-bottom: 1%;
 }
+
+.wcss1{
+ margin-top: 0rpx;
+}
+.wcss2{
+  padding: 0;
+  padding-left: 4%;
+}
+.wcss3{
+  margin-top: 0rpx;
+  
+}
+.wcss1::before{
+  border: none;
+}
+.wcss3::before{
+  border:none;
+}
+.wcss3:after{
+ border: none;
+}
