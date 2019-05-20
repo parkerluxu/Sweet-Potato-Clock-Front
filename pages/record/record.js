@@ -5,7 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    axis: [
+      {
+        time: '2018-2-15',
+        name: '张三',
+        event: '垃圾太多'
+      },
+      {
+        time: '2018-2-15',
+        name: '王三',
+        event: '垃圾太多'
+      },
+      {
+        time: '2018-2-15',
+        name: '张三',
+        event: '垃圾太多'
+      },
+      {
+        time: '2018-2-15',
+        name: '张三',
+        event: '垃圾太多'
+      },
+    ],
+     selected: [
+      {
+        date: '2018-5-21'
+      }, {
+        date: '2018-5-22'
+      },{
+        date: '2018-5-24'
+      },{
+        date: '2018-5-25'
+      }
+    ]
   },
 
   /**
@@ -61,6 +93,17 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+  bindselect(e) {
+    console.log(e.detail.ischeck)
+  },
+  /**
+   * 获取选择日期
+   */
+  bindgetdate(e) {
+    let time = e.detail;
+    console.log(time)
 
   }
 })

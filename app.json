@@ -1,25 +1,23 @@
 {
   "pages": [
+    "pages/record/record",
     "pages/group_information/group_information",
     "pages/home_page/home_page",
-    
-    
     "pages/index/index",
     "pages/logs/logs",
-    
     "pages/clock/clock",
     "pages/group/group",
     "pages/new_group/new_group",
     "pages/personal_information/personal_information",
     "pages/my_forest/my_forest",
-    "pages/record/record",
+
     "pages/ranking_list/ranking_list",
     
     "pages/member_anagement/member_anagement"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#fa9857",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
