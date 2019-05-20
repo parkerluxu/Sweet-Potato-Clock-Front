@@ -1,12 +1,11 @@
-// pages/group_information/group_information.js
+// pages/group/group.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
- 
-
+    isCapatain:true,
   },
 
   /**
@@ -64,5 +63,9 @@ Page({
   onShareAppMessage: function () {
 
   },
-  
+  changeToMemberManagement:function(){
+    wx.navigateTo({
+      url: '../member_anagement/member_anagement',
+    })
+  }
 })
