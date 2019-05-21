@@ -7,26 +7,42 @@ Page({
   data: {
     axis: [
       {
+<<<<<<< HEAD
         date: '2018-2-15',
         time: '15:28',
+=======
+        time: '2018-2-15',
+>>>>>>> new_master
         name: '张三',
         event: '垃圾太多'
       },
       {
+<<<<<<< HEAD
         date: '2018-2-15',
         time: '15:28',
+=======
+        time: '2018-2-15',
+>>>>>>> new_master
         name: '王三',
         event: '垃圾太多'
       },
       {
+<<<<<<< HEAD
         date: '2018-2-15',
         time: '15:28',
+=======
+        time: '2018-2-15',
+>>>>>>> new_master
         name: '张三',
         event: '垃圾太多'
       },
       {
+<<<<<<< HEAD
         date: '2018-2-15',
         time: '15:28',
+=======
+        time: '2018-2-15',
+>>>>>>> new_master
         name: '张三',
         event: '垃圾太多'
       },

@@ -1,6 +1,7 @@
 <!--pages/record/record.wxml-->
 <view class='weui-cell-third'>
 <view class='calender'>
+<<<<<<< HEAD
  <view class="page_title">
  <text class='title_text'>打卡记录</text></view>
  <calendar selected="{{selected}}" bindselect="bindselect" bindgetdate="bindgetdate" /></view>
@@ -17,6 +18,20 @@
   <view class='weui-cell-event'>{{item.event}}</view>
   </view>
   </view>
+=======
+<calendar selected="{{selected}}" bindselect="bindselect" bindgetdate="bindgetdate" /></view>
+ <view class="page_title">
+ <image src='../images/naozhong.svg' class='image_title'></image>
+ <text class='title_text'>打卡记录</text></view>
+ <block wx:for="{{axis}}" wx:key="*this">
+ <view class='weui-cell-list'>
+  <image src='../images/jilu.png' class='image_list'></image>
+  <view class='weui-cell-line'>
+  <view class='weui-cell-time'>{{item.time}}</view>
+  <view class='weui-cell-name'>{{item.name}}</view>
+  <view class='weui-cell-event'>{{item.event}}</view>
+  </view>
+>>>>>>> new_master
  </view>
  </block>
 </view>

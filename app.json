@@ -1,8 +1,16 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/record/record",
     "pages/my_forest/my_forest",
     "pages/group_information/group_information",
+=======
+    "pages/member_anagement/anagement",
+"pages/group_information/group_information",
+    "pages/record/record",
+
+    
+>>>>>>> new_master
     "pages/home_page/home_page",
     "pages/index/index",
     "pages/logs/logs",
@@ -10,6 +18,12 @@
     "pages/group/group",
     "pages/new_group/new_group",
     "pages/personal_information/personal_information",
+<<<<<<< HEAD
+=======
+    "pages/my_forest/my_forest",
+
+
+>>>>>>> new_master
     "pages/ranking_list/ranking_list"
 
     
