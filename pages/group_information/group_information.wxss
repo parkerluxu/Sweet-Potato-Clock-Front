@@ -20,8 +20,6 @@ page{
 }
 .text{
   margin-bottom: 1%;
-<<<<<<< HEAD
-=======
 }
 
 .wcss1{
@@ -43,5 +41,4 @@ page{
 }
 .wcss3:after{
  border: none;
->>>>>>> new_master
 }

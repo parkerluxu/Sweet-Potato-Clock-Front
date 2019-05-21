@@ -7,32 +7,21 @@
   background-color:#fa9857 ;
 }
 .image_title{
-<<<<<<< HEAD
   height: 40px;
   width: 40px;
-=======
-  height: 20px;
-  width: 20px;
->>>>>>> new_master
   margin: 10px;
 }
 .image_list{
   height: 20px;
   width: 20px;
-<<<<<<< HEAD
   margin-left: 30%;
   margin-bottom: 5px;
-=======
->>>>>>> new_master
 }
 .page_title{
   display: flex;
   align-items: center;
   justify-content: center;
-<<<<<<< HEAD
   margin-top: 45rpx;
-=======
->>>>>>> new_master
 }
 .title_text{
   margin-left: 1  px
@@ -40,7 +29,6 @@
 .weui-cell-list{
  background: #fff;
  margin: 5px 50px 5px 50px;
-<<<<<<< HEAD
  display: flex;
  flex-direction: column;
 }
@@ -72,41 +60,10 @@
  padding-top: 5px;
  padding-left: 15rpx;
 
-=======
-}
-.weui-cell-line{
-/* width: 100px; */
-margin-left: 8px;
- border-left: 1.5px solid #ddd;
- height: 100px;
- background: #fff
-}
-.weui-cell-circle{
- border: 1px solid #fa9857;
- border-radius: 5px;
- width: 10px;
- height: 10px;
- border-color: #fa9857;
-}
-.weui-cell-time{
- /* width: 50px; */
- float: left;
- font-size:14px;
- padding-left: 15px;
- width: 72px;
-}
-.weui-cell-event{
- padding-top: 15px;
- padding-left: 15px;
->>>>>>> new_master
 }
 .weui-cell-name{
 font-size:14px;
 height:23px;
-<<<<<<< HEAD
 margin-left: 15rpx;
 width: 65%;
-=======
-margin-left: 100px;
->>>>>>> new_master
 }

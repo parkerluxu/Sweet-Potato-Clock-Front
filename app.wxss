@@ -2,10 +2,6 @@
 
 @import 'styles/weui.wxss';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> new_master
 .container {
   height: 100%;
   display: flex;
