@@ -3,8 +3,9 @@
 .weui-cell-third{
  background: #fff;
 }
-.calendar{
+.calender{
   background-color:#fa9857 ;
+  margin-bottom: 15px;
 }
 .image_title{
   height: 40px;
@@ -14,14 +15,14 @@
 .image_list{
   height: 20px;
   width: 20px;
-  margin-left: 30%;
+  margin-left: 32%;
   margin-bottom: 5px;
 }
 .page_title{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 45rpx;
+  margin-top: 30rpx;
 }
 .title_text{
   margin-left: 1  px
@@ -45,13 +46,17 @@
 }
 .weui-cell-time{
  /* width: 50px; */
+ margin-top: 8%;
  font-size:14px;
-
+ font-family: KaiTi_GB2312;
+ text-align: right;
+ color: #38312bbb
 }
 .weui-cell-line{
 /* width: 100px; */
-  margin-left: 15rpx;
+  margin-left: 30rpx;
  border-left: 1.5px solid #ddd;
+ margin-right: 15rpx;
  height: 80px;
  background: #fff
 }
@@ -60,6 +65,10 @@
  padding-top: 5px;
  padding-left: 15rpx;
 
+}
+.content{
+  display: flex;
+  flex-direction: column;
 }
 .weui-cell-content{
 font-size:14px;

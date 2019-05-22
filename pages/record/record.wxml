@@ -1,8 +1,6 @@
 <!--pages/record/record.wxml-->
 <view class='weui-cell-third'>
 <view class='calender'>
- <view class="page_title">
- <text class='title_text'>打卡记录</text></view>
  <calendar selected="{{selected}}" bindselect="bindselect" bindgetdate="bindgetdate" /></view>
  <block wx:for="{{recordInfo}}" wx:key="*this">
  <view class='weui-cell-list'>
@@ -11,7 +9,8 @@
     <view class='date-time'>
     <view class='weui-cell-time'>{{item.dateTime}}</view>
     </view>
-  <view class='weui-cell-line'>
+  <view class='weui-cell-line'/>
+  <view class='content'>
   <view class='weui-cell-content'>{{item.content}}</view>
   <view class='weui-cell-minutes'>{{item.minutes}}分钟</view>
   </view>
