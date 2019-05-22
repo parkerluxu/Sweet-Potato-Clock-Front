@@ -7,29 +7,29 @@ Page({
    */
   data: {
     axis: [{
-      date: '2018-2-15',
-      time: '15:28',
-      name: '张三',
-      event: '垃圾太多'
-    },
-    {
-      date: '2018-2-15',
-      time: '15:28',
-      name: '王三',
-      event: '垃圾太多'
-    },
-    {
-      date: '2018-2-15',
-      time: '15:28',
-      name: '张三',
-      event: '垃圾太多'
-    },
-    {
-      date: '2018-2-15',
-      time: '15:28',
-      name: '张三',
-      event: '垃圾太多'
-    },
+        date: '2018-2-15',
+        time: '15:28',
+        name: '张三',
+        event: '垃圾太多'
+      },
+      {
+        date: '2018-2-15',
+        time: '15:28',
+        name: '王三',
+        event: '垃圾太多'
+      },
+      {
+        date: '2018-2-15',
+        time: '15:28',
+        name: '张三',
+        event: '垃圾太多'
+      },
+      {
+        date: '2018-2-15',
+        time: '15:28',
+        name: '张三',
+        event: '垃圾太多'
+      },
     ],
     recordInfo: []
   },
@@ -37,15 +37,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
     var nowDate = new Date();
     var year = nowDate.getFullYear();
     var month = nowDate.getMonth() + 1 < 10 ? ("0" + (nowDate.getMonth() + 1)) : nowDate.getMonth() + 1;
     var day = nowDate.getDate() < 10 ? ("0" + nowDate.getDate()) : nowDate.getDate();
     var hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
-    var minutes = nowDate.getMinutes() < 10? "0" + nowDate.getMinutes() : nowDate.getMinutes();
-    var seconds = nowDate.getSeconds() < 10? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+    var minutes = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+    var seconds = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
     var dateStr = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
     console.log(dateStr);
     wx.request({
@@ -55,16 +55,18 @@ Page({
         userid: wx.getStorageSync('openid'),
         date: dateStr,
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         var recordList = res.data.recordList;
         var goalList = res.data.goalList;
+
         for (var i = 0; i < recordList.length; i++) {
           var dateTime = 'recordInfo[' + i + '].dateTime'
           var minutes = 'recordInfo[' + i + '].minutes'
           var goal = 'recordInfo[' + i + '].content'
+          var dateTime1 = (recordList[i].dateTime).substr(0, 16)
           that.setData({
-            [dateTime]: recordList[i].dateTime,
+            [dateTime]: dateTime1,
             [minutes]: recordList[i].minutes,
             [goal]: goalList[i].content,
           })
@@ -76,49 +78,80 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function(options) {
+    var that = this
+    that.setData({
+      recordInfo: null
+    })
+    console.log(options)
+    var dateStr = options
+    if (options != null) {
+      wx.request({
+        url: 'http://localhost:8080/displayrecord',
+        method: 'GET',
+        data: {
+          userid: wx.getStorageSync('openid'),
+          date: dateStr,
+        },
+        success: function(res) {
+          console.log(res.data)
+          var recordList = res.data.recordList;
+          var goalList = res.data.goalList;
+          for (var i = 0; i < recordList.length; i++) {
+            var dateTime = 'recordInfo[' + i + '].dateTime'
+            var minutes = 'recordInfo[' + i + '].minutes'
+            var goal = 'recordInfo[' + i + '].content'
+            var dateTime1 = (recordList[i].dateTime).substr(0, 16)
+            that.setData({
+              [dateTime]: dateTime1,
+              [minutes]: recordList[i].minutes,
+              [goal]: goalList[i].content,
+            })
+          }
+        }
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
   bindselect(e) {
@@ -128,7 +161,11 @@ Page({
    * 获取选择日期
    */
   bindgetdate(e) {
+    var that = this;
     let time = e.detail;
     console.log(time)
+    var dateStr = time.year + "-" + time.month + "-" + time.date + " " + "08:00:00";
+    console.log(dateStr)
+    that.onShow(dateStr);
   }
 })
