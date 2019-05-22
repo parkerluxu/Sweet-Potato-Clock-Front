@@ -7,13 +7,12 @@
 
 .button {
   display: flex;
-  align-items: center;
   height: 50px；
 }
 
 .btn2{
    margin-left: 10%;
-margin-top: 4%;
+  margin-top: 4%;
   height: 80rpx;
   line-height: 70rpx;
    font-size: 100rpx;
@@ -25,7 +24,7 @@ margin-top: 4%;
 }
 .button1{
   margin-left: 20%;
- margin-top: 4%;
+  margin-top: 4%;
   height: 60rpx;
   font-size: 30rpx;
   line-height: 60rpx;

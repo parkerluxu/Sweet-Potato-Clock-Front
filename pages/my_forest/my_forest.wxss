@@ -1,1 +1,4 @@
 /* pages/my_forest/my_forest.wxss */
+.canvas{
+  width: 100%;
+}

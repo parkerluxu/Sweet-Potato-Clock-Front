@@ -10,15 +10,17 @@ Page({
     winHeight: 0,
     // tab切换  
     currentTab: 0,
-    color_1_1: "#ffffff",
-    color_1_2: "#f66a0c",
-    color_1_3: "#f66a0c",
-    color_2_1: "#f66a0c",
+    color_2_1: "#ffffff",
     color_2_2: "#f66a0c",
-    color_2_3: "#ffffff",
+    color_2_3: "#f66a0c",
+    color_1_1: "#f66a0c",
+    color_1_2: "#f66a0c",
+    color_1_3: "#ffffff",
+    status: 1,
+    clockList: [],
     memberList: [],
-    timeList:[],
-    groupId: '1',
+    timeList: [],
+    treesList: [],
     list_1: [],
     showList: [],//展示列表
     title: '',
@@ -48,33 +50,32 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      var that=this;
-      wx.request({
-        url: 'http://127.0.0.1:8080/displayuserlist/displayuserlist',
-        method:"GET",
-       data:{
-         groupId:that.data.groupId
-       },
-       success:function(res){
-          that.setData({
-            memberList:res.data.userList,
-            timeList:res.data.timeList,
-          })
-          for(var i=0;i<that.data.memberList.length;++i){
-            var k1='showList['+i+'].avatar';
-            var k2='showList['+i+'].name';
-            var k3='showList['+i+'].minutesSum';
-            var k4='showList['+i+'].minutes';
-            that.setData({
-              [k1]:that.data.memberList[i].avatar,
-              [k2]:that.data.memberList[i].userNickname,
-              [k3]:that.data.memberList[i].minutesSum,
-              [k4]:that.data.timeList[i]
-            })
-          }
+    var that = this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/rank/rankGrobal',
+      method: "GET",
 
-       }
-      })
+      success: function (res) {
+        that.setData({
+          memberList: res.data.userList,
+          timeList: res.data.timeList,
+          treesList:res.data.treesList
+        })
+        for (var i = 0; i < that.data.memberList.length; ++i) {
+          var k1 = 'showList[' + i + '].avatar';
+          var k2 = 'showList[' + i + '].name';
+          var k3 = 'showList[' + i + '].treesSum';
+          var k4 = 'showList[' + i + '].minutes';
+          that.setData({
+            [k1]: that.data.memberList[i].avatar,
+            [k2]: that.data.memberList[i].userNickname,
+            [k3]: that.data.treesList[i].treeNumber,
+            [k4]: that.data.timeList[i]
+          })
+        }
+
+      }
+    })
   },
 
   /**
@@ -112,15 +113,10 @@ Page({
 
   },
   click_on_1: function () {
-    wx.navigateTo({
-      url: '../world_ranking_list/world_ranking_list',
-    })
-
+    var that = this;
+   wx.navigateBack({
+   delta:1
+   })
   },
-  click_on_2:function(){
-    wx.navigateTo({
-      url: '../group_information/group_information',
-    })
-  }
 
 })

@@ -50,19 +50,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    /*var that = this
+    var that = this
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/userinformation/getuserinformationbyuserid',
+      url: 'http://127.0.0.1:8080/userinformation/userinformation',
       data: {
-        userid: wx.getStorageSync('openid'),
+        userid: '1',
       },
       method: 'GET',
       success: function (res) {
         console.log(res.data.userinformation);
         var value = res.data.userinformation;
+        var treeNumber=res.data.treeNumber;
         var daysSum = value.daysSum + '天';
         var minutesSum = value.minutesSum + '分钟';
-        var score = value.score + '分';
+        var score = treeNumber + '棵';
         var item0 = 'orderItems[' + 0 + '].contentText';
         var item1 = 'orderItems[' + 1 + '].contentText';
         var item2 = 'orderItems[' + 2 + '].contentText';
@@ -73,7 +74,7 @@ Page({
           [item2]: score,
         })
       },
-    })*/
+    })
   },
 
   /**

@@ -1,38 +1,35 @@
-
-<div class="weui-cells__title wcss0">小组名称</div>
-<view wx:if="{{!isCapatain}}" class="weui-cells wcss1" >
+<view class="weui-cells__title wcss0">
+  小组名称</view>
+<view wx:if="{{!isCapatain}}" class="weui-cells wcss1">
   <view class="weui-cell wcss2">
-        <div class="weui-article__p text ">
-            cell standard
-        </div>
+    <div class="weui-article__p text ">
+      cell standard
+    </div>
   </view>
 </view>
 <view wx:if="{{isCapatain}}" class="weui-cells wcss1">
   <view class="weui-cell wcss2">
-        <div class="weui-cell__bd ">
-           <input class="weui-input" placeholder="小组名称"/>
-        </div>
+    <div class="weui-cell__bd ">
+      <input class="weui-input" placeholder="小组名称" />
+    </div>
   </view>
 </view>
 <view class='divLine'>
 </view>
-<view class="weui-cells__title">小组公告</view>
- <view class="weui-cells wcss3">
-           <view class="weui-article__p my_text_2" bindtap=''>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.
-                       
-                    </view>
-            </view>
+<view class="weui-cells__title wcss4">小组公告</view>
+<view class="weui-cells wcss3">
+  <view class="weui-article__p my_text_2" bindtap='showText'>
+    consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+  </view>
+</view>
 <view class='divLine'>
 </view>
 <view wx:if="{{isCapatain}}">
-<button type="default" bindtap="changeToMemberManagement" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;" hover-class="button-hover">踢出成员</button>
+  <button type="default" bindtap="changeToMemberManagement" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;" hover-class="button-hover">踢出成员</button>
   <button type="default" bindtap="killGroup" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;margin-bottom:0;" hover-class="button-hover">退出并解散小组</button>
-  </view>
-  <view wx:if="{{!isCapatain}}">
+</view>
+<view wx:if="{{!isCapatain}}">
 
   <button type="default" bindtap="killGroup" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;margin-bottom:0;" hover-class="button-hover">退出小组</button>
-  </view>
+</view>
