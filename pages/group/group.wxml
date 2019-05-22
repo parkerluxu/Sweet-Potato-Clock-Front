@@ -1,2 +1,32 @@
-<!--pages/group/group.wxml-->
-<text>pages/group/group.wxml</text>
+<view class='page_row' bindtap="suo">
+  <view class="search">
+    <view class="df search_arr">
+      <icon class="searchcion" size='20' type='search'></icon>
+      <input class="" disabled placeholder="请输入小组名称" value="{{searchValue}}" />
+    </view>
+  </view>
+  <view class='sousuo'>搜索</view>
+</view>
+<view class='divLine'>
+</view>
+
+<scroll-view scroll-y="true" style="width:100%;">
+  <view wx:for="{{3}}" class="list">
+    <view class="item">
+    <view class="index"><text>{{item}}</text></view>
+  <image class="poster" src="../images/achieve.png" />
+  <view class="meta">
+    <text class="title">dasdsa</text>
+  </view>
+  <view class="rating">
+    <text>编辑</text>
+  </view>
+</view>
+  </view>
+</scroll-view>
+
+<view>
+  <image src="/pages/images/new-group.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>
+  <image src="/pages/images/join-group.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>
+  <image src="/pages/images/add.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
+</view>

@@ -6,31 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    axis: [{
-        date: '2018-2-15',
-        time: '15:28',
-        name: '张三',
-        event: '垃圾太多'
-      },
-      {
-        date: '2018-2-15',
-        time: '15:28',
-        name: '王三',
-        event: '垃圾太多'
-      },
-      {
-        date: '2018-2-15',
-        time: '15:28',
-        name: '张三',
-        event: '垃圾太多'
-      },
-      {
-        date: '2018-2-15',
-        time: '15:28',
-        name: '张三',
-        event: '垃圾太多'
-      },
-    ],
     recordInfo: []
   },
 
@@ -166,6 +141,6 @@ Page({
     console.log(time)
     var dateStr = time.year + "-" + time.month + "-" + time.date + " " + "08:00:00";
     console.log(dateStr)
-    that.onShow(dateStr);
+    that.onShow(dateStr);r
   }
 })

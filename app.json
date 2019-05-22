@@ -1,18 +1,16 @@
 {
   "pages": [
-
+    "pages/home_page/home_page",
     "pages/record/record",
-        "pages/login/login",
+    "pages/login/login",
     "pages/my_forest/my_forest",
     "pages/group_information/group_information",
-    "pages/home_page/home_page",
     "pages/index/index",
     "pages/logs/logs",
     "pages/clock/clock",
     "pages/group/group",
     "pages/new_group/new_group",
     "pages/personal_information/personal_information"
-
   ],
   "window": {
     "backgroundTextStyle": "light",

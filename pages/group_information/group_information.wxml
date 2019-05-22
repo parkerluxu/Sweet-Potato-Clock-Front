@@ -1,5 +1,4 @@
-<div class="weui-cells__title wcss0">
-  小组名称</div>
+<div class="weui-cells__title wcss0">小组名称</div>
 <view wx:if="{{!isCapatain}}" class="weui-cells wcss1">
   <view class="weui-cell wcss2">
     <div class="weui-article__p text ">
