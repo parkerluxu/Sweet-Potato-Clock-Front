@@ -56,14 +56,13 @@
  background: #fff
 }
 
-.weui-cell-event{
+.weui-cell-minutes{
  padding-top: 5px;
  padding-left: 15rpx;
 
 }
-.weui-cell-name{
+.weui-cell-content{
 font-size:14px;
 height:23px;
 margin-left: 15rpx;
-width: 65%;
 }
