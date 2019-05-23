@@ -1,5 +1,6 @@
 <!--pages/my_forest/my_forest.wxml-->
 <view class="container">
+
     <!--绘制canvas-->
     <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
 </view>
