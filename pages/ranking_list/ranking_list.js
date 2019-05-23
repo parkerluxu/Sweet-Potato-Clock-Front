@@ -18,7 +18,7 @@ Page({
     color_2_3: "#ffffff",
     memberList: [],
     timeList:[],
-    groupId: '1',
+    groupId: 1,
     list_1: [],
     showList: [],//展示列表
     title: '',
@@ -34,8 +34,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
+      this.setData({
+        groupId:options.groupId
+      })
+},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -119,7 +121,7 @@ Page({
   },
   click_on_2:function(){
     wx.navigateTo({
-      url: '../group_information/group_information',
+      url: '../group_information/group_information?groupId='+this.data.groupId,
     })
   }
 

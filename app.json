@@ -1,18 +1,17 @@
 {
   "pages": [
-    "pages/ranking_list/ranking_list",
-    "pages/personal_information/personal_information",
-    
-    "pages/record/record",
-    "pages/my_forest/my_forest",
-    "pages/group_information/group_information",
     "pages/home_page/home_page",
+      "pages/group_information/group_information",
+    "pages/record/record",
+    "pages/login/login",
+    "pages/my_forest/my_forest",
+    "pages/ranking_list/ranking_list",
     "pages/index/index",
     "pages/logs/logs",
     "pages/clock/clock",
     "pages/group/group",
     "pages/new_group/new_group",
-   
+    "pages/personal_information/personal_information",
     "pages/world_ranking_list/world_ranking_list"
   ],
   "window": {

@@ -1,4 +1,4 @@
-// pages/new_group/new_group.js
+// pages/linking_list/linking_list.js
 Page({
 
   /**
@@ -7,12 +7,7 @@ Page({
   data: {
 
   },
-  switch1Change(e) {
-    console.log('switch1 发生 change 事件，携带值为', e.detail.value)
-  },
-  switch2Change(e) {
-    console.log('switch2 发生 change 事件，携带值为', e.detail.value)
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

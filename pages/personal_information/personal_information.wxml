@@ -13,15 +13,9 @@
       </view>
     </block>
   </view>
-  <view class="weui-cells weui-cells_after-title">
-    <navigator url="../my_forest/my_forest" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-      <view class="weui-cell__bd">森林</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </navigator>
-   
-    <navigator url="../record/record?userId={{userId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-      <view class="weui-cell__bd">记录</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </navigator>
-  </view>
-</view>
+ <view class="btn-area">
+ <button class="btn1" plain='true' bindtap='changeToTree'><image class="images" src="../images/tree.png"></image><view><text>森林</text></view></button>
+ <button class="btn2" plain='true' bindtap='changeToRecord'>
+ <image class="images" src="../images/tree.png"></image><view><text>记录</text></view></button>
+ </view>
+ </view>

@@ -57,7 +57,7 @@ padding-top: -5rpx;
 
 .list .item {
   display: flex;
-  padding: 20rpx 40rpx;
+  padding: 20rpx 20rpx;
   border-bottom: 1rpx solid #eee;
   cursor: pointer;
 }
@@ -68,10 +68,9 @@ padding-top: -5rpx;
 .index text{ 
   width: 50rpx;
   font-size: 50rpx;
-  font-weight: bold;
+  font-weight: solid;
   text-align: center;
- 
-  color: #f66a0c;
+  color: #ec9053;
   padding: 10rpx;
   border-radius: 20rpx;
 }
@@ -123,3 +122,17 @@ padding-top: -5rpx;
   border-radius: 20rpx;
 }
 
+.artists1{
+  display: flex;
+}
+.clock_png{
+  width:30rpx;
+  height: 30rpx;
+  margin-right:2%;
+  margin-top: 2%;
+}
+
+.tree_png{
+  width:30rpx;
+  height: 30rpx;
+}
