@@ -1,6 +1,10 @@
 <!--pages/my_forest/my_forest.wxml-->
 <view class="container">
-
+<i-row i-class="demo-row">
+    <i-col span="8" i-class="demo-col">8：33.33%</i-col>
+    <i-col span="8" i-class="demo-col light">8：33.33%</i-col>
+    <i-col span="8" i-class="demo-col">8：33.33%</i-col>
+</i-row>
     <!--绘制canvas-->
     <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
 </view>
