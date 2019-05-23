@@ -12,8 +12,8 @@
 }
 
 .btn2{
-   margin-left: 10%;
-margin-top: 4%;
+   margin-left: 5%;
+margin-top: 2%;
   height: 80rpx;
   line-height: 70rpx;
    font-size: 100rpx;
@@ -135,4 +135,39 @@ padding-top: -5rpx;
 .tree_png{
   width:30rpx;
   height: 30rpx;
+}
+.modify_png{
+   width:40rpx;
+  height: 40rpx;
+}
+.drawerbox {
+  width: 80%;
+  height: 50%;
+  overflow: scroll;
+  position: fixed;
+  top: 25%;
+  left: 10%;
+  z-index: 1001;
+  background: #fff;
+  border-radius: 10px;
+}
+.drawer-title {
+  display: flex;
+  padding: 1%;
+  padding-left: 5%;
+  font: 45rpx;
+  /*font-weight: 550;*/
+  text-align: left;
+  color: #000;
+  background-color: #fa9857;
+}
+.pen_png{
+    width:40rpx;
+  height: 40rpx;
+  margin-top: 2%;
+  margin-right: 1%;
+}
+.weui-cell__bd{
+  height: 80rpx;
+  line-height: 80rpx;
 }

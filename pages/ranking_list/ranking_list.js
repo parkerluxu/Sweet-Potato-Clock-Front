@@ -27,7 +27,13 @@ Page({
     hasMore: true,
     page: 1,
     size: 20,
-    movies: ["dasdas", "ascsacsc"]
+    movies: ["dasdas", "ascsacsc"],
+    isCapatain: true,
+    captainId: null,
+    groupName:String,
+    text:String,
+    showModalStatus: false,
+    userId:"1"
   },
 
   /**
@@ -51,6 +57,31 @@ Page({
    */
   onShow: function () {
       var that=this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/displaygroupinformation/displaygroup',
+      method: "GET",
+      data: {
+        groupId: that.data.groupId
+      },
+      success: function (res) {
+        var value = res.data.groupInformation;
+        that.setData({
+          captainId: value.captainId,
+          groupName: value.groupName,
+          text: value.description
+        });
+        if (that.data.captainId == that.data.userId) {
+          that.setData({
+            isCapatain: true
+          })
+        } else {
+          that.setData({
+            isCapatain: false
+          })
+        }
+
+      }
+    });
       wx.request({
         url: 'http://127.0.0.1:8080/displayuserlist/displayuserlist',
         method:"GET",
@@ -120,9 +151,12 @@ Page({
 
   },
   click_on_2:function(){
-    wx.navigateTo({
-      url: '../group_information/group_information?groupId='+this.data.groupId,
-    })
+   var that=this;
+   if(that.data.isCapatain==true){
+      that.setData({
+        showModalStatus:true
+      })
+   }
   }
 
 })

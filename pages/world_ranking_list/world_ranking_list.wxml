@@ -23,11 +23,15 @@
       <view class="meta">
         <text class="title">{{item.name}}</text>
 
-        <view class="artists">今日已专注{{item.minutes}}分钟</view>
+        <view class="artists1">
+    <image class="clock_png" src="../images/clock.png"></image>
+    <view class="artists">今日已专注{{item.minutes}}分钟</view>
+    </view>
       </view>
       <view class="rating">
-        <text>{{item.treesSum}}棵</text>
-      </view>
+  <image class="tree_png" src="../images/clock.png"></image>
+    <text>×{{item.treesSum}}</text>
+  </view>
     </view>
   </view>
 
