@@ -6,14 +6,14 @@
  <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="{{groupName}}" />
+                    <input class="weui-input" placeholder="{{groupName}}" disabled='{{isAbled}}'/>
                 </view>
             </view>
         </view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+                    <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em"disabled='{{isAbled}}' />
                     <view class="weui-textarea-counter">0/200</view>
                 </view>
             </view>

@@ -33,7 +33,8 @@ Page({
     groupName:String,
     text:String,
     showModalStatus: false,
-    userId:"1"
+    userId:"1",
+    isAbled:false
   },
 
   /**
@@ -72,11 +73,13 @@ Page({
         });
         if (that.data.captainId == that.data.userId) {
           that.setData({
-            isCapatain: true
+            isCapatain: true,
+            isAbled:true
           })
         } else {
           that.setData({
-            isCapatain: false
+            isCapatain: false,
+            isAbled:false
           })
         }
 
