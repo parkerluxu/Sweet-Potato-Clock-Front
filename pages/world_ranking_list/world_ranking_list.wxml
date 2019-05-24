@@ -1,0 +1,38 @@
+<import src="../common/movie-list" />
+<view class="button">
+
+  <button class="button1" size="default" plain="true" style="color:{{color_1_1}}; border-color: {{color_1_2}}; background-color:{{color_1_3}};" hover-class="button-hover" bindtap="click_on_1">组内排行</button>
+
+
+  <button size="default" class="button2" plain="true " style="color:{{color_2_1}}; border-color: {{color_2_2}}; background-color:{{color_2_3}};" hover-class="button-hover ">世界排行</button>
+ <button class="btn2" size="default" bindtap="goto" bindtap='click_on_2'></button>
+
+</view>
+<view class='divLine'>
+</view>
+
+
+<scroll-view scroll-y="true" style="width:100%;">
+
+  <view wx:for="{{showList}}" class="list">
+    <view class="item">
+      <view class="index">
+        <text>{{index}}</text>
+      </view>
+      <image class="poster" src="../images/achieve.png" />
+      <view class="meta">
+        <text class="title">{{item.name}}</text>
+
+        <view class="artists1">
+    <image class="clock_png" src="../images/clock.png"></image>
+    <view class="artists">今日已专注{{item.minutes}}分钟</view>
+    </view>
+      </view>
+      <view class="rating">
+  <image class="tree_png" src="../images/clock.png"></image>
+    <text>×{{item.treesSum}}</text>
+  </view>
+    </view>
+  </view>
+
+</scroll-view>

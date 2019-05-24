@@ -11,17 +11,19 @@
 </view>
 
 <scroll-view scroll-y="true" style="width:100%;">
-  <view wx:for="{{3}}" class="list">
-    <view class="item">
-    <view class="index"><text>{{item}}</text></view>
-  <image class="poster" src="../images/achieve.png" />
-  <view class="meta">
-    <text class="title">dasdsa</text>
-  </view>
-  <view class="rating">
-    <text>编辑</text>
-  </view>
-</view>
+  <view wx:for="{{groupList}}" class="list">
+    <navigator class="item" url='../ranking_list/ranking_list?groupId={{item.groupId}}'>
+      <view class="index">
+        <text>{{index}}</text>
+      </view>
+      <image class="poster" src="../images/achieve.png" />
+      <view class="meta">
+        <text class="title">{{item.groupName}}</text>
+      </view>
+      <view class="rating">
+        <text>编辑</text>
+      </view>
+    </navigator>
   </view>
 </scroll-view>
 

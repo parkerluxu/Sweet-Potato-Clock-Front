@@ -186,7 +186,6 @@
 button::after {
     border: 0;
   } 
-
 .inactive {
   color: #ffae49;
   border:2rpx solid #ffae49;

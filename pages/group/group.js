@@ -5,8 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userId:"1",
     focus: false,
     inputValue: '',
+    groupList:[],
     isPopping: false,//是否已经弹出
     animPlus: {},//旋转动画
     animCollect: {},//item位移,透明度
@@ -117,6 +119,25 @@ Page({
     // 生命周期函数--监听页面初次渲染完成
   },
   onShow: function () {
+    var that=this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
+      method:"GET",
+      data: {
+        userid: that.data.userId
+      },
+      success:function(res){
+        var list=res.data.groupList;
+        for(var i=0;i<res.data.groupList.length;++i){
+          var k1='groupList['+i+'].groupName';
+          var k2='groupList['+i+'].groupId';
+          that.setData({
+            [k1]:list[i].groupName,
+            [k2]:list[i].groupId,
+          })
+        }
+      }
+    })
     // 生命周期函数--监听页面显示
   },
   onHide: function () {

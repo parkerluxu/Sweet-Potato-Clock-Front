@@ -1,4 +1,5 @@
 // pages/record/record.js
+var app = getApp();
 Page({
 
   /**
