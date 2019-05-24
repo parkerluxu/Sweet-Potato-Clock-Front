@@ -108,7 +108,7 @@ padding-top: -5rpx;
   color: #999;
 }
 .rating{
-  margin-left: 20%;
+  margin-left: 15%;
    margin-top: 6%;
 }
 .list .item .rating text {

@@ -10,14 +10,14 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__bd_1">
-        <input class="weui-input" placeholder="{{groupName}}" disabled='{{isAbled}}' />
+        <input class="weui-input" placeholder="{{groupName}}" disabled='{{isAbled}}' bindtap='getInput_1'/>
       </view>
     </view>
   </view>
   <view class="weui-cells weui-cells_after-title weui-cell_2 ">
     <view class="weui-cell weui-cell_1">
     <image class="suona_png" src="../images/suona.png"></image>
-      <textarea class=" weui-textarea" placeholder="{{text}}" fixed='true' />
+      <textarea class=" weui-textarea" placeholder="{{text}}" fixed='true' bindtap='getInput_2'/>
       <view class="weui-textarea-counter">0/200</view>
     </view>
   </view>

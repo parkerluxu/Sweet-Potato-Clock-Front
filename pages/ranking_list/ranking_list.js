@@ -34,7 +34,9 @@ Page({
     text:String,
     showModalStatus: false,
     userId:"1",
-    isAbled:true
+    isAbled:true,
+    inputValue_1:null,
+    inputValue_2:null
   },
 
   /**
@@ -209,5 +211,17 @@ Page({
       });
     }
   },
+  getInput_1: function (e) {
+    var that = this;
+    that.setData({
+      inputValue_1: e.detail.value
+    })
+  },
+  getInput_2: function (e) {
+    var that = this;
+    that.setData({
+      inputValue_2: e.detail.value
+    })
+  }
 
 })
