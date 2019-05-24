@@ -1,31 +1,38 @@
 /* pages/my_forest/my_forest.wxss */
-.canvas{
+
+.canvas {
   width: 100%;
   margin-top: 80rpx;
 }
-.imagesize{
- display:flex;                  
- justify-content: center;        
+
+.imagesize {
+  display: flex;
+  justify-content: center;
 }
-.imagesize image { 
-  width:100%;
-  height:400rpx;
+
+.imagesize image {
+  width: 100%;
+  height: 400rpx;
 }
-.tree-content{
+
+.tree-content {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-right: 50rpx;
-  }
-.tree-number{
+}
+
+.tree-number {
   margin-top: 1%;
   color: #9e9d9d;
   font-size: 40rpx;
 }
-.tree-image{
+
+.tree-image {
   height: 80rpx;
   width: 80rpx;
 }
+
 .button {
   display: flex;
   height: 80rpx;
@@ -33,59 +40,63 @@
   align-items: center;
 }
 
-.button1{
+.button1 {
   height: 60rpx;
   font-size: 30rpx;
-  line-height: 60rpx;  
+  line-height: 60rpx;
   margin-top: 2%;
+  margin-bottom: 2%;
 }
-.button2{
+
+.button2 {
   height: 60rpx;
-font-size: 30rpx;
-line-height: 60rpx;
+  font-size: 30rpx;
+  line-height: 60rpx;
   margin-top: 2%;
+  margin-bottom: 2%;
 }
-.name{
+
+.name {
   margin-left: 10px;
 }
-.divLine{
-  background: #bdbbbb;
- width: 100%;
- height: 3rpx;
- margin-top: 3%;
+
+.divLine.mid {
+  background-color: #bdbbbb;
+  width: 100%;
+  height: 2rpx;
 }
-.divLine.mid{
-background-color:#bdbbbb;
-width: 90%;
-height: 1.5rpx;
-margin-left: 5%;
-}
-.date{
+
+.date {
   height: 80rpx;
   text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 1%;
 }
-.date-str{
+
+.date-str {
   margin-top: 3%;
   font-size: 30rpx;
-  color: #a5a4a4
+  color: #a5a4a4;
 }
-.date-content{
+
+.date-content {
   margin-left: 50rpx;
   margin-right: 50rpx;
   display: flex;
   align-items: center;
 }
-.clock{
+
+.clock {
   height: 50rpx;
   width: 50rpx;
   margin-top: 2%;
-  margin-right: 10rpx
+  margin-right: 10rpx;
 }
-.arrow{
+
+.arrow {
   height: 100rpx;
   width: 100rpx;
   margin-top: 2%;
