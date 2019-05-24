@@ -1,5 +1,4 @@
 // pages/record/record.js
-var app = getApp();
 Page({
 
   /**
@@ -24,7 +23,7 @@ Page({
     var dateStr = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
     console.log(dateStr);
     wx.request({
-      url: 'http://localhost:8080/displayrecord',
+      url: 'http://localhost:8080/displayrecord/displayrecord',
       method: 'GET',
       data: {
         userid: wx.getStorageSync('openid'),
@@ -34,14 +33,18 @@ Page({
         console.log(res.data)
         var recordList = res.data.recordList;
         var goalList = res.data.goalList;
-
         for (var i = 0; i < recordList.length; i++) {
-          var dateTime = 'recordInfo[' + i + '].dateTime'
+          var date = 'recordInfo[' + i + '].date'
+          var time = 'recordInfo[' + i + '].time'
           var minutes = 'recordInfo[' + i + '].minutes'
           var goal = 'recordInfo[' + i + '].content'
-          var dateTime1 = (recordList[i].dateTime).substr(0, 16)
+          var date1 = (recordList[i].dateTime).substr(0, 10)
+          var time1 = (recordList[i].dateTime).substr(11,5)
+          console.log(date1)
+          console.log(time1)
           that.setData({
-            [dateTime]: dateTime1,
+            [date]: date1,
+            [time]:time1,
             [minutes]: recordList[i].minutes,
             [goal]: goalList[i].content,
           })
@@ -69,7 +72,7 @@ Page({
     var dateStr = options
     if (options != null) {
       wx.request({
-        url: 'http://localhost:8080/displayrecord',
+        url: 'http://localhost:8080/displayrecord/displayrecordbydate',
         method: 'GET',
         data: {
           userid: wx.getStorageSync('openid'),
@@ -80,18 +83,26 @@ Page({
           var recordList = res.data.recordList;
           var goalList = res.data.goalList;
           for (var i = 0; i < recordList.length; i++) {
-            var dateTime = 'recordInfo[' + i + '].dateTime'
+            var date = 'recordInfo[' + i + '].date'
+            var time = 'recordInfo[' + i + '].time'
             var minutes = 'recordInfo[' + i + '].minutes'
             var goal = 'recordInfo[' + i + '].content'
-            var dateTime1 = (recordList[i].dateTime).substr(0, 16)
+            var date1 = (recordList[i].dateTime).substr(0, 10)
+            var time1 = (recordList[i].dateTime).substr(11, 5)
+            console.log(date1)
+            console.log(time1)
             that.setData({
-              [dateTime]: dateTime1,
+              [date]: date1,
+              [time]: time1,
               [minutes]: recordList[i].minutes,
               [goal]: goalList[i].content,
             })
           }
         }
       })
+    }
+    else{
+      that.onLoad();
     }
   },
 
@@ -141,6 +152,6 @@ Page({
     console.log(time)
     var dateStr = time.year + "-" + time.month + "-" + time.date + " " + "08:00:00";
     console.log(dateStr)
-    that.onShow(dateStr);r
+    that.onShow(dateStr);
   }
 })

@@ -1,10 +1,15 @@
 <!--pages/my_forest/my_forest.wxml-->
-<view class="container">
-<i-row i-class="demo-row">
-    <i-col span="8" i-class="demo-col">8：33.33%</i-col>
-    <i-col span="8" i-class="demo-col light">8：33.33%</i-col>
-    <i-col span="8" i-class="demo-col">8：33.33%</i-col>
-</i-row>
     <!--绘制canvas-->
-    <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+    <view class='imagesize'>
+  <image src="../images/forest.jpg">
+  </image>
 </view>
+<import src="../common/movie-list" />
+<view class='divLine'/>
+<view class="button">
+    <button class="button1" size="default"plain="true"  style="color:{{color_1_1}}; border-color: {{color_1_2}}; background-color:{{color_1_3}};" hover-class="button-hover" bindtap="clickDay">日</button> 
+    <button size="default"class="button2" plain="true " style="color:{{color_2_1}}; border-color: {{color_2_2}}; background-color:{{color_2_3}};" hover-class="button-hover " bindtap="clickWeek">周</button>
+    <button size="default"class="button2" plain="true " style="color:{{color_3_1}}; border-color: {{color_3_2}}; background-color:{{color_3_3}};" hover-class="button-hover " bindtap="clickMonth">月</button>
+</view>
+<view class='divLine.mid'/>
+    <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>

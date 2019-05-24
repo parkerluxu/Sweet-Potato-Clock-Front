@@ -1,0 +1,22 @@
+{
+  "name": "miniprogram-test-7-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HandsomeLu/Sweet-Potato-Clock-Front.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HandsomeLu/Sweet-Potato-Clock-Front/issues"
+  },
+  "homepage": "https://github.com/HandsomeLu/Sweet-Potato-Clock-Front#readme",
+  "dependencies": {
+    "lottie-web": "^5.5.3"
+  }
+}

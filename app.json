@@ -18,30 +18,29 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
-    "tabBar": {
-      "color": "#bfbfbf",
-      "selectedColor": "#e0620d",
-      "borderStyle": "white",
-      "list": [
-        {
-          "selectedIconPath": "pages/images/index_2.png",
-          "iconPath": "pages/images/index_1.png",
-          "pagePath": "pages/home_page/home_page",
-          "text": "首页"
-        },
-        {
-          "selectedIconPath": "pages/images/bottomAddSeleted.png",
-          "iconPath": "pages/images/bottomAddUnseleted.png",
-          "pagePath": "pages/group/group",
-          "text": "小组"
-        },
-        {
-          "selectedIconPath": "pages/images/bottomPersonSeleted.png",
-          "iconPath": "pages/images/bottomPersonUnseleted.png",
-          "pagePath": "pages/personal_information/personal_information",
-          "text": "个人信息"
-        }
-      ]
-    },
-  "sitemapLocation": "sitemap.json"
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#e0620d",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "pages/images/index_2.png",
+        "iconPath": "pages/images/index_1.png",
+        "pagePath": "pages/home_page/home_page",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "pages/images/bottomAddSeleted.png",
+        "iconPath": "pages/images/bottomAddUnseleted.png",
+        "pagePath": "pages/group/group",
+        "text": "小组"
+      },
+      {
+        "selectedIconPath": "pages/images/bottomPersonSeleted.png",
+        "iconPath": "pages/images/bottomPersonUnseleted.png",
+        "pagePath": "pages/personal_information/personal_information",
+        "text": "个人信息"
+      }
+    ]
+  }
 }

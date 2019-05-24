@@ -6,7 +6,17 @@ var chartData = {
   main: {
     title: '订单统计',
     data: [10, 20, 30, 40, 100,30],
-    categories: ['0-4', '4-8', '8-12', '12-16', '16-20','20-24']
+    categories: ['0-4', '4-8', '8-12', '12-16', '16-20','20-24'],
+    color_1_1: "#ffffff",
+    color_1_2: "#f66a0c",
+    color_1_3: "#f66a0c",
+    color_2_1: "#f66a0c",
+    color_2_2: "#f66a0c",
+    color_2_3: "#ffffff",
+    color_3_1: "#f66a0c",
+    color_3_2: "#f66a0c",
+    color_3_3: "#ffffff",
+    status:[],
   }
 };
 Page({
@@ -22,7 +32,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      color_1_1: "#ffffff",
+      color_1_2: "#f66a0c",
+      color_1_3: "#f66a0c",
+      color_2_1: "#f66a0c",
+      color_2_2: "#f66a0c",
+      color_2_3: "#ffffff",
+      color_3_1: "#f66a0c",
+      color_3_2: "#f66a0c",
+      color_3_3: "#ffffff",
+    })
   },
 
   /**
@@ -108,5 +128,55 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  clickDay: function () {
+    var that = this;
+    that.setData({
+      color_1_1: "#ffffff",
+      color_1_2: "#f66a0c",
+      color_1_3: "#f66a0c",
+      color_2_1: "#f66a0c",
+      color_2_2: "#f66a0c",
+      color_2_3: "#ffffff",
+      color_3_1: "#f66a0c",
+      color_3_2: "#f66a0c",
+      color_3_3: "#ffffff",
+
+      status: 1,
+    })
+
+  },
+  clickWeek: function () {
+    var that = this;
+    that.setData({
+      color_2_1: "#ffffff",
+      color_2_2: "#f66a0c",
+      color_2_3: "#f66a0c",
+      color_1_1: "#f66a0c",
+      color_1_2: "#f66a0c",
+      color_1_3: "#ffffff",
+      color_3_1: "#f66a0c",
+      color_3_2: "#f66a0c",
+      color_3_3: "#ffffff",
+
+      status: 2,
+    })
+  },
+
+  clickMonth: function () {
+    var that = this;
+    that.setData({
+      color_3_1: "#ffffff",
+      color_3_2: "#f66a0c",
+      color_3_3: "#f66a0c",
+      color_1_1: "#f66a0c",
+      color_1_2: "#f66a0c",
+      color_1_3: "#ffffff",
+      color_2_1: "#f66a0c",
+      color_2_2: "#f66a0c",
+      color_2_3: "#ffffff",
+      status: 3,
+    })
   }
 })
