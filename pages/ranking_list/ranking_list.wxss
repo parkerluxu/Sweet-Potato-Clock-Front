@@ -219,6 +219,7 @@ align-items: center;
 .weui-cell_3{
   margin-top: 2%;
   padding-right: 0;
+  margin-bottom: 2%;
 }
 .weui-cell_3::before{
   border:none;
