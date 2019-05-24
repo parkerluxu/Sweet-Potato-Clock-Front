@@ -141,7 +141,7 @@ Page({
     if (currentStatu == "open") {
       this.setData({
         showModalStatus: true
-      });
+      }.bind(this),100);
     }
   },
 
