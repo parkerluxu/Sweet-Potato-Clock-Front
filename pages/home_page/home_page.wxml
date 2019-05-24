@@ -17,7 +17,7 @@
     <label class="lable1">名称</label>
     <view class="name-input">
       <image src='../images/write.png' style="width: 46rpx;height: 55rpx;"></image>
-      <input type="text" name="other" placeholder="请输入目标名称" style="font-size:32rpx;color:#e9833e;margin-right: 5%;" />
+      <input type="text" name="other" placeholder="请输入目标名称" style="font-size:32rpx;color:#e9833e;margin-right: 5%;" bindinput='setGoalName' />
     </view>
   </view>
   <view class="line" style="height:15%;">
@@ -32,11 +32,11 @@
   <view class="line">
     <label class="lable1" style="color:{{textColor}}">时长</label>
     <view class="time-input" style="justify-content: center;border:{{tborder}}">
-      <input type="number" name="other" value="{{input}}" placeholder="时长(10~120)" style="padding:0 5% 0 5%;font-size:32rpx;color:#e9833e;" bindinput="getInput" disabled="{{distime}}" />
+      <input type="number" name="other" value="{{input}}" placeholder="时长(10~120)" style="padding:0 5% 0 5%;font-size:32rpx;color:#e9833e;" bindinput="setGoalMinutes" disabled="{{distime}}" />
       <view style="font-size:40rpx;color:{{ibColor}};margin:0 3% 0 3%;"> min </view>
     </view>
   </view>
-  <view class="btn_ok" bindtap="drawer" data-statu="close">确定</view>
+  <view class="btn_ok" bindtap="addGoal" data-statu="close">确定</view>
 </view>
 
 <view class="list-card">
