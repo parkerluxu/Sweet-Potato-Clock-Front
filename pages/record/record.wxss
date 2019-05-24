@@ -68,7 +68,7 @@
  padding-left: 30rpx;
 
 }
-.content{
+.clock_content{
   display: flex;
   flex-direction: column;
   background-color:  #f1f1f1;
@@ -82,4 +82,7 @@ font-size:14px;
 height:23px;
 margin-left: 30rpx;
 margin-top: 15rpx;
+}
+.plan{
+  margin-top: 50rpx;
 }

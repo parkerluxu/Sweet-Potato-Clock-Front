@@ -56,6 +56,7 @@ Page({
             var timeMinute = 'recordInfo[' + i + '].timeMinute'
             var minutes = 'recordInfo[' + i + '].minutes'
             var goal = 'recordInfo[' + i + '].content'
+            var concentrated = 'recordInfo[' + i + '].concentrated'
             var year1 = (recordList[i].dateTime).substr(0, 4)
             var month1 = (recordList[i].dateTime).substr(5, 2)
             var day1 = (recordList[i].dateTime).substr(8, 2)
@@ -69,6 +70,7 @@ Page({
               [timeMinute]: timeMinute1,
               [minutes]: recordList[i].minutes,
               [goal]: goalList[i].content,
+              [concentrated]: goalList[i].concentrated,
             })
           }
         }
@@ -93,6 +95,7 @@ Page({
             var timeMinute = 'recordInfo[' + i + '].timeMinute'
             var minutes = 'recordInfo[' + i + '].minutes'
             var goal = 'recordInfo[' + i + '].content'
+            var concentrated = 'recordInfo[' + i + '].concentrated'
             var year1 = (recordList[i].dateTime).substr(0, 4)
             var month1 = (recordList[i].dateTime).substr(5, 2)
             var day1 = (recordList[i].dateTime).substr(8, 2)
@@ -106,6 +109,7 @@ Page({
               [timeMinute]: timeMinute1,
               [minutes]: recordList[i].minutes,
               [goal]: goalList[i].content,
+              [concentrated]: goalList[i].concentrated,
             })
           }
         }
