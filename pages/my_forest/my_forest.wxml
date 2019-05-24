@@ -1,15 +1,29 @@
 <!--pages/my_forest/my_forest.wxml-->
-    <!--绘制canvas-->
-    <view class='imagesize'>
+<!--绘制canvas-->
+<view class='imagesize'>
   <image src="../images/forest.jpg">
   </image>
 </view>
-<import src="../common/movie-list" />
-<view class='divLine'/>
-<view class="button">
-    <button class="button1" size="default"plain="true"  style="color:{{color_1_1}}; border-color: {{color_1_2}}; background-color:{{color_1_3}};" hover-class="button-hover" bindtap="clickDay">日</button> 
-    <button size="default"class="button2" plain="true " style="color:{{color_2_1}}; border-color: {{color_2_2}}; background-color:{{color_2_3}};" hover-class="button-hover " bindtap="clickWeek">周</button>
-    <button size="default"class="button2" plain="true " style="color:{{color_3_1}}; border-color: {{color_3_2}}; background-color:{{color_3_3}};" hover-class="button-hover " bindtap="clickMonth">月</button>
+<view class='tree-content'>
+  <image src='../images/tree.png' class='tree-image'></image>
+  <text class='tree-number'>{{tree}}</text>
 </view>
-<view class='divLine.mid'/>
-    <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+<import src="../common/movie-list" />
+<view class='divLine' />
+<view class="button">
+  <button class="button1" size="default" plain="true" style="color:{{color_1_1}}; border-color: {{color_1_2}}; background-color:{{color_1_3}};" hover-class="button-hover" bindtap="clickDay">日</button>
+  <button size="default" class="button2" plain="true " style="color:{{color_2_1}}; border-color: {{color_2_2}}; background-color:{{color_2_3}};" hover-class="button-hover " bindtap="clickWeek">周</button>
+  <button size="default" class="button2" plain="true " style="color:{{color_3_1}}; border-color: {{color_3_2}}; background-color:{{color_3_3}};" hover-class="button-hover " bindtap="clickMonth">月</button>
+</view>
+<view class='divLine.mid' />
+<view class='date'>
+  <image src='../images/left.svg' class="arrow" bindtap='toLastDay'></image>
+  <view class='date-content'>
+    <image src='../images/naozhong.svg' class='clock'></image>
+    <text class="date-str">{{dateStr.year}}年{{dateStr.month}}月{{dateStr.day}}日</text>
+  </view>
+  <image src='../images/right.svg' class="arrow" bindtap='toNextDay'></image>
+</view>
+<!--view class='divLine.mid' /-->
+
+<canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>

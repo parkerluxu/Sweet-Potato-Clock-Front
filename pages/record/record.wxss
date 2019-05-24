@@ -15,7 +15,7 @@
 .image_list{
   height: 20px;
   width: 20px;
-  margin-left: 32%;
+  margin-left: 31%;
   margin-bottom: 5px;
 }
 .page_title{
@@ -48,7 +48,7 @@
 .weui-cell-time{
  /* width: 50px; */
  margin-top: 8%;
- font-size:14px;
+ font-size:12px;
  font-family: KaiTi_GB2312;
  text-align: right;
  color: #38312bbb
@@ -59,7 +59,7 @@
  margin-right: 15rpx;
  height: 80px;
  background: #fff;
- margin-left: 30rpx;
+ margin-left: 15rpx;
  
 }
 

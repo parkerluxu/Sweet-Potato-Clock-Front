@@ -7,8 +7,8 @@
     <image src='../images/jilu.png' class='image_list'></image>
     <view class='block'>
     <view class='date-time'>
-    <view class='weui-cell-time'>{{item.date}}</view>
-    <view class='weui-cell-time'>{{item.time}}</view>
+    <view class='weui-cell-time'>{{item.year}}年{{item.month}}月{{item.day}}日</view>
+    <view class='weui-cell-time'>{{item.hour}}:{{item.timeMinute}}</view>
     </view>
   <view class='weui-cell-line'/>
   <view class='content'>

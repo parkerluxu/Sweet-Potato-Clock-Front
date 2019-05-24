@@ -42,5 +42,6 @@
         "text": "个人信息"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
