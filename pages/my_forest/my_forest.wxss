@@ -2,3 +2,46 @@
 .canvas{
   width: 100%;
 }
+.imagesize{
+ display:flex;                  
+ justify-content: center;        
+}
+.imagesize image { 
+  width:100%;
+  height:400rpx;
+}
+.button {
+  display: flex;
+  height: 80rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.button1{
+  height: 60rpx;
+  font-size: 30rpx;
+  line-height: 60rpx;  
+  margin-top: 2%;
+}
+.button2{
+  height: 60rpx;
+font-size: 30rpx;
+line-height: 60rpx;
+  margin-top: 2%;
+}
+.name{
+  margin-left: 10px;
+}
+.divLine{
+  background: rgb(194, 191, 191);
+ width: 100%;
+ height: 3rpx;
+ margin-top: 3%;
+}
+.divLine.mid{
+  background-color:#bdbbbb;
+ width: 90%;
+ height: 1.5rpx;
+ margin-top: 3%;
+margin-left: 5%;
+}

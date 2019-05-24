@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    recordInfo: []
+    recordInfo: [],
+
   },
 
   /**
@@ -27,7 +28,6 @@ Page({
       method: 'GET',
       data: {
         userid: wx.getStorageSync('openid'),
-        date: dateStr,
       },
       success: function(res) {
         console.log(res.data)

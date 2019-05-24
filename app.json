@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/home_page/home_page",
     "pages/record/record",
-    "pages/login/login",
     "pages/my_forest/my_forest",
     "pages/group_information/group_information",
     "pages/index/index",
