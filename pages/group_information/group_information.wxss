@@ -20,7 +20,9 @@ page{
   margin-left: 4%;
   margin-top: 0%;
 
+
   font-size: 40rpx;
+
 
 }
 .text{

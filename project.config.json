@@ -10,7 +10,12 @@
 		"minified": true,
 		"newFeature": true,
 		"autoAudits": false,
+<<<<<<< HEAD
 		"checkInvalidKey": true
+=======
+		"checkInvalidKey": true,
+		"nodeModules": true
+>>>>>>> new_master
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.6",

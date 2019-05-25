@@ -1,3 +1,4 @@
+
 /* pages/record/record.wxss */
 
 .weui-cell-third{
@@ -15,7 +16,7 @@
 .image_list{
   height: 20px;
   width: 20px;
-  margin-left: 32%;
+  margin-left: 31%;
   margin-bottom: 5px;
 }
 .page_title{
@@ -29,49 +30,61 @@
 }
 .weui-cell-list{
  background: #fff;
- margin: 5px 50px 5px 50px;
+ margin: 5rpx 40rpx 5rpx 10rpx;
  display: flex;
  flex-direction: column;
 }
 .block{
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
+  position:relative;
+
 }
 .date-time{
   display: flex;
   flex-direction: column;
-  width: 30%;
-  align-items: center;
+  width: 35vw;
 }
 .weui-cell-time{
  /* width: 50px; */
  margin-top: 8%;
- font-size:14px;
+ font-size:12px;
  font-family: KaiTi_GB2312;
  text-align: right;
  color: #38312bbb
 }
 .weui-cell-line{
 /* width: 100px; */
-  margin-left: 30rpx;
  border-left: 1.5px solid #ddd;
  margin-right: 15rpx;
  height: 80px;
- background: #fff
+ background: #fff;
+ margin-left: 15rpx;
+ 
 }
 
 .weui-cell-minutes{
  padding-top: 5px;
- padding-left: 15rpx;
+ padding-left: 30rpx;
 
 }
-.content{
+.clock_content{
   display: flex;
   flex-direction: column;
+  background-color:  #f1f1f1;
+	color: #333333;
+  width: 70vw;
+  box-shadow: 3rpx 3rpx 3rpx #888888;
+  border-radius: 30rpx;
 }
 .weui-cell-content{
 font-size:14px;
 height:23px;
-margin-left: 15rpx;
+margin-left: 30rpx;
+margin-top: 15rpx;
+}
+.plan{
+  margin-top: 50rpx;
+
 }

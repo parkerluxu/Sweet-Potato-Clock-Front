@@ -58,7 +58,9 @@ Page({
                         console.log('解密失败')
                       }
                       wx.switchTab({
-                        url: '../record/record',
+
+                        url: '../home_page/home_page',
+
                       })
                     },
                     fail: function () {
@@ -101,7 +103,9 @@ Page({
                         console.log('解密失败')
                       }
                       wx.switchTab({
-                        url: '../record/record',
+
+                        url: '../home_page/home_page',
+
                       })
                     },
                     fail: function () {
@@ -143,8 +147,9 @@ Page({
     if (that.data.logged == true) {
       setTimeout(function () {
         wx.switchTab({
-          url: '../record/record',
-        })
+
+          url: '../home_page/home_page',
+      })
       }, 2000)
     }
   },

@@ -17,7 +17,9 @@
     <label class="lable1">名称</label>
     <view class="name-input">
       <image src='../images/write.png' style="width: 46rpx;height: 55rpx;"></image>
-      <input type="text" name="other" placeholder="请输入目标名称" style="font-size:32rpx;color:#e9833e;margin-right: 5%;" />
+
+      <input type="text" name="other" placeholder="请输入目标名称" style="font-size:32rpx;color:#e9833e;margin-right: 5%;" bindinput='setGoalName' />
+
     </view>
   </view>
   <view class="line" style="height:15%;">
@@ -32,28 +34,32 @@
   <view class="line">
     <label class="lable1" style="color:{{textColor}}">时长</label>
     <view class="time-input" style="justify-content: center;border:{{tborder}}">
-      <input type="number" name="other" value="{{input}}" placeholder="时长(10~120)" style="padding:0 5% 0 5%;font-size:32rpx;color:#e9833e;" bindinput="getInput" disabled="{{distime}}" />
+
+      <input type="number" name="other" value="{{input}}" placeholder="时长(10~120)" style="padding:0 5% 0 5%;font-size:32rpx;color:#e9833e;" bindinput="setGoalMinutes" disabled="{{distime}}" />
       <view style="font-size:40rpx;color:{{ibColor}};margin:0 3% 0 3%;"> min </view>
     </view>
   </view>
-  <view class="btn_ok" bindtap="drawer" data-statu="close">确定</view>
+  <view class="btn_ok" bindtap="addGoal" data-statu="close">确定</view>
 </view>
 
-<view class="list-card">
+<view class="list-card" wx:for="{{clock}}">
   <view class="clock-list">
-    <view wx:for="{{clock}}" class="p">
+    <view class="p">
       <view class="lable2">{{item.clockName}} </view>
-      <view class="lable2" style="font-size:30rpx;">{{item.clockTime}}</view>
+      <view class="lable2" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
+
     </view>
     <button class="btn2" type="default" bindtap="clockStart" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover">开始</button>
   </view>
 </view>
-<view class="list-card">
+
+<view class="list-card" wx:for="{{plan}}">
   <view class="plan-list">
-    <view wx:for="{{plan}}" class="p">
+    <view  class="p">
       <view class="lable2">{{item.planName}}</view>
     </view>
-    <button class="btn2 {{hiddenbtn?'show':'hide'}}" type="default" bindtap="hidebtn" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover">完成</button>
-    <image class="finish {{hiddenbtn?'hide':'show'}}" src='../images/right.png' bindtap="hidebtn"></image>
+    <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default" bindtap="hidebtn" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}' bindtap="finishPlan">完成</button>
+    <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png' bindtap="unFinishPlan" data-goalid='{{item.goalId}}'></image>
+
   </view>
 </view>

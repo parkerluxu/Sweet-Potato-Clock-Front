@@ -183,6 +183,11 @@
   padding:8rpx;margin-right: 3%;width: 20%;
 }
 
+
+button::after {
+    border: 0;
+  } 
+
 .inactive {
   color: #ffae49;
   border:2rpx solid #ffae49;

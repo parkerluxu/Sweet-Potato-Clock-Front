@@ -1,20 +1,27 @@
 <!--pages/record/record.wxml-->
 <view class='weui-cell-third'>
-<view class='calender'>
- <calendar selected="{{selected}}" bindselect="bindselect" bindgetdate="bindgetdate" /></view>
- <block wx:for="{{recordInfo}}" wx:key="*this">
- <view class='weui-cell-list'>
-    <image src='../images/jilu.png' class='image_list'></image>
-    <view class='block'>
-    <view class='date-time'>
-    <view class='weui-cell-time'>{{item.dateTime}}</view>
+
+  <view class='calender'>
+    <calendar selected="{{selected}}" bindselect="bindselect" bindgetdate="bindgetdate" />
+  </view>
+  <block wx:for="{{recordInfo}}" wx:key="*this">
+    <view class='weui-cell-list'>
+      <image src='../images/jilu.png' class='image_list'></image>
+      <view class='block'>
+        <view class='date-time'>
+          <view class='weui-cell-time'>{{item.year}}年{{item.month}}月{{item.day}}日</view>
+          <view class='weui-cell-time'>{{item.hour}}:{{item.timeMinute}}</view>
+        </view>
+        <view class='weui-cell-line' />
+        <view class='clock_content' wx:if="{{item.concentrated}}">
+          <view class='weui-cell-content'>{{item.content}}</view>
+          <view class='weui-cell-minutes'>{{item.minutes}}分钟</view>
+        </view>
+        <view class='clock_content' wx:else>
+          <view class='weui-cell-content plan'>{{item.content}}</view>
+        </view>
+      </view>
     </view>
-  <view class='weui-cell-line'/>
-  <view class='content'>
-  <view class='weui-cell-content'>{{item.content}}</view>
-  <view class='weui-cell-minutes'>{{item.minutes}}分钟</view>
-  </view>
-  </view>
- </view>
- </block>
+  </block>
+
 </view>

@@ -31,4 +31,6 @@
   <image src="/pages/images/new-group.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>
   <image src="/pages/images/join-group.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>
   <image src="/pages/images/add.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
+
 </view>
+
