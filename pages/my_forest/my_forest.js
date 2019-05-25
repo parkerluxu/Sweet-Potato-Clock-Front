@@ -19,7 +19,7 @@ Page({
     color_3_1: "#f66a0c",
     color_3_2: "#f66a0c",
     color_3_3: "#ffffff",
-    status: Number,
+    status: 1,
     dateStr: {},
     tree: [],
     chartData: {
@@ -390,19 +390,7 @@ Page({
         }
       }
     }
-    //判断是否需要给日和月加“0”
-    if (that.data.dateStr.month < 10 && typeof (that.data.dateStr.month) == 'number') {
-      var month = "0" + that.data.dateStr.month
-      that.setData({
-        'dateStr.month': month
-      })
-    }
-    if (that.data.dateStr.day < 10 && typeof (that.data.dateStr.day) == 'number') {
-      var day = "0" + that.data.dateStr.day
-      that.setData({
-        'dateStr.day': day
-      })
-    }
+    that.dateToStr()
   },
 
   //日历切换至上一天/周/月
@@ -514,19 +502,399 @@ Page({
       }
       
     }
-    //判断是否需要给日和月加“0”
-    if (that.data.dateStr.month < 10 && typeof (that.data.dateStr.month) == 'number') {
-      var month = "0" + that.data.dateStr.month
-      that.setData({
-        'dateStr.month': month
-      })
-    }
-    if (that.data.dateStr.day < 10 && typeof (that.data.dateStr.day) == 'number') {
-      var day = "0" + that.data.dateStr.day
-      that.setData({
-        'dateStr.day': day
-      })
-    }
-  }
+    that.dateToStr()
+  },
 
+  toNextWeek:function(){
+    var that=this
+    var month = parseInt(that.data.dateStr.month) 
+    var day = parseInt(that.data.dateStr.day) 
+    //如果是大月（除12月）
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 ){
+      //如果+7后超过31，则月份+1，取余31
+      var newDay=day+7;
+      if(newDay>31){
+        var newDate=newDay%31
+        that.setData({
+          'dateStr.month':month+1,
+          'dateStr.day': newDate,
+        })
+      }else{
+        //没有超31
+        that.setData({
+          'dateStr.day':newDay,
+        })
+      }
+    }//如果是12月
+    else if(month==12){
+      var newDay = day + 7;
+      var newYear = that.data.dateStr.year+1;
+       //如果+7后超过31，则月份年份+1，取余31
+      if (newDay > 31) {
+        var newDate = newDay % 31
+        that.setData({
+          'dateStr.month': 1,
+          'dateStr.day': newDate,
+          'dateStr.year':newYear,
+        })
+      } else {
+        //没有超31
+        that.setData({
+          'dateStr.day': newDay,
+        })
+      }
+    }//如果是2月
+    else if (month == 2){
+      //判断是否是闰年
+      //如果是闰年
+      var year = that.data.dateStr.year;
+      var cond1 = year % 4 == 0;  //条件1：年份必须要能被4整除
+      var cond2 = year % 100 != 0;  //条件2：年份不能是整百数
+      var cond3 = year % 400 == 0;  //条件3：年份是400的倍数
+      //当条件1和条件2同时成立时，就肯定是闰年，所以条件1和条件2之间为“与”的关系。
+      //如果条件1和条件2不能同时成立，但如果条件3能成立，则仍然是闰年。所以条件3与前2项为“或”的关系。
+      //所以得出判断闰年的表达式：
+      var cond = cond1 && cond2 || cond3;
+      if (cond){
+        //如果+7后超过29，则月份+1，取余29
+        var newDay = day + 7;
+        if (newDay > 29) {
+          var newDate = newDay % 29
+          that.setData({
+            'dateStr.month': month + 1,
+            'dateStr.day': newDate,
+          })
+        } else {
+          //没有超29
+          that.setData({
+            'dateStr.day': newDay,
+          })
+        }
+      }//如果不是闰年
+      else{
+        //如果+7后超过28，则月份+1，取余28
+        var newDay = day + 7;
+        if (newDay > 28) {
+          var newDate = newDay % 28
+          that.setData({
+            'dateStr.month': month + 1,
+            'dateStr.day': newDate,
+          })
+        } else {
+          //没有超28
+          that.setData({
+            'dateStr.day': newDay,
+          })
+        }
+      }
+    }//如果是其他小月
+    else{
+      //如果+7后超过30，则月份+1，取余30
+      var newDay = day + 7;
+      if (newDay > 30) {
+        var newDate = newDay % 30
+        that.setData({
+          'dateStr.month': month + 1,
+          'dateStr.day': newDate,
+        })
+      } else {
+        //没有超30
+        that.setData({
+          'dateStr.day': newDay,
+        })
+      }
+    }
+    that.dateToStr()
+  },
+
+  toLastWeek: function () {
+    var that = this
+    var lastMonth = parseInt(that.data.dateStr.month)-1
+    var month = parseInt(that.data.dateStr.month)
+    var day = parseInt(that.data.dateStr.day)
+    //如果上个月是大月（除1月）
+    if (lastMonth == 12 || lastMonth == 3 || lastMonth == 5 || lastMonth == 7 || lastMonth == 8 || lastMonth == 10) {
+      //如果-7后小于1，则月份-1，31+newDate
+      var newDay = day - 7;
+      if (newDay < 1) {
+        var newDate = newDay + 31
+        that.setData({
+          'dateStr.month': month - 1,
+          'dateStr.day': newDate,
+        })
+      } else {
+        //没有小于1
+        that.setData({
+          'dateStr.day': newDay,
+        })
+      }
+    }//如果是1月
+    else if (month == 0) {
+      var newDay = day - 7;
+      var newYear = that.data.dateStr.year - 1;
+      //如果-7后小于1，则月份年份-1，31+newDay
+      if (newDay < 1) {
+        var newDate = newDay + 31
+        that.setData({
+          'dateStr.month': month - 1,
+          'dateStr.day': newDate,
+          'dateStr.year': newYear,
+        })
+      } else {
+        //没有小于1
+        that.setData({
+          'dateStr.day': newDay,
+        })
+      }
+    }//如果上一月是2月
+    else if (lastMonth == 2) {
+      //判断是否是闰年
+      //如果是闰年
+      var year = that.data.dateStr.year;
+      var cond1 = year % 4 == 0;  //条件1：年份必须要能被4整除
+      var cond2 = year % 100 != 0;  //条件2：年份不能是整百数
+      var cond3 = year % 400 == 0;  //条件3：年份是400的倍数
+      //当条件1和条件2同时成立时，就肯定是闰年，所以条件1和条件2之间为“与”的关系。
+      //如果条件1和条件2不能同时成立，但如果条件3能成立，则仍然是闰年。所以条件3与前2项为“或”的关系。
+      //所以得出判断闰年的表达式：
+      var cond = cond1 && cond2 || cond3;
+      if (cond) {
+        //如果-7后小于1，则月份-1，newDay+29
+        var newDay = day - 7;
+        if (newDay < 1) {
+          var newDate = newDay + 29
+          that.setData({
+            'dateStr.month': month - 1,
+            'dateStr.day': newDate,
+          })
+        } else {
+          //没有小于1
+          that.setData({
+            'dateStr.day': newDay,
+          })
+        }
+      }//如果不是闰年
+      else {
+        //如果-7后小于1，则月份-1，newDay+28
+        var newDay = day - 7;
+        if (newDay < 1) {
+          var newDate = newDay + 28
+          that.setData({
+            'dateStr.month': month - 1,
+            'dateStr.day': newDate,
+          })
+        } else {
+          //没有小于1
+          that.setData({
+            'dateStr.day': newDay,
+          })
+        }
+      }
+    }//如果是其他小月
+    else {
+      //如果-7后小于1，则月份-1，newDay+30
+      var newDay = day - 7;
+      if (newDay < 1) {
+        var newDate = newDay + 30
+        that.setData({
+          'dateStr.month': month - 1,
+          'dateStr.day': newDate,
+        })
+      } else {
+        //没有小于1
+        that.setData({
+          'dateStr.day': newDay,
+        })
+      }
+    }
+    that.dateToStr()
+  },
+
+  toNextMonth:function(){
+    var that=this
+    var month = parseInt(that.data.dateStr.month) 
+    var newMonth=month+1
+    var day = parseInt(that.data.dateStr.day)
+    //判断下一月是不是大月
+    if ( newMonth == 3 || newMonth == 5 || newMonth == 7 || newMonth == 8 || newMonth == 10 || newMonth == 12){
+      that.setData({
+        'dateStr.month':newMonth,
+      })
+    }//如果是12月
+    else if(month==12){
+      var newYear=that.data.dateStr.year+1
+      that.setData({
+        'dateStr.month': 1,
+        'dateStr.year': newYear,
+      })
+    }//如果下一月是2月
+    else if(month==1){
+      //如果是闰年且day>29
+      var year = that.data.dateStr.year;
+      var cond1 = year % 4 == 0;  //条件1：年份必须要能被4整除
+      var cond2 = year % 100 != 0;  //条件2：年份不能是整百数
+      var cond3 = year % 400 == 0;  //条件3：年份是400的倍数
+      //当条件1和条件2同时成立时，就肯定是闰年，所以条件1和条件2之间为“与”的关系。
+      //如果条件1和条件2不能同时成立，但如果条件3能成立，则仍然是闰年。所以条件3与前2项为“或”的关系。
+      //所以得出判断闰年的表达式：
+      var cond = cond1 && cond2 || cond3;
+      if (cond && day>29){
+        that.setData({
+          'dateStr.month': newMonth,
+          'dateStr.day': 29,
+        })
+      }//如果不是闰年且day>28
+      else if(day>28){
+        that.setData({
+          'dateStr.month': newMonth,
+          'dateStr.day': 28,
+        })
+      }//其他情况
+      else {
+        that.setData({
+          'dateStr.month': newMonth,
+        })
+      }
+    }//如果下一月是小月
+    else {
+      //如果day>30
+      if(day>30){
+        that.setData({
+          'dateStr.month': newMonth,
+          'dateStr.day': 30,
+        })
+      }
+      //如果不大于30
+      else {
+        that.setData({
+          'dateStr.month': newMonth,
+        })
+      }
+    }
+    that.dateToStr();
+  },
+toLastMonth:function(){
+ var that=this
+    var month = parseInt(that.data.dateStr.month) 
+    var newMonth=month-1
+    var day = parseInt(that.data.dateStr.day)
+    //判断上一月是不是大月
+    if ( newMonth == 3 || newMonth == 5 || newMonth == 7 || newMonth == 8 || newMonth == 10 || newMonth == 12){
+      that.setData({
+        'dateStr.month':newMonth,
+      })
+    }//如果是1月
+    else if(month==1){
+      var newYear=that.data.dateStr.year-1
+      that.setData({
+        'dateStr.month': 12,
+        'dateStr.year': newYear,
+      })
+    }//如果下一月是2月
+    else if(month==3){
+      //如果是闰年且day>29
+      var year = that.data.dateStr.year;
+      var cond1 = year % 4 == 0;  //条件1：年份必须要能被4整除
+      var cond2 = year % 100 != 0;  //条件2：年份不能是整百数
+      var cond3 = year % 400 == 0;  //条件3：年份是400的倍数
+      //当条件1和条件2同时成立时，就肯定是闰年，所以条件1和条件2之间为“与”的关系。
+      //如果条件1和条件2不能同时成立，但如果条件3能成立，则仍然是闰年。所以条件3与前2项为“或”的关系。
+      //所以得出判断闰年的表达式：
+      var cond = cond1 && cond2 || cond3;
+      if (cond && day>29){
+        that.setData({
+          'dateStr.month': newMonth,
+          'dateStr.day': 29,
+        })
+      }//如果不是闰年且day>28
+      else if(day>28){
+        that.setData({
+          'dateStr.month': newMonth,
+          'dateStr.day': 28,
+        })
+      }//其他情况
+      else {
+        that.setData({
+          'dateStr.month': newMonth,
+        })
+      }
+    }//如果下一月是小月
+    else {
+      //如果day>30
+      if(day>30){
+        that.setData({
+          'dateStr.month': newMonth,
+          'dateStr.day': 30,
+        })
+      }
+      //如果不大于30
+      else {
+        that.setData({
+          'dateStr.month': newMonth,
+        })
+      }
+    }
+    that.dateToStr();
+},
+
+dateToStr:function(){
+  var that=this
+  //判断是否需要给日和月加“0”
+  if (that.data.dateStr.month < 10 && typeof (that.data.dateStr.month) == 'number') {
+    var month = "0" + that.data.dateStr.month
+    that.setData({
+      'dateStr.month': month
+    })
+  }
+  if (that.data.dateStr.day < 10 && typeof (that.data.dateStr.day) == 'number') {
+    var day = "0" + that.data.dateStr.day
+    that.setData({
+      'dateStr.day': day
+    })
+  }
+},
+
+  dateNextCon: function () {
+    var that=this
+    switch(this.data.status){
+      case 1:{
+        that.toNextDay()
+        break
+      }
+      case 2:{
+        that.toNextWeek()
+        break
+      }
+      case 3:{
+        that.toNextMonth()
+        break
+      }
+      default :{
+        that.toNextDay()
+        break
+      }
+    }
+  },
+
+  dateLastCon: function () {
+    var that = this
+    switch (this.data.status) {
+      case 1: {
+        that.toLastDay()
+        break
+      }
+      case 2: {
+        that.toLastWeek()
+        break
+      }
+      case 3: {
+        that.toLastMonth()
+        break
+      }
+      default :{
+        that.toLastDay()
+        break
+      }
+    }
+  },
 })
