@@ -6,6 +6,7 @@ Page({
    */
   data: {
     clock: [{
+
       clockName: "考研加油还有一年",
       clockTime: "30min",
       isComplete:Boolean,
@@ -129,7 +130,6 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-
   //确认，发送请求添加数据
   addGoal: function(e) {
     var that = this;
@@ -176,6 +176,7 @@ Page({
   },
 
   util: function(currentStatu) {
+
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation = wx.createAnimation({
@@ -196,13 +197,16 @@ Page({
     })
 
     // 第5步：设置定时器到指定时候后，执行第二组动画 
+
     setTimeout(function() {
+
       // 执行第二组动画 
       animation.opacity(1).rotateX(0).step();
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
       this.setData({
         animationData: animation
       })
+
 
       //关闭 
       if (currentStatu == "close") {
@@ -372,8 +376,6 @@ Page({
       }
     })
   },
-
-  
   /**
    * 生命周期函数--监听页面隐藏
    */

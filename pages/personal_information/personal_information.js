@@ -11,19 +11,19 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     orderItems: [{
         typeId: 0,
-        name: '打卡天数',
+        image_url:'../images/rili.svg',
         content: Number,
         contentText: String
       },
       {
         typeId: 1,
-        name: '打卡时长',
+        image_url: '../images/naozhong.svg',
         content: Number,
         contentText: String
       },
       {
         typeId: 2,
-        name: '树木量',
+        image_url: '../images/shu.svg',
         content: Number,
         contentText: String
       },

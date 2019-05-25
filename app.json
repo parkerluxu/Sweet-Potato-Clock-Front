@@ -5,6 +5,7 @@
     "pages/record/record",
     "pages/my_forest/my_forest",
     "pages/group_information/group_information",
+    "pages/ranking_list/ranking_list",
     "pages/index/index",
     "pages/logs/logs",
     "pages/clock/clock",
@@ -25,20 +26,20 @@
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "pages/images/index_2.png",
-        "iconPath": "pages/images/index_1.png",
+        "selectedIconPath": "pages/images/tab-shouyexuanzhong.png",
+        "iconPath": "pages/images/tab-shouyeweixuanzhong.png",
         "pagePath": "pages/home_page/home_page",
         "text": "首页"
       },
       {
-        "selectedIconPath": "pages/images/bottomAddSeleted.png",
-        "iconPath": "pages/images/bottomAddUnseleted.png",
+        "selectedIconPath": "pages/images/xiaozuxuanzhong.png",
+        "iconPath": "pages/images/xiaozuweixuanzhong.png",
         "pagePath": "pages/group/group",
         "text": "小组"
       },
       {
-        "selectedIconPath": "pages/images/bottomPersonSeleted.png",
-        "iconPath": "pages/images/bottomPersonUnseleted.png",
+        "selectedIconPath": "pages/images/wodexuanzhong.png",
+        "iconPath": "pages/images/wodeweixuanzhong.png",
         "pagePath": "pages/personal_information/personal_information",
         "text": "个人信息"
       }

@@ -1,5 +1,4 @@
 <!--pages/my_forest/my_forest.wxml-->
-<!--绘制canvas-->
 <view class='imagesize'>
   <image src="../images/forest.jpg">
   </image>

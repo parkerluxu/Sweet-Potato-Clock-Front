@@ -2,7 +2,6 @@
 var wxCharts = require('../../utils/wxcharts.js');
 var app = getApp();
 var columnChart = null;
-
 Page({
 
   /**
@@ -35,6 +34,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    var that=this;
+    var that = this;
+    var nowDate = new Date();
+    var year = nowDate.getFullYear();
+    var month = nowDate.getMonth() + 1 < 10 ? ("0" + (nowDate.getMonth() + 1)) : nowDate.getMonth() + 1;
+    var day = nowDate.getDate() < 10 ? ("0" + nowDate.getDate()) : nowDate.getDate();
+    var hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+    var minutes = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+    var seconds = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+    var dateStr = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
+    console.log(dateStr);
+    that.setData({
+      'dateStr.year': year,
+      'dateStr.month':month,
+      'dateStr.day':day,
+    })
+    wx.request({
+      url: 'http://localhost:8080/userinformation/userinformation',
+      data:{
+        userid:wx.getStorageSync('openid')
+      },
+      method:'GET',
+      success:function(res){
+        console.log(res.data)
+        that.setData({
+          tree: res.data.treeNumber,
+        })
+      }
+    })
 
   },
 

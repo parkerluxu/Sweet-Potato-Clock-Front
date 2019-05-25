@@ -8,11 +8,14 @@ Page({
   data: {
     recordInfo: [],
     count:0,
+    recordInfo: []
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad: function(options) {
     this.setData({
       recordInfo: null,
@@ -150,6 +153,27 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+
+  },
+  bindselect(e) {
+    console.log(e.detail.ischeck)
+  },
+  /**
+   * 获取选择日期
+   */
+  bindgetdate(e) {
+    var that = this;
+    let time = e.detail;
+    console.log(time)
+    var dateStr = time.year + "-" + time.month + "-" + time.date + " " + "08:00:00";
+    console.log(dateStr)
+
+    if(that.data.count!=0){
+      that.onShow(dateStr);
+    }
+    that.setData({
+      count:1,
+    })
 
   },
   bindselect(e) {
