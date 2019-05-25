@@ -1,21 +1,24 @@
-<view class='page'>
-  <view class="userinfo">
-    <view class='userinfo-avatar'>
-      <open-data type="userAvatarUrl"></open-data>
+<view class="userinfo">
+  <view class='userinfo-avatar'>
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <open-data type="userNickName" class="userinfo-nickname"></open-data>
+</view>
+<view class="navs">
+  <block wx:for-items="{{orderItems}}" wx:key="name">
+    <view class="nav-item" catchtap="toOrder" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+      <text>{{item.name}}</text>
+      <text>{{item.contentText}}</text>
     </view>
-      <open-data type="userNickName" class="userinfo-nickname"></open-data>
-  </view>
-  <view class="navs">
-    <block wx:for-items="{{orderItems}}" wx:key="name">
-      <view class="nav-item" catchtap="toOrder" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
-        <text>{{item.name}}</text>
-        <text>{{item.contentText}}</text>
-      </view>
-    </block>
-  </view>
- <view class="btn-area">
- <button class="btn1" plain='true' bindtap='changeToTree'><image class="images" src="../images/tree.png"></image><view><text>森林</text></view></button>
- <button class="btn2" plain='true' bindtap='changeToRecord'>
- <image class="images" src="../images/tree.png"></image><view><text>记录</text></view></button>
- </view>
- </view>
+  </block>
+</view>
+<view class="btn-area">
+  <button class="btn1" plain='true' bindtap='changeToTree'>
+    <image class="images" src="../images/tree.png"></image>
+      <text>森林</text>
+  </button>
+  <button class="btn1" plain='true' bindtap='changeToRecord'>
+    <image class="images" src="../images/tree.png"></image>
+      <text>记录</text>
+  </button>
+</view>
