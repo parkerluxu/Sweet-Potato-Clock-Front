@@ -52,7 +52,6 @@ Page({
         index: "6",
         selected: false
       },
-
     ],
     hiddenbtn: true,
     showModalStatus: false,
@@ -66,7 +65,6 @@ Page({
     input: "",
     ibColor: "#e9833e",
     selectIndex: 0,
-
     hiddenDate: true,
     goal: {
       minutes: Number,
@@ -81,7 +79,6 @@ Page({
     var that = this;
     let index = e.currentTarget.dataset.index;
     //如果自定义就打开星期选项
-
     if (index == 3) {
       this.setData({
         hiddenDate: false
@@ -90,7 +87,6 @@ Page({
       this.setData({
         hiddenDate: true
       })
-
       //如果选择一次性，则把goalDate中的dispasable设为true
       if (index == 1) {
         that.setData({
@@ -108,17 +104,14 @@ Page({
         }
         console.log(that.data.dates)
       }
-
     }
     this.setData({
       selectIndex: e.currentTarget.dataset.index
     })
 
-
   },
   //设置打卡周期
   selectDate: function(e) {
-
     let index = e.currentTarget.dataset.index;
     let arrs = this.data.dates;
     if (arrs[index].selected == false) {
@@ -130,7 +123,6 @@ Page({
       dates: arrs,
       hiddenDate: false
     })
-
     console.log(this.data.dates)
   },
 
@@ -138,6 +130,7 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
+
 
   //确认，发送请求添加数据
   addGoal: function(e) {
@@ -182,10 +175,14 @@ Page({
       },
     })
     that.drawer(e);
+
+
   },
+  //选择了计划模式
+  selectP: function() {
 
+  },
   util: function(currentStatu) {
-
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation = wx.createAnimation({
@@ -206,16 +203,13 @@ Page({
     })
 
     // 第5步：设置定时器到指定时候后，执行第二组动画 
-
     setTimeout(function() {
-
       // 执行第二组动画 
       animation.opacity(1).rotateX(0).step();
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
       this.setData({
         animationData: animation
       })
-
 
       //关闭 
       if (currentStatu == "close") {
@@ -262,6 +256,7 @@ Page({
       tborder: "2rpx dashed #979797",
       input: "",
 
+
       ibColor: "#979797",
       'goal.isConcentrate': false,
     })
@@ -288,6 +283,7 @@ Page({
   },
 
   hidebtn: function() {
+
 
     var that = this;
     that.setData({
@@ -355,6 +351,7 @@ Page({
     })
   },
 
+
   finishPlan:function(e){
     var that=this;
     console.log(e.currentTarget.dataset['goalid'])
@@ -379,6 +376,7 @@ Page({
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
       url: 'http://localhost:8080/record/planUnComplete',
+
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
@@ -390,6 +388,10 @@ Page({
       }
     })
   },
+
+
+  
+
   /**
    * 生命周期函数--监听页面隐藏
    */

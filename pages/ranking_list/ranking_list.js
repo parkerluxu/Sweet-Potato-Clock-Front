@@ -16,6 +16,7 @@ Page({
     color_2_2: "#f66a0c",
     color_2_3: "#ffffff",
     memberList: [],
+
     timeList: [],
     groupId: 1,
     list_1: [],
@@ -30,16 +31,19 @@ Page({
     group: null,
     isPrivate:false
 
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad: function(options) {
     this.setData({
       groupId: options.groupId
     })
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -51,15 +55,19 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+
   onShow: function() {
     var that = this;
+
     wx.request({
       url: 'http://127.0.0.1:8080/displaygroupinformation/displaygroup',
       method: "GET",
       data: {
         groupId: that.data.groupId
       },
+
       success: function(res) {
+
         var value = res.data.groupInformation;
         that.setData({
           captainId: value.captainId,
@@ -70,21 +78,27 @@ Page({
           'group.text': value.description,
           'group.isPrivate': value.privateGroup,
           
+
         });
         if (that.data.captainId == that.data.userId) {
           that.setData({
             isCapatain: true,
+
             isAbled: false
+
           })
         } else {
           that.setData({
             isCapatain: false,
+
             isAbled: true
+
           })
         }
 
       }
     });
+
     wx.request({
       url: 'http://127.0.0.1:8080/displayuserlist/displayuserlist',
       method: "GET",
@@ -111,6 +125,7 @@ Page({
 
       }
     })
+
   },
 
   /**
@@ -147,6 +162,7 @@ Page({
   onShareAppMessage: function() {
 
   },
+
   click_on_1: function() {
     wx.navigateTo({
       url: '../world_ranking_list/world_ranking_list',
@@ -157,8 +173,10 @@ Page({
     var that = this;
     that.setData({
       'group.groupName': e.detail.value
+
     })
   },
+
   getInput_2:function(e) {
     var that = this;
     that.setData({
@@ -172,6 +190,7 @@ Page({
     })
   },
   util: function(currentStatu) {
+
 
     /* 动画部分 */
     // 第1步：创建动画实例 
@@ -194,7 +213,9 @@ Page({
 
     // 第5步：设置定时器到指定时候后，执行第二组动画 
 
+
     setTimeout(function() {
+
 
       // 执行第二组动画 
       animation.opacity(1).rotateX(0).step();
@@ -202,6 +223,7 @@ Page({
       this.setData({
         animationData: animation
       })
+
 
 
       //关闭 
@@ -219,6 +241,7 @@ Page({
       });
     }
   },
+
   drawer: function(e) {
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)

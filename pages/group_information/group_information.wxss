@@ -3,6 +3,7 @@ page{
 }
 
 
+
 .divLine{
     background: rgb(194, 191, 191);
  width: 100%;
@@ -21,7 +22,9 @@ page{
   margin-top: 0%;
 
 
+
   font-size: 40rpx;
+
 
 
 }

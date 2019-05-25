@@ -1,5 +1,5 @@
-/* pages/my_forest/my_forest.wxss */
 
+/* pages/my_forest/my_forest.wxss */
 
 .canvas {
   width: 100%;
@@ -103,5 +103,4 @@
   width: 100rpx;
   margin-top: 2%;
 }
-
 

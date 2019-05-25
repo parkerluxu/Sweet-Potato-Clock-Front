@@ -1,12 +1,15 @@
 {
   "pages": [
 
+
     "pages/login/login",
     "pages/home_page/home_page",
     "pages/record/record",
     "pages/my_forest/my_forest",
     "pages/group_information/group_information",
+
 "pages/ranking_list/ranking_list",
+
     "pages/index/index",
     "pages/logs/logs",
     "pages/clock/clock",

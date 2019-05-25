@@ -1,5 +1,6 @@
 <!--pages/my_forest/my_forest.wxml-->
 
+
 <!--绘制canvas-->
 <view class='imagesize'>
   <image src="../images/forest.jpg">
@@ -17,12 +18,16 @@
 </view>
 <view class='divLine.mid' />
 <view class='date'>
-  <image src='../images/left.svg' class="arrow" bindtap='toLastDay'></image>
+
+  <image src='../images/left.svg' class="arrow" bindtap='dateLastCon'></image>
+
   <view class='date-content'>
     <image src='../images/rili.svg' class='clock'></image>
     <text class="date-str">{{dateStr.year}}年{{dateStr.month}}月{{dateStr.day}}日</text>
   </view>
-  <image src='../images/right.svg' class="arrow" bindtap='toNextDay'></image>
+
+  <image src='../images/right.svg' class="arrow" bindtap='dateNextCon'></image>
+
 </view>
 <!--view class='divLine.mid' /-->
 

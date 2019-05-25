@@ -1,3 +1,4 @@
+
 /* pages/home-page/homet-page.wxss */
 
 .list-cell {
@@ -183,11 +184,9 @@
   padding:8rpx;margin-right: 3%;width: 20%;
 }
 
-
 button::after {
     border: 0;
   } 
-
 .inactive {
   color: #ffae49;
   border:2rpx solid #ffae49;
@@ -226,5 +225,7 @@ button::after {
   color: #fa8d44;
   border-top: 1px solid #fa9857;
 }
+
+
 
 

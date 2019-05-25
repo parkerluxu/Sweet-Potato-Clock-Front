@@ -1,4 +1,6 @@
 
+
+
 <div class="weui-cells__title wcss0">小组名称</div>
 
 <view wx:if="{{!isCapatain}}" class="weui-cells wcss1">

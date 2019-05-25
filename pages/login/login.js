@@ -13,14 +13,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
   },
   bindGetUserInfo: function (event) {
     console.log(event.detail.userInfo)
-    var that=this;
+    var that = this;
     wx.getSetting({
       success: res => {
-        if (!res.authSetting['scope.userInfo']){
+        if (!res.authSetting['scope.userInfo']) {
           wx.authorize({
             scope: 'scope.userInfo',
             success(res) {
@@ -58,9 +58,7 @@ Page({
                         console.log('解密失败')
                       }
                       wx.switchTab({
-
                         url: '../home_page/home_page',
-
                       })
                     },
                     fail: function () {
@@ -103,9 +101,7 @@ Page({
                         console.log('解密失败')
                       }
                       wx.switchTab({
-
                         url: '../home_page/home_page',
-
                       })
                     },
                     fail: function () {
@@ -121,7 +117,7 @@ Page({
     })
   },
 
-  login: function (e) { 
+  login: function (e) {
     wx.authorize({
       scope: 'scope.userInfo',
       success(res) {
@@ -147,9 +143,8 @@ Page({
     if (that.data.logged == true) {
       setTimeout(function () {
         wx.switchTab({
-
           url: '../home_page/home_page',
-      })
+        })
       }, 2000)
     }
   },

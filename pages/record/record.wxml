@@ -1,6 +1,7 @@
 <!--pages/record/record.wxml-->
 <view class='weui-cell-third'>
 
+
   <view class='calender'>
     <calendar selected="{{selected}}" bindselect="bindselect" bindgetdate="bindgetdate" />
   </view>
@@ -23,5 +24,6 @@
       </view>
     </view>
   </block>
+
 
 </view>
