@@ -49,10 +49,10 @@
 </view>
 <view class='divLine'>
 </view>
-<scroll-view scroll-y="true" style="width:100%;">
+<scroll-view scroll-y="true" style=" width:100%;min-height:100%; padding:0rpx 0">
 
-  <view wx:for="{{showList}}" class="list">
-    <view class="item">
+  <view class=" list  {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{showList}}" wx:key="">
+    <view class="{{item.isTouchMove ? 'item' : 'item'}} " >
       <view class="index">
         <text>{{index}}</text>
       </view>
@@ -69,6 +69,7 @@
         <text>×{{item.minutesSum}}</text>
       </view>
     </view>
+   <view class="del" catchtap="del" data-index="{{index}}">删除</view>
   </view>
 
 </scroll-view>
