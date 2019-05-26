@@ -2,6 +2,7 @@
   "pages": [
     "pages/login/login",
     "pages/home_page/home_page",
+    "pages/anagement/anagement",
     "pages/record/record",
     "pages/my_forest/my_forest",
     "pages/group_information/group_information",

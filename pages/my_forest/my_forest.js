@@ -1,7 +1,7 @@
 // pages/my_forest/my_forest.js
 var wxCharts = require('../../utils/wxcharts.js');
 var app = getApp();
-var columnChart = null;
+var columnChart = null
 Page({
 
   /**
@@ -70,7 +70,9 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
+
   onReady: function() {
+
 
   },
 

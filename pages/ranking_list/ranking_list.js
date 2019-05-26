@@ -16,6 +16,7 @@ Page({
     color_2_2: "#f66a0c",
     color_2_3: "#ffffff",
     memberList: [],
+
     timeList: [],
     groupId: 1,
     list_1: [],
@@ -25,21 +26,27 @@ Page({
     groupName: String,
     text: String,
     showModalStatus: false,
-    userId: "2",
+    userId: "1",
     isAbled: true,
     group: null,
-    isPrivate:false
+    isPrivate:false,
+    startX: 0, //开始坐标
+
+    startY: 0
+
 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad: function(options) {
     this.setData({
       groupId: options.groupId
     })
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -51,15 +58,19 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+
   onShow: function() {
     var that = this;
+
     wx.request({
       url: 'http://127.0.0.1:8080/displaygroupinformation/displaygroup',
       method: "GET",
       data: {
         groupId: that.data.groupId
       },
+
       success: function(res) {
+
         var value = res.data.groupInformation;
         that.setData({
           captainId: value.captainId,
@@ -70,21 +81,27 @@ Page({
           'group.text': value.description,
           'group.isPrivate': value.privateGroup,
           
+
         });
         if (that.data.captainId == that.data.userId) {
           that.setData({
             isCapatain: true,
+
             isAbled: false
+
           })
         } else {
           that.setData({
             isCapatain: false,
+
             isAbled: true
+
           })
         }
 
       }
     });
+
     wx.request({
       url: 'http://127.0.0.1:8080/displayuserlist/displayuserlist',
       method: "GET",
@@ -101,16 +118,20 @@ Page({
           var k2 = 'showList[' + i + '].name';
           var k3 = 'showList[' + i + '].minutesSum';
           var k4 = 'showList[' + i + '].minutes';
+          var k5 = 'showList[' + i +'].isTouchMove';
+          var k6='showList['+i+
           that.setData({
             [k1]: that.data.memberList[i].avatar,
             [k2]: that.data.memberList[i].userNickname,
             [k3]: that.data.memberList[i].minutesSum,
-            [k4]: that.data.timeList[i]
+            [k4]: that.data.timeList[i],
+            [k5]:false,
           })
         }
 
       }
     })
+
   },
 
   /**
@@ -147,6 +168,7 @@ Page({
   onShareAppMessage: function() {
 
   },
+
   click_on_1: function() {
     wx.navigateTo({
       url: '../world_ranking_list/world_ranking_list',
@@ -157,8 +179,10 @@ Page({
     var that = this;
     that.setData({
       'group.groupName': e.detail.value
+
     })
   },
+
   getInput_2:function(e) {
     var that = this;
     that.setData({
@@ -172,6 +196,7 @@ Page({
     })
   },
   util: function(currentStatu) {
+
 
     /* 动画部分 */
     // 第1步：创建动画实例 
@@ -194,7 +219,9 @@ Page({
 
     // 第5步：设置定时器到指定时候后，执行第二组动画 
 
+
     setTimeout(function() {
+
 
       // 执行第二组动画 
       animation.opacity(1).rotateX(0).step();
@@ -218,6 +245,7 @@ Page({
       });
     }
   },
+
   drawer: function(e) {
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
@@ -251,7 +279,127 @@ Page({
       }
 
   })
-  }
+  },
+  //手指触摸动作开始 记录起点X坐标
 
+  touchstart: function (e) {
+    var that = this;
+    if (that.data.userId == that.data.captainId) {
+
+    //开始触摸时 重置所有删除
+
+    this.data.showList.forEach(function (v, i) {
+
+      if (v.isTouchMove)//只操作为true的
+
+        v.isTouchMove = false;
+
+    })
+
+    this.setData({
+
+      startX: e.changedTouches[0].clientX,
+
+      startY: e.changedTouches[0].clientY,
+
+      showList: this.data.showList
+
+    })
+    }
+
+  },
+
+  //滑动事件处理
+
+  touchmove: function (e) {
+    var that=this;
+    if(that.data.userId==that.data.captainId){
+    var that = this,
+
+      index = e.currentTarget.dataset.index,//当前索引
+
+      startX = that.data.startX,//开始X坐标
+
+      startY = that.data.startY,//开始Y坐标
+
+      touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+
+      touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+
+      //获取滑动角度
+
+      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+
+    that.data.showList.forEach(function (v, i) {
+
+      v.isTouchMove = false
+
+      //滑动超过30度角 return
+
+      if (Math.abs(angle) > 30) return;
+
+      if (i == index) {
+
+        if (touchMoveX > startX) //右滑
+
+          v.isTouchMove = false
+
+        else {//左滑
+
+          v.isTouchMove = true
+          
+        }
+
+      }
+
+    })
+
+    //更新数据
+
+    that.setData({
+
+      showList: that.data.showList
+
+    })
+    }
+  },
+
+  /**
+  
+  * 计算滑动角度
+  
+  * @param {Object} start 起点坐标
+  
+  * @param {Object} end 终点坐标
+  
+  */
+
+  angle: function (start, end) {
+
+    var _X = end.X - start.X,
+
+      _Y = end.Y - start.Y
+
+    //返回角度 /Math.atan()返回数字的反正切值
+
+    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
+
+  },
+
+  //删除事件
+
+  del: function (e) {
+    var that=this;
+
+
+    this.data.showList.splice(e.currentTarget.dataset.index, 1)
+
+    this.setData({
+
+      showList: this.data.showList
+
+    })
+
+  }
 
 })

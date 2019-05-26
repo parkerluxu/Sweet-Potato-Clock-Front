@@ -1,3 +1,4 @@
+    
 /* pages/member_anagement/member_anagement.wxss */
 .button{
   height: 70rpx;
@@ -35,13 +36,4 @@ flex-direction: column;
 .item{
   padding-left: 0%;
   width: 10%;
-}
-.wcss0::before{
-  border: none;
-}
-.wcss0::after{
-  border: none;
-}
-.wcss1::before{
-  border: 0;
 }
