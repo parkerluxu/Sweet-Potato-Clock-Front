@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userId: String,
+    userId: wx.getStorageSync('openid'),
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),

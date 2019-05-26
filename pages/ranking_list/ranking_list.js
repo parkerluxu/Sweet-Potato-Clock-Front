@@ -26,7 +26,7 @@ Page({
     groupName: String,
     text: String,
     showModalStatus: false,
-    userId: "1",
+    userId: wx.getStorageSync('openid'),
     isAbled: true,
     group: null,
     isPrivate:false,

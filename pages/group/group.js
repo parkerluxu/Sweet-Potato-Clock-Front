@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userId:"1",
+    userId: wx.getStorageSync('openid'),
     focus: false,
     inputValue: '',
     groupList:[],
