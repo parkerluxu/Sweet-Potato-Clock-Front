@@ -20,17 +20,17 @@
     <view class="weui-cell weui-cell_1">
     <image class="suona_png" src="../images/suona.png"></image>
 
-      <textarea class=" weui-textarea" placeholder="{{text}}" fixed='true' bindinput='getInput_2' disabled='{{!isAbled}}'/>
+      <textarea class="weui-textarea text_area" placeholder="{{text}}" fixed='true' bindinput='getInput_2' disabled='{{!isAbled}}'/>
 
       <view class="weui-textarea-counter">0/200</view>
     </view>
   </view>
    <view class="weui-cell weui-cell_input weui-cell_3">
-      <text class="font">设为私密</text>
+      <text class="font">是否可见</text>
 
       <switch bindchange ='switchChange'class="is_private_text" checked='{{isPrivate}}' disabled='{{!isAbled}}' />
 </view>
-  <button size="default" bindtap='confirm' >确定</button>
+  <button size="default" bindtap='confirm' hidden='{{!isAbled}}' >确定</button>
 
 </view>
 <view class="button">
@@ -65,7 +65,7 @@
         </view>
       </view>
       <view class="rating">
-        <image class="tree_png" src="../images/clock.png"></image>
+        <image class="tree_png" src="../images/shu.png"></image>
         <text>×{{item.minutesSum}}</text>
       </view>
     </view>

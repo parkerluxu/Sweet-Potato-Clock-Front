@@ -37,7 +37,7 @@ margin-top: 2%;
   font-size: 30rpx;
   line-height: 60rpx;
   padding-top: -5rpx;
-  
+   box-shadow:0px 2px 1px 1px #c0c0c0;
 }
 .button2{
   margin-left: 0%;
@@ -46,7 +46,7 @@ margin-top: 2%;
 font-size: 30rpx;
 line-height: 60rpx;
 padding-top: -5rpx;
-
+ box-shadow:0px 2px 1px 1px #c0c0c0;
 }
 .name{
   margin-left: 10px;
@@ -296,4 +296,7 @@ transition: all 0.4s;
 
 transform: translateX(0);
 
+}
+.text_area{
+  margin-top: 2.5%;
 }

@@ -113,6 +113,25 @@ Page({
 
 
   onLoad: function (options) {
+    var that = this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
+      method: "GET",
+      data: {
+        userid: that.data.userId
+      },
+      success: function (res) {
+        var list = res.data.groupList;
+        for (var i = 0; i < res.data.groupList.length; ++i) {
+          var k1 = 'groupList[' + i + '].groupName';
+          var k2 = 'groupList[' + i + '].groupId';
+          that.setData({
+            [k1]: list[i].groupName,
+            [k2]: list[i].groupId,
+          })
+        }
+      }
+    })
     // 生命周期函数--监听页面加载
   },
   onReady: function () {
@@ -141,7 +160,10 @@ Page({
     // 生命周期函数--监听页面显示
   },
   onHide: function () {
-    // 生命周期函数--监听页面隐藏
+    var that=this;
+    that.setData({
+      groupList:null
+    })
   },
   onUnload: function () {
     // 生命周期函数--监听页面卸载

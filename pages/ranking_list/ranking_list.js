@@ -390,7 +390,22 @@ Page({
 
   del: function (e) {
     var that=this;
-
+    wx.request({
+      url: 'http://127.0.0.1:8080/deletegroupmember/deletegroupmember',
+      method:'GET',
+      data:{
+        userId: that.data.memberList[e.currentTarget.dataset.index].userId,
+        groupId:that.data.groupId
+      },success:function(res){
+        if(res.data.success==1){
+          wx.showToast({
+            title: '删除成功',
+            icon:'success',
+            duration:1000
+          })
+        }
+      }
+    })
 
     this.data.showList.splice(e.currentTarget.dataset.index, 1)
 
