@@ -17,7 +17,7 @@
   <view wx:for="{{showList}}" class="list">
     <view class="item">
       <view class="index">
-        <text>{{index}}</text>
+        <text>{{index+1}}</text>
       </view>
       <image class="poster" src="../images/achieve.png" />
       <view class="meta">

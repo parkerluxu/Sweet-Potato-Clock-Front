@@ -1,4 +1,3 @@
-
 <!--pages/home-page/home-page.wxml-->
 <view class="list-cell">
   <text class="goalList-title">check！</text>
@@ -51,11 +50,28 @@
 </view>
 <view class="list-card" wx:for="{{plan}}">
   <view class="plan-list">
-    <view  class="p">
+    <view class="p">
       <view class="lable2">{{item.planName}}</view>
     </view>
     <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default" bindtap="hidebtn" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}' bindtap="finishPlan">完成</button>
     <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png' bindtap="unFinishPlan" data-goalid='{{item.goalId}}'></image>
   </view>
-
+</view>
+<view class="list-card_1" wx:for="{{clock_1}}">
+  <view class="clock-list">
+    <view class="p">
+      <view class="lable2">{{item.clockName}} </view>
+      <view class="lable2" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
+    </view>
+    <button class="btn2" type="default" bindtap="clockStart" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover">开始</button>
+  </view>
+</view>
+<view class="list-card_1" wx:for="{{plan_1}}">
+  <view class="plan-list">
+    <view class="p">
+      <view class="lable2">{{item.planName}}</view>
+    </view>
+    <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default" bindtap="hidebtn" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}' bindtap="finishPlan">完成</button>
+    <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png' bindtap="unFinishPlan" data-goalid='{{item.goalId}}'></image>
+  </view>
 </view>

@@ -157,8 +157,8 @@ margin-left: -90px;
 }
 
 .tree_png{
-  width:30rpx;
-  height: 30rpx;
+  width:50rpx;
+  height: 50rpx;
 }
 .modify_png{
    width:40rpx;

@@ -31,6 +31,16 @@
   border: 2rpx solid #e9833e;
   border-radius: 10rpx;
 }
+.list-card_1 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 90%;
+  margin-top: 3%;
+  margin-left: 5%;
+  border: 2rpx solid #b9b6b4;
+  border-radius: 10rpx;
+}
 
 .clock-list {
   display: flex;

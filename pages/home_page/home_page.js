@@ -5,8 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+      /**
+   * 以_1结尾的数组表示那些今天不需要打卡的目标
+   */
     clock: [{
-
       clockName: "考研加油还有一年",
       clockTime: "30min",
       isComplete:Boolean,
@@ -16,6 +18,18 @@ Page({
       isComplete: Boolean,
       planName: "按钮？",
       goalId:Number,
+    }],
+    clock_1: [{
+
+      clockName: "考研加油还有一年",
+      clockTime: "30min",
+      isComplete: Boolean,
+      goalId: Number,
+    }],
+    plan_1: [{
+      isComplete: Boolean,
+      planName: "按钮？",
+      goalId: Number,
     }],
     dates: [{
         name: "Sun",
@@ -81,11 +95,13 @@ Page({
     //如果自定义就打开星期选项
     if (index == 3) {
       this.setData({
-        hiddenDate: false
+        hiddenDate: false,
+        disposable: false
       })
     } else {
       this.setData({
-        hiddenDate: true
+        hiddenDate: true,
+        disposable: false
       })
       //如果选择一次性，则把goalDate中的dispasable设为true
       if (index == 1) {
@@ -312,8 +328,11 @@ Page({
       success: function(res) {
         console.log(res.data.goalList)
         var goalList = res.data.goalList;
+        var goalNoTodayList=res.data.goalNoTodayList;
         var clockNum = 0
         var planNum = 0;
+        var clockNum_1=0;
+        var planNum_1=0;
         for (var i = 0; i < goalList.length; i++) {
           var clockName = 'clock[' + clockNum + '].clockName'
           var clockId = 'clock[' + clockNum + '].goalId'
@@ -337,6 +356,31 @@ Page({
               [planId]: goalList[i].goalId,
             })
             planNum+=1
+          }
+        }
+        for (var i = 0; i < goalNoTodayList.length; i++) {
+          var clockName = 'clock_1[' + clockNum_1 + '].clockName'
+          var clockId = 'clock_1[' + clockNum_1 + '].goalId'
+          var clockTime = 'clock_1[' + clockNum_1 + '].clockTime'
+          var clockComplete = 'clock_1[' + clockNum_1 + '].isComplete'
+          var planName = 'plan_1[' + planNum_1 + '].planName'
+          var planComplete = 'plan_1[' + planNum_1 + '].isComplete'
+          var planId = 'plan_1[' + planNum_1 + '].goalId'
+          if (goalNoTodayList[i].concentrated == true) {
+            that.setData({
+              [clockName]: goalNoTodayList[i].content,
+              [clockTime]: goalNoTodayList[i].minutes,
+              [clockComplete]: goalNoTodayList[i].complete,
+              [clockId]: goalNoTodayList[i].goalId,
+            })
+            clockNum_1 += 1
+          } else {
+            that.setData({
+              [planName]: goalNoTodayList[i].content,
+              [planComplete]: goalNoTodayList[i].complete,
+              [planId]: goalNoTodayList[i].goalId,
+            })
+            planNum_1 += 1
           }
         }
       }
