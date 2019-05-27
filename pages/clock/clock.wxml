@@ -23,9 +23,5 @@
   <slider class="slider" min="{{minutesLimit}}" max="99" step="1" selected-color='#fa9857' block-color='#fa9857' block-size='18' show-value='true' bindchanging="goal_of_time" value="{{minutes}}"></slider>
 </view>
 <view class="btn-area">
-  <button class="button" bindtap="startTimer" disabled="{{is_disabled}}" hover-class="button-hover" plain="true" style="color: #77b5e7; border-color: #77b5e7;">{{buttonText}}</button>
+  <button class="button" bindtap="startTimer" disabled="{{is_disabled}}" hover-class="button-hover" plain="true" style="color: #fa9857; border-color: #fa9857;">{{buttonText}}</button>
 </view>
-<view 
-	  	bindtap="startTimer" 
-	  	data-type="work" 
-	  	class="timer_ctrl {{isRuning && timerType == 'rest' ? 'hide' : ''}}" >{{isRuning ? '完成': '工作'}}</view>
