@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/login/login",
     "pages/home_page/home_page",
+    "pages/login/login",
     "pages/record/record",
     "pages/my_forest/my_forest",
     "pages/ranking_list/ranking_list",
