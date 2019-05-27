@@ -128,7 +128,7 @@
   bottom: 250rpx;
   right: 0rpx;
   z-index: 100;
-  top: 380px
+  top: 870rpx
 }
  
 .img-style {
@@ -139,7 +139,7 @@
   opacity: 0;
   right: 0rpx;
   z-index: 100;
-  top: 380px
+  top: 870rpx
 }
 
 
@@ -190,7 +190,7 @@
   background-color: #fa9857;
 }
 .drawer_content {
-  height: 350rpx;
+  height: 360rpx;
   overflow-y: scroll; /*超出父盒子高度可滚动*/
 }
  
@@ -228,6 +228,10 @@
 }
 .input_h30{
     height: 30px;
+    line-height: 30px;
+}
+.input_h31{
+    height: 50px;
     line-height: 30px;
 }
 .input_h60{

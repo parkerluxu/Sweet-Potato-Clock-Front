@@ -9,7 +9,6 @@
     "pages/logs/logs",
     "pages/clock/clock",
     "pages/group/group",
-    "pages/new_group/new_group",
     "pages/personal_information/personal_information",
     "pages/world_ranking_list/world_ranking_list"
   ],
