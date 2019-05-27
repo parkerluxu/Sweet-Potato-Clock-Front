@@ -43,8 +43,11 @@
   margin-left: 5%;
   width: 90%;
   border: 2rpx solid #b9b6b4;
+   overflow: hidden;
+  justify-content: space-between;
   border-radius: 10rpx;
   box-shadow: 5rpx 5rpx 3rpx #888;
+  color: #b9b6b4;
 }
 
 .clock-list {
