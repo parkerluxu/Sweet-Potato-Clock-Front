@@ -63,7 +63,7 @@
       <view class="lable2">{{item.clockName}} </view>
       <view class="lable2" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
     </view>
-    <button class="btn2" type="default" bindtap="clockStart" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover">开始</button>
+    <button class="btn2_1" type="default" bindtap="clockStart" plain="true" style="color: #b9b6b4; border-color: #fff;" hover-class="button-hover" disabled='true'>开始</button>
   </view>
 </view>
 <view class="list-card_1" wx:for="{{plan_1}}">
@@ -71,7 +71,7 @@
     <view class="p">
       <view class="lable2">{{item.planName}}</view>
     </view>
-    <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default" bindtap="hidebtn" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}' bindtap="finishPlan">完成</button>
-    <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png' bindtap="unFinishPlan" data-goalid='{{item.goalId}}'></image>
+    <button class="btn2_1"  type="default" bindtap="hidebtn" plain="true" style="color: #b9b6b4; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}' bindtap="finishPlan" disabled='true'>完成</button>
+
   </view>
 </view>

@@ -30,6 +30,7 @@
   margin-left: 5%;
   border: 2rpx solid #e9833e;
   border-radius: 10rpx;
+
 }
 .list-card_1 {
   display: flex;
@@ -40,6 +41,7 @@
   margin-left: 5%;
   border: 2rpx solid #b9b6b4;
   border-radius: 10rpx;
+  color:#b9b6b4;
 }
 
 .clock-list {
@@ -87,6 +89,19 @@
   font-weight: 900;*/
   font-size: 45rpx;
   background-color: #fff;
+}
+.btn2_1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 100%;
+  /*font-family: 'WeiRuan YaHei';
+  font-weight: 900;*/
+  font-size: 45rpx;
+
+  color:#b9b6b4;
 }
 
 .hide {
