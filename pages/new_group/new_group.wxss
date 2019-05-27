@@ -1,11 +1,1 @@
-.btn1 {
-  width: 80%;
-  margin-top: 50rpx;
-  background-color: #fa9857;
-  color: white;
-  border-radius: 98rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
+/* pages/new_group/new_group.wxss */
