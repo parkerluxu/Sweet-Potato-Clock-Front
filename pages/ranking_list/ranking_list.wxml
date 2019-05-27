@@ -54,7 +54,7 @@
   <view class=" list  {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{showList}}" wx:key="">
     <view class="{{item.isTouchMove ? 'item' : 'item'}} " >
       <view class="index">
-        <text>{{index}}</text>
+        <text>{{index+1}}</text>
       </view>
       <image class="poster" src="../images/achieve.png" />
       <view class="meta">

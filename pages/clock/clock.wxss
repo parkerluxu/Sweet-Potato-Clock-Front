@@ -114,13 +114,10 @@
   color: #000000;
 }
 
-.timer_inputname {
-  bottom: -40px;
+.timer_name {
   width: 100%;
-  text-align: center;
   height: 40px;
   padding-left: 10px;
-  border-bottom: 1px solid #f2f2f2;
   color: #999;
 }
 
@@ -190,4 +187,12 @@
   margin-bottom: 30px;
   border: 1px dashed #dedede;
   border-radius: 20px;
+}
+.button{
+  width: 40%;
+  background-color:#fff;
+}
+.button-hover{
+  opacity: 0.7;
+  transform: scale(0.96,0.96);
 }
