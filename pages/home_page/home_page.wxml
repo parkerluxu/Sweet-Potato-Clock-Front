@@ -39,7 +39,7 @@
   <view class="btn_ok" bindtap="addGoal" data-statu="close">确定</view>
 </view>
 
-<view class="list-card" wx:for="{{clock}}">
+<view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1"  wx:key="">
   <view class="clock-list">
     <view class="p">
       <view class="lable2">{{item.clockName}} </view>
@@ -47,8 +47,9 @@
     </view>
     <button class="btn2" type="default" bindtap="clockStart" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover">开始</button>
   </view>
+    <view class="del" catchtap="del_1" data-index="{{index}}">删除</view>
 </view>
-<view class="list-card" wx:for="{{plan}}">
+<view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan}}" data-index="{{index}}" bindtouchstart="touchstart_2" bindtouchmove="touchmove_2"  wx:key="">
   <view class="plan-list">
     <view class="p">
       <view class="lable2">{{item.planName}}</view>
@@ -56,8 +57,9 @@
     <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default" bindtap="hidebtn" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}' bindtap="finishPlan">完成</button>
     <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png' bindtap="unFinishPlan" data-goalid='{{item.goalId}}'></image>
   </view>
+   <view class="del" catchtap="del_2" data-index="{{index}}">删除</view>
 </view>
-<view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock_1}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove"  wx:key="">
+<view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock_1}}" data-index="{{index}}" bindtouchstart="touchstart_3" bindtouchmove="touchmove_3"  wx:key="">
   <view class="clock-list">
     <view class="p">
       <view class="lable2">{{item.clockName}} </view>
@@ -65,14 +67,14 @@
     </view>
     <button class="btn2_1" type="default" bindtap="clockStart" plain="true" style="color: #b9b6b4; border-color: #fff;" hover-class="button-hover" disabled='true'>开始</button>
   </view>
- <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+ <view class="del" catchtap="del_3" data-index="{{index}}">删除</view>
 </view>
-<view class="list-card_1" wx:for="{{plan_1}}">
+<view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan_1}}" data-index="{{index}}" bindtouchstart="touchstart_4" bindtouchmove="touchmove_4"  wx:key="">
   <view class="plan-list">
     <view class="p">
       <view class="lable2">{{item.planName}}</view>
     </view>
     <button class="btn2_1"  type="default" bindtap="hidebtn" plain="true" style="color: #b9b6b4; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}' bindtap="finishPlan" disabled='true'>完成</button>
-
   </view>
+  <view class="del" catchtap="del_4" data-index="{{index}}">删除</view>
 </view>

@@ -29,18 +29,20 @@
   margin-top: 3%;
   margin-left: 5%;
   border: 2rpx solid #e9833e;
-  border-radius: 10rpx;
+   overflow: hidden;
+  justify-content: space-between;
+border-radius: 10rpx;
 
 }
 .list-card_1 {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  
   margin-top: 3%;
   margin-left: 5%;
   border: 2rpx solid #b9b6b4;
   border-radius: 10rpx;
+  color: #b9b6b4;
    overflow: hidden;
   justify-content: space-between;
   width: 90%;
@@ -78,6 +80,11 @@ margin-left: -90px;
   justify-content: center;
   align-items: center;
   width: 100%;
+      -webkit-transition: all 0.4s;
+transition: all 0.4s;
+-webkit-transform: translateX(90px);
+transform: translateX(90px);
+margin-left: -90px;
 }
 
 .button-hover {
