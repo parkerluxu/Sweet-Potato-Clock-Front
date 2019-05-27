@@ -579,7 +579,20 @@ Page({
   del_1: function (e) {
     var that=this;
     wx.request({
-      url: '',
+      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      method:'GET',
+      data:{
+        goalId: that.data.clock[e.currentTarget.dataset.index].goalId
+      },
+      success:function(res){
+        if(res.data.success==1){
+          wx.showToast({
+            title: '删除成功',
+            icon:'success',
+            duration:1000
+          })
+        }
+      }
     })
     this.data.clock.splice(e.currentTarget.dataset.index, 1)
     this.setData({
@@ -675,7 +688,20 @@ Page({
   del_2: function (e) {
     var that = this;
     wx.request({
-      url: '',
+      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      method: 'GET',
+      data: {
+        goalId: that.data.plan[e.currentTarget.dataset.index].goalId
+      },
+      success: function (res) {
+        if (res.data.success == 1) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          })
+        }
+      }
     })
     this.data.plan.splice(e.currentTarget.dataset.index, 1)
     this.setData({
@@ -771,7 +797,20 @@ Page({
   del_3: function (e) {
     var that = this;
     wx.request({
-      url: '',
+      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      method: 'GET',
+      data: {
+        goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
+      },
+      success: function (res) {
+        if (res.data.success == 1) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          })
+        }
+      }
     })
     this.data.clock_1.splice(e.currentTarget.dataset.index, 1)
     this.setData({
@@ -867,7 +906,20 @@ Page({
   del_4: function (e) {
     var that = this;
     wx.request({
-      url: '',
+      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      method: 'GET',
+      data: {
+        goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId
+      },
+      success: function (res) {
+        if (res.data.success == 1) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          })
+        }
+      }
     })
     this.data.plan_1.splice(e.currentTarget.dataset.index, 1)
     this.setData({
