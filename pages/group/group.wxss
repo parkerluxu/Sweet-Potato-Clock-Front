@@ -190,7 +190,7 @@
   background-color: #fa9857;
 }
 .drawer_content {
-  height: 300rpx;
+  height: 350rpx;
   overflow-y: scroll; /*超出父盒子高度可滚动*/
 }
  
@@ -260,9 +260,14 @@ radio{
   justify-content: center;
   align-items: center;
   width: 30%;
-  height: 70%;
+  height: 140%;
   margin-top: 2%;
   font-size: 32rpx;
   border-radius: 20rpx;
   background-color: #fff;
+}
+.line {
+  display: flex;
+  padding-top: 3%;
+  height: 12%;
 }

@@ -15,6 +15,7 @@ Page({
     animTranspond: {}, //item位移,透明度
     animInput: {}, //item位移,透明度
     ctColor: "#ffae49",
+    pbgColor: "#fff",
   },
   bindButtonTap: function() {
     this.setData({
