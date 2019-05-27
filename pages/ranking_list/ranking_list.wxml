@@ -30,7 +30,7 @@
 
       <switch bindchange ='switchChange'class="is_private_text" checked='{{isPrivate}}' disabled='{{!isAbled}}' />
 </view>
-  <button size="default" bindtap='confirm' hidden='{{!isAbled}}' >确定</button>
+  <button size="default" bindtap='confirm' hidden='{{!isAbled}}' >保存</button>
 
 </view>
 <view class="button">
