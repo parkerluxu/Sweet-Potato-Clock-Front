@@ -167,8 +167,8 @@ Page({
       timingFunction: 'ease-out'
     })
     animationPlus.rotateZ(180).step();
-    animationcollect.translate(-30, -80).rotateZ(360).opacity(1).step();
-    animationTranspond.translate(-80, -30).rotateZ(360).opacity(1).step();
+    animationcollect.translate(-80, -30).rotateZ(360).opacity(1).step();
+    animationTranspond.translate(-30, -80).rotateZ(360).opacity(1).step();
     animationInput.translate(-100, 100).rotateZ(180).opacity(1).step();
     this.setData({
       animPlus: animationPlus.export(),
