@@ -1,2 +1,26 @@
 <!--pages/clock/clock.wxml-->
-<text>pages/clock/clock.wxml</text>
+<view class="container timer {{isRuning ? 'timer--runing': ''}}">
+  <view class="timer_main">
+    <view class="timer_time-wrap">
+      <view class="timer_progress_mask"></view>
+      <view class="timer_progress timer_left">
+        <view class="timer_circle timer_circle--left" style="transform: rotate({{leftDeg}}deg);"></view>
+      </view>
+      <view class="timer_progress timer_right">
+        <view class="timer_circle timer_circle--right" style="transform: rotate({{rightDeg}}deg);"></view>
+      </view>
+      <image src='{{imageSrc[imageindex]}}' class='clock_tree'></image>
+    </view>
+  </view>
+  <text wx:if="{{!completed}}" class="timer_time">{{remainTimeText}}</text>
+  <text wx:if="{{isRuning}}" animation="{{nameAnimation}}" class="timer_taskName">{{taskName}}{{completed ? '已完成！' : '中'}}</text>
+  <text wx:if="{{completed}}" class="timer_time">00:00</text>
+</view>
+<input type="text" placeholder-style="text-align:center" class="timer_inputname" bindinput="changeLogName" placeholder="给您的任务取个名字吧" />
+<view class="slider_area">
+  <slider class="slider" min="{{minutesLimit}}" max="100" step="1" selected-color='#fa9857' block-color='#fa9857' block-size='18' show-value='true' bindchanging="goal_of_time" value="{{minutes}}"></slider>
+</view>
+<view class="btn-area">
+  <button class="button" bindtap="button_distinguish" disabled="{{is_disabled}}" hover-class="button-hover" plain="true" style="color: #77b5e7; border-color: #77b5e7;">{{buttonValue}}</button>
+</view>
+<view bindtap="startTimer" data-type="work" class="timer_ctrl {{isRuning && timerType == 'rest' ? 'hide' : ''}}">{{isRuning ? '完成': '工作'}}</view>

@@ -15,5 +15,12 @@ const formatNumber = n => {
 }
 
 module.exports = {
+  formatTime1: formatTime1,
   formatTime: formatTime
+}
+
+function formatTime1(time, format) {
+  let temp = '0000000000' + time
+  let len = format.length
+  return temp.substr(-len)
 }

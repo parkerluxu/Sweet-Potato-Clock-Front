@@ -13,6 +13,7 @@
     </view>
   </block>
 </view>
+<view class='divLine.mid' />
 <view class="btn-area">
   <button class="btn1" plain='true' bindtap='changeToTree'>
     <image class="images" src="../images/tree.svg"></image>

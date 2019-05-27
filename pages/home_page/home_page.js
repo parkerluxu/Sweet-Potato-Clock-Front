@@ -177,10 +177,7 @@ Page({
 
 
   },
-  //选择了计划模式
-  selectP: function() {
 
-  },
   util: function(currentStatu) {
     /* 动画部分 */
     // 第1步：创建动画实例 

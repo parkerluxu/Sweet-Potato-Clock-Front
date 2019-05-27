@@ -41,12 +41,12 @@
 </view>
 
 <view class="list-card" wx:for="{{clock}}">
-  <view class="clock-list">
+  <view class="clock-list" bindtap="clockStart">
     <view class="p">
       <view class="lable2">{{item.clockName}} </view>
       <view class="lable2" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
     </view>
-    <button class="btn2" type="default" bindtap="clockStart" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover">开始</button>
+    <view class="btn2">开始</view>
   </view>
 </view>
 <view class="list-card" wx:for="{{plan}}">

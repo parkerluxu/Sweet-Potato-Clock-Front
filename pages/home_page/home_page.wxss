@@ -30,6 +30,7 @@
   margin-left: 5%;
   border: 2rpx solid #e9833e;
   border-radius: 10rpx;
+  box-shadow: 5rpx 5rpx 3rpx #888888;
 }
 
 .clock-list {
@@ -48,7 +49,7 @@
 .lable2 {
   display: flex;
   width: 100%;
-  padding: 5%;
+  padding: 2%;
   margin-left: 5%;
   font-size: 40rpx;
 }
@@ -72,9 +73,7 @@
   justify-content: center;
   align-items: center;
   width: 25%;
-  height: 100%;
-  /*font-family: 'WeiRuan YaHei';
-  font-weight: 900;*/
+  height: 95%;
   font-size: 45rpx;
   background-color: #fff;
 }
