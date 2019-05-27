@@ -16,6 +16,10 @@ Page({
     animInput: {}, //item位移,透明度
     ctColor: "#ffae49",
     pbgColor: "#fff",
+    newGroup:{
+      name:String,
+      intro:String,
+    }
   },
   bindButtonTap: function() {
     this.setData({
@@ -104,9 +108,9 @@ Page({
       textColor: "#000",
       tborder: "2rpx dashed #ffae49",
       ibColor: "#e9833e",
-      'goal.isConcentrate': true,
+      'newGroup.isPrivate': true,
     })
-    console.log(that.data.goal.isConcentrate)
+    console.log(that.data.newGroup.isPrivate)
   },
   //选择了否
   selectP: function () {
@@ -121,11 +125,28 @@ Page({
       tborder: "2rpx dashed #979797",
       input: "",
       ibColor: "#979797",
-      'goal.isConcentrate': false,
+      'newGroup.isPrivate': false,
     })
-    console.log(that.data.goal.isConcentrate)
+    console.log(that.data.newGroup.isPrivate)
   },
 
+//获取小组名称
+  getGroupName:function(e){
+    console.log(e.detail.value)
+    var that = this
+    that.setData({
+      'newGroup.name': e.detail.value,
+    })
+  },
+
+  //获取小组简介
+  getGroupintro:function(e){
+    console.log(e.detail.value)
+    var that = this
+    that.setData({
+      'newGroup.intro': e.detail.value,
+    })
+  },
   //弹出动画
   popp: function() {
     //plus顺时针旋转
@@ -187,6 +208,37 @@ Page({
     })
   },
 
+
+  addGroup:function(e){
+    var that=this
+    that.powerDrawer(e)
+    var isPrivate=0
+    if(that.data.newGroup.isPrivate=true){
+      isPrivate=1
+    }else{
+      isPrivate=0
+    }
+    wx.request({
+      url: 'http://127.0.0.1:8080/cretegroup',
+      method:'POST',
+      data:{
+        captainId:wx.getStorageSync('openid'),
+        groupName:that.data.newGroup.name,
+        privateGroup: isPrivate,
+        description:that.data.newGroup.intro,
+      },
+      success:function(res){
+        console.log(res.data)
+        var toastText = "创建成功";
+        wx.showToast({
+          title: toastText,
+          icon: 'success',
+          duration: 1000
+        });
+        that.onShow();
+      }
+    })
+  },
 
   onLoad: function(options) {
     var that = this;
