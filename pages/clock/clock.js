@@ -31,6 +31,7 @@ Page({
   },
 
   onLoad:function(option){
+    console.log(option)
     this.setData({
       clockName: option.clockName,
       minutesLimit: option.minutesLimit,

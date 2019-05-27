@@ -463,7 +463,7 @@ Page({
   },
 
   clockStart: function (event) {
-    console.log(event.currentTarget)
+    console.log(event.currentTarget.dataset)
     wx.navigateTo({
       url: '../clock/clock?clockName=' + event.currentTarget.dataset.clockname + '&minutesLimit=' + event.currentTarget.dataset.clocktime + '&id=' + event.currentTarget.dataset.goalid,
     })
