@@ -61,6 +61,7 @@
   -webkit-transform: translateX(90px);
   transform: translateX(90px);
   margin-left: -90px;
+  color: #fff;
 }
 
 .p {
@@ -102,7 +103,6 @@
   width: 25%;
   height: 95%;
   font-size: 45rpx;
-  background-color: #fff;
 }
 
 .btn2_1 {

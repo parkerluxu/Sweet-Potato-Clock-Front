@@ -29,7 +29,7 @@
 
 <view>
   <image src="/pages/images/new-group.png" class="img-style" animation="{{animCollect}}" bindtap="powerDrawer"data-statu="open"></image>
-  <image src="/pages/images/join-group.png" class="img-style" animation="{{animTranspond}}" bindtap="powerDrawer1"data-statu="open"></image>
+  <image src="/pages/images/join-group.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>
   <image src="/pages/images/add.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
 </view>
 
@@ -41,20 +41,19 @@
   <!--drawer content-->
   <view class="drawer_title">新建小组</view>
   <view class="drawer_content">
-    <view class="top grid"> 
+    <view class="top grid">
       <label class="title col-0">小组名称</label>
-      <input class="input_base input_h30 col-1" name="rName" value="可自行定义内容"></input>
+      <input class="input_base input_h30 col-1" name="rName" placeholder="请输入小组名称"  bindinput='getGroupName'></input>
     </view>
     <view class="top grid">
       <label class="title col-0">小组简介</label>
-      <input class="input_base input_h31 col-1" name="mobile"></input>
-      <view class="weui-textarea-counter">0/200</view>
+      <input class="input_base input_h30 col-1" name="mobile" placeholder="请输入小组简介" bindinput='getGroupintro'></input>
     </view>
       <view class="line">
     <label class="title col-0">公开此小组</label>
-    <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ctColor}}; border-color:#ffae49;background-color:{{cbgColor}};margin-left: 3%;margin-right: 8%;" hover-class="button-hover" bindtap="selectC">是</button>
+    <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ctColor}}; border-color:#ffae49;background-color:{{cbgColor}};margin-left: 5%;margin-right: 8%;" hover-class="button-hover" bindtap="selectC">是</button>
     <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ptColor}}; border-color:#ffae49;background-color:{{pbgColor}};margin-right: 8%;" hover-class="button-hover" bindtap="selectP">否</button>
   </view>
   </view>
-  <view class="btn_ok" bindtap="powerDrawer" data-statu="close">确定</view>
+  <view class="btn_ok" bindtap="addGroup" data-statu="close">确定</view>
 </view>

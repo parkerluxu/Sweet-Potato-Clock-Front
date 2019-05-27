@@ -40,22 +40,22 @@
 </view>
 
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1">
-  <view class="clock-list">
+  <view class="clock-list" data-goalid='{{item.goalId}}'bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' style="background:url('../images/cardBack1.png')">
     <view class="p">
       <view class="lable2">{{item.clockName}} </view>
       <view class="lable2" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
     </view>
-    <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default"  plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}'bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' >完成</button>
+    <view class="btn2 {{item.isComplete?'hide':'show'}}" type="default"  plain="true" style="color: #fff;"  >开始</view>
     <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png'  data-goalid='{{item.goalId}}'></image>
   </view>
     <view class="del" catchtap="del_1" data-index="{{index}}">删除</view>
 </view>
-<view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan}}" data-index="{{index}}" bindtouchstart="touchstart_2" bindtouchmove="touchmove_2"  wx:key="">
+<view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan}}" data-index="{{index}}" bindtouchstart="touchstart_2" bindtouchmove="touchmove_2"  wx:key="" style="background:url('../images/cardBack4.png')" bindtap="hidebtn" bindtap="finishPlan">
   <view class="plan-list">
     <view class="p">
       <view class="lable2">{{item.planName}}</view>
     </view>
-    <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default" bindtap="hidebtn" plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}' bindtap="finishPlan">完成</button>
+    <view class="btn2 {{item.isComplete?'hide':'show'}}">完成</view>
     <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png' bindtap="unFinishPlan" data-goalid='{{item.goalId}}'></image>
   </view>
    <view class="del" catchtap="del_2" data-index="{{index}}">删除</view>
