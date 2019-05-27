@@ -57,7 +57,7 @@
     <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png' bindtap="unFinishPlan" data-goalid='{{item.goalId}}'></image>
   </view>
 </view>
-<view class="list-card_1" wx:for="{{clock_1}}">
+<view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock_1}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove"  wx:key="">
   <view class="clock-list">
     <view class="p">
       <view class="lable2">{{item.clockName}} </view>
@@ -65,6 +65,7 @@
     </view>
     <button class="btn2_1" type="default" bindtap="clockStart" plain="true" style="color: #b9b6b4; border-color: #fff;" hover-class="button-hover" disabled='true'>开始</button>
   </view>
+ <view class="del" catchtap="del" data-index="{{index}}">删除</view>
 </view>
 <view class="list-card_1" wx:for="{{plan_1}}">
   <view class="plan-list">

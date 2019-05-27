@@ -61,8 +61,6 @@ padding-top: -5rpx;
 .list {
   display: flex;
    overflow: hidden;
- 
-  
   justify-content: space-between;
   width: 100%;
   border-bottom:1px solid #ccc;
