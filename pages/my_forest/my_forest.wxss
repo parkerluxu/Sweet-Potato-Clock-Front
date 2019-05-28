@@ -11,9 +11,8 @@
 }
 
 .imagesize image {
-  width: 90%;
-  height: 300rpx;
-  margin-top: 100rpx;
+  width: 100%;
+  height: 400rpx;
 }
 
 .tree-content {

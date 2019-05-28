@@ -64,9 +64,7 @@
 }
 
 .weui-cell-minutes{
- padding-top: 5px;
  padding-left: 30rpx;
-
 }
 .clock_content{
   display: flex;
@@ -77,12 +75,18 @@
   box-shadow: 3rpx 3rpx 20rpx #888888;
   border-radius: 30rpx;
 }
+.clock_block{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .weui-cell-content{
 font-size:14px;
-height:23px;
 margin-left: 30rpx;
-margin-top: 15rpx;
 }
 .plan{
-  margin-top: 50rpx;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
