@@ -1,4 +1,5 @@
 // pages/home-page/home-page.js
+const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -8,9 +9,11 @@ Page({
       /**
    * 以_1结尾的数组表示那些今天不需要打卡的目标
    */
+
       /**
    * 特别说明，变量以_1结尾的是服务于添加目标的，不加是服务于修改目标的
    */
+
 
     clock: [{
       clockName: "考研加油还有一年",
@@ -157,6 +160,7 @@ Page({
     periodList_0:[],
     canModify:true,
     color_0:"#979797",
+
   },
 
   //选择“一次”、“每天”、“自定义”
@@ -458,6 +462,12 @@ Page({
    */
   onShow: function() {
     var that = this;
+    var date = new Date()
+    let showTime = util.formatTime(date)
+    let showDate = showTime.substr(0,10)
+    that.setData({
+      date:showDate,
+    })
     wx.request({
       url: 'http://127.0.0.1:8080/displaygoal/displaygoal',
       method: 'GET',
@@ -725,8 +735,10 @@ Page({
   },
   del_1: function (e) {
     var that=this;
+    console.log(e.currentTarget.dataset.index)
+    console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method:'GET',
       data:{
         goalId: that.data.clock[e.currentTarget.dataset.index].goalId
@@ -835,7 +847,7 @@ Page({
   del_2: function (e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan[e.currentTarget.dataset.index].goalId
@@ -944,7 +956,7 @@ Page({
   del_3: function (e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
@@ -1053,7 +1065,7 @@ Page({
   del_4: function (e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId

@@ -1,6 +1,6 @@
 <!--pages/my_forest/my_forest.wxml-->
 <view class='imagesize'>
-  <image src="../images/forest.jpg">
+  <image src="../images/forest.png">
   </image>
 </view>
 <view class='tree-content'>

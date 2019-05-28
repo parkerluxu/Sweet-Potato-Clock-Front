@@ -1,3 +1,4 @@
+
 <!--pages/home-page/home-page.wxml-->
 <view class="list-cell">
   <text class="goalList-title">check！</text>

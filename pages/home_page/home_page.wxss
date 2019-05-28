@@ -10,10 +10,12 @@
 
 .goalList-title {
   width: 70%;
+  height: 50rpx;
   padding-left: 12%;
-  font-size: 40rpx;
+  font-size: 36rpx;
   /*font-weight: 550;*/
-  color: #000;
+  color: #fff;
+  margin-bottom: 10rpx;
 }
 
 .newGoal {
@@ -28,11 +30,11 @@
   width: 90%;
   margin-top: 3%;
   margin-left: 5%;
-  border: 2rpx solid #e9833e;
+  /*border: 2rpx solid #e9833e;*/
   overflow: hidden;
   justify-content: space-between;
   border-radius: 10rpx;
-  box-shadow: 5rpx 5rpx 3rpx #888;
+  box-shadow: 1rpx 1rpx 15rpx #888;
 }
 
 .list-card_1 {
@@ -46,7 +48,7 @@
    overflow: hidden;
   justify-content: space-between;
   border-radius: 10rpx;
-  box-shadow: 5rpx 5rpx 3rpx #888;
+  box-shadow: 1rpx 1rpx 15rpx #888;
   color: #b9b6b4;
 }
 
@@ -61,6 +63,7 @@
   -webkit-transform: translateX(90px);
   transform: translateX(90px);
   margin-left: -90px;
+  color: #fff;
 }
 
 .p {
@@ -72,7 +75,7 @@
   display: flex;
   width: 100%;
   padding: 2%;
-  margin-left: 5%;
+  margin-left: 30rpx;
   font-size: 40rpx;
 }
 
@@ -87,6 +90,7 @@
   -webkit-transform: translateX(90px);
   transform: translateX(90px);
   margin-left: -90px;
+  color: #fff;
 }
 
 .button-hover {
@@ -99,10 +103,10 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 25%;
+  width: 35%;
   height: 95%;
   font-size: 45rpx;
-  background-color: #fff;
+  padding-left: 10%;
 }
 
 .btn2_1 {
@@ -110,12 +114,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 25%;
+  width: 100rpx;
   height: 100%;
   /*font-family: 'WeiRuan YaHei';
   font-weight: 900;*/
   font-size: 45rpx;
-  color: #b9b6b4;
+  color: #fff;
 }
 
 .hide {
