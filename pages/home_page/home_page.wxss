@@ -253,7 +253,7 @@ button::after {
   text-align: center;
   align-items: center;
   margin-left: 7%;
-  width: 55%;
+  width: 60%;
   font-size: 40rpx;
 }
 

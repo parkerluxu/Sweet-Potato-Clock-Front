@@ -45,7 +45,7 @@
       <view class="lable2">{{item.clockName}} </view>
       <view class="lable2" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
     </view>
-    <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default"  plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}'bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' >完成</button>
+    <button class="btn2 {{item.isComplete?'hide':'show'}}" type="default"  plain="true" style="color: #000; border-color: #fff;" hover-class="button-hover" data-goalid='{{item.goalId}}'bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' >开始</button>
     <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png'  data-goalid='{{item.goalId}}'></image>
   </view>
     <view class="del" catchtap="del_1" data-index="{{index}}">删除</view>

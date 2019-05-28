@@ -925,4 +925,16 @@ Page({
 
     })
   },
+  showMessage_1:function(e){
+    var that=this;
+    var list=that.data.clock[e.currentTarget.dataset.index];
+    var goalid=list.goalId;
+    var name=list.clockname;
+    var time=list.clockTime;
+    that.setData({
+      ctColor:"#ffae49",
+      ptColor: "#fff",
+
+    })
+  }
 })
