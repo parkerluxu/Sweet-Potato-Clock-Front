@@ -6,20 +6,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-      /**
-   * 以_1结尾的数组表示那些今天不需要打卡的目标
-   */
-    date:null,
+    /**
+     * 以_1结尾的数组表示那些今天不需要打卡的目标
+     */
+    date: null,
     clock: [{
       clockName: "考研加油还有一年",
       clockTime: "30min",
-      isComplete:Boolean,
+      isComplete: Boolean,
       goalId: Number,
     }],
     plan: [{
       isComplete: Boolean,
       planName: "按钮？",
-      goalId:Number,
+      goalId: Number,
     }],
     clock_1: [{
       clockName: "考研加油还有一年",
@@ -27,11 +27,7 @@ Page({
       isComplete: Boolean,
       goalId: Number,
     }],
-    plan_1: [{
-      isComplete: Boolean,
-      planName: "按钮？",
-      goalId: Number,
-    }],
+    plan_1: [],
     dates: [{
         name: "Sun",
         index: "0",
@@ -157,44 +153,49 @@ Page({
       goalId: null,
     })
     console.log(that.data.goal.isConcentrate)
-    wx.request({
-      url: 'http://localhost:8080/usergoal/addgoal',
-      method: 'POST',
-      data: {
-        userId: wx.getStorageSync('openid'),
-        content: that.data.goal.name,
-        concentrated: that.data.goal.isConcentrate,
-        minutes: that.data.goal.minutes,
-      },
-      success: function(res) {
-        console.log(res.data)
-        that.setData({
-          goalId: res.data.goalId,
-        })
-        wx.request({
-          url: 'http://localhost:8080/goaldate/addgoaldate',
-          method: 'POST',
-          data: {
-            goalId: that.data.goalId,
-            sunday: that.data.dates[0].selected,
-            monday: that.data.dates[1].selected,
-            tuesday: that.data.dates[2].selected,
-            wednesday: that.data.dates[3].selected,
-            thursday: that.data.dates[4].selected,
-            friday: that.data.dates[5].selected,
-            saturday: that.data.dates[6].selected,
-            disposable: that.data.disposable,
-          },
-          success: function (res) {
-            that.onShow()
-          }
-        })
-        
-      },
-    })
-    that.drawer(e);
-
-
+    if (that.data.goal.minutes < 10) {
+      wx.showToast({
+        title: '时长过短',
+        image: '../images/close.png',
+        duration: 1000
+      })
+    } else {
+      wx.request({
+        url: 'http://localhost:8080/usergoal/addgoal',
+        method: 'POST',
+        data: {
+          userId: wx.getStorageSync('openid'),
+          content: that.data.goal.name,
+          concentrated: that.data.goal.isConcentrate,
+          minutes: that.data.goal.minutes,
+        },
+        success: function(res) {
+          console.log(res.data)
+          that.setData({
+            goalId: res.data.goalId,
+          })
+          wx.request({
+            url: 'http://localhost:8080/goaldate/addgoaldate',
+            method: 'POST',
+            data: {
+              goalId: that.data.goalId,
+              sunday: that.data.dates[0].selected,
+              monday: that.data.dates[1].selected,
+              tuesday: that.data.dates[2].selected,
+              wednesday: that.data.dates[3].selected,
+              thursday: that.data.dates[4].selected,
+              friday: that.data.dates[5].selected,
+              saturday: that.data.dates[6].selected,
+              disposable: that.data.disposable,
+            },
+            success: function(res) {
+              that.onShow()
+            }
+          })
+        }
+      })
+      that.drawer(e);
+    }
   },
 
   util: function(currentStatu) {
@@ -321,9 +322,9 @@ Page({
     var that = this;
     var date = new Date()
     let showTime = util.formatTime(date)
-    let showDate = showTime.substr(0,10)
+    let showDate = showTime.substr(0, 10)
     that.setData({
-      date:showDate,
+      date: showDate,
     })
     wx.request({
       url: 'http://localhost:8080/displaygoal/displaygoal',
@@ -334,11 +335,11 @@ Page({
       success: function(res) {
         console.log(res.data.goalList)
         var goalList = res.data.goalList;
-        var goalNoTodayList=res.data.goalNoTodayList;
+        var goalNoTodayList = res.data.goalNoTodayList;
         var clockNum = 0
         var planNum = 0;
-        var clockNum_1=0;
-        var planNum_1=0;
+        var clockNum_1 = 0;
+        var planNum_1 = 0;
         for (var i = 0; i < goalList.length; i++) {
           var clockName = 'clock[' + clockNum + '].clockName'
           var clockId = 'clock[' + clockNum + '].goalId'
@@ -354,14 +355,14 @@ Page({
               [clockComplete]: goalList[i].complete,
               [clockId]: goalList[i].goalId,
             })
-            clockNum+=1
-          }else{
+            clockNum += 1
+          } else {
             that.setData({
               [planName]: goalList[i].content,
               [planComplete]: goalList[i].complete,
               [planId]: goalList[i].goalId,
             })
-            planNum+=1
+            planNum += 1
           }
         }
         for (var i = 0; i < goalNoTodayList.length; i++) {
@@ -393,9 +394,17 @@ Page({
     })
   },
 
+  finishControll:function(e){
+    console.log(e.currentTarget.dataset)
+    if(e.currentTarget.dataset['iscomplete']==true){
+      this.unFinishPlan(e);
+    }else{
+      this.finishPlan(e);
+    }
+  },
 
-  finishPlan:function(e){
-    var that=this;
+  finishPlan: function(e) {
+    var that = this;
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
@@ -405,26 +414,25 @@ Page({
         userId: wx.getStorageSync('openid'),
         goalId: goalId,
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         that.onShow()
       }
     })
   },
 
-  unFinishPlan:function(e){
+  unFinishPlan: function(e) {
     var that = this;
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
       url: 'http://localhost:8080/record/planUnComplete',
-
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
         goalId: goalId,
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         that.onShow()
       }
@@ -432,13 +440,13 @@ Page({
   },
 
 
-  
+
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-    
+
   },
 
   /**
@@ -469,94 +477,109 @@ Page({
 
   },
 
-  clockStart: function (event) {
+  clockStart: function(event) {
     console.log(event.currentTarget.dataset)
-    wx.navigateTo({
-      url: '../clock/clock?clockName=' + event.currentTarget.dataset.clockname + '&minutesLimit=' + event.currentTarget.dataset.clocktime + '&id=' + event.currentTarget.dataset.goalid,
-    })
+    if (event.currentTarget.dataset.complete == false) {
+      wx.navigateTo({
+        url: '../clock/clock?clockName=' + event.currentTarget.dataset.clockname + '&minutesLimit=' + event.currentTarget.dataset.clocktime + '&id=' + event.currentTarget.dataset.goalid,
+      })
+    } else {
+      wx.showToast({
+        title: '今日已完成该目标',
+        image: '../images/close.png',
+        duration: 1000
+      })
+    }
+
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_1: function (e) {
+  touchstart_1: function(e) {
     var that = this;
-   
 
-      //开始触摸时 重置所有删除
 
-      this.data.clock.forEach(function (v, i) {
+    //开始触摸时 重置所有删除
 
-        if (v.isTouchMove)//只操作为true的
+    this.data.clock.forEach(function(v, i) {
 
-          v.isTouchMove = false;
+      if (v.isTouchMove) //只操作为true的
 
-      })
+        v.isTouchMove = false;
 
-      this.setData({
+    })
 
-        startX: e.changedTouches[0].clientX,
+    this.setData({
 
-        startY: e.changedTouches[0].clientY,
+      startX: e.changedTouches[0].clientX,
 
-        clock: this.data.clock
+      startY: e.changedTouches[0].clientY,
 
-      })
-    
+      clock: this.data.clock
+
+    })
+
 
   },
 
   //滑动事件处理
 
-  touchmove_1: function (e) {
+  touchmove_1: function(e) {
     var that = this;
-    
-      var that = this,
 
-        index = e.currentTarget.dataset.index,//当前索引
+    var that = this,
 
-        startX = that.data.startX,//开始X坐标
+      index = e.currentTarget.dataset.index, //当前索引
 
-        startY = that.data.startY,//开始Y坐标
+      startX = that.data.startX, //开始X坐标
 
-        touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      startY = that.data.startY, //开始Y坐标
 
-        touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
 
-        //获取滑动角度
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
 
-        angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+      //获取滑动角度
 
-      that.data.clock.forEach(function (v, i) {
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-        v.isTouchMove = false
+    that.data.clock.forEach(function(v, i) {
 
-        //滑动超过30度角 return
+      v.isTouchMove = false
 
-        if (Math.abs(angle) > 30) return;
+      //滑动超过30度角 return
 
-        if (i == index) {
+      if (Math.abs(angle) > 30) return;
 
-          if (touchMoveX > startX) //右滑
+      if (i == index) {
 
-            v.isTouchMove = false
+        if (touchMoveX > startX) //右滑
 
-          else {//左滑
+          v.isTouchMove = false
 
-            v.isTouchMove = true
+        else { //左滑
 
-          }
+          v.isTouchMove = true
 
         }
 
-      })
+      }
 
-      //更新数据
+    })
 
-      that.setData({
+    //更新数据
 
-        clock: that.data.clock
+    that.setData({
 
-      })
-    
+      clock: that.data.clock
+
+    })
+
   },
 
   /**
@@ -569,7 +592,7 @@ Page({
   
   */
 
-  angle: function (start, end) {
+  angle: function(start, end) {
 
     var _X = end.X - start.X,
 
@@ -580,20 +603,22 @@ Page({
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
 
   },
-  del_1: function (e) {
-    var that=this;
+  del_1: function(e) {
+    var that = this;
+    console.log(e.currentTarget.dataset.index)
+    console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
-      method:'GET',
-      data:{
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      method: 'GET',
+      data: {
         goalId: that.data.clock[e.currentTarget.dataset.index].goalId
       },
-      success:function(res){
-        if(res.data.success==1){
+      success: function(res) {
+        if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
-            icon:'success',
-            duration:1000
+            icon: 'success',
+            duration: 1000
           })
         }
       }
@@ -607,15 +632,15 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_2: function (e) {
+  touchstart_2: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.plan.forEach(function (v, i) {
+    this.data.plan.forEach(function(v, i) {
 
-      if (v.isTouchMove)//只操作为true的
+      if (v.isTouchMove) //只操作为true的
 
         v.isTouchMove = false;
 
@@ -636,26 +661,32 @@ Page({
 
   //滑动事件处理
 
-  touchmove_2: function (e) {
+  touchmove_2: function(e) {
     var that = this;
 
     var that = this,
 
-      index = e.currentTarget.dataset.index,//当前索引
+      index = e.currentTarget.dataset.index, //当前索引
 
-      startX = that.data.startX,//开始X坐标
+      startX = that.data.startX, //开始X坐标
 
-      startY = that.data.startY,//开始Y坐标
+      startY = that.data.startY, //开始Y坐标
 
-      touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
 
-      touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
 
       //获取滑动角度
 
-      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.plan.forEach(function (v, i) {
+    that.data.plan.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -669,7 +700,7 @@ Page({
 
           v.isTouchMove = false
 
-        else {//左滑
+        else { //左滑
 
           v.isTouchMove = true
 
@@ -689,15 +720,15 @@ Page({
 
   },
 
-  del_2: function (e) {
+  del_2: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -716,15 +747,15 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_3: function (e) {
+  touchstart_3: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.clock_1.forEach(function (v, i) {
+    this.data.clock_1.forEach(function(v, i) {
 
-      if (v.isTouchMove)//只操作为true的
+      if (v.isTouchMove) //只操作为true的
 
         v.isTouchMove = false;
 
@@ -745,26 +776,32 @@ Page({
 
   //滑动事件处理
 
-  touchmove_3: function (e) {
+  touchmove_3: function(e) {
     var that = this;
 
     var that = this,
 
-      index = e.currentTarget.dataset.index,//当前索引
+      index = e.currentTarget.dataset.index, //当前索引
 
-      startX = that.data.startX,//开始X坐标
+      startX = that.data.startX, //开始X坐标
 
-      startY = that.data.startY,//开始Y坐标
+      startY = that.data.startY, //开始Y坐标
 
-      touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
 
-      touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
 
       //获取滑动角度
 
-      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.clock_1.forEach(function (v, i) {
+    that.data.clock_1.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -778,7 +815,7 @@ Page({
 
           v.isTouchMove = false
 
-        else {//左滑
+        else { //左滑
 
           v.isTouchMove = true
 
@@ -798,15 +835,15 @@ Page({
 
   },
 
-  del_3: function (e) {
+  del_3: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -825,15 +862,15 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_4: function (e) {
+  touchstart_4: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.plan_1.forEach(function (v, i) {
+    this.data.plan_1.forEach(function(v, i) {
 
-      if (v.isTouchMove)//只操作为true的
+      if (v.isTouchMove) //只操作为true的
 
         v.isTouchMove = false;
 
@@ -854,26 +891,32 @@ Page({
 
   //滑动事件处理
 
-  touchmove_4: function (e) {
+  touchmove_4: function(e) {
     var that = this;
 
     var that = this,
 
-      index = e.currentTarget.dataset.index,//当前索引
+      index = e.currentTarget.dataset.index, //当前索引
 
-      startX = that.data.startX,//开始X坐标
+      startX = that.data.startX, //开始X坐标
 
-      startY = that.data.startY,//开始Y坐标
+      startY = that.data.startY, //开始Y坐标
 
-      touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
 
-      touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
 
       //获取滑动角度
 
-      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.plan_1.forEach(function (v, i) {
+    that.data.plan_1.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -887,7 +930,7 @@ Page({
 
           v.isTouchMove = false
 
-        else {//左滑
+        else { //左滑
 
           v.isTouchMove = true
 
@@ -907,15 +950,15 @@ Page({
 
   },
 
-  del_4: function (e) {
+  del_4: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
