@@ -19,7 +19,16 @@ Page({
     newGroup: {
       name: String,
       intro: String,
-    }
+    },
+    text: '这是一条会滚动的文字滚来滚去的文字跑马灯，哈哈哈哈哈哈哈哈',
+    marqueePace: 1,//滚动速度
+    marqueeDistance: 0,//初始滚动距离
+    marqueeDistance2: 0,
+    marquee2copy_status: false,
+    marquee2_margin: 60,
+    size: 14,
+    orientation: 'left',//滚动方向
+    interval: 20 // 时间间隔
   },
   bindButtonTap: function() {
     this.setData({
@@ -91,9 +100,53 @@ Page({
       });
     }
   },
-  //新建小组
-  transpond: function() {
-    console.log("transpond")
+  pDrawer: function (e) {
+    var currentStatu = e.currentTarget.dataset.statu;
+    this.utill(currentStatu)
+  },
+  utill: function (currentStatu) {
+    /* 动画部分 */
+    // 第1步：创建动画实例 
+    var animation = wx.createAnimation({
+      duration: 200, //动画时长
+      timingFunction: "linear", //线性
+      delay: 0 //0则不延迟
+    });
+
+    // 第2步：这个动画实例赋给当前的动画实例
+    this.animation = animation;
+
+    // 第3步：执行第一组动画
+    animation.opacity(0).rotateX(-100).step();
+
+    // 第4步：导出动画对象赋给数据对象储存
+    this.setData({
+      animationData: animation.export()
+    })
+
+    // 第5步：设置定时器到指定时候后，执行第二组动画
+    setTimeout(function () {
+      // 执行第二组动画
+      animation.opacity(1).rotateX(0).step();
+      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
+      this.setData({
+        animationData: animation
+      })
+
+      //关闭
+      if (currentStatu == "close") {
+        this.setData({
+          showModalStat: false
+        });
+      }
+    }.bind(this), 200)
+
+    // 显示
+    if (currentStatu == "open") {
+      this.setData({
+        showModalStat: true
+      });
+    }
   },
   //加入小组
   //选择了是
@@ -309,6 +362,60 @@ Page({
       desc: 'desc', // 分享描述
       path: 'path' // 分享路径
     }
+  },
+  onShow: function () {
+    // 页面显示
+    var vm = this;
+    var length = vm.data.text.length * vm.data.size;//文字长度
+    var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
+    vm.setData({
+      length: length,
+      windowWidth: windowWidth,
+      marquee2_margin: length < windowWidth ? windowWidth - length : vm.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白
+    });
+    vm.run1();// 水平一行字滚动完了再按照原来的方向滚动
+    vm.run2();// 第一个字消失后立即从右边出现
+  },
+  run1: function () {
+    var vm = this;
+    var interval = setInterval(function () {
+      if (-vm.data.marqueeDistance < vm.data.length) {
+        vm.setData({
+          marqueeDistance: vm.data.marqueeDistance - vm.data.marqueePace,
+        });
+      } else {
+        clearInterval(interval);
+        vm.setData({
+          marqueeDistance: vm.data.windowWidth
+        });
+        vm.run1();
+      }
+    }, vm.data.interval);
+  },
+  run2: function () {
+    var vm = this;
+    var interval = setInterval(function () {
+      if (-vm.data.marqueeDistance2 < vm.data.length) {
+        // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
+        vm.setData({
+          marqueeDistance2: vm.data.marqueeDistance2 - vm.data.marqueePace,
+          marquee2copy_status: vm.data.length + vm.data.marqueeDistance2 <= vm.data.windowWidth + vm.data.marquee2_margin,
+        });
+      } else {
+        if (-vm.data.marqueeDistance2 >= vm.data.marquee2_margin) { // 当第二条文字滚动到最左边时
+          vm.setData({
+            marqueeDistance2: vm.data.marquee2_margin // 直接重新滚动
+          });
+          clearInterval(interval);
+          vm.run2();
+        } else {
+          clearInterval(interval);
+          vm.setData({
+            marqueeDistance2: -vm.data.windowWidth
+          });
+          vm.run2();
+        }
+      }
+    }, vm.data.interval);
   }
-
 })
