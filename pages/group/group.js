@@ -16,9 +16,9 @@ Page({
     animInput: {}, //item位移,透明度
     ctColor: "#ffae49",
     pbgColor: "#fff",
-    newGroup:{
-      name:String,
-      intro:String,
+    newGroup: {
+      name: String,
+      intro: String,
     }
   },
   bindButtonTap: function() {
@@ -96,8 +96,8 @@ Page({
     console.log("transpond")
   },
   //加入小组
-   //选择了是
-  selectC: function () {
+  //选择了是
+  selectC: function() {
     var that = this;
     that.setData({
       ctColor: "#fff",
@@ -113,7 +113,7 @@ Page({
     console.log(that.data.newGroup.isPrivate)
   },
   //选择了否
-  selectP: function () {
+  selectP: function() {
     var that = this;
     that.setData({
       ptColor: "#fff",
@@ -130,8 +130,8 @@ Page({
     console.log(that.data.newGroup.isPrivate)
   },
 
-//获取小组名称
-  getGroupName:function(e){
+  //获取小组名称
+  getGroupName: function(e) {
     console.log(e.detail.value)
     var that = this
     that.setData({
@@ -140,7 +140,7 @@ Page({
   },
 
   //获取小组简介
-  getGroupintro:function(e){
+  getGroupintro: function(e) {
     console.log(e.detail.value)
     var that = this
     that.setData({
@@ -167,8 +167,8 @@ Page({
       timingFunction: 'ease-out'
     })
     animationPlus.rotateZ(180).step();
-    animationcollect.translate(0, -150).rotateZ(360).opacity(1).step();
-    animationTranspond.translate(0, -75).rotateZ(360).opacity(1).step();
+    animationcollect.translate(-80, -30).rotateZ(360).opacity(1).step();
+    animationTranspond.translate(-30, -80).rotateZ(360).opacity(1).step();
     animationInput.translate(-100, 100).rotateZ(180).opacity(1).step();
     this.setData({
       animPlus: animationPlus.export(),
@@ -209,25 +209,25 @@ Page({
   },
 
 
-  addGroup:function(e){
-    var that=this
+  addGroup: function(e) {
+    var that = this
     that.powerDrawer(e)
-    var isPrivate=0
-    if(that.data.newGroup.isPrivate=true){
-      isPrivate=1
-    }else{
-      isPrivate=0
+    var isPrivate = 0
+    if (that.data.newGroup.isPrivate = true) {
+      isPrivate = 1
+    } else {
+      isPrivate = 0
     }
     wx.request({
       url: 'http://127.0.0.1:8080/cretegroup',
-      method:'POST',
-      data:{
-        captainId:wx.getStorageSync('openid'),
-        groupName:that.data.newGroup.name,
+      method: 'POST',
+      data: {
+        captainId: wx.getStorageSync('openid'),
+        groupName: that.data.newGroup.name,
         privateGroup: isPrivate,
-        description:that.data.newGroup.intro,
+        description: that.data.newGroup.intro,
       },
-      success:function(res){
+      success: function(res) {
         console.log(res.data)
         var toastText = "创建成功";
         wx.showToast({

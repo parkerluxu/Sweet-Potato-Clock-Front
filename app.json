@@ -9,7 +9,6 @@
     "pages/logs/logs",
     "pages/clock/clock",
     "pages/group/group",
-    "pages/new_group/new_group",
     "pages/personal_information/personal_information",
     "pages/world_ranking_list/world_ranking_list"
   ],
@@ -17,7 +16,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fa9857",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle":"white"
   },
   "tabBar": {
     "color": "#bfbfbf",

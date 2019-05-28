@@ -1,4 +1,5 @@
 /* pages/my_forest/my_forest.wxss */
+
 .canvas {
   width: 100%;
   margin-top: 80rpx;
@@ -10,8 +11,9 @@
 }
 
 .imagesize image {
-  width: 100%;
-  height: 400rpx;
+  width: 90%;
+  height: 300rpx;
+  margin-top: 100rpx;
 }
 
 .tree-content {
@@ -46,6 +48,7 @@
   line-height: 60rpx;
   margin-top: 2%;
   margin-bottom: 2%;
+  box-shadow:0px 2px 1px 1px #c0c0c0;
 }
 
 .button2 {
@@ -54,6 +57,7 @@
   line-height: 60rpx;
   margin-top: 2%;
   margin-bottom: 2%;
+  box-shadow:0px 2px 1px 1px #c0c0c0;
 }
 
 .name {
@@ -101,4 +105,3 @@
   width: 100rpx;
   margin-top: 2%;
 }
-

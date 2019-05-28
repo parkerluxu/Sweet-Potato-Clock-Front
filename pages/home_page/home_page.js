@@ -1,4 +1,5 @@
 // pages/home-page/home-page.js
+const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -8,6 +9,7 @@ Page({
       /**
    * 以_1结尾的数组表示那些今天不需要打卡的目标
    */
+    date:null,
     clock: [{
       clockName: "考研加油还有一年",
       clockTime: "30min",
@@ -317,6 +319,12 @@ Page({
    */
   onShow: function() {
     var that = this;
+    var date = new Date()
+    let showTime = util.formatTime(date)
+    let showDate = showTime.substr(0,10)
+    that.setData({
+      date:showDate,
+    })
     wx.request({
       url: 'http://localhost:8080/displaygoal/displaygoal',
       method: 'GET',
