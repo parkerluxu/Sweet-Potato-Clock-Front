@@ -28,11 +28,11 @@
   width: 90%;
   margin-top: 3%;
   margin-left: 5%;
-  border: 2rpx solid #e9833e;
+  /*border: 2rpx solid #e9833e;*/
   overflow: hidden;
   justify-content: space-between;
   border-radius: 10rpx;
-  box-shadow: 5rpx 5rpx 3rpx #888;
+  box-shadow: 3rpx 3rpx 20rpx #888;
 }
 
 .list-card_1 {

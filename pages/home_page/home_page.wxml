@@ -40,13 +40,13 @@
 </view>
 
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1">
-  <view class="clock-list" data-goalid='{{item.goalId}}'bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' style="background:url('../images/cardBack1.png')">
+  <view class="clock-list" data-goalid='{{item.goalId}}'bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' style="background:url('../images/origin1.png'); background-size:100% 100%;">
     <view class="p">
       <view class="lable2">{{item.clockName}} </view>
       <view class="lable2" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
     </view>
     <view class="btn2 {{item.isComplete?'hide':'show'}}" type="default"  plain="true" style="color: #fff;"  >开始</view>
-    <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right.png'  data-goalid='{{item.goalId}}'></image>
+    <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right1.png'  data-goalid='{{item.goalId}}'></image>
   </view>
     <view class="del" catchtap="del_1" data-index="{{index}}">删除</view>
 </view>

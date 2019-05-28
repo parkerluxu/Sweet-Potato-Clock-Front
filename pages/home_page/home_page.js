@@ -86,7 +86,6 @@ Page({
     disposable: false,
     goalId: Number,
     startX: 0, //开始坐标
-
     startY: 0
   },
 
