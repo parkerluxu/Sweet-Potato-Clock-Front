@@ -582,8 +582,10 @@ Page({
   },
   del_1: function (e) {
     var that=this;
+    console.log(e.currentTarget.dataset.index)
+    console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method:'GET',
       data:{
         goalId: that.data.clock[e.currentTarget.dataset.index].goalId
@@ -692,7 +694,7 @@ Page({
   del_2: function (e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan[e.currentTarget.dataset.index].goalId
@@ -801,7 +803,7 @@ Page({
   del_3: function (e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
@@ -910,7 +912,7 @@ Page({
   del_4: function (e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegoal/deletegoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId
