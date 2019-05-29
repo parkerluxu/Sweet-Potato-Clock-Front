@@ -13,8 +13,10 @@
         </view>
         <view class='weui-cell-line' />
         <view class='clock_content' wx:if="{{item.concentrated}}">
-          <view class='weui-cell-content'>{{item.content}}</view>
-          <view class='weui-cell-minutes'>{{item.minutes}}分钟</view>
+          <view class="clock_block">
+            <view class='weui-cell-content'>{{item.content}}</view>
+            <view class='weui-cell-minutes'>{{item.minutes}}分钟</view>
+          </view>
         </view>
         <view class='clock_content' wx:else>
           <view class='weui-cell-content plan'>{{item.content}}</view>

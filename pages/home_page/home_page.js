@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+
       /**
    * 以_1结尾的数组表示那些今天不需要打卡的目标
    */
@@ -15,18 +16,21 @@ Page({
    */
 
 
+
     clock: [{
       clockName: "考研加油还有一年",
       clockTime: "30min",
-      isComplete:Boolean,
+      isComplete: Boolean,
       goalId: Number,
       period:[],
     }],
     plan: [{
       isComplete: Boolean,
       planName: "按钮？",
+
       goalId:Number,
       period: [],
+
     }],
     clock_1: [{
       clockName: "考研加油还有一年",
@@ -35,12 +39,14 @@ Page({
       goalId: Number,
       period: [],
     }],
+
     plan_1: [{
       isComplete: Boolean,
       planName: "按钮？",
       goalId: Number,
       period: [],
     }],
+
     dates: [{
         name: "Sun",
         index: "0",
@@ -151,6 +157,7 @@ Page({
     ],
     goalId: Number,
     startX: 0, //开始坐标
+
     startY: 0,
     //储存目标的原始信息，用来判断用户是否对目标进行了修改
     cbgColor_0:String,
@@ -160,6 +167,8 @@ Page({
     periodList_0:[],
     canModify:true,
     color_0:"#979797",
+    goalName_0:String,
+    chooseWhichGoal:String,
 
   },
 
@@ -167,7 +176,7 @@ Page({
   selectOnce: function(e) {
     var that = this;
     let index = e.currentTarget.dataset.index;
-    if(index==selectIndex_0){
+    if(index==that.data.selectIndex_0){
     that.setData({
       canModify:true,
       color_0: "#979797",
@@ -180,7 +189,18 @@ Page({
     if (index == 3) {
       this.setData({
         hiddenDate: false,
-        disposable: false
+        disposable: false,
+        'chooseWhichGoal.selectIndex': 3,
+      })
+      var periodList=that.data.chooseWhichGoal.period;
+      var dateList=that.data.dates;
+      for(var i=0;i<7;++i){
+        if (periodList[i] == 1) {
+          dateList[i].selected = true;
+        } else dateList[i].selected = false;
+      }
+      that.setData({
+        dates:dateList
       })
     } else {
       this.setData({
@@ -190,7 +210,8 @@ Page({
       //如果选择一次性，则把goalDate中的dispasable设为true
       if (index == 1) {
         that.setData({
-          disposable: true
+          disposable: true,
+          'chooseWhichGoal.selectIndex':1,
         })
         console.log(that.data.disposable)
       }
@@ -198,8 +219,12 @@ Page({
       if (index == 2) {
         for (var i = 0; i < that.data.dates.length; i++) {
           var dateSel = 'dates[' + i + '].selected'
+          var item = 'chooseWhichGoal.period['+i+']'
           that.setData({
             [dateSel]: true,
+            'chooseWhichGoal.selectIndex': 2,
+            [item]:1,
+            'chooseWhichGoal.period[7]':0,
           })
         }
         console.log(that.data.dates)
@@ -212,28 +237,40 @@ Page({
   },
   //设置打卡周期
   selectDate: function(e) {
+    var that=this;
     let index = e.currentTarget.dataset.index;
     let arrs = this.data.dates;
+    var item='chooseWhichGoal.period['+index+']';
     if (arrs[index].selected == false) {
       arrs[index].selected = true;
+      that.setData({
+       [item]: 1,
+      })
     } else {
       arrs[index].selected = false;
+      that.setData({
+        [item]: 0,
+      })
     }
     this.setData({
       dates: arrs,
       hiddenDate: false
     })
-    if(periodList_0==arrs){
-      that.setData({
-        canModify:true,
-        color_0:"#979797"
-      })
-    }else{
-      that.setData({
-        canModify: false,
-        color_0:"#ffae49"
-      })
-    }
+   for(var i=0;i<7;++i){
+     if(that.data.periodList_0[i].selected!=arrs[i].selected){
+       that.setData({
+         canModify: false,
+         color_0: "#ffae49",
+       })
+       break;
+     }
+     if(i==6){
+     that.setData({
+       canModify: true,
+       color_0: "#979797",
+     })
+     }
+   }
     console.log(this.data.dates)
   },
 
@@ -251,43 +288,49 @@ Page({
       goalId: null,
     })
     console.log(that.data.goal.isConcentrate)
-    wx.request({
-      url: 'http://localhost:8080/usergoal/addgoal',
-      method: 'POST',
-      data: {
-        userId: wx.getStorageSync('openid'),
-        content: that.data.goal.name,
-        concentrated: that.data.goal.isConcentrate,
-        minutes: that.data.goal.minutes,
-      },
-      success: function(res) {
-        console.log(res.data)
-        that.setData({
-          goalId: res.data.goalId,
-        })
-        wx.request({
-          url: 'http://localhost:8080/goaldate/addgoaldate',
-          method: 'POST',
-          data: {
-            goalId: that.data.goalId,
-            sunday: that.data.dates_1[0].selected,
-            monday: that.data.dates_1[1].selected,
-            tuesday: that.data.dates_1[2].selected,
-            wednesday: that.data.dates_1[3].selected,
-            thursday: that.data.dates_1[4].selected,
-            friday: that.data.dates_1[5].selected,
-            saturday: that.data.dates_1[6].selected,
-            disposable: that.data.disposable_1,
-          },
-          success: function (res) {
-            that.onShow()
-          }
-        })
-        
-      },
-    })
-    that.drawer_1(e);
-
+    if (that.data.goal.minutes < 10) {
+      wx.showToast({
+        title: '时长过短',
+        image: '../images/close.png',
+        duration: 1000
+      })
+    } else {
+      wx.request({
+        url: 'http://localhost:8080/usergoal/addgoal',
+        method: 'POST',
+        data: {
+          userId: wx.getStorageSync('openid'),
+          content: that.data.goal.name,
+          concentrated: that.data.goal.isConcentrate,
+          minutes: that.data.goal.minutes,
+        },
+        success: function(res) {
+          console.log(res.data)
+          that.setData({
+            goalId: res.data.goalId,
+          })
+          wx.request({
+            url: 'http://localhost:8080/goaldate/addgoaldate',
+            method: 'POST',
+            data: {
+              goalId: that.data.goalId,
+              sunday: that.data.dates[0].selected,
+              monday: that.data.dates[1].selected,
+              tuesday: that.data.dates[2].selected,
+              wednesday: that.data.dates[3].selected,
+              thursday: that.data.dates[4].selected,
+              friday: that.data.dates[5].selected,
+              saturday: that.data.dates[6].selected,
+              disposable: that.data.disposable,
+            },
+            success: function(res) {
+              that.onShow()
+            }
+          })
+        }
+      })
+      that.drawer(e);
+    }
 
   },
 
@@ -338,7 +381,14 @@ Page({
   //选择了专注模式
   selectC: function() {
     var that = this;
+    if (that.data.chooseWhichGoal.clockTime==0){
+      that.setData({
+        'chooseWhichGoal.clockTime':that.data.timeValue
+      })
+    }
     that.setData({
+      'chooseWhichGoal.clockTime': that.data.chooseWhichGoal.clockTime,
+      'chooseWhichGoal.clockName': that.data.chooseWhichGoal.planName,
       ctColor: "#fff",
       cbgColor: "#ffae49",
       ptColor: "#ffae49",
@@ -349,6 +399,7 @@ Page({
       ibColor: "#e9833e",
       'goal.isConcentrate': true,
     })
+
     if (that.data.cbgColor_0==that.data.cbgColor) {
       that.setData({
         canModify: true,
@@ -366,6 +417,8 @@ Page({
   selectP: function() {
     var that = this;
     that.setData({
+      'chooseWhichGoal.planName':that.data.chooseWhichGoal.clockName,
+      'chooseWhichGoal.clockTime':0,
       ptColor: "#fff",
       pbgColor: "#ffae49",
       ctColor: "#ffae49",
@@ -398,9 +451,18 @@ Page({
     that.setData({
       'goal.name': e.detail.value,
     })
-    if(e.detail.value==null){
+    if(e.detail.value.length==0){
       that.setData({
-        'goal.name':that.data.goalName
+        'goal.name':that.data.goalName,
+      })
+    }
+    if(that.data.chooseWhichGoal.clockTime==0){
+      that.setData({
+        'chooseWhichGoal.planName':that.data.goal.name,
+      })
+    }else{
+      that.setData({
+        'chooseWhichGoal.clockName':that.data.goal.name,
       })
     }
     if (that.data.goalName==that.data.goal.name) {
@@ -423,6 +485,7 @@ Page({
     var minutes = parseInt(e.detail.value)
     that.setData({
       'goal.minutes': minutes,
+      'chooseWhichGoal.clockTime': minutes,
     })
     if (that.data.timeValue_0 == that.data.timeValue) {
       that.setData({
@@ -464,9 +527,11 @@ Page({
     var that = this;
     var date = new Date()
     let showTime = util.formatTime(date)
+
     let showDate = showTime.substr(0,10)
     that.setData({
       date:showDate,
+
     })
     wx.request({
       url: 'http://127.0.0.1:8080/displaygoal/displaygoal',
@@ -480,10 +545,11 @@ Page({
         var periodOfGoalList = res.data.periodOfGoalList;
         var goalNoTodayList=res.data.goalNoTodayList;
         var periodOfGoalNoTodayList = res.data.periodOfGoalNoTodayList;
+
         var clockNum = 0
         var planNum = 0;
-        var clockNum_1=0;
-        var planNum_1=0;
+        var clockNum_1 = 0;
+        var planNum_1 = 0;
         for (var i = 0; i < goalList.length; i++) {
           var clockName = 'clock[' + clockNum + '].clockName'
           var clockId = 'clock[' + clockNum + '].goalId'
@@ -494,6 +560,7 @@ Page({
           var planComplete = 'plan[' + planNum + '].isComplete'
           var planId = 'plan[' + planNum + '].goalId'
           var periodOfPlan = 'plan[' + planNum + '].period'
+          var planTime = 'plan[' + planNum + '].clockTime'
           if (goalList[i].concentrated == true) {
             that.setData({
               [clockName]: goalList[i].content,
@@ -502,15 +569,16 @@ Page({
               [clockId]: goalList[i].goalId,
               [periodOfClock]: periodOfGoalList[i],
             })
-            clockNum+=1
-          }else{
+            clockNum += 1
+          } else {
             that.setData({
               [planName]: goalList[i].content,
               [planComplete]: goalList[i].complete,
               [planId]: goalList[i].goalId,
               [periodOfPlan]: periodOfGoalList[i],
+              [planTime]:goalList[i].minutes,
             })
-            planNum+=1
+            planNum += 1
           }
         }
         for (var i = 0; i < goalNoTodayList.length; i++) {
@@ -523,6 +591,7 @@ Page({
           var planComplete = 'plan_1[' + planNum_1 + '].isComplete'
           var planId = 'plan_1[' + planNum_1 + '].goalId'
           var periodOfPlan='plan_1['+planNum_1+'].period'
+          var planTime = 'plan_1[' + planNum_1 + '].clockTime'
           if (goalNoTodayList[i].concentrated == true) {
             that.setData({
               [clockName]: goalNoTodayList[i].content,
@@ -538,6 +607,7 @@ Page({
               [planComplete]: goalNoTodayList[i].complete,
               [planId]: goalNoTodayList[i].goalId,
               [periodOfPlan]:periodOfGoalNoTodayList[i],
+              [planTime]: goalNoTodayList[i].minutes,
             })
             planNum_1 += 1
           }
@@ -546,9 +616,17 @@ Page({
     })
   },
 
+  finishControll:function(e){
+    console.log(e.currentTarget.dataset)
+    if(e.currentTarget.dataset['iscomplete']==true){
+      this.unFinishPlan(e);
+    }else{
+      this.finishPlan(e);
+    }
+  },
 
-  finishPlan:function(e){
-    var that=this;
+  finishPlan: function(e) {
+    var that = this;
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
@@ -558,26 +636,25 @@ Page({
         userId: wx.getStorageSync('openid'),
         goalId: goalId,
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         that.onShow()
       }
     })
   },
 
-  unFinishPlan:function(e){
+  unFinishPlan: function(e) {
     var that = this;
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
       url: 'http://localhost:8080/record/planUnComplete',
-
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
         goalId: goalId,
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         that.onShow()
       }
@@ -585,13 +662,13 @@ Page({
   },
 
 
-  
+
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-    
+
   },
 
   /**
@@ -622,94 +699,109 @@ Page({
 
   },
 
-  clockStart: function (event) {
+  clockStart: function(event) {
     console.log(event.currentTarget.dataset)
-    wx.navigateTo({
-      url: '../clock/clock?clockName=' + event.currentTarget.dataset.clockname + '&minutesLimit=' + event.currentTarget.dataset.clocktime + '&id=' + event.currentTarget.dataset.goalid,
-    })
+    if (event.currentTarget.dataset.complete == false) {
+      wx.navigateTo({
+        url: '../clock/clock?clockName=' + event.currentTarget.dataset.clockname + '&minutesLimit=' + event.currentTarget.dataset.clocktime + '&id=' + event.currentTarget.dataset.goalid,
+      })
+    } else {
+      wx.showToast({
+        title: '今日已完成该目标',
+        image: '../images/close.png',
+        duration: 1000
+      })
+    }
+
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_1: function (e) {
+  touchstart_1: function(e) {
     var that = this;
-   
 
-      //开始触摸时 重置所有删除
 
-      this.data.clock.forEach(function (v, i) {
+    //开始触摸时 重置所有删除
 
-        if (v.isTouchMove)//只操作为true的
+    this.data.clock.forEach(function(v, i) {
 
-          v.isTouchMove = false;
+      if (v.isTouchMove) //只操作为true的
 
-      })
+        v.isTouchMove = false;
 
-      this.setData({
+    })
 
-        startX: e.changedTouches[0].clientX,
+    this.setData({
 
-        startY: e.changedTouches[0].clientY,
+      startX: e.changedTouches[0].clientX,
 
-        clock: this.data.clock
+      startY: e.changedTouches[0].clientY,
 
-      })
-    
+      clock: this.data.clock
+
+    })
+
 
   },
 
   //滑动事件处理
 
-  touchmove_1: function (e) {
+  touchmove_1: function(e) {
     var that = this;
-    
-      var that = this,
 
-        index = e.currentTarget.dataset.index,//当前索引
+    var that = this,
 
-        startX = that.data.startX,//开始X坐标
+      index = e.currentTarget.dataset.index, //当前索引
 
-        startY = that.data.startY,//开始Y坐标
+      startX = that.data.startX, //开始X坐标
 
-        touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      startY = that.data.startY, //开始Y坐标
 
-        touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
 
-        //获取滑动角度
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
 
-        angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+      //获取滑动角度
 
-      that.data.clock.forEach(function (v, i) {
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-        v.isTouchMove = false
+    that.data.clock.forEach(function(v, i) {
 
-        //滑动超过30度角 return
+      v.isTouchMove = false
 
-        if (Math.abs(angle) > 30) return;
+      //滑动超过30度角 return
 
-        if (i == index) {
+      if (Math.abs(angle) > 30) return;
 
-          if (touchMoveX > startX) //右滑
+      if (i == index) {
 
-            v.isTouchMove = false
+        if (touchMoveX > startX) //右滑
 
-          else {//左滑
+          v.isTouchMove = false
 
-            v.isTouchMove = true
+        else { //左滑
 
-          }
+          v.isTouchMove = true
 
         }
 
-      })
+      }
 
-      //更新数据
+    })
 
-      that.setData({
+    //更新数据
 
-        clock: that.data.clock
+    that.setData({
 
-      })
-    
+      clock: that.data.clock
+
+    })
+
   },
 
   /**
@@ -722,7 +814,7 @@ Page({
   
   */
 
-  angle: function (start, end) {
+  angle: function(start, end) {
 
     var _X = end.X - start.X,
 
@@ -733,22 +825,26 @@ Page({
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
 
   },
+
   del_1: function (e) {
     var that=this;
+
     console.log(e.currentTarget.dataset.index)
     console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
       url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+
       method:'GET',
       data:{
+
         goalId: that.data.clock[e.currentTarget.dataset.index].goalId
       },
-      success:function(res){
-        if(res.data.success==1){
+      success: function(res) {
+        if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
-            icon:'success',
-            duration:1000
+            icon: 'success',
+            duration: 1000
           })
         }
       }
@@ -762,15 +858,15 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_2: function (e) {
+  touchstart_2: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.plan.forEach(function (v, i) {
+    this.data.plan.forEach(function(v, i) {
 
-      if (v.isTouchMove)//只操作为true的
+      if (v.isTouchMove) //只操作为true的
 
         v.isTouchMove = false;
 
@@ -791,26 +887,32 @@ Page({
 
   //滑动事件处理
 
-  touchmove_2: function (e) {
+  touchmove_2: function(e) {
     var that = this;
 
     var that = this,
 
-      index = e.currentTarget.dataset.index,//当前索引
+      index = e.currentTarget.dataset.index, //当前索引
 
-      startX = that.data.startX,//开始X坐标
+      startX = that.data.startX, //开始X坐标
 
-      startY = that.data.startY,//开始Y坐标
+      startY = that.data.startY, //开始Y坐标
 
-      touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
 
-      touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
 
       //获取滑动角度
 
-      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.plan.forEach(function (v, i) {
+    that.data.plan.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -824,7 +926,7 @@ Page({
 
           v.isTouchMove = false
 
-        else {//左滑
+        else { //左滑
 
           v.isTouchMove = true
 
@@ -844,7 +946,7 @@ Page({
 
   },
 
-  del_2: function (e) {
+  del_2: function(e) {
     var that = this;
     wx.request({
       url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
@@ -852,7 +954,7 @@ Page({
       data: {
         goalId: that.data.plan[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -871,15 +973,15 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_3: function (e) {
+  touchstart_3: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.clock_1.forEach(function (v, i) {
+    this.data.clock_1.forEach(function(v, i) {
 
-      if (v.isTouchMove)//只操作为true的
+      if (v.isTouchMove) //只操作为true的
 
         v.isTouchMove = false;
 
@@ -900,26 +1002,32 @@ Page({
 
   //滑动事件处理
 
-  touchmove_3: function (e) {
+  touchmove_3: function(e) {
     var that = this;
 
     var that = this,
 
-      index = e.currentTarget.dataset.index,//当前索引
+      index = e.currentTarget.dataset.index, //当前索引
 
-      startX = that.data.startX,//开始X坐标
+      startX = that.data.startX, //开始X坐标
 
-      startY = that.data.startY,//开始Y坐标
+      startY = that.data.startY, //开始Y坐标
 
-      touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
 
-      touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
 
       //获取滑动角度
 
-      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.clock_1.forEach(function (v, i) {
+    that.data.clock_1.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -933,7 +1041,7 @@ Page({
 
           v.isTouchMove = false
 
-        else {//左滑
+        else { //左滑
 
           v.isTouchMove = true
 
@@ -953,7 +1061,7 @@ Page({
 
   },
 
-  del_3: function (e) {
+  del_3: function(e) {
     var that = this;
     wx.request({
       url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
@@ -961,7 +1069,7 @@ Page({
       data: {
         goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -980,15 +1088,15 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_4: function (e) {
+  touchstart_4: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.plan_1.forEach(function (v, i) {
+    this.data.plan_1.forEach(function(v, i) {
 
-      if (v.isTouchMove)//只操作为true的
+      if (v.isTouchMove) //只操作为true的
 
         v.isTouchMove = false;
 
@@ -1009,26 +1117,32 @@ Page({
 
   //滑动事件处理
 
-  touchmove_4: function (e) {
+  touchmove_4: function(e) {
     var that = this;
 
     var that = this,
 
-      index = e.currentTarget.dataset.index,//当前索引
+      index = e.currentTarget.dataset.index, //当前索引
 
-      startX = that.data.startX,//开始X坐标
+      startX = that.data.startX, //开始X坐标
 
-      startY = that.data.startY,//开始Y坐标
+      startY = that.data.startY, //开始Y坐标
 
-      touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
 
-      touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
 
       //获取滑动角度
 
-      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.plan_1.forEach(function (v, i) {
+    that.data.plan_1.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -1042,7 +1156,7 @@ Page({
 
           v.isTouchMove = false
 
-        else {//左滑
+        else { //左滑
 
           v.isTouchMove = true
 
@@ -1062,7 +1176,7 @@ Page({
 
   },
 
-  del_4: function (e) {
+  del_4: function(e) {
     var that = this;
     wx.request({
       url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
@@ -1070,7 +1184,7 @@ Page({
       data: {
         goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -1100,13 +1214,15 @@ Page({
       goalName:name,
       timeValue_0:time,
       inputValue:name,
-      
+      chooseWhichGoal: item,
       timeValue:time,
       ctColor:"#fff",
       cbgColor:"#ffae49",
       ptColor: "#ffae49",
       pbgColor:"#fff",
       distime:false,
+      canModify: true,
+      color_0: "#979797",
       textColor:"#000",
       ibColor: "#e9833e",
       tborder: "2rpx dashed #ffae49",
@@ -1166,6 +1282,7 @@ Page({
     var name = item.planName;
     that.setData({
       cbgColor_0:"#fff",
+      chooseWhichGoal: item,
       goalName:name,
       timeValue_0:"时长(10~120)",
       inputValue: name,
@@ -1173,6 +1290,8 @@ Page({
       cbgColor:"#fff",
       ctColor: "#ffae49",
       ptColor: "#fff",
+      canModify: true,
+      color_0: "#979797",
       pbgColor:"#ffae49",
       distime:true,
       textColor: "#979797",
@@ -1235,6 +1354,7 @@ Page({
     var time = item.clockTime;
     that.setData({
       cbgColor_0:"#ffae49",
+      chooseWhichGoal: item,
       goalName:name,
       timeValue_0: time,
       inputValue: name,
@@ -1243,7 +1363,8 @@ Page({
       cbgColor: "#ffae49",
       ptColor: "#ffae49",
       pbgColor: "#fff",
-
+      canModify: true,
+      color_0: "#979797",
       distime: false,
       textColor: "#000",
       ibColor: "#e9833e",
@@ -1304,6 +1425,9 @@ Page({
     var name = item.planName;
     that.setData({
       cbgColor_0:"#fff",
+      chooseWhichGoal:item,
+      canModify: true,
+      color_0: "#979797",
       goalName:name,
       timeValue_0: "时长(10~120)",
       inputValue: name,
@@ -1526,7 +1650,113 @@ Page({
       hiddenbtn_1: (!that.data.hiddenbtn_1)
     })
   },
-  modifyGoal:function(){
-
+  modifyGoal:function(e){
+    var that = this;
+    var newGoal=that.data.chooseWhichGoal
+    for(var i=0;i<8;++i){
+      if(newGoal.period[i]==1){
+        newGoal.period[i] = true
+      }else{
+        newGoal.period[i] = false
+      }
+    }
+  
+      if(newGoal.clockTime==0||newGoal.clockName=="时长（10~120）"){
+      
+      wx.request({
+        url: 'http://localhost:8080/usergoal/modifyusergoal',
+        method: 'POST',
+        data: {
+          userId: wx.getStorageSync('openid'),
+          goalId:newGoal.goalId,
+          content: newGoal.planName,
+          complete:newGoal.isComplete,
+          concentrated: false,
+          minutes: 0,
+        },
+        success: function (res) {
+          console.log(res.data)
+          that.setData({
+            goalId: res.data.goalId,
+          })
+          wx.request({
+            url: 'http://localhost:8080/goaldate/modifygoaldate',
+            method: 'POST',
+            data: {
+              goalId: newGoal.goalId,
+              sunday: newGoal.period[0],
+              monday: newGoal.period[1],
+              tuesday: newGoal.period[2],
+              wednesday: newGoal.period[3],
+              thursday: newGoal.period[4],
+              friday: newGoal.period[5],
+              saturday: newGoal.period[6],
+              disposable: that.data.disposable,
+            },
+            success: function (res) {
+              wx.showToast({
+                title: '修改成功',
+                icon:'success',
+                duration: 1000
+              })
+              that.onShow()
+            }
+          })
+        }
+      })
+      that.drawer(e);}
+      else{
+        if (newGoal.clockTime < 10) {
+          wx.showToast({
+            title: '时长过短',
+            image: '../images/close.png',
+            duration: 1000
+          })
+        }else{
+        wx.request({
+          url: 'http://localhost:8080/usergoal/modifyusergoal',
+          method: 'POST',
+          data: {
+            userId: wx.getStorageSync('openid'),
+            goalId: newGoal.goalId,
+            content: newGoal.clockName,
+            complete: newGoal.isComplete,
+            concentrated: true,
+            minutes: newGoal.clockTime,
+          },
+          success: function (res) {
+            console.log(res.data)
+            that.setData({
+              goalId: res.data.goalId,
+            })
+            wx.request({
+              url: 'http://localhost:8080/goaldate/modifygoaldate',
+              method: 'POST',
+              data: {
+                goalId: newGoal.goalId,
+                sunday: newGoal.period[0],
+                monday: newGoal.period[1],
+                tuesday: newGoal.period[2],
+                wednesday: newGoal.period[3],
+                thursday: newGoal.period[4],
+                friday: newGoal.period[5],
+                saturday: newGoal.period[6],
+                disposable: that.data.disposable,
+              },
+              success: function (res) {
+                wx.showToast({
+                  title: '修改成功',
+                  icon: 'success',
+                  duration: 1000
+                })
+                that.onShow()
+              }
+            })
+          }
+        })
+        }
+        that.drawer(e);
+      }
+    
   }
 })
