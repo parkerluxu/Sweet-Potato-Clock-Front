@@ -116,46 +116,67 @@ Page({
   },
 
   stopTimer: function () {
-    // reset circle progress
     var that=this
-    this.setData({
-      leftDeg: initDeg.left,
-      rightDeg: initDeg.right
-    })
-
-    // clear timer
-    this.timer && clearInterval(this.timer)
-
     //completeGoal
-    wx.request({
-      url: 'http://localhost:8080/record/goalcomplete',
-      method:'POST',
-      data:{
-        goalId:that.data.goalId,
-        userId:wx.getStorageSync('openid'),
-        minutes:that.data.workTime,
-      },
-      success:function(res){
-        console.log(res.data)
-        clearInterval(that.data.intervarID);
-        var pages = getCurrentPages(); //当前页面栈
-        if (pages.length > 1) {
-          var beforePage = pages[pages.length - 2]; //获取上一个页面实例对象
-          beforePage.onLoad(); //触发父页面中的方法
-          var toastText = "打卡成功";
-          wx.showToast({
-            title: toastText,
-            icon: 'success',
-            duration: 1000
-          });
+    if(that.data.completed==true){
+      // reset circle progress
+      this.setData({
+        leftDeg: initDeg.left,
+        rightDeg: initDeg.right
+      })
+      // clear timer
+      this.timer && clearInterval(that.timer)
+      wx.request({
+        url: 'http://localhost:8080/record/goalcomplete',
+        method: 'POST',
+        data: {
+          goalId: that.data.goalId,
+          userId: wx.getStorageSync('openid'),
+          minutes: that.data.workTime,
+        },
+        success: function (res) {
+          console.log(res.data)
+          clearInterval(that.data.intervarID);
+          var pages = getCurrentPages(); //当前页面栈
+          if (pages.length > 1) {
+            var beforePage = pages[pages.length - 2]; //获取上一个页面实例对象
+            beforePage.onLoad(); //触发父页面中的方法
+            var toastText = "打卡成功";
+            wx.showToast({
+              title: toastText,
+              icon: 'success',
+              duration: 1000
+            });
+          }
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000)
         }
-        setTimeout(function () {
-          wx.navigateBack({
-            delta: 1
-          })
-        }, 1000)
-      }
-    })
+      })
+    }else{
+      wx.showModal({
+        title: '取消打卡',
+        content: '时间还没有到，确认要取消吗？',
+        success:function(e){
+          if(e.confirm){
+            // reset circle progress
+            that.setData({
+              leftDeg: initDeg.left,
+              rightDeg: initDeg.right
+            })
+            // clear timer
+            that.timer && clearInterval(that.timer)
+          }else{
+            that.setData({
+              buttonText: '取消',
+              isRuning:true,
+            })
+          }
+        }
+      })
+    }
   },
 
   updateTimer: function () {

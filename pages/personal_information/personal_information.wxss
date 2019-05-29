@@ -13,13 +13,6 @@
   height: 300rpx;
 }
 
-.userinfo-btn {
-  margin-top: 50rpx;
-  background: none !important;
-  color: #000 !important;
-  font-size: 40rpx;
-}
-
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
@@ -59,24 +52,6 @@
   font-size: 30rpx;
   color: gray;
 }
-
-.btn-area {
-  display: flex;
-  justify-content: center;
-  margin-top: 5%;
-}
-
-.btn1 {
-  border: 0;
-  width: 40%;
-  height: 200rpx;
-  border-radius: 50rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .images {
   width: 80rpx;
   height: 80rpx;
@@ -93,9 +68,7 @@
   color: gray;
   font-size: 35rpx;
 }
-.navs{
-  margin-bottom: 0rpx;
-}
+
 .weui-cells{
   margin-top: 0rpx;
   padding-top: 5%;
@@ -105,17 +78,17 @@
   border: none;
 }
 .btn-area{
-     display: flex;
+    display: flex;
     justify-content: center;
     margin-top: 5%;
+    align-items: center;
 }
 .btn1{
   display: flex;
   padding: 0;
-  border:0;
   width: 40%;
   height: 40%;
-    border-radius: 50rpx;
+  border-radius: 50rpx;
   flex-direction:row;
   align-items: center;
   box-shadow: 1rpx 1rpx 15rpx #888888;
@@ -123,7 +96,6 @@
 .btn2{
   display: flex;
   padding: 0;
-  border:0;
   width: 40%;
   height: 20%;
  border-radius: 50rpx;
@@ -131,18 +103,13 @@
   align-items: center;
 box-shadow: 5rpx 5rpx 1rpx 1rpx rgba(71, 58, 58, 0.377);
 }
+button::after{
+  border: none;
+}
 .images{
    width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
-}
-.btn1 text{
-  line-height: 10%;
-  color: gray
-}
-.btn2 text{
-  color: gray;
-  line-height: 10%;
 }
 .divLine.mid {
   background-color: #bdbbbb;
