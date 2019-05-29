@@ -91,13 +91,10 @@
   border-radius: 50rpx;
   flex-direction:row;
   align-items: center;
-<<<<<<< HEAD
   justify-content: center;
   box-shadow: 1rpx 1rpx 15rpx #888888;
   border: 0;
-=======
-  box-shadow: 1rpx 1rpx 15rpx #888888;
->>>>>>> new_master
+
 }
 .btn2{
   display: flex;

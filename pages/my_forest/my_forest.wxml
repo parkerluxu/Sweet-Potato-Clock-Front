@@ -1,12 +1,8 @@
 <!--pages/my_forest/my_forest.wxml-->
 <view class='imagesize'>
-<<<<<<< HEAD
-  <image src="../images/forest1.png">
-=======
 
   <image src="../images/forest1.png">
 
->>>>>>> new_master
   </image>
 </view>
 <view class='tree-content'>

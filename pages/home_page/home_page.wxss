@@ -36,10 +36,7 @@
   border-radius: 10rpx;
   box-shadow: 1rpx 1rpx 15rpx #888;
   margin-bottom: 1.5%;
-<<<<<<< HEAD
-=======
 
->>>>>>> new_master
 }
 
 .list-card_1 {
@@ -125,19 +122,12 @@
   justify-content: center;
   align-items: center;
   width: 35%;
-<<<<<<< HEAD
-  height: 49rpx;
-  padding: 5%;
-  padding-right: 1rpx;
-  font-size: 45rpx;
-=======
 
   height: 49rpx;
   padding: 5%;
   padding-right: 5rpx;
   font-size: 45rpx;
 
->>>>>>> new_master
 }
 
 .btn2_1 {
