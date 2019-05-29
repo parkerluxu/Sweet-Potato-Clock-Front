@@ -158,7 +158,7 @@ Page({
     }else{
       wx.showModal({
         title: '取消打卡',
-        content: '时间还没有到，确认要取消吗？',
+        content: '确认要取消吗？',
         success:function(e){
           if(e.confirm){
             // reset circle progress

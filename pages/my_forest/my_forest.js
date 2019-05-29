@@ -151,6 +151,7 @@ Page({
 
   getDayStatic: function(dateStr) {
     var that=this
+    var categories=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     wx.request({
       url: 'http://localhost:8080/displayuserstastic/displayuserstasticday',
       method: 'GET',
@@ -160,7 +161,8 @@ Page({
       },
       success: function(res) {
         that.setData({
-          'chartData.main.data': res.data.minutesList
+          'chartData.main.data': res.data.minutesList,
+          'chartData.main.categories': categories,
         })
         console.log(res.data)
         console.log(that.data.chartData.main.data)
@@ -271,6 +273,75 @@ Page({
     })
   },
 
+  getMonthStatic: function (dateStr) {
+    var that = this
+    var categories = []
+    that.setData({
+      'chartData.main.data': null,
+      'chartData.main.categories': null,
+    })
+    wx.request({
+      url: 'http://localhost:8080/displayuserstastic/displayuserstasticmonth',
+      method: 'GET',
+      data: {
+        userId: wx.getStorageSync('openid'),
+        date: dateStr,
+      },
+      success: function (res) {
+        for (let i = 0; i < res.data.minutesList.length;i++){
+          categories[i]=i+1
+        }
+        that.setData({
+          'chartData.main.data': res.data.minutesList,
+          'chartData.main.categories': categories,
+        })
+        console.log(res.data)
+        console.log(that.data.chartData.main.data)
+        try {
+          var width = wx.getSystemInfoSync().windowWidth;
+        } catch (e) {
+          console.error('getSystemInfoSync failed!');
+        }
+        columnChart = new wxCharts({
+          canvasId: 'columnCanvas',
+          type: 'column',
+          animation: true,
+          categories: that.data.chartData.main.categories,
+          legend: false,
+          series: [{
+            name: "打卡时长",
+            color: '#fa9857',
+            data: that.data.chartData.main.data,
+            format: function (val, name) {
+              return val.toFixed(0);
+            },
+
+          }],
+          yAxis: {
+            format: function (val) {
+              return val + '分钟';
+            },
+            min: 0,
+            disabled: true,
+            max: that.data.max
+          },
+          xAxis: {
+            disableGrid: false,
+            type: 'calibration'
+          },
+          extra: {
+            column: {
+              width: 15,
+            },
+            legendTextColor: '#000000'
+          },
+          width: width,
+          height: 150,
+        });
+      },
+    })
+  },
+
   clickDay: function() {
     var that = this;
     that.setData({
@@ -285,7 +356,9 @@ Page({
       color_3_3: "#ffffff",
       status: 1,
     })
-
+    var dateStr = that.data.dateStr.year + "-" + that.data.dateStr.month + "-" + that.data.dateStr.day;
+    var userid = wx.getStorageSync('openid')
+    that.getDayStatic(dateStr)
   },
   clickWeek: function() {
     var that = this;
@@ -320,6 +393,9 @@ Page({
       color_2_3: "#ffffff",
       status: 3,
     })
+    var dateStr = that.data.dateStr.year + "-" + that.data.dateStr.month + "-" + that.data.dateStr.day;
+    var userid = wx.getStorageSync('openid')
+    that.getMonthStatic(dateStr)
   },
 
   //日历切换至下一天
@@ -820,6 +896,9 @@ Page({
       }
     }
     that.dateToStr();
+    var dateStr = that.data.dateStr.year + "-" + that.data.dateStr.month + "-" + that.data.dateStr.day;
+    var userid = wx.getStorageSync('openid')
+    that.getMonthStatic(dateStr)
   },
   toLastMonth: function() {
     var that = this
@@ -883,6 +962,9 @@ Page({
       }
     }
     that.dateToStr();
+    var dateStr = that.data.dateStr.year + "-" + that.data.dateStr.month + "-" + that.data.dateStr.day;
+    var userid = wx.getStorageSync('openid')
+    that.getMonthStatic(dateStr)
   },
 
   dateToStr: function() {
