@@ -19,7 +19,7 @@
       <view class="index">
         <text>{{index+1}}</text>
       </view>
-      <image class="poster" src="../images/achieve.png" />
+      <image class="poster" src="{{item.avatar}}" />
       <view class="meta">
         <text class="title">{{item.name}}</text>
 

@@ -61,7 +61,7 @@ box-shadow:0px 2px 1px 1px #c0c0c0;
   cursor: pointer;
 }
 .index{
- margin-top: 5%;
+ margin-top: 2%;
  margin-left: 0%;
 }
 .index text{ 
@@ -74,10 +74,10 @@ box-shadow:0px 2px 1px 1px #c0c0c0;
   border-radius: 20rpx;
 }
 .list .item .poster {
-  margin-top: 2%;
-  height: 40px;
+  margin-top: 1%;
+    height: 40px;
     width: 40px;
-    padding-left: 15rpx;
+    margin-left: 15rpx;
     border-radius: 40px;
 }
 
