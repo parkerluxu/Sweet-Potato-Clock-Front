@@ -327,7 +327,7 @@ radio {
 
 
 .item_content{
-  width: 300%;
+  width: 400rpx;
   height: 50rpx;
   font-size: 11pt;
   color: #888;

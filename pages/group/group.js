@@ -20,12 +20,11 @@ Page({
       name: String,
       intro: String,
     },
-    text: '这是一条会滚动的文字滚来滚去的文字跑马灯，哈哈哈哈哈哈哈哈',
     marqueePace: 1,//滚动速度
-    marqueeDistance: 0,//初始滚动距离
-    marqueeDistance2: 0,
+    marqueeDistance: [0],//初始滚动距离
+    marqueeDistance2: [0],
     marquee2copy_status: false,
-    marquee2_margin: 60,
+    marquee2_margin: [60],
     size: 14,
     orientation: 'left',//滚动方向
     interval: 20 // 时间间隔
@@ -108,6 +107,7 @@ Page({
   utill: function (currentStatu) {
     /* 动画部分 */
     // 第1步：创建动画实例 
+    var that=this
     var animation = wx.createAnimation({
       duration: 200, //动画时长
       timingFunction: "linear", //线性
@@ -136,7 +136,7 @@ Page({
 
       //关闭
       if (currentStatu == "close") {
-        this.setData({
+        that.setData({
           showModalStat: false
         });
       }
@@ -144,7 +144,7 @@ Page({
 
     // 显示
     if (currentStatu == "open") {
-      this.setData({
+      that.setData({
         showModalStat: true
       });
     }
@@ -326,7 +326,8 @@ Page({
   },
 //点击加入小组时随机获取部分小组信息
   getShowGroup:function(e){
-    var that=this
+    var that = this
+    console.log(e.currentTarget)
     that.pDrawer(e)
     wx.request({
       url: 'http://127.0.0.1:8080/displaygrouprandom/displaygrouprandom',
@@ -338,14 +339,27 @@ Page({
           var k1 = 'groupShowList[' + i + '].groupName';
           var k2 = 'groupShowList[' + i + '].groupId';
           var k3 = 'groupShowList[' + i + '].description';
+          var textLength = 'textLength[' + i + ']';
+          var marquee2_margin = 'marquee2_margin[' + i + ']';
+          var despcription = list[i].description
+          if (list[i].description.length>11){
+            despcription = list[i].description.substr(0,11)+"..."
+          }
+          var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
           that.setData({
             [k1]: list[i].groupName,
             [k2]: list[i].groupId,
-            [k3]: list[i].description,
+            [k3]: despcription,
+            [textLength]: list[i].description.length,
+            windowWidth: windowWidth,
+            [marquee2_margin]: list[i].description.length < windowWidth ? windowWidth - list[i].description.length : that.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白
           })
+          //that.run1();// 水平一行字滚动完了再按照原来的方向滚动
+          //that.run2();// 第一个字消失后立即从右边出现
         }
       }
     })
+    
   },
 
   onLoad: function(options) {
@@ -360,27 +374,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    // 页面显示
-    var length = that.data.text.length * that.data.size;//文字长度
-    var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
-    that.setData({
-      length: length,
-      windowWidth: windowWidth,
-      marquee2_margin: length < windowWidth ? windowWidth - length : that.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白
-    });
-    that.run1();// 水平一行字滚动完了再按照原来的方向滚动
-    that.run2();// 第一个字消失后立即从右边出现
-    var that = this;
+    var that=this
     wx.request({
       url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
       method: "GET",
       data: {
-        userid: that.data.userId
+        userid: wx.getStorageSync('openid')
       },
       success: function (res) {
         console.log(res.data)
         var list = res.data.groupList;
+        if(res.data.groupList==null){
+          
+        }
         for (var i = 0; i < res.data.groupList.length; ++i) {
           var k1 = 'groupList[' + i + '].groupName';
           var k2 = 'groupList[' + i + '].groupId';
@@ -421,41 +427,48 @@ Page({
   run1: function () {
     var vm = this;
     var interval = setInterval(function () {
-      if (-vm.data.marqueeDistance < vm.data.length) {
-        vm.setData({
-          marqueeDistance: vm.data.marqueeDistance - vm.data.marqueePace,
-        });
-      } else {
-        clearInterval(interval);
-        vm.setData({
-          marqueeDistance: vm.data.windowWidth
-        });
-        vm.run1();
+      for (var i = 0; i < vm.data.textLength.length;i++){
+        var marqueeDistance = 'marqueeDistance[' + i + ']'
+        if (-vm.data.marqueeDistance < vm.data.textLength[i]) { 
+          vm.setData({
+            [marqueeDistance]: vm.data.marqueeDistance[i] - vm.data.marqueePace[i],
+          });
+        } else {
+          clearInterval(interval);
+          vm.setData({
+            [marqueeDistance]: vm.data.windowWidth
+          });
+          vm.run1();
+        }
       }
     }, vm.data.interval);
   },
   run2: function () {
     var vm = this;
     var interval = setInterval(function () {
-      if (-vm.data.marqueeDistance2 < vm.data.length) {
-        // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
-        vm.setData({
-          marqueeDistance2: vm.data.marqueeDistance2 - vm.data.marqueePace,
-          marquee2copy_status: vm.data.length + vm.data.marqueeDistance2 <= vm.data.windowWidth + vm.data.marquee2_margin,
-        });
-      } else {
-        if (-vm.data.marqueeDistance2 >= vm.data.marquee2_margin) { // 当第二条文字滚动到最左边时
+      for (let i = 0; i < vm.data.textLength.length;i++){
+        var marqueeDistance = 'marqueeDistance2[' + i + ']'
+        var marquee2copy_status = 'marquee2copy_status[' + i + ']'
+        if (-vm.data.marqueeDistance2[i] < vm.data.textLength[i]) {
+          // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
           vm.setData({
-            marqueeDistance2: vm.data.marquee2_margin // 直接重新滚动
+          [marqueeDistance]: vm.data.marqueeDistance2[i] - vm.data.marqueePace[i],
+          [marquee2copy_status]: vm.data.textLength[i] + vm.data.marqueeDistance2[i] <= vm.data.windowWidth + vm.data.marquee2_margin[i],
           });
-          clearInterval(interval);
-          vm.run2();
         } else {
-          clearInterval(interval);
-          vm.setData({
-            marqueeDistance2: -vm.data.windowWidth
-          });
-          vm.run2();
+          if (-vm.data.marqueeDistance2[i] >= vm.data.marquee2_margin[i]) { // 当第二条文字滚动到最左边时
+            vm.setData({
+              [marqueeDistance]: vm.data.marquee2_margin[i] // 直接重新滚动
+            });
+            clearInterval(interval);
+            vm.run2();
+          } else {
+            clearInterval(interval);
+            vm.setData({
+              [marqueeDistance]: -vm.data.windowWidth
+            });
+            vm.run2();
+          }
         }
       }
     }, vm.data.interval);

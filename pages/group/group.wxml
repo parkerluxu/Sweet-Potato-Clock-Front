@@ -7,8 +7,7 @@
   </view>
   <view class='sousuo'>搜索</view>
 </view>
-<view class='divLine'>
-</view>
+  <view class='divLine'/>
 
 <scroll-view scroll-y="true" style="width:100%;">
   <view wx:for="{{groupList}}" class="list">
@@ -27,6 +26,7 @@
     </navigator>
   </view>
 </scroll-view>
+<view class='divLine'/>
 
 <view>
   <image src="/pages/images/new-group.png" class="img-style" animation="{{animCollect}}" bindtap="powerDrawer" data-statu="open"></image>
