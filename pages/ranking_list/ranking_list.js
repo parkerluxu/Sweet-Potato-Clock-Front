@@ -61,7 +61,6 @@ Page({
 
   onShow: function() {
     var that = this;
-
     wx.request({
       url: 'http://127.0.0.1:8080/displaygroupinformation/displaygroup',
       method: "GET",
@@ -80,15 +79,11 @@ Page({
           'group.groupName': value.groupName,
           'group.text': value.description,
           'group.isPrivate': value.privateGroup,
-          
-
         });
         if (that.data.captainId == that.data.userId) {
           that.setData({
             isCapatain: true,
-
             isAbled: false
-
           })
         } else {
           that.setData({

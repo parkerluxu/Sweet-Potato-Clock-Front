@@ -16,12 +16,13 @@
       <view class="index">
         <text>{{index+1}}</text>
       </view>
-      <image class="poster" src="../images/achieve.png" />
+      <image class="poster" src="../images/xingquxiaozu.svg" />
       <view class="meta">
         <text class="title">{{item.groupName}}</text>
       </view>
       <view class="rating">
-        <text>编辑</text>
+        <image src='../images/xiaozuxuanzhong.png' class='image_group'></image>
+        <text>{{item.memberNumber}}人</text>
       </view>
     </navigator>
   </view>
@@ -29,7 +30,7 @@
 
 <view>
   <image src="/pages/images/new-group.png" class="img-style" animation="{{animCollect}}" bindtap="powerDrawer" data-statu="open"></image>
-  <image src="/pages/images/join-group.png" class="img-style" animation="{{animTranspond}}" bindtap="pDrawer" data-statu="open"></image>
+  <image src="/pages/images/join-group.png" class="img-style" animation="{{animTranspond}}" bindtap="getShowGroup" data-statu="open"></image>
   <image src="/pages/images/add.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
 </view>
 
@@ -43,19 +44,19 @@
   <view class="drawer_content">
     <view class="top grid">
       <label class="title col-0">小组名称</label>
-      <input class="input_base input_h30 col-1" name="rName" value="可自行定义内容"></input>
+      <input class="input_base input_h30 col-1" name="rName" placeholder="请输入小组名称" bindinput='getGroupName'></input>
     </view>
     <view class="top grid">
       <label class="title col-0">小组简介</label>
-      <input class="input_base input_h30 col-1" name="mobile"></input>
+      <input class="input_base input_h30 col-1" name="mobile" bindinput='getGroupintro' placeholder="请输入小组简介"></input>
     </view>
     <view class="line">
-      <label class="title col-0">公开此小组</label>
+      <label class="title col-0">设为私密</label>
       <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ctColor}}; border-color:#ffae49;background-color:{{cbgColor}};margin-left: 5%;margin-right: 8%;" hover-class="button-hover" bindtap="selectC">是</button>
       <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ptColor}}; border-color:#ffae49;background-color:{{pbgColor}};margin-right: 8%;" hover-class="button-hover" bindtap="selectP">否</button>
     </view>
   </view>
-  <view class="btn_ok" bindtap="powerDrawer" data-statu="close">确定</view>
+  <view class="btn_ok" bindtap="addGroup" data-statu="close">确定</view>
 </view>
 
 <view class="drawer_screen" bindtap="pDrawer" data-statu="close" wx:if="{{showModalStat}}"></view>
@@ -63,20 +64,20 @@
   <!--drawer content-->
   <view class="drawer_title">加入小组</view>
   <view class="drawer_content_join">
-    <view hover-class='hover-class' id="id" style='display:flex; height:160rpx;border-bottom: 1px solid #DBDBDB'>
+    <view hover-class='hover-class' id="id" style='display:flex; height:160rpx;border-bottom: 1px solid #DBDBDB' bindtap='joinGroup' data-groupid='{{item.groupId}}' wx:for='{{groupShowList}}' wx:key=''>
       <!--左边图片-->
       <view style='width:128rpx; height:128rpx; margin:20rpx;'>
-        <image class='index-logo' style='width:128rpx; height:128rpx' src="../images/achieve.png"></image>
+        <image class='index-logo' style='width:128rpx; height:128rpx' src="../images/xingquxiaozu.svg"></image>
       </view>
       <!-- 右边内容 上下结构 -->
       <view style='display:flex; flex-direction:column; margin:20rpx;'>
-        <label class='item_title'>小组名称</label>
+        <label class='item_title'>{{item.groupName}}</label>
         <label class='item_content'>
           <view class="example">
             <view class="marquee_box">
               <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
-                <text>{{text}}</text>
-                <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{text}}</text>
+                <text>{{item.description}}</text>
+                <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{item.description}}</text>
               </view>
             </view>
           </view>

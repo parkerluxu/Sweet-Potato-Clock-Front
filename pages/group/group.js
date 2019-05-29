@@ -56,6 +56,7 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
+
   util: function(currentStatu) {
     /* 动画部分 */
     // 第1步：创建动画实例 
@@ -220,8 +221,8 @@ Page({
       timingFunction: 'ease-out'
     })
     animationPlus.rotateZ(180).step();
-    animationcollect.translate(-80, -30).rotateZ(360).opacity(1).step();
-    animationTranspond.translate(-30, -80).rotateZ(360).opacity(1).step();
+    animationcollect.translate(-60, -15).rotateZ(360).opacity(1).step();
+    animationTranspond.translate(-15, -60).rotateZ(360).opacity(1).step();
     animationInput.translate(-100, 100).rotateZ(180).opacity(1).step();
     this.setData({
       animPlus: animationPlus.export(),
@@ -293,27 +294,62 @@ Page({
     })
   },
 
-  onLoad: function(options) {
-    var that = this;
+//加入小组
+  joinGroup:function(e){
+    var that=this
+    console.log(e.currentTarget.dataset)
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
-      method: "GET",
-      data: {
-        userid: that.data.userId
+      url: 'http://127.0.0.1:8080/joinGroup',
+      method:'GET',
+      data:{
+        userid:wx.getStorageSync('openid'),
+        groupid: e.currentTarget.dataset.groupid,
       },
-      success: function(res) {
+      success(res){
         console.log(res.data)
-        var list = res.data.groupList;
-        for (var i = 0; i < res.data.groupList.length; ++i) {
-          var k1 = 'groupList[' + i + '].groupName';
-          var k2 = 'groupList[' + i + '].groupId';
-          that.setData({
-            [k1]: list[i].groupName,
-            [k2]: list[i].groupId,
+        if(res.data.success==1){
+          wx.showToast({
+            title: '加入成功',
+            icon: 'success',
+            duration: 1000
+          })
+          that.onShow();
+        }else{
+          wx.showToast({
+            title: '您已在该小组',
+            image:'../images/close.png',
+            duration: 1000
           })
         }
       }
     })
+  },
+//点击加入小组时随机获取部分小组信息
+  getShowGroup:function(e){
+    var that=this
+    that.pDrawer(e)
+    wx.request({
+      url: 'http://127.0.0.1:8080/displaygrouprandom/displaygrouprandom',
+      method:'GET',
+      success(res){
+        console.log(res.data)
+        var list=res.data.groupList
+        for(let i=0;i<list.length;i++){
+          var k1 = 'groupShowList[' + i + '].groupName';
+          var k2 = 'groupShowList[' + i + '].groupId';
+          var k3 = 'groupShowList[' + i + '].description';
+          that.setData({
+            [k1]: list[i].groupName,
+            [k2]: list[i].groupId,
+            [k3]: list[i].description,
+          })
+        }
+      }
+    })
+  },
+
+  onLoad: function(options) {
+    
     // 生命周期函数--监听页面加载
   },
   onReady: function() {
@@ -335,21 +371,24 @@ Page({
     });
     that.run1();// 水平一行字滚动完了再按照原来的方向滚动
     that.run2();// 第一个字消失后立即从右边出现
+    var that = this;
     wx.request({
       url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
       method: "GET",
       data: {
         userid: that.data.userId
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res.data)
         var list = res.data.groupList;
         for (var i = 0; i < res.data.groupList.length; ++i) {
           var k1 = 'groupList[' + i + '].groupName';
           var k2 = 'groupList[' + i + '].groupId';
+          var k3 = 'groupList[' + i + '].memberNumber';
           that.setData({
             [k1]: list[i].groupName,
             [k2]: list[i].groupId,
+            [k3]: list[i].memberNumber,
           })
         }
       }

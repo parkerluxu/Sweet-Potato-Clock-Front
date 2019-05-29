@@ -102,7 +102,7 @@ margin-left: -90px;
 }
 
 .list .item .meta {
-  width: 55%;
+  width: 50%;
   margin-left: 4%;
   display: flex;
   flex-direction: column;

@@ -9,9 +9,9 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+		"nodeModules": false,
 		"autoAudits": false,
-		"checkInvalidKey": true,
-		"nodeModules": true
+		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.6",

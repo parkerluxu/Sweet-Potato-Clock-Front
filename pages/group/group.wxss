@@ -68,14 +68,13 @@
 }
 
 .index {
-  margin-top: 5%;
+  margin-top: 2%;
   margin-left: 0%;
 }
 
 .index text {
   width: 50rpx;
   font-size: 50rpx;
-  font-weight: bold;
   text-align: center;
   color: #f66a0c;
   padding: 10rpx;
@@ -83,15 +82,22 @@
 }
 
 .list .item .poster {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   border-radius: 25px;
+  padding: 5rpx;
+}
+
+.image_group{
+  width: 50rpx;
+  height: 50rpx;
 }
 
 .list .item .meta {
-  flex: 1;
+  width: 55%;
   margin-left: 4%;
-  margin-top: 4%;
+  display: flex;
+  align-items: center;
 }
 
 .list .item .meta .title, .list .item .meta .sub-title {
@@ -101,6 +107,8 @@
 
 .list .item .meta .title {
   font-size: 40rpx;
+  text-align: start;
+  width: 100%;
 }
 
 .list .item .meta .sub-title {
@@ -114,12 +122,13 @@
 }
 
 .rating {
-  margin-left: 20%;
-  margin-top: 6%;
+  width: 25%;
+  display: flex;
+  align-items: center;
 }
 
 .list .item .rating text {
-  width: 40rpx;
+  width: 80rpx;
   font-size: 35rpx;
   font-weight: bold;
   text-align: center;
@@ -129,9 +138,9 @@
 }
 
 .img-plus-style {
-  height: 150rpx;
-  width: 150rpx;
-  position: absolute;
+  height: 120rpx;
+  width: 120rpx;
+  position: fixed;
   bottom: 250rpx;
   right: 0rpx;
   z-index: 100;
@@ -139,9 +148,9 @@
 }
 
 .img-style {
-  height: 150rpx;
-  width: 150rpx;
-  position: absolute;
+  height: 120rpx;
+  width: 120rpx;
+  position: fixed;
   bottom: 250rpx;
   opacity: 0;
   right: 0rpx;
