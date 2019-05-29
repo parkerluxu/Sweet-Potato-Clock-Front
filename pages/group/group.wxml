@@ -26,7 +26,6 @@
     </navigator>
   </view>
 </scroll-view>
-<view class='divLine' />
 
 <view>
   <image src="/pages/images/new-group.png" class="img-style" animation="{{animCollect}}" bindtap="powerDrawer" data-statu="open"></image>

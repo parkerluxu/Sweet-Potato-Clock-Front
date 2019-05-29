@@ -67,9 +67,7 @@ Page({
       data: {
         groupId: that.data.groupId
       },
-
       success: function(res) {
-
         var value = res.data.groupInformation;
         that.setData({
           captainId: value.captainId,
@@ -83,20 +81,20 @@ Page({
         if (that.data.captainId == that.data.userId) {
           that.setData({
             isCapatain: true,
-            isAbled: false
+            isAbled: false,
+            buttonText:'保存更改',
           })
         } else {
           that.setData({
             isCapatain: false,
-
-            isAbled: true
-
+            isAbled: true,
+            buttonText: '退出小组',
           })
+          
         }
 
       }
     });
-
     wx.request({
       url: 'http://127.0.0.1:8080/displayuserlist/displayuserlist',
       method: "GET",
@@ -114,7 +112,6 @@ Page({
           var k3 = 'showList[' + i + '].minutesSum';
           var k4 = 'showList[' + i + '].minutes';
           var k5 = 'showList[' + i +'].isTouchMove';
-          var k6='showList['+i+
           that.setData({
             [k1]: that.data.memberList[i].avatar,
             [k2]: that.data.memberList[i].userNickname,
@@ -167,15 +164,14 @@ Page({
   click_on_1: function() {
     wx.navigateTo({
       url: '../world_ranking_list/world_ranking_list',
-
     })
   },
   getInput_1:function(e) {
     var that = this;
     that.setData({
       'group.groupName': e.detail.value
-
     })
+    console.log(that.data.group.groupName)
   },
 
   getInput_2:function(e) {
@@ -191,8 +187,6 @@ Page({
     })
   },
   util: function(currentStatu) {
-
-
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation = wx.createAnimation({
@@ -216,15 +210,12 @@ Page({
 
 
     setTimeout(function() {
-
-
       // 执行第二组动画 
       animation.opacity(1).rotateX(0).step();
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
       this.setData({
         animationData: animation
       })
-
       //关闭 
       if (currentStatu == "close") {
         this.setData({
@@ -232,7 +223,6 @@ Page({
         });
       }
     }.bind(this), 100)
-
     // 显示 
     if (currentStatu == "open") {
       this.setData({
@@ -245,35 +235,62 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-  confirm:function(){
-    var that = this;
-    wx.showModal({
-      title:'提示',
-    content: '确定修改吗？',
-      success: function(sm) {
-        if (sm.confirm == true) {
-          wx.request({
-            url: 'http://127.0.0.1:8080/group/modifyname',
-            method: "POST",
-            data: {
-              groupId: that.data.groupId,
-              groupName: that.data.group.groupName,
-              privateGroup:that.data.group.isPrivate,
-              description:that.data.group.text
-            },
-            success: function (res) {
-              if (res.data.success == 1) {
-                wx.showToast({
-                  title: '修改成功',
-                  duration: 1500,
-                })
-              }
-            }
-          })
-        }
-      }
 
-  })
+  confirmAndQuit:function(e){
+    var that = this;
+    if(that.data.isCapatain==true){
+      console.log("zheli")
+      console.log(that.data.group.groupName)
+      wx.request({
+        url: 'http://127.0.0.1:8080/group/modifyname',
+        method: "POST",
+        data: {
+          groupId: that.data.groupId,
+          groupName: that.data.group.groupName,
+          privateGroup: that.data.group.isPrivate,
+          description: that.data.group.text
+        },
+        success: function (res) {
+          if (res.data.success == 1) {
+            wx.showToast({
+              title: '修改成功',
+              duration: 1500,
+            })
+          }
+        },
+      })
+
+    }else{
+      wx.showModal({
+        title: '退出小组',
+        content: '确认退出吗？',
+        success(e){
+          if(e.confirm==true){
+            wx.request({
+              url: 'http://127.0.0.1:8080/deletegroupmember/deletegroupmember',
+              method: 'GET',
+              data: {
+                userId: wx.getStorageSync('openid'),
+                groupId: that.data.groupId
+              }, success: function (res) {
+                if (res.data.success == 1) {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                  wx.showToast({
+                    title: '退出成功',
+                    icon: 'success',
+                    duration: 1000
+                  })
+                }
+              }
+            })
+          }
+        }
+      })
+    }
+    that.drawer(e)
+    that.onShow();
   },
   //手指触摸动作开始 记录起点X坐标
 

@@ -37,11 +37,11 @@
   <view class="btn_ok" bindtap="addGoal" data-statu="close">确定</view>
 </view>
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1">
-  <view class="clock-list" data-goalid='{{item.goalId}}' bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' data-complete='{{item.isComplete}}' style="background:url('../images/origin1-1.png'); background-size:100% 100%;">
+  <view class="clock-list" data-goalid='{{item.goalId}}' bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' data-complete='{{item.isComplete}}' style="background:url('../images/back2.png'); ">
     <view class="p">
       <view class="lable2">{{item.clockName}}</view>
       <view class='time_content'>
-      <image class='time_icon' src='../images/clock1.png'></image>
+      <image class='time_icon' src='../images/clock2.png'></image>
       <view class="lable3" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
       </view>
     </view>
@@ -50,7 +50,7 @@
   </view>
   <view class="del" catchtap="del_1" data-index="{{index}}">删除</view>
 </view>
-<view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan}}" data-index="{{index}}" bindtouchstart="touchstart_2" bindtouchmove="touchmove_2" wx:key="" style="background:url('../images/origin3-1.png'); background-size:100% 100%;"
+<view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan}}" data-index="{{index}}" bindtouchstart="touchstart_2" bindtouchmove="touchmove_2" wx:key="" style="background:url('../images/back3.png');"
   bindtap="hidebtn" bindtap="finishControll" data-goalid='{{item.goalId}}' data-isComplete='{{item.isComplete}}'>
   <view class="plan-list">
     <view class="p">
@@ -62,7 +62,7 @@
   <view class="del" catchtap="del_2" data-index="{{index}}">删除</view>
 </view>
 <view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock_1}}" data-index="{{index}}" bindtouchstart="touchstart_3" bindtouchmove="touchmove_3" wx:key="">
-  <view class="clock-list" style="background:url('../images/origin3-3.png'); background-size:100% 100%;">
+  <view class="clock-list1" style="background:url('../images/origin3-3.png'); background-size:100% 100%;">
     <view class="p">
       <view class="lable2">{{item.clockName}} </view>
       <view class='time_content'>
@@ -75,7 +75,7 @@
   <view class="del" catchtap="del_3" data-index="{{index}}">删除</view>
 </view>
 <view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan_1}}" data-index="{{index}}" bindtouchstart="touchstart_4" bindtouchmove="touchmove_4" wx:key="">
-  <view class="plan-list" style="background:url('../images/origin3-3.png'); background-size:100% 100%;">
+  <view class="plan-list1" style="background:url('../images/origin3-3.png'); background-size:100% 100%;">
     <view class="p">
       <view class="lable2">{{item.planName}}</view>
     </view>

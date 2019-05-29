@@ -10,23 +10,9 @@ Page({
      * 以_1结尾的数组表示那些今天不需要打卡的目标
      */
     date: null,
-    clock: [{
-      clockName: "考研加油还有一年",
-      clockTime: "30min",
-      isComplete: Boolean,
-      goalId: Number,
-    }],
-    plan: [{
-      isComplete: Boolean,
-      planName: "按钮？",
-      goalId: Number,
-    }],
-    clock_1: [{
-      clockName: "考研加油还有一年",
-      clockTime: "30min",
-      isComplete: Boolean,
-      goalId: Number,
-    }],
+    clock: [],
+    plan: [],
+    clock_1: [],
     plan_1: [],
     dates: [{
         name: "Sun",

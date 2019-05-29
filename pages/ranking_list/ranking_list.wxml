@@ -4,31 +4,28 @@
 <view animation="{{animationData}}" class="drawerbox" wx:if="{{showModalStatus}}">
 
   <view class="drawer-title">
-    <image class="pen_png" src="../images/pen.png" />
+    <image class="pen_png" src="../images/pen.svg" />
     <view>修改小组信息</view>
   </view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__bd_1">
-
-        <input type="text" name='name' class="weui-input" placeholder="{{groupName}}" disabled='{{isAbled}}'  bindinput='getInput_1' value='{{name}}'/>
-
+        <input type="text" class="weui-input" value="{{group.groupName}}" disabled='{{isAbled}}'  bindinput='getInput_1' />
       </view>
     </view>
   </view>
   <view class="weui-cells weui-cells_after-title weui-cell_2 ">
     <view class="weui-cell weui-cell_1">
     <image class="suona_png" src="../images/suona.png"></image>
-      <textarea class="weui-textarea text_area" placeholder="{{text}}" fixed='true' bindinput='getInput_2' disabled='{{isAbled}}'/>
+      <textarea class="weui-textarea text_area" value="{{text}}" fixed='true' bindinput='getInput_2' disabled='{{isAbled}}'/>
       <view class="weui-textarea-counter">0/200</view>
     </view>
   </view>
    <view class="weui-cell weui-cell_input weui-cell_3">
       <text class="font">是否私密</text>
-
       <switch bindchange ='switchChange'class="is_private_text" checked='{{isPrivate}}' disabled='{{isAbled}}' />
 </view>
-  <button size="default" bindtap='confirm' hidden='{{!isAbled}}' >保存</button>
+  <button class='btn_ok' bindtap='confirmAndQuit' data-statu="close">{{buttonText}}</button>
 
 </view>
 <view class="button">
@@ -41,7 +38,7 @@
 
   <button class="btn2" size="default" bindtap="drawer" data-statu="open" >
 
-    <image class="modify_png" src='../images/modify.png'></image>
+    <image class="modify_png" src='../images/bianji.svg'></image>
   </button>
 
 </view>
