@@ -65,7 +65,7 @@
         </view>
       </view>
       <view class="rating">
-        <image class="tree_png" src="../images/shu.svg"></image>
+        <image class="tree_png" src="../images/naozhong.svg"></image>
         <text>×{{item.minutesSum}}</text>
       </view>
     </view>

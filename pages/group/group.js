@@ -302,6 +302,7 @@ Page({
         userid: that.data.userId
       },
       success: function(res) {
+        console.log(res.data)
         var list = res.data.groupList;
         for (var i = 0; i < res.data.groupList.length; ++i) {
           var k1 = 'groupList[' + i + '].groupName';
@@ -318,8 +319,22 @@ Page({
   onReady: function() {
     // 生命周期函数--监听页面初次渲染完成
   },
-  onShow: function() {
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     var that = this;
+    // 页面显示
+    var length = that.data.text.length * that.data.size;//文字长度
+    var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
+    that.setData({
+      length: length,
+      windowWidth: windowWidth,
+      marquee2_margin: length < windowWidth ? windowWidth - length : that.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白
+    });
+    that.run1();// 水平一行字滚动完了再按照原来的方向滚动
+    that.run2();// 第一个字消失后立即从右边出现
     wx.request({
       url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
       method: "GET",
@@ -327,6 +342,7 @@ Page({
         userid: that.data.userId
       },
       success: function(res) {
+        console.log(res.data)
         var list = res.data.groupList;
         for (var i = 0; i < res.data.groupList.length; ++i) {
           var k1 = 'groupList[' + i + '].groupName';
@@ -362,19 +378,6 @@ Page({
       desc: 'desc', // 分享描述
       path: 'path' // 分享路径
     }
-  },
-  onShow: function () {
-    // 页面显示
-    var vm = this;
-    var length = vm.data.text.length * vm.data.size;//文字长度
-    var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
-    vm.setData({
-      length: length,
-      windowWidth: windowWidth,
-      marquee2_margin: length < windowWidth ? windowWidth - length : vm.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白
-    });
-    vm.run1();// 水平一行字滚动完了再按照原来的方向滚动
-    vm.run2();// 第一个字消失后立即从右边出现
   },
   run1: function () {
     var vm = this;
