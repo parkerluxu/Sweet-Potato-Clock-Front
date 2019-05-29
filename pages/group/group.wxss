@@ -195,7 +195,7 @@
   z-index: 1001;
   background: #fafafa;
   margin: -150px 50rpx 0 50rpx;
-  border-radius: 3px;
+  border-radius: 10px;
 }
 
 .drawer_title {
@@ -325,7 +325,9 @@ radio {
   height: 12%;
 }
 
-
+.hide{
+  display: none;
+}
 .item_content{
   width: 400rpx;
   height: 50rpx;

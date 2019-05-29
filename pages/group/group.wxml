@@ -1,13 +1,13 @@
-<view class='page_row' bindtap="suo">
+<view class='page_row'>
   <view class="search">
     <view class="df search_arr">
       <icon class="searchcion" size='20' type='search'></icon>
-      <input class="" disabled placeholder="请输入小组名称" value="{{searchValue}}" />
+      <input class="" placeholder="请输入小组名称" value="{{searchValue}}" bindinput='getSearchName' />
     </view>
   </view>
-  <view class='sousuo'>搜索</view>
+  <view class='sousuo' bindtap="serchGroup" data-statu="open">搜索</view>
 </view>
-  <view class='divLine'/>
+<view class='divLine' />
 
 <scroll-view scroll-y="true" style="width:100%;">
   <view wx:for="{{groupList}}" class="list">
@@ -26,7 +26,7 @@
     </navigator>
   </view>
 </scroll-view>
-<view class='divLine'/>
+<view class='divLine' />
 
 <view>
   <image src="/pages/images/new-group.png" class="img-style" animation="{{animCollect}}" bindtap="powerDrawer" data-statu="open"></image>
@@ -62,9 +62,10 @@
 <view class="drawer_screen" bindtap="pDrawer" data-statu="close" wx:if="{{showModalStat}}"></view>
 <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStat}}">
   <!--drawer content-->
-  <view class="drawer_title">加入小组</view>
+  <view class="drawer_title ">加入小组</view>
   <view class="drawer_content_join">
-    <view hover-class='hover-class' id="id" style='display:flex; height:160rpx;border-bottom: 1px solid #DBDBDB' bindtap='joinGroup' data-groupid='{{item.groupId}}' wx:for='{{groupShowList}}' wx:key=''>
+        <text class="drawer_title {{noData? '':'hide'}}">未找到符合条件的小组</text>
+    <view hover-class='hover-class' id="id" style='display:flex; height:160rpx;border-bottom: 1px solid #DBDBDB' bindtap='joinGroup' data-groupid='{{item.groupId}}' wx:for='{{groupShowList}}' wx:key='' class="{{noData?'hide':''}}" >
       <!--左边图片-->
       <view style='width:128rpx; height:128rpx; margin:20rpx;'>
         <image class='index-logo' style='width:128rpx; height:128rpx' src="../images/xingquxiaozu.svg"></image>
@@ -86,5 +87,3 @@
     </view>
   </view>
 </view>
-
-

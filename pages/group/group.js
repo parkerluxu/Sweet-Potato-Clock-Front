@@ -327,7 +327,6 @@ Page({
 //点击加入小组时随机获取部分小组信息
   getShowGroup:function(e){
     var that = this
-    console.log(e.currentTarget)
     that.pDrawer(e)
     wx.request({
       url: 'http://127.0.0.1:8080/displaygrouprandom/displaygrouprandom',
@@ -360,6 +359,53 @@ Page({
       }
     })
     
+  },
+
+  getSearchName:function(e){
+    this.setData({
+      searchName:e.detail.value
+    })
+  },
+
+//按名称寻找小组
+  serchGroup:function(e){
+    var that=this
+    that.setData({
+      groupShowList:null
+    })
+    wx.request({
+      url: 'http://127.0.0.1:8080/search/searchbygroupname',
+      method:'GET',
+      data:{
+        groupName:that.data.searchName
+      },
+      success(res){
+        console.log(res.data)
+        console.log(e.currentTarget.dataset)
+        that.pDrawer(e)
+        var list = res.data.groupList
+        if(list.length!=0){
+          for (let i = 0; i < list.length; i++) {
+            var despcription = list[i].description
+            if (list[i].description.length > 11) {
+              despcription = list[i].description.substr(0, 11) + "..."
+            }
+            var k1 = 'groupShowList[' + i + '].groupName';
+            var k2 = 'groupShowList[' + i + '].groupId';
+            var k3 = 'groupShowList[' + i + '].description';
+            that.setData({
+              [k1]: list[i].groupName,
+              [k2]: list[i].groupId,
+              [k3]: despcription,
+            })
+          }
+        }else{
+          that.setData({
+            noData:true
+          })
+        }
+      }
+    })
   },
 
   onLoad: function(options) {
