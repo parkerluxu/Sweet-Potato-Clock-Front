@@ -63,8 +63,8 @@
   <!--drawer content-->
   <view class="drawer_title ">加入小组</view>
   <view class="drawer_content_join">
-        <text class="drawer_title {{noData? '':'hide'}}">未找到符合条件的小组</text>
-    <view hover-class='hover-class' id="id" style='display:flex; height:160rpx;border-bottom: 1px solid #DBDBDB' bindtap='joinGroup' data-groupid='{{item.groupId}}' wx:for='{{groupShowList}}' wx:key='' class="{{noData?'hide':''}}" >
+    <text class="drawer_title {{noData? '':'hide'}}">未找到符合条件的小组</text>
+    <view hover-class='hover-class' id="id" style='display:flex; height:160rpx;border-bottom: 1px solid #DBDBDB' bindtap='joinGroup' data-groupid='{{item.groupId}}' wx:for='{{groupShowList}}' wx:key='' class="{{noData?'hide':''}}">
       <!--左边图片-->
       <view style='width:128rpx; height:128rpx; margin:20rpx;'>
         <image class='index-logo' style='width:128rpx; height:128rpx' src="../images/xingquxiaozu.svg"></image>

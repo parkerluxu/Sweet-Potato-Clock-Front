@@ -27,7 +27,7 @@ Page({
     marquee2_margin: [60],
     size: 14,
     orientation: 'left',//滚动方向
-    interval: 20 // 时间间隔
+    interval: 20 // 时间间隔b
   },
   bindButtonTap: function() {
     this.setData({
@@ -55,7 +55,6 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-
   util: function(currentStatu) {
     /* 动画部分 */
     // 第1步：创建动画实例 
