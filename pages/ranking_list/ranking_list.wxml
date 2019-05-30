@@ -44,6 +44,10 @@
 </view>
 <view class='divLine'>
 </view>
+<view hidden='{{isMember}}'>
+ <button type="default" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;" hover-class="button-hover" bindtap='joinGroup'>加入小组</button>
+ <view class='divLine'/>
+</view>
 <scroll-view scroll-y="true" style=" width:100%;min-height:100%; padding:0rpx 0">
 
   <view class=" list  {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{showList}}" wx:key="">

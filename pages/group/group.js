@@ -16,10 +16,7 @@ Page({
     animInput: {}, //item位移,透明度
     ctColor: "#ffae49",
     pbgColor: "#fff",
-    newGroup: {
-      name: String,
-      intro: String,
-    },
+    newGroup:{},
     marqueePace: 1,//滚动速度
     marqueeDistance: [0],//初始滚动距离
     marqueeDistance2: [0],
@@ -54,6 +51,7 @@ Page({
   powerDrawer: function(e) {
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
+    this.selectP();
   },
   util: function(currentStatu) {
     /* 动画部分 */
@@ -161,7 +159,7 @@ Page({
       textColor: "#000",
       tborder: "2rpx dashed #ffae49",
       ibColor: "#e9833e",
-      'newGroup.isPrivate': true,
+      'newGroup.isPrivate': 1,
     })
     console.log(that.data.newGroup.isPrivate)
   },
@@ -178,7 +176,7 @@ Page({
       tborder: "2rpx dashed #979797",
       input: "",
       ibColor: "#979797",
-      'newGroup.isPrivate': false,
+      'newGroup.isPrivate': 0,
     })
     console.log(that.data.newGroup.isPrivate)
   },
@@ -264,32 +262,37 @@ Page({
 
   addGroup: function(e) {
     var that = this
-    that.powerDrawer(e)
-    var isPrivate = 0
-    if (that.data.newGroup.isPrivate = true) {
-      isPrivate = 1
-    } else {
-      isPrivate = 0
+    if (that.data.newGroup==null||that.data.newGroup.name == null || that.data.newGroup.intro == null){
+      wx.showToast({
+        title: '请输入名称简介',
+        image:"../images/close.png",
+        duration:1000
+      })
+    }else{
+      that.powerDrawer(e)
+      wx.request({
+        url: 'https://clock.dormassistant.wang:8080/cretegroup',
+        method: 'POST',
+        data: {
+          captainId: wx.getStorageSync('openid'),
+          groupName: that.data.newGroup.name,
+          privateGroup: that.data.newGroup.isPrivate,
+          description: that.data.newGroup.intro,
+        },
+        success: function (res) {
+          console.log(res.data)
+          var toastText = "创建成功";
+          wx.showToast({
+            title: toastText,
+            icon: 'success',
+            duration: 1000
+          });
+          that.onShow();
+        }
+      })
     }
-    wx.request({
-      url: 'https://clock.dormassistant.wang:8080/cretegroup',
-      method: 'POST',
-      data: {
-        captainId: wx.getStorageSync('openid'),
-        groupName: that.data.newGroup.name,
-        privateGroup: isPrivate,
-        description: that.data.newGroup.intro,
-      },
-      success: function(res) {
-        console.log(res.data)
-        var toastText = "创建成功";
-        wx.showToast({
-          title: toastText,
-          icon: 'success',
-          duration: 1000
-        });
-        that.onShow();
-      }
+    that.setData({
+      newGroup: null
     })
   },
 
@@ -370,7 +373,8 @@ Page({
   serchGroup:function(e){
     var that=this
     that.setData({
-      groupShowList:null
+      groupShowList:null,
+      noData:false,
     })
     wx.request({
       url: 'https://clock.dormassistant.wang:8080/search/searchbygroupname',

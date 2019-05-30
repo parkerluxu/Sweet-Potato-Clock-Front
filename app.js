@@ -7,13 +7,49 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    var logged=wx.getStorageSync('logged')
     // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+    if (logged==true){
+      wx.login({
+        success: function (r) {
+          //获取临时凭证
+          var code = r.code;
+          wx.getUserInfo({
+            success: function (res) {
+              console.log({
+                encryptedData: res.encryptedData,
+                iv: res.iv,
+                code: code
+              })
+              //调用后端
+              wx.request({
+                url: 'https://clock.dormassistant.wang:8080/WXLogin',
+                data: {
+                  encryptedData: res.encryptedData,
+                  iv: res.iv,
+                  code: code,
+                },
+                method: "POST",
+                success: function (result) {
+                  if (result.data.status == 1) {
+                    console.log(result.data.userInfo.openId);
+                  } else {
+                    console.log('解密失败')
+                  }
+                },
+                fail: function () {
+                  console.log("系统错误")
+                }
+              })
+            }
+          })
+        }
+      })
+    }else{
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    }
     // 获取用户信息
     wx.getSetting({
       success: res => {

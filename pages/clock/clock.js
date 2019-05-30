@@ -75,14 +75,21 @@ Page({
     let isRuning = this.data.isRuning
     let showTime = util.formatTime1(this.data.workTime, 'HH')
     let keepTime = showTime * 60 * 1000
-    if (!isRuning) {
+    if (isRuning==false) {
       this.timer = setInterval((function () {
         this.updateTimer()
         this.startNameAnimation()
       }).bind(this), 1000)
       this.setData({
-        buttonText: '取消'
+        buttonText: '取消',
+        isRuning:true,
       })
+      this.data.log = {
+        startTime: Date.now(),
+        keepTime: keepTime,
+        endTime: keepTime + startTime,
+        action: actionName[isRuning ? 'stop' : 'start'],
+      }
     } else {
       this.stopTimer()
       this.setData({
@@ -90,18 +97,6 @@ Page({
       })
     }
 
-    this.setData({
-      isRuning: !isRuning,
-      completed: false,
-      remainTimeText: showTime + ':00',
-    })
-    
-    this.data.log = {
-      startTime: Date.now(),
-      keepTime: keepTime,
-      endTime: keepTime + startTime,
-      action: actionName[isRuning ? 'stop' : 'start'],
-    }
   },
 
   startNameAnimation: function () {
@@ -136,7 +131,6 @@ Page({
         },
         success: function (res) {
           console.log(res.data)
-          clearInterval(that.data.intervarID);
           var pages = getCurrentPages(); //当前页面栈
           if (pages.length > 1) {
             var beforePage = pages[pages.length - 2]; //获取上一个页面实例对象
@@ -164,14 +158,15 @@ Page({
             // reset circle progress
             that.setData({
               leftDeg: initDeg.left,
-              rightDeg: initDeg.right
+              rightDeg: initDeg.right,
+              remainTimeText: that.data.workTime + ":00",
+              isRuning:false,
             })
             // clear timer
             that.timer && clearInterval(that.timer)
           }else{
             that.setData({
               buttonText: '取消',
-              isRuning:true,
             })
           }
         }
@@ -219,11 +214,20 @@ Page({
   },
 
   onUnload: function () {
+    // reset circle progress
+    that.setData({
+      leftDeg: initDeg.left,
+      rightDeg: initDeg.right,
+      remainTimeText: that.data.workTime + ":00",
+      isRuning: false,
+      buttonText: '开始',
+    })
     // clear timer
-    this.timer && clearInterval(this.timer)
+    that.timer && clearInterval(that.timer)
   },
 
   onHide: function () {
+
   },
 
 })

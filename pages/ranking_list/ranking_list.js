@@ -16,7 +16,7 @@ Page({
     color_2_2: "#f66a0c",
     color_2_3: "#ffffff",
     memberList: [],
-
+    isMember:false,
     timeList: [],
     groupId: 1,
     list_1: [],
@@ -112,6 +112,12 @@ Page({
           var k3 = 'showList[' + i + '].minutesSum';
           var k4 = 'showList[' + i + '].minutes';
           var k5 = 'showList[' + i +'].isTouchMove';
+          var userId=wx.getStorageSync('openid')
+          if (userId == res.data.userList[i].userId){
+            that.setData({
+              isMember:true,
+            })
+          }
           that.setData({
             [k1]: that.data.memberList[i].avatar,
             [k2]: that.data.memberList[i].userNickname,
@@ -160,7 +166,36 @@ Page({
   onShareAppMessage: function() {
 
   },
-
+  //加入小组
+  joinGroup: function (e) {
+    var that = this
+    console.log(e.currentTarget.dataset)
+    wx.request({
+      url: 'https://clock.dormassistant.wang:8080/joinGroup',
+      method: 'GET',
+      data: {
+        userid: wx.getStorageSync('openid'),
+        groupid: that.data.groupId,
+      },
+      success(res) {
+        console.log(res.data)
+        if (res.data.success == 1) {
+          wx.showToast({
+            title: '加入成功',
+            icon: 'success',
+            duration: 1000
+          })
+        } else {
+          wx.showToast({
+            title: '您已在该小组',
+            image: '../images/close.png',
+            duration: 1000
+          })
+        }
+        that.onShow();
+      }
+    })
+  },
   click_on_1: function() {
     wx.navigateTo({
       url: '../world_ranking_list/world_ranking_list',
@@ -182,9 +217,16 @@ Page({
   },
   switchChange:function(e){
     var that=this;
-    that.setData({
-      'group.isPrivate':e.detail.value
-    })
+    if(e.detail.value==false){
+      that.setData({
+        'group.isPrivate': 0
+      })
+    }else{
+      that.setData({
+        'group.isPrivate': 0
+      })
+    }
+   
   },
   util: function(currentStatu) {
     /* 动画部分 */
@@ -274,6 +316,7 @@ Page({
                 groupId: that.data.groupId
               }, success: function (res) {
                 if (res.data.success == 1) {
+                  that.onShow()
                   wx.navigateBack({
                     delta: 1
                   })
@@ -422,9 +465,7 @@ Page({
     this.data.showList.splice(e.currentTarget.dataset.index, 1)
 
     this.setData({
-
       showList: this.data.showList
-
     })
 
   }

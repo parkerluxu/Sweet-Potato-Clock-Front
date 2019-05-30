@@ -70,7 +70,7 @@ Page({
             }
           })
         }
-        if (res.authSetting['scope.userInfo']) {
+        if (res.authSetting['scope.userInfo']&&wx.getStorageSync('logged')==false) {
           wx.login({
             success: function (r) {
               //获取临时凭证
@@ -141,6 +141,47 @@ Page({
       logged: wx.getStorageSync('logged')
     })
     if (that.data.logged == true) {
+      wx.login({
+        success: function (r) {
+          //获取临时凭证
+          var code = r.code;
+          wx.getUserInfo({
+            success: function (res) {
+              console.log({
+                encryptedData: res.encryptedData,
+                iv: res.iv,
+                code: code
+              })
+              //调用后端
+              wx.request({
+                url: 'https://clock.dormassistant.wang:8080/WXLogin',
+                data: {
+                  encryptedData: res.encryptedData,
+                  iv: res.iv,
+                  code: code,
+                },
+                method: "POST",
+                success: function (result) {
+                  if (result.data.status == 1) {
+                    console.log(result.data.userInfo.openId);
+                    app.globalData.userInfo = result.data.userInfo;
+                    wx.setStorageSync('logged', true);
+                    wx.setStorageSync('openid', result.data.userInfo.openId);
+                  } else {
+                    console.log('解密失败')
+                  }
+                  wx.switchTab({
+                    url: '../home_page/home_page',
+                  })
+                },
+                fail: function () {
+                  console.log("系统错误")
+                }
+              })
+            }
+          })
+        }
+      })
       setTimeout(function () {
         wx.switchTab({
           url: '../home_page/home_page',
