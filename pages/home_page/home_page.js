@@ -272,7 +272,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'http://localhost:8080/usergoal/addgoal',
+        url: 'https://clock.dormassistant.wang:8080/usergoal/addgoal',
         method: 'POST',
         data: {
           userId: wx.getStorageSync('openid'),
@@ -286,7 +286,7 @@ Page({
             goalId: res.data.goalId,
           })
           wx.request({
-            url: 'http://localhost:8080/goaldate/addgoaldate',
+            url: 'https://clock.dormassistant.wang:8080/goaldate/addgoaldate',
             method: 'POST',
             data: {
               goalId: that.data.goalId,
@@ -503,14 +503,12 @@ Page({
     var that = this;
     var date = new Date()
     let showTime = util.formatTime(date)
-
     let showDate = showTime.substr(0,10)
     that.setData({
       date:showDate,
-
     })
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygoal/displaygoal',
+      url: 'https://clock.dormassistant.wang:8080/displaygoal/displaygoal',
       method: 'GET',
       data: {
         userId: wx.getStorageSync('openid')
@@ -518,10 +516,18 @@ Page({
       success: function(res) {
         console.log(res.data.goalList)
         var goalList = res.data.goalList;
+        if (goalList.length==0){
+          that.setData({
+            noData:true,
+          })
+        }else{
+          that.setData({
+            noData:false,
+          })
+        }
         var periodOfGoalList = res.data.periodOfGoalList;
         var goalNoTodayList=res.data.goalNoTodayList;
         var periodOfGoalNoTodayList = res.data.periodOfGoalNoTodayList;
-
         var clockNum = 0
         var planNum = 0;
         var clockNum_1 = 0;
@@ -606,7 +612,7 @@ Page({
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
-      url: 'http://localhost:8080/record/planComplete',
+      url: 'https://clock.dormassistant.wang:8080/record/planComplete',
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
@@ -624,7 +630,7 @@ Page({
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
-      url: 'http://localhost:8080/record/planUnComplete',
+      url: 'https://clock.dormassistant.wang:8080/record/planUnComplete',
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
@@ -808,7 +814,7 @@ Page({
     console.log(e.currentTarget.dataset.index)
     console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
-      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
 
       method:'GET',
       data:{
@@ -925,7 +931,7 @@ Page({
   del_2: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan[e.currentTarget.dataset.index].goalId
@@ -1040,7 +1046,7 @@ Page({
   del_3: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
@@ -1155,7 +1161,7 @@ Page({
   del_4: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId
@@ -1640,7 +1646,7 @@ Page({
       if(newGoal.clockTime==0||newGoal.clockName=="时长（10~120）"){
       
       wx.request({
-        url: 'http://localhost:8080/usergoal/modifyusergoal',
+        url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
         method: 'POST',
         data: {
           userId: wx.getStorageSync('openid'),
@@ -1656,7 +1662,7 @@ Page({
             goalId: res.data.goalId,
           })
           wx.request({
-            url: 'http://localhost:8080/goaldate/modifygoaldate',
+            url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
             method: 'POST',
             data: {
               goalId: newGoal.goalId,
@@ -1690,7 +1696,7 @@ Page({
           })
         }else{
         wx.request({
-          url: 'http://localhost:8080/usergoal/modifyusergoal',
+          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
           method: 'POST',
           data: {
             userId: wx.getStorageSync('openid'),
@@ -1706,7 +1712,7 @@ Page({
               goalId: res.data.goalId,
             })
             wx.request({
-              url: 'http://localhost:8080/goaldate/modifygoaldate',
+              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
               method: 'POST',
               data: {
                 goalId: newGoal.goalId,

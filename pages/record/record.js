@@ -39,7 +39,7 @@ Page({
     var dateStr = options
     if (options != null) {
       wx.request({
-        url: 'http://localhost:8080/displayrecord/displayrecordbydate',
+        url: 'https://clock.dormassistant.wang:8080/displayrecord/displayrecordbydate',
         method: 'GET',
         data: {
           userid: wx.getStorageSync('openid'),
@@ -79,7 +79,7 @@ Page({
     }
     else {
       wx.request({
-        url: 'http://localhost:8080/displayrecord/displayrecord',
+        url: 'https://clock.dormassistant.wang:8080/displayrecord/displayrecord',
         method: 'GET',
         data: {
           userid: wx.getStorageSync('openid'),

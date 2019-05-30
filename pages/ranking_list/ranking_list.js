@@ -62,7 +62,7 @@ Page({
   onShow: function() {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygroupinformation/displaygroup',
+      url: 'https://clock.dormassistant.wang:8080/displaygroupinformation/displaygroup',
       method: "GET",
       data: {
         groupId: that.data.groupId
@@ -96,7 +96,7 @@ Page({
       }
     });
     wx.request({
-      url: 'http://127.0.0.1:8080/displayuserlist/displayuserlist',
+      url: 'https://clock.dormassistant.wang:8080/displayuserlist/displayuserlist',
       method: "GET",
       data: {
         groupId: that.data.groupId
@@ -242,7 +242,7 @@ Page({
       console.log("zheli")
       console.log(that.data.group.groupName)
       wx.request({
-        url: 'http://127.0.0.1:8080/group/modifyname',
+        url: 'https://clock.dormassistant.wang:8080/group/modifyname',
         method: "POST",
         data: {
           groupId: that.data.groupId,
@@ -267,7 +267,7 @@ Page({
         success(e){
           if(e.confirm==true){
             wx.request({
-              url: 'http://127.0.0.1:8080/deletegroupmember/deletegroupmember',
+              url: 'https://clock.dormassistant.wang:8080/deletegroupmember/deletegroupmember',
               method: 'GET',
               data: {
                 userId: wx.getStorageSync('openid'),
@@ -403,7 +403,7 @@ Page({
   del: function (e) {
     var that=this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegroupmember/deletegroupmember',
+      url: 'https://clock.dormassistant.wang:8080/deletegroupmember/deletegroupmember',
       method:'GET',
       data:{
         userId: that.data.memberList[e.currentTarget.dataset.index].userId,

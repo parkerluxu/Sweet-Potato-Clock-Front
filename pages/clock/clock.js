@@ -127,7 +127,7 @@ Page({
       // clear timer
       this.timer && clearInterval(that.timer)
       wx.request({
-        url: 'http://localhost:8080/record/goalcomplete',
+        url: 'https://clock.dormassistant.wang:8080/record/goalcomplete',
         method: 'POST',
         data: {
           goalId: that.data.goalId,
@@ -224,8 +224,6 @@ Page({
   },
 
   onHide: function () {
-    // clear timer
-    this.timer && clearInterval(this.timer)
   },
 
 })
