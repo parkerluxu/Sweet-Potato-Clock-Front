@@ -47,7 +47,11 @@
     </view>
     <view class="top grid">
       <label class="title col-0">小组简介</label>
-      <input class="input_base input_h30 col-1" name="mobile" bindinput='getGroupintro' placeholder="请输入小组简介"></input>
+      <view class="contentView">
+        <view class="textarea_bg">
+          <textarea bindinput="textareaInput2" style="height: 4em" maxlength="-1" />
+        </view>
+      </view>
     </view>
     <view class="line">
       <label class="title col-0">设为私密</label>

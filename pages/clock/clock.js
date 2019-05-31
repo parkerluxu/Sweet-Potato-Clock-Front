@@ -13,7 +13,10 @@ const initDeg = {
   left: 45,
   right: -45,
 }
-
+var areaWidth //滑块移动区域宽度
+var viewWidth //滑块宽度
+var viewX, viewX0, viewX1 //滑块左边界坐标
+var workTime
 Page({
 
   data: {
@@ -28,6 +31,33 @@ Page({
     imageSrc: ['../images/clock-tree1.png', '../images/clock-tree2.png', '../images/clock-tree3.png'],
     imageindex:0,
     buttonText:'开始',
+    canMove: true,
+    canSet: true,
+  },
+
+
+  move: function (e) {
+    var query = wx.createSelectorQuery()
+    query.select('#movable-view').boundingClientRect(function (rect) {
+      viewX = rect.left
+      viewX1 = viewX
+      console.log("viewX1------->", viewX1)
+    }).exec()
+
+    //时间
+    workTime = Math.round((viewX1 - viewX0) / (areaWidth - viewWidth) * (99 - this.data.minutesLimit)) + parseInt(this.data.minutesLimit)
+      this.setData({
+        workTime: workTime,
+      })
+      var e = {
+        detail:{
+          value:workTime
+        }
+      }
+    this.goal_of_time(e)
+  },
+  moveend: function (e) {
+    
   },
 
   onLoad:function(option){
@@ -37,6 +67,26 @@ Page({
       minutesLimit: option.minutesLimit,
       goalId: option.id,
     });
+    var query = wx.createSelectorQuery()
+    //第一次进来应该获取节点信息，用来计算滑块长度
+    if ( viewWidth == undefined || viewWidth == null || viewX == undefined || viewX == null) {
+      setTimeout(function () { //代码多的情况下需要延时执行，否则可能获取不到节点信息
+        //获取movable的宽度，计算改变进度使用
+        query.select('#movable-area').boundingClientRect(function (rect) {
+          areaWidth = rect.width
+          console.log("areaWidth------->", areaWidth)
+        }).exec()
+        query.select('#movable-view').boundingClientRect(function (rect) {
+          viewWidth = rect.width // 节点的宽度
+          console.log("viewWidth------->", viewWidth)
+        }).exec()
+        query.select('#movable-view').boundingClientRect(function (rect) {
+          viewX = rect.left
+          viewX0 = viewX
+          console.log("viewX0------->", viewX0)
+        }).exec()
+      }, 1000)
+    }
   },
 
   onShow: function () {

@@ -29,7 +29,7 @@
    <view class="del" catchtap="del_2" data-index="{{index}}">删除</view>
 </view>
 <view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock_1}}" data-index="{{index}}" bindtouchstart="touchstart_3" bindtouchmove="touchmove_3"  wx:key="" bindlongtap='showMessage_3' data-statu="open">
-  <view class="clock-list1" style="background:url('../images/origin3-3.png'); background-size:100% 100%;">
+  <view class="clock-list1" style="background-image:url('https://dormassistant.wang/origin3-3.png'); background-size:100% 100%;">
     <view class="p">
       <view class="lable2">{{item.clockName}} </view>
       <view class='time_content'>

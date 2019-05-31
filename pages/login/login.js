@@ -136,57 +136,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
-    that.setData({
-      logged: wx.getStorageSync('logged')
-    })
-    if (that.data.logged == true) {
-      wx.login({
-        success: function (r) {
-          //获取临时凭证
-          var code = r.code;
-          wx.getUserInfo({
-            success: function (res) {
-              console.log({
-                encryptedData: res.encryptedData,
-                iv: res.iv,
-                code: code
-              })
-              //调用后端
-              wx.request({
-                url: 'https://clock.dormassistant.wang:8080/WXLogin',
-                data: {
-                  encryptedData: res.encryptedData,
-                  iv: res.iv,
-                  code: code,
-                },
-                method: "POST",
-                success: function (result) {
-                  if (result.data.status == 1) {
-                    console.log(result.data.userInfo.openId);
-                    app.globalData.userInfo = result.data.userInfo;
-                    wx.setStorageSync('logged', true);
-                    wx.setStorageSync('openid', result.data.userInfo.openId);
-                  } else {
-                    console.log('解密失败')
-                  }
-                  wx.switchTab({
-                    url: '../home_page/home_page',
-                  })
-                },
-                fail: function () {
-                  console.log("系统错误")
-                }
-              })
-            }
-          })
-        }
+    var that=this
+    if(wx.getStorageSync('logged')==true){
+      that.setData({
+        logged:true
       })
-      setTimeout(function () {
+      setTimeout(function(){
         wx.switchTab({
           url: '../home_page/home_page',
         })
-      }, 2000)
+      },1000)
+      
     }
   },
 

@@ -367,9 +367,30 @@ radio {
   width: 100%;
   position: relative;
 }
-
+.contentView {
+  width: 75%;
+  margin-top: 40rpx;
+}
 .marquee_text {
   white-space: nowrap;
   position: absolute;
   top: 0;
+}
+
+.textarea_title {
+  margin-left: 1rpx;
+  color: gray;
+}
+
+.textarea_bg {
+  padding: 0 20rpx;
+  background-color: #fff;
+  border: 2rpx solid #ccc;
+  padding-left: 8rpx;
+  margin-right: 40rpx;
+}
+
+textarea {
+  width: 100%;
+  padding: 20rpx 0;
 }

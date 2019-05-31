@@ -164,7 +164,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    title:this.data.groupName
   },
   //加入小组
   joinGroup: function (e) {
