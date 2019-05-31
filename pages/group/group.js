@@ -433,8 +433,14 @@ Page({
       success: function (res) {
         console.log(res.data)
         var list = res.data.groupList;
-        if(res.data.groupList==null){
-          
+        if(res.data.groupList.length==0){
+          that.setData({
+            noData:true
+          })
+        }else{
+          that.setData({
+            noData: false
+          })
         }
         for (var i = 0; i < res.data.groupList.length; ++i) {
           var k1 = 'groupList[' + i + '].groupName';

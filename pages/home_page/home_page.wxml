@@ -3,7 +3,11 @@
   <image class="newGoal" src='../images/new.png' bindtap='drawer_1' data-statu="open" style="margin-right:10%;"></image>
 </view>
 
-<view hidden='{{!noData}}'>您还没有打卡目标，点击+添加打卡目标开启美好的一天吧~</view>
+<view hidden='{{!noData}}' class='noData'>
+<image class='noData_image' src='../images/kong.png'></image>
+<text style='color:gray;'>您还没有打卡目标</text>
+<text style='color:gray;'>点击右上角+添加目标吧！</text>
+</view>
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1"  bindlongtap='showMessage_1'data-statu="open">
   <view class="clock-list" style="background-image:url('https://dormassistant.wang/back3.png');">
     <view class="p">

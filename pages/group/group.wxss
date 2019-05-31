@@ -20,6 +20,20 @@
   margin-top: 34rpx;
 }
 
+.noData{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20%;
+}
+
+.noData_image{
+  width: 500rpx;
+  height: 500rpx;
+}
+
 .sousuo {
   margin-left: 15rpx;
   width: 15%;

@@ -11,7 +11,7 @@
 .goalList-title {
   width: 70%;
   height: 50rpx;
-  padding-left: 12%;
+  padding-left: 8%;
   font-size: 36rpx;
   /*font-weight: 550;*/
   color: #fff;
@@ -21,6 +21,20 @@
 .newGoal {
   width: 42rpx;
   height: 42rpx;
+}
+
+.noData{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20%;
+}
+
+.noData_image{
+  width: 500rpx;
+  height: 500rpx;
 }
 
 .list-card {

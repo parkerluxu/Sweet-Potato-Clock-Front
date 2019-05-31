@@ -8,7 +8,11 @@
   <view class='sousuo' bindtap="serchGroup" data-statu="open">搜索</view>
 </view>
 <view class='divLine' />
-<view hidden='{{!noData}}'>您还没有加入小组，点击+即可创建/加入小组~</view>
+<view hidden='{{!noData}}' class='noData'>
+<image class='noData_image' src='../images/kong.png'></image>
+<text style='color:gray;'>您还没有加入小组</text>
+<text style='color:gray;'>点击右下角+添加小组吧！</text>
+</view>
 <scroll-view scroll-y="true" style="width:100%;">
   <view wx:for="{{groupList}}" class="list">
     <navigator class="item" url='../ranking_list/ranking_list?groupId={{item.groupId}}'>
