@@ -49,7 +49,7 @@
       <label class="title col-0">小组简介</label>
       <view class="contentView">
         <view class="textarea_bg">
-          <textarea bindinput="textareaInput2" style="height: 4em" maxlength="-1" />
+          <textarea bindinput="getGroupintro" style="height: 4em" maxlength="-1" class='textarea' />
         </view>
       </view>
     </view>

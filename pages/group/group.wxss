@@ -390,7 +390,8 @@ radio {
   margin-right: 40rpx;
 }
 
-textarea {
+.textarea {
   width: 100%;
   padding: 20rpx 0;
+  
 }

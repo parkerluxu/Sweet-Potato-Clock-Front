@@ -281,8 +281,6 @@ Page({
   confirmAndQuit:function(e){
     var that = this;
     if(that.data.isCapatain==true){
-      console.log("zheli")
-      console.log(that.data.group.groupName)
       wx.request({
         url: 'https://clock.dormassistant.wang:8080/group/modifyname',
         method: "POST",
@@ -299,6 +297,7 @@ Page({
               duration: 1500,
             })
           }
+          that.onShow()
         },
       })
 

@@ -292,7 +292,7 @@ Page({
       })
     }
     that.setData({
-      newGroup: null
+      newGroup:null
     })
   },
 
