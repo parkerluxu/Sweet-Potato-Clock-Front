@@ -263,14 +263,22 @@ Page({
     that.setData({
       goalId: null,
     })
-    console.log(that.data.goal.isConcentrate)
-    if (that.data.goal.minutes < 10) {
+    if (that.data.goal.minutes < 10 && that.data.goal.isConcentrate==true) {
       wx.showToast({
         title: '时长过短',
         image: '../images/close.png',
         duration: 1000
       })
-    } else {
+    } else if (that.data.goal.name == undefined || that.data.goal.name==""){
+      wx.showToast({
+        title: '请输入目标',
+        image: '../images/close.png',
+        duration: 1000
+      })
+    } else if (that.data.goal.isConcentrate == undefined || that.data.goal.name == "") {
+
+    } 
+    else{
       wx.request({
         url: 'https://clock.dormassistant.wang:8080/usergoal/addgoal',
         method: 'POST',
@@ -301,11 +309,14 @@ Page({
             },
             success: function(res) {
               that.onShow()
+              that.setData({
+                goal: null,
+              })
+              that.drawer_1(e);
             }
           })
         }
       })
-      that.drawer_1(e);
     }
 
   },
@@ -506,6 +517,10 @@ Page({
     let showDate = showTime.substr(0,10)
     that.setData({
       date:showDate,
+      clock:null,
+      clock_1:null,
+      plan:null,
+      plan_1:null,
     })
     wx.request({
       url: 'https://clock.dormassistant.wang:8080/displaygoal/displaygoal',
@@ -516,7 +531,10 @@ Page({
       success: function(res) {
         console.log(res.data.goalList)
         var goalList = res.data.goalList;
-        if (goalList.length==0){
+        var periodOfGoalList = res.data.periodOfGoalList;
+        var goalNoTodayList = res.data.goalNoTodayList;
+        var periodOfGoalNoTodayList = res.data.periodOfGoalNoTodayList;
+        if (goalList.length == 0 && goalNoTodayList.length==0){
           that.setData({
             noData:true,
           })
@@ -525,9 +543,6 @@ Page({
             noData:false,
           })
         }
-        var periodOfGoalList = res.data.periodOfGoalList;
-        var goalNoTodayList=res.data.goalNoTodayList;
-        var periodOfGoalNoTodayList = res.data.periodOfGoalNoTodayList;
         var clockNum = 0
         var planNum = 0;
         var clockNum_1 = 0;
@@ -1183,6 +1198,7 @@ Page({
 
     })
   },
+
   showMessage_1:function(e){
     var that=this;
     var dateList=that.data.dates;
@@ -1528,6 +1544,10 @@ Page({
     var that = this;
     var currentStatu_1 = e.currentTarget.dataset.statu;
     this.util_1(currentStatu_1)
+    var e ={
+      
+    }
+    that.selectOnce_1()
   },
   util_1: function (currentStatu_1) {
     /* 动画部分 */
@@ -1642,9 +1662,8 @@ Page({
         newGoal.period[i] = false
       }
     }
-  
+    if (newGoal.planName)
       if(newGoal.clockTime==0||newGoal.clockName=="时长（10~120）"){
-      
       wx.request({
         url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
         method: 'POST',
@@ -1682,6 +1701,9 @@ Page({
                 duration: 1000
               })
               that.onShow()
+              that.setData({
+                goal: null,
+              })
             }
           })
         }

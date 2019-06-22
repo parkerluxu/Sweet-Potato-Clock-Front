@@ -316,10 +316,16 @@ Page({
             duration: 1000
           })
           that.onShow();
-        }else{
+        } else if (res.data.success == 2){
           wx.showToast({
             title: '您已在该小组',
             image:'../images/close.png',
+            duration: 1000
+          })
+        }else{
+          wx.showToast({
+            title: '系统错误',
+            image: '../images/close.png',
             duration: 1000
           })
         }
@@ -330,6 +336,9 @@ Page({
   getShowGroup:function(e){
     var that = this
     that.pDrawer(e)
+    that.setData({
+      noData1: false,
+    })
     wx.request({
       url: 'https://clock.dormassistant.wang:8080/displaygrouprandom/displaygrouprandom',
       method:'GET',
@@ -374,7 +383,7 @@ Page({
     var that=this
     that.setData({
       groupShowList:null,
-      noData:false,
+      noData1:false,
     })
     wx.request({
       url: 'https://clock.dormassistant.wang:8080/search/searchbygroupname',
@@ -404,7 +413,7 @@ Page({
           }
         }else{
           that.setData({
-            noData:true
+            noData1:true
           })
         }
       }

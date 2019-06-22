@@ -44,7 +44,6 @@
   width: 90%;
   margin-top: 3%;
   margin-left: 5%;
-  /*border: 2rpx solid #e9833e;*/
   overflow: hidden;
   justify-content: space-between;
   border-radius: 10rpx;
@@ -56,14 +55,13 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  width: 90%;
   margin-top: 3%;
   margin-left: 5%;
-  width: 90%;
   overflow: hidden;
   justify-content: space-between;
   border-radius: 10rpx;
   box-shadow: 1rpx 1rpx 15rpx #888;
-  color: #b9b6b4;
   margin-bottom: 1.5%;
 }
 

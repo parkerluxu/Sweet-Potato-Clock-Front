@@ -46,11 +46,11 @@
  <view class="del" catchtap="del_3" data-index="{{index}}">删除</view>
 </view>
 <view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan_1}}" data-index="{{index}}" bindtouchstart="touchstart_4" bindtouchmove="touchmove_4"  wx:key="" bindlongtap='showMessage_4'data-statu="open">
-  <view class="plan-list1" style="background:url('../images/origin3-3.png'); background-size:100% 100%; ;">
+  <view class="plan-list1" style="background:url('https://dormassistant.wang/origin3-3.png'); background-size:100% 100%; ;">
     <view class="p">
       <view class="lable2">{{item.planName}}</view>
     </view>
-    <view class="btn2_1"  type="default" bindtap="hidebtn" plain="true"  hover-class="button-hover" data-goalid='{{item.goalId}}' disabled='true' type="default" plain="true" style="color: #fff;" ></view>
+    <view class="btn2"  type="default" plain="true"  hover-class="button-hover" data-goalid='{{item.goalId}}' disabled='true' type="default" plain="true" style="color: #fff;" ></view>
   </view>
   <view class="del" catchtap="del_4" data-index="{{index}}">删除</view>
 </view>
