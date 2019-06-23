@@ -7,13 +7,13 @@ Page({
    */
   data: {
 
-      /**
-   * 以_1结尾的数组表示那些今天不需要打卡的目标
-   */
+    /**
+     * 以_1结尾的数组表示那些今天不需要打卡的目标
+     */
 
-      /**
-   * 特别说明，变量以_1结尾的是服务于添加目标的，不加是服务于修改目标的
-   */
+    /**
+     * 特别说明，变量以_1结尾的是服务于添加目标的，不加是服务于修改目标的
+     */
 
 
 
@@ -77,12 +77,12 @@ Page({
       isConcentrate: Boolean,
     },
     disposable: false,
-    inputValue:"请输入目标名称",
-    timeValue:"时长(10~120)",
+    inputValue: "请输入目标名称",
+    timeValue: "时长(10~120)",
     disposable_1: false,
     inputValue_1: "请输入目标名称",
     timeValue_1: "时长(10~120)",
-    selectIndex_1:0,
+    selectIndex_1: 0,
     hiddenbtn_1: true,
     showModalStatus_1: false,
     ptColor_1: "#ffae49",
@@ -96,55 +96,55 @@ Page({
     ibColor_1: "#e9833e",
     hiddenDate_1: true,
     dates_1: [{
-      name: "Sun",
-      index: "0",
-      selected: false
-    },
-    {
-      name: "Mon",
-      index: "1",
-      selected: false
-    },
-    {
-      name: "Tue",
-      index: "2",
-      selected: false
-    },
-    {
-      name: "Wed",
-      index: "3",
-      selected: false
-    },
-    {
-      name: "Thu",
-      index: "4",
-      selected: false
-    },
-    {
-      name: "Fri",
-      index: "5",
-      selected: false
-    },
-    {
-      name: "Sat",
-      index: "6",
-      selected: false
-    },
+        name: "Sun",
+        index: "0",
+        selected: false
+      },
+      {
+        name: "Mon",
+        index: "1",
+        selected: false
+      },
+      {
+        name: "Tue",
+        index: "2",
+        selected: false
+      },
+      {
+        name: "Wed",
+        index: "3",
+        selected: false
+      },
+      {
+        name: "Thu",
+        index: "4",
+        selected: false
+      },
+      {
+        name: "Fri",
+        index: "5",
+        selected: false
+      },
+      {
+        name: "Sat",
+        index: "6",
+        selected: false
+      },
     ],
     goalId: Number,
     startX: 0, //开始坐标
 
     startY: 0,
     //储存目标的原始信息，用来判断用户是否对目标进行了修改
-    cbgColor_0:String,
-    goalName:String,
-    selectIndex_0:0,
-    timeValue_0:0,
-    periodList_0:[],
-    canModify:true,
-    color_0:"#979797",
-    goalName_0:String,
-    chooseWhichGoal:String,
+    cbgColor_0: String,
+    goalName: String,
+    selectIndex_0: 0,
+    timeValue_0: 0,
+    periodList_0: [],
+    canModify: true,
+    color_0: "#979797",
+    goalName_0: String,
+    chooseWhichGoal: String,
 
   },
 
@@ -152,15 +152,17 @@ Page({
   selectOnce: function(e) {
     var that = this;
     let index = e.currentTarget.dataset.index;
-    if(index==that.data.selectIndex_0){
-    that.setData({
-      canModify:true,
-      color_0: "#979797",
-    })}else{
+    if (index == that.data.selectIndex_0) {
       that.setData({
-        canModify:false ,
+        canModify: true,
+        color_0: "#979797",
+      })
+    } else {
+      that.setData({
+        canModify: false,
         color_0: "#ffae49",
-      })}
+      })
+    }
     //如果自定义就打开星期选项
     if (index == 3) {
       this.setData({
@@ -168,15 +170,15 @@ Page({
         disposable: false,
         'chooseWhichGoal.selectIndex': 3,
       })
-      var periodList=that.data.chooseWhichGoal.period;
-      var dateList=that.data.dates;
-      for(var i=0;i<7;++i){
+      var periodList = that.data.chooseWhichGoal.period;
+      var dateList = that.data.dates;
+      for (var i = 0; i < 7; ++i) {
         if (periodList[i] == 1) {
           dateList[i].selected = true;
         } else dateList[i].selected = false;
       }
       that.setData({
-        dates:dateList
+        dates: dateList
       })
     } else {
       this.setData({
@@ -187,7 +189,7 @@ Page({
       if (index == 1) {
         that.setData({
           disposable: true,
-          'chooseWhichGoal.selectIndex':1,
+          'chooseWhichGoal.selectIndex': 1,
         })
         console.log(that.data.disposable)
       }
@@ -195,12 +197,12 @@ Page({
       if (index == 2) {
         for (var i = 0; i < that.data.dates.length; i++) {
           var dateSel = 'dates[' + i + '].selected'
-          var item = 'chooseWhichGoal.period['+i+']'
+          var item = 'chooseWhichGoal.period[' + i + ']'
           that.setData({
             [dateSel]: true,
             'chooseWhichGoal.selectIndex': 2,
-            [item]:1,
-            'chooseWhichGoal.period[7]':0,
+            [item]: 1,
+            'chooseWhichGoal.period[7]': 0,
           })
         }
         console.log(that.data.dates)
@@ -213,14 +215,14 @@ Page({
   },
   //设置打卡周期
   selectDate: function(e) {
-    var that=this;
+    var that = this;
     let index = e.currentTarget.dataset.index;
     let arrs = this.data.dates;
-    var item='chooseWhichGoal.period['+index+']';
+    var item = 'chooseWhichGoal.period[' + index + ']';
     if (arrs[index].selected == false) {
       arrs[index].selected = true;
       that.setData({
-       [item]: 1,
+        [item]: 1,
       })
     } else {
       arrs[index].selected = false;
@@ -232,26 +234,26 @@ Page({
       dates: arrs,
       hiddenDate: false
     })
-   for(var i=0;i<7;++i){
-     if(that.data.periodList_0[i].selected!=arrs[i].selected){
-       that.setData({
-         canModify: false,
-         color_0: "#ffae49",
-       })
-       break;
-     }
-     if(i==6){
-     that.setData({
-       canModify: true,
-       color_0: "#979797",
-     })
-     }
-   }
+    for (var i = 0; i < 7; ++i) {
+      if (that.data.periodList_0[i].selected != arrs[i].selected) {
+        that.setData({
+          canModify: false,
+          color_0: "#ffae49",
+        })
+        break;
+      }
+      if (i == 6) {
+        that.setData({
+          canModify: true,
+          color_0: "#979797",
+        })
+      }
+    }
     console.log(this.data.dates)
   },
 
   drawer: function(e) {
-    var that=this;
+    var that = this;
 
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
@@ -263,13 +265,13 @@ Page({
     that.setData({
       goalId: null,
     })
-    if (that.data.goal.minutes < 10 && that.data.goal.isConcentrate==true) {
+    if (that.data.goal.minutes < 10 && that.data.goal.isConcentrate == true) {
       wx.showToast({
         title: '时长过短',
         image: '../images/close.png',
         duration: 1000
       })
-    } else if (that.data.goal.name == undefined || that.data.goal.name==""){
+    } else if (that.data.goal.name == undefined || that.data.goal.name == "") {
       wx.showToast({
         title: '请输入目标',
         image: '../images/close.png',
@@ -277,8 +279,7 @@ Page({
       })
     } else if (that.data.goal.isConcentrate == undefined || that.data.goal.name == "") {
 
-    } 
-    else{
+    } else {
       wx.request({
         url: 'https://clock.dormassistant.wang:8080/usergoal/addgoal',
         method: 'POST',
@@ -368,9 +369,9 @@ Page({
   //选择了专注模式
   selectC: function() {
     var that = this;
-    if (that.data.chooseWhichGoal.clockTime==0){
+    if (that.data.chooseWhichGoal.clockTime == 0) {
       that.setData({
-        'chooseWhichGoal.clockTime':that.data.timeValue
+        'chooseWhichGoal.clockTime': that.data.timeValue
       })
     }
     that.setData({
@@ -387,7 +388,7 @@ Page({
       'goal.isConcentrate': true,
     })
 
-    if (that.data.cbgColor_0==that.data.cbgColor) {
+    if (that.data.cbgColor_0 == that.data.cbgColor) {
       that.setData({
         canModify: true,
         color_0: "#979797"
@@ -404,8 +405,8 @@ Page({
   selectP: function() {
     var that = this;
     that.setData({
-      'chooseWhichGoal.planName':that.data.chooseWhichGoal.clockName,
-      'chooseWhichGoal.clockTime':0,
+      'chooseWhichGoal.planName': that.data.chooseWhichGoal.clockName,
+      'chooseWhichGoal.clockTime': 0,
       ptColor: "#fff",
       pbgColor: "#ffae49",
       ctColor: "#ffae49",
@@ -438,21 +439,21 @@ Page({
     that.setData({
       'goal.name': e.detail.value,
     })
-    if(e.detail.value.length==0){
+    if (e.detail.value.length == 0) {
       that.setData({
-        'goal.name':that.data.goalName,
+        'goal.name': that.data.goalName,
       })
     }
-    if(that.data.chooseWhichGoal.clockTime==0){
+    if (that.data.chooseWhichGoal.clockTime == 0) {
       that.setData({
-        'chooseWhichGoal.planName':that.data.goal.name,
+        'chooseWhichGoal.planName': that.data.goal.name,
       })
-    }else{
+    } else {
       that.setData({
-        'chooseWhichGoal.clockName':that.data.goal.name,
+        'chooseWhichGoal.clockName': that.data.goal.name,
       })
     }
-    if (that.data.goalName==that.data.goal.name) {
+    if (that.data.goalName == that.data.goal.name) {
       that.setData({
         canModify: true,
         color_0: "#979797"
@@ -514,13 +515,13 @@ Page({
     var that = this;
     var date = new Date()
     let showTime = util.formatTime(date)
-    let showDate = showTime.substr(0,10)
+    let showDate = showTime.substr(0, 10)
     that.setData({
-      date:showDate,
-      clock:null,
-      clock_1:null,
-      plan:null,
-      plan_1:null,
+      date: showDate,
+      clock: null,
+      clock_1: null,
+      plan: null,
+      plan_1: null,
     })
     wx.request({
       url: 'https://clock.dormassistant.wang:8080/displaygoal/displaygoal',
@@ -534,13 +535,13 @@ Page({
         var periodOfGoalList = res.data.periodOfGoalList;
         var goalNoTodayList = res.data.goalNoTodayList;
         var periodOfGoalNoTodayList = res.data.periodOfGoalNoTodayList;
-        if (goalList.length == 0 && goalNoTodayList.length==0){
+        if (goalList.length == 0 && goalNoTodayList.length == 0) {
           that.setData({
-            noData:true,
+            noData: true,
           })
-        }else{
+        } else {
           that.setData({
-            noData:false,
+            noData: false,
           })
         }
         var clockNum = 0
@@ -573,7 +574,7 @@ Page({
               [planComplete]: goalList[i].complete,
               [planId]: goalList[i].goalId,
               [periodOfPlan]: periodOfGoalList[i],
-              [planTime]:goalList[i].minutes,
+              [planTime]: goalList[i].minutes,
             })
             planNum += 1
           }
@@ -583,11 +584,11 @@ Page({
           var clockId = 'clock_1[' + clockNum_1 + '].goalId'
           var clockTime = 'clock_1[' + clockNum_1 + '].clockTime'
           var clockComplete = 'clock_1[' + clockNum_1 + '].isComplete'
-          var periodOfCLock='clock_1['+clockNum_1+'].period'
+          var periodOfCLock = 'clock_1[' + clockNum_1 + '].period'
           var planName = 'plan_1[' + planNum_1 + '].planName'
           var planComplete = 'plan_1[' + planNum_1 + '].isComplete'
           var planId = 'plan_1[' + planNum_1 + '].goalId'
-          var periodOfPlan='plan_1['+planNum_1+'].period'
+          var periodOfPlan = 'plan_1[' + planNum_1 + '].period'
           var planTime = 'plan_1[' + planNum_1 + '].clockTime'
           if (goalNoTodayList[i].concentrated == true) {
             that.setData({
@@ -595,7 +596,7 @@ Page({
               [clockTime]: goalNoTodayList[i].minutes,
               [clockComplete]: goalNoTodayList[i].complete,
               [clockId]: goalNoTodayList[i].goalId,
-              [periodOfCLock]:periodOfGoalNoTodayList[i],
+              [periodOfCLock]: periodOfGoalNoTodayList[i],
             })
             clockNum_1 += 1
           } else {
@@ -603,7 +604,7 @@ Page({
               [planName]: goalNoTodayList[i].content,
               [planComplete]: goalNoTodayList[i].complete,
               [planId]: goalNoTodayList[i].goalId,
-              [periodOfPlan]:periodOfGoalNoTodayList[i],
+              [periodOfPlan]: periodOfGoalNoTodayList[i],
               [planTime]: goalNoTodayList[i].minutes,
             })
             planNum_1 += 1
@@ -613,11 +614,11 @@ Page({
     })
   },
 
-  finishControll:function(e){
+  finishControll: function(e) {
     console.log(e.currentTarget.dataset)
-    if(e.currentTarget.dataset['iscomplete']==true){
+    if (e.currentTarget.dataset['iscomplete'] == true) {
       this.unFinishPlan(e);
-    }else{
+    } else {
       this.finishPlan(e);
     }
   },
@@ -823,16 +824,16 @@ Page({
 
   },
 
-  del_1: function (e) {
-    var that=this;
+  del_1: function(e) {
+    var that = this;
 
     console.log(e.currentTarget.dataset.index)
     console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
       url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
 
-      method:'GET',
-      data:{
+      method: 'GET',
+      data: {
 
         goalId: that.data.clock[e.currentTarget.dataset.index].goalId
       },
@@ -1199,51 +1200,51 @@ Page({
     })
   },
 
-  showMessage_1:function(e){
-    var that=this;
-    var dateList=that.data.dates;
+  showMessage_1: function(e) {
+    var that = this;
+    var dateList = that.data.dates;
     var item = that.data.clock[e.currentTarget.dataset.index];
-    var periodList=item.period;
-    var goalid=item.goalId;
-    var name=item.clockName;
-    var time=item.clockTime;
+    var periodList = item.period;
+    var goalid = item.goalId;
+    var name = item.clockName;
+    var time = item.clockTime;
     that.setData({
-      cbgColor_0:"#ffae49",
-      goalName:name,
-      timeValue_0:time,
-      inputValue:name,
+      cbgColor_0: "#ffae49",
+      goalName: name,
+      timeValue_0: time,
+      inputValue: name,
       chooseWhichGoal: item,
-      timeValue:time,
-      ctColor:"#fff",
-      cbgColor:"#ffae49",
+      timeValue: time,
+      ctColor: "#fff",
+      cbgColor: "#ffae49",
       ptColor: "#ffae49",
-      pbgColor:"#fff",
-      distime:false,
+      pbgColor: "#fff",
+      distime: false,
       canModify: true,
       color_0: "#979797",
-      textColor:"#000",
+      textColor: "#000",
       ibColor: "#e9833e",
       tborder: "2rpx dashed #ffae49",
     })
-    if(periodList[7]==1){
+    if (periodList[7] == 1) {
       that.setData({
-        selectIndex:1,
+        selectIndex: 1,
         hiddenDate: true,
       })
-    } else if (periodList[0] == 1 && periodList[1] == 1 && periodList[2] == 1 && periodList[3] == 1 && periodList[4] == 1 && periodList[5] == 1 && periodList[6] == 1 ){
-        that.setData({
-          selectIndex:2,
-          hiddenDate: true,
-        })
-  }else{
-    that.setData({
-      selectIndex:3,
-      hiddenDate:false,
-    })
-    if(periodList[0]==1){
-      dateList[0].selected=true;
+    } else if (periodList[0] == 1 && periodList[1] == 1 && periodList[2] == 1 && periodList[3] == 1 && periodList[4] == 1 && periodList[5] == 1 && periodList[6] == 1) {
+      that.setData({
+        selectIndex: 2,
+        hiddenDate: true,
+      })
+    } else {
+      that.setData({
+        selectIndex: 3,
+        hiddenDate: false,
+      })
+      if (periodList[0] == 1) {
+        dateList[0].selected = true;
 
-    } else dateList[0].selected = false;
+      } else dateList[0].selected = false;
       if (periodList[1] == 1) {
         dateList[1].selected = true;
       } else dateList[1].selected = false;
@@ -1262,16 +1263,16 @@ Page({
       if (periodList[6] == 1) {
         dateList[6].selected = true;
       } else dateList[6].selected = false;
-  }
-  that.setData({
-    dates:dateList,
-    selectIndex_0:that.data.selectIndex,
-    periodList_0:dateList,
-  })
+    }
+    that.setData({
+      dates: dateList,
+      selectIndex_0: that.data.selectIndex,
+      periodList_0: dateList,
+    })
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-  showMessage_2: function (e) {
+  showMessage_2: function(e) {
     var that = this;
     var dateList = that.data.dates;
     var item = that.data.plan[e.currentTarget.dataset.index];
@@ -1279,19 +1280,19 @@ Page({
     var goalid = item.goalId;
     var name = item.planName;
     that.setData({
-      cbgColor_0:"#fff",
+      cbgColor_0: "#fff",
       chooseWhichGoal: item,
-      goalName:name,
-      timeValue_0:"时长(10~120)",
+      goalName: name,
+      timeValue_0: "时长(10~120)",
       inputValue: name,
       timeValue: "时长（10~120）",
-      cbgColor:"#fff",
+      cbgColor: "#fff",
       ctColor: "#ffae49",
       ptColor: "#fff",
       canModify: true,
       color_0: "#979797",
-      pbgColor:"#ffae49",
-      distime:true,
+      pbgColor: "#ffae49",
+      distime: true,
       textColor: "#979797",
       ibColor: "#979797",
       tborder: "2rpx dashed #979797",
@@ -1336,13 +1337,13 @@ Page({
     }
     that.setData({
       dates: dateList,
-      selectIndex_0:that.data.selectIndex,
+      selectIndex_0: that.data.selectIndex,
       periodList_0: dateList,
     })
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-  showMessage_3: function (e) {
+  showMessage_3: function(e) {
     var that = this;
     var dateList = that.data.dates;
     var item = that.data.clock_1[e.currentTarget.dataset.index];
@@ -1351,9 +1352,9 @@ Page({
     var name = item.clockName;
     var time = item.clockTime;
     that.setData({
-      cbgColor_0:"#ffae49",
+      cbgColor_0: "#ffae49",
       chooseWhichGoal: item,
-      goalName:name,
+      goalName: name,
       timeValue_0: time,
       inputValue: name,
       timeValue: time,
@@ -1408,13 +1409,13 @@ Page({
     }
     that.setData({
       dates: dateList,
-      selectIndex_0:that.data.selectIndex,
+      selectIndex_0: that.data.selectIndex,
       periodList_0: dateList,
     })
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-  showMessage_4: function (e) {
+  showMessage_4: function(e) {
     var that = this;
     var dateList = that.data.dates;
     var item = that.data.plan_1[e.currentTarget.dataset.index];
@@ -1422,14 +1423,14 @@ Page({
     var goalid = item.goalId;
     var name = item.planName;
     that.setData({
-      cbgColor_0:"#fff",
-      chooseWhichGoal:item,
+      cbgColor_0: "#fff",
+      chooseWhichGoal: item,
       canModify: true,
       color_0: "#979797",
-      goalName:name,
+      goalName: name,
       timeValue_0: "时长(10~120)",
       inputValue: name,
-      timeValue:"时长（10~120）",
+      timeValue: "时长（10~120）",
       cbgColor: "#fff",
       ctColor: "#ffae49",
       ptColor: "#fff",
@@ -1479,15 +1480,15 @@ Page({
     }
     that.setData({
       dates: dateList,
-      selectIndex_0:that.data.selectIndex,
+      selectIndex_0: that.data.selectIndex,
       periodList_0: dateList,
-      
+
     })
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
   //选择“一次”、“每天”、“自定义”
-  selectOnce_1: function (e) {
+  selectOnce_1: function(e) {
     var that = this;
     let index = e.currentTarget.dataset.index;
     //如果自定义就打开星期选项
@@ -1525,7 +1526,7 @@ Page({
 
   },
   //设置打卡周期
-  selectDate_1: function (e) {
+  selectDate_1: function(e) {
     let index = e.currentTarget.dataset.index;
     let arrs = this.data.dates_1;
     if (arrs[index].selected == false) {
@@ -1540,16 +1541,16 @@ Page({
     console.log(this.data.dates_1)
   },
 
-  drawer_1: function (e) {
+  drawer_1: function(e) {
     var that = this;
     var currentStatu_1 = e.currentTarget.dataset.statu;
     this.util_1(currentStatu_1)
-    var e ={
-      
+    var e = {
+
     }
     that.selectOnce_1()
   },
-  util_1: function (currentStatu_1) {
+  util_1: function(currentStatu_1) {
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation_1 = wx.createAnimation({
@@ -1570,7 +1571,7 @@ Page({
     })
 
     // 第5步：设置定时器到指定时候后，执行第二组动画 
-    setTimeout(function () {
+    setTimeout(function() {
       // 执行第二组动画 
       animation_1.opacity(1).rotateX(0).step();
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
@@ -1594,7 +1595,7 @@ Page({
     }
   },
   //选择了专注模式
-  selectC_1: function () {
+  selectC_1: function() {
     var that = this;
     that.setData({
       ctColor_1: "#fff",
@@ -1610,7 +1611,7 @@ Page({
     console.log(that.data.goal.isConcentrate_1)
   },
   //选择了计划模式
-  selectP_1: function () {
+  selectP_1: function() {
     var that = this;
     that.setData({
       ptColor_1: "#fff",
@@ -1628,7 +1629,7 @@ Page({
   },
 
   //设置目标名称
-  setGoalName_1: function (e) {
+  setGoalName_1: function(e) {
     console.log(e.detail.value)
     var that = this
     that.setData({
@@ -1637,7 +1638,7 @@ Page({
   },
 
   //设置目标时间
-  setGoalMinutes_1: function (e) {
+  setGoalMinutes_1: function(e) {
     var that = this
     console.log(e.detail.value)
     var minutes = parseInt(e.detail.value)
@@ -1646,93 +1647,39 @@ Page({
     })
   },
 
-  hidebtn_1: function () {
+  hidebtn_1: function() {
     var that = this;
     that.setData({
       hiddenbtn_1: (!that.data.hiddenbtn_1)
     })
   },
-  modifyGoal:function(e){
+
+  //修改目标
+  modifyGoal: function(e) {
     var that = this;
-    var newGoal=that.data.chooseWhichGoal
-    for(var i=0;i<8;++i){
-      if(newGoal.period[i]==1){
+    var newGoal = that.data.chooseWhichGoal
+    for (var i = 0; i < 8; ++i) {
+      if (newGoal.period[i] == 1) {
         newGoal.period[i] = true
-      }else{
+      } else {
         newGoal.period[i] = false
       }
     }
-    if (newGoal.planName)
-      if(newGoal.clockTime==0||newGoal.clockName=="时长（10~120）"){
-      wx.request({
-        url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
-        method: 'POST',
-        data: {
-          userId: wx.getStorageSync('openid'),
-          goalId:newGoal.goalId,
-          content: newGoal.planName,
-          complete:newGoal.isComplete,
-          concentrated: false,
-          minutes: 0,
-        },
-        success: function (res) {
-          console.log(res.data)
-          that.setData({
-            goalId: res.data.goalId,
-          })
-          wx.request({
-            url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
-            method: 'POST',
-            data: {
-              goalId: newGoal.goalId,
-              sunday: newGoal.period[0],
-              monday: newGoal.period[1],
-              tuesday: newGoal.period[2],
-              wednesday: newGoal.period[3],
-              thursday: newGoal.period[4],
-              friday: newGoal.period[5],
-              saturday: newGoal.period[6],
-              disposable: that.data.disposable,
-            },
-            success: function (res) {
-              wx.showToast({
-                title: '修改成功',
-                icon:'success',
-                duration: 1000
-              })
-              that.onShow()
-              that.setData({
-                goal: null,
-              })
-            }
-          })
-        }
-      })
-      that.drawer(e);}
-      else{
-        if (newGoal.clockTime < 10) {
-          wx.showToast({
-            title: '时长过短',
-            image: '../images/close.png',
-            duration: 1000
-          })
-        }else{
+    console.log(newGoal.planName)
+      if (newGoal.clockTime == 0 || newGoal.clockName == "时长（10~120）") {
         wx.request({
           url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
           method: 'POST',
           data: {
             userId: wx.getStorageSync('openid'),
             goalId: newGoal.goalId,
-            content: newGoal.clockName,
+            content: newGoal.planName,
             complete: newGoal.isComplete,
-            concentrated: true,
-            minutes: newGoal.clockTime,
+            concentrated: false,
+            minutes: 0,
           },
-          success: function (res) {
+          success: function(res) {
             console.log(res.data)
-            that.setData({
-              goalId: res.data.goalId,
-            })
             wx.request({
               url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
               method: 'POST',
@@ -1747,7 +1694,57 @@ Page({
                 saturday: newGoal.period[6],
                 disposable: that.data.disposable,
               },
-              success: function (res) {
+              success: function(res) {
+                wx.showToast({
+                  title: '修改成功',
+                  icon: 'success',
+                  duration: 1000
+                })
+                that.onShow()
+                that.setData({
+                  goal: null,
+                })
+              }
+            })
+          }
+        })
+        that.drawer(e);
+      }else {
+      if (newGoal.clockTime < 10 || newGoal.clockTime > 120) {
+        wx.showToast({
+          title: '时长不符',
+          image: '../images/close.png',
+          duration: 1000
+        })
+      } else {
+        wx.request({
+          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
+          method: 'POST',
+          data: {
+            userId: wx.getStorageSync('openid'),
+            goalId: newGoal.goalId,
+            content: newGoal.clockName,
+            complete: newGoal.isComplete,
+            concentrated: true,
+            minutes: newGoal.clockTime,
+          },
+          success: function(res) {
+            console.log(res.data)
+            wx.request({
+              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
+              method: 'POST',
+              data: {
+                goalId: newGoal.goalId,
+                sunday: newGoal.period[0],
+                monday: newGoal.period[1],
+                tuesday: newGoal.period[2],
+                wednesday: newGoal.period[3],
+                thursday: newGoal.period[4],
+                friday: newGoal.period[5],
+                saturday: newGoal.period[6],
+                disposable: that.data.disposable,
+              },
+              success: function(res) {
                 wx.showToast({
                   title: '修改成功',
                   icon: 'success',
@@ -1758,9 +1755,9 @@ Page({
             })
           }
         })
-        }
-        that.drawer(e);
       }
-    
+      that.drawer(e);
+    }
+
   }
 })
