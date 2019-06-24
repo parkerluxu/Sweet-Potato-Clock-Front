@@ -62,7 +62,7 @@ Page({
   onShow: function() {
     var that = this;
     wx.request({
-      url: 'http://localhost:8080/displaygroupinformation/displaygroup',
+      url: 'https://clock.dormassistant.wang:8080/displaygroupinformation/displaygroup',
       method: "GET",
       data: {
         groupId: that.data.groupId
@@ -96,7 +96,7 @@ Page({
       }
     });
     wx.request({
-      url: 'http://localhost:8080/displayuserlist/displayuserlist',
+      url: 'https://clock.dormassistant.wang:8080/displayuserlist/displayuserlist',
       method: "GET",
       data: {
         groupId: that.data.groupId
