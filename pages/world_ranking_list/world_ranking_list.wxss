@@ -1,0 +1,138 @@
+
+.on {
+  color: #0aaaf6;
+  border-bottom: 5pxc solid rgba(22, 235, 153, 0.63);
+}
+
+
+.button {
+  display: flex;
+  height: 40px；
+}
+
+.btn2{
+   margin-left: 10%;
+  margin-top: 4%;
+  height: 80rpx;
+  line-height: 70rpx;
+   font-size: 100rpx;
+  padding-right:0rpx; 
+  background-color: #fff;
+}
+.btn2::after{
+  border:0;
+}
+.button1{
+  margin-left: 20%;
+  margin-top: 4%;
+  height: 60rpx;
+  font-size: 30rpx;
+  line-height: 60rpx;
+  padding-top: -5rpx;
+  box-shadow:0px 2px 1px 1px #c0c0c0;
+}
+.button2{
+  margin-left: 0%;
+  margin-top: 4%;
+  height: 60rpx;
+font-size: 30rpx;
+line-height: 60rpx;
+padding-top: -5rpx;
+box-shadow:0px 2px 1px 1px #c0c0c0;
+}
+.name{
+  margin-left: 10px;
+}
+.divLine{
+  background: rgb(194, 191, 191);
+ width: 100%;
+ height: 2rpx;
+ margin-top: 0%;
+}
+
+.list {
+  height: 100%;
+}
+
+.list .item {
+  display: flex;
+  padding: 20rpx 20rpx;
+  border-bottom: 1rpx solid #eee;
+  cursor: pointer;
+}
+.index{
+ margin-top: 2%;
+ margin-left: 0%;
+}
+.index text{ 
+  width: 50rpx;
+  font-size: 50rpx;
+  font-weight: solid;
+  text-align: center;
+  color: #f66a0c;
+  padding: 10rpx;
+  border-radius: 20rpx;
+}
+.list .item .poster {
+  margin-top: 1%;
+    height: 40px;
+    width: 40px;
+    margin-left: 15rpx;
+    border-radius: 40px;
+}
+
+.list .item .meta {
+  width: 55%;
+  margin-left: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.list .item .meta .title,
+.list .item .meta .sub-title {
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.list .item .meta .title {
+  font-size: 32rpx;
+}
+
+.list .item .meta .sub-title {
+  font-size: 22rpx;
+  color: #c0c0c0;
+}
+
+.list .item .meta .artists {
+  font-size: 24rpx;
+  color: #999;
+}
+.rating{
+  display: flex;
+  align-items: center;
+}
+.list .item .rating text {
+  width: 40rpx;
+  font-size: 35rpx;
+  font-weight: bold;
+  text-align: center;
+ 
+  color: #fa9857;
+  padding: 10rpx;
+  border-radius: 20rpx;
+}
+.artists1{
+  display: flex;
+}
+.clock_png{
+  width:30rpx;
+  height: 30rpx;
+  margin-right:2%;
+  margin-top: 1%;
+}
+.tree_png{
+  width:50rpx;
+  height: 50rpx;
+}
+

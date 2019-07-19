@@ -1,0 +1,26 @@
+
+<view class="userinfo">
+  <view class='userinfo-avatar'>
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <open-data type="userNickName" class="userinfo-nickname"></open-data>
+</view>
+<view class="navs">
+  <block wx:for-items="{{orderItems}}" wx:key="name">
+    <view class="nav-item" catchtap="toOrder" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+    <image class="images_title" src="{{item.image_url}}"></image>
+      <text>{{item.contentText}}</text>
+    </view>
+  </block>
+</view>
+<view class='divLine.mid' />
+<view class="btn-area">
+  <button class="btn1"  bindtap='changeToTree'>
+    <image class="images" src="../images/tree.svg"></image>
+      <text>森林</text>
+  </button>
+  <button class="btn1"  bindtap='changeToRecord'>
+    <image class="images_record" src="../images/jilu1.svg"></image>
+      <text>记录</text>
+  </button>
+</view>
