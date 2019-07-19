@@ -1,0 +1,122 @@
+/* pages/MyInfo/MyInfo.wxss */
+
+.page {
+  line-height: 1.6;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fa9857;
+  width: 100%;
+  height: 300rpx;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.userinfo-nickname {
+  color: #fff;
+}
+
+.navs {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-item {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20rpx;
+}
+
+.nav-item .nav-image {
+  width: 55rpx;
+  height: 55rpx;
+  margin: 5rpx;
+}
+.images_title{
+  width: 50rpx;
+  height: 50rpx;
+}
+.nav-item text {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  color: gray;
+}
+.images {
+  width: 80rpx;
+  height: 80rpx;
+}
+.images_record{
+  width: 85rpx;
+  height: 85rpx;
+  padding: 35rpx;
+}
+.text-area{
+  height: 40rpx;
+}
+.btn1 text {
+  color: gray;
+  font-size: 35rpx;
+}
+
+.weui-cells{
+  margin-top: 0rpx;
+  padding-top: 5%;
+}
+
+.weui-cells::after{
+  border: none;
+}
+.btn-area{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    align-items: center;
+}
+.btn1{
+  display: flex;
+  padding: 0;
+  width: 40%;
+  height: 40%;
+  border-radius: 50rpx;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1rpx 1rpx 15rpx #888888;
+  border: 0;
+}
+.btn2{
+  display: flex;
+  padding: 0;
+  width: 40%;
+  height: 20%;
+ border-radius: 50rpx;
+  flex-direction:row;
+  align-items: center;
+box-shadow: 5rpx 5rpx 1rpx 1rpx rgba(71, 58, 58, 0.377);
+}
+button::after{
+  border: none;
+}
+.images{
+   width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+.divLine.mid {
+  background-color: #bdbbbb;
+  width: 100%;
+  height: 2.5rpx;
+}
+
+

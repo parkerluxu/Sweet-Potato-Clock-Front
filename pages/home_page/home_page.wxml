@@ -1,0 +1,137 @@
+<view class="list-cell">
+  <text class="goalList-title">{{date}}</text>
+  <image class="newGoal" src='../images/new.png' bindtap='drawer_1' data-statu="open" style="margin-right:10%;"></image>
+</view>
+
+<view hidden='{{!noData}}' class='noData'>
+<image class='noData_image' src='../images/kong.png'></image>
+<text style='color:gray;'>您还没有打卡目标</text>
+<text style='color:gray;'>点击右上角+添加目标吧！</text>
+</view>
+<view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1"  bindlongtap='showMessage_1'data-statu="open">
+  <view class="clock-list" style="background-image:url('https://dormassistant.wang/back3.png');">
+    <view class="p">
+    <view class="lable2">{{item.clockName}} </view>
+    <view class='time_content'>
+    <image class='time_icon' src='../images/clock2.png'></image>
+    <view class="lable3" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
+    </view>
+    </view>
+    <view class="btn2 {{item.isComplete?'hide':'show'}}" type="default" data-goalid='{{item.goalId}}'bindtap="clockStart" wx:key="" data-clockname='{{item.clockName}}' data-clockTime='{{item.clockTime}}' data-goalId='{{item.goalId}}' data-complete='{{item.isComplete}}' type="default" plain="true" style="color: #fff;">开始</view>
+    <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right1.png'  data-goalid='{{item.goalId}}'></image>
+  </view>
+    <view class="del" catchtap="del_1" data-index="{{index}}">删除</view>
+</view>
+<view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan}}" data-index="{{index}}" bindtouchstart="touchstart_2" bindtouchmove="touchmove_2"  wx:key="" bindlongtap='showMessage_2'data-statu="open">
+  <view class="plan-list" style="background-image:url('https://dormassistant.wang/back2.png'); ">
+    <view class="p">
+      <view class="lable2">{{item.planName}}</view>
+    </view>
+    <view class="btn2 {{item.isComplete?'hide':'show'}}" type="default" bindtap="hidebtn" plain="true" data-goalid='{{item.goalId}}' bindtap="finishPlan" type="default" plain="true" style="color: #fff;">完成</view>
+    <image class="finish {{item.isComplete?'show':'hide'}}" src='../images/right1.png' bindtap="unFinishPlan" data-goalid='{{item.goalId}}'></image>
+  </view>
+   <view class="del" catchtap="del_2" data-index="{{index}}">删除</view>
+</view>
+<view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock_1}}" data-index="{{index}}" bindtouchstart="touchstart_3" bindtouchmove="touchmove_3"  wx:key="" bindlongtap='showMessage_3' data-statu="open">
+  <view class="clock-list1" style="background-image:url('https://dormassistant.wang/origin3-3.png'); background-size:100% 100%;">
+    <view class="p">
+      <view class="lable2">{{item.clockName}} </view>
+      <view class='time_content'>
+    <image class='time_icon' src='../images/clock1.png'></image>
+    <view class="lable3" style="font-size:30rpx;">{{item.clockTime}}分钟</view>
+    </view>
+    </view>
+  <view class="btn2" type="default" plain="true" style="color: #fff;"></view>
+  </view>
+ <view class="del" catchtap="del_3" data-index="{{index}}">删除</view>
+</view>
+<view class="list-card_1 {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan_1}}" data-index="{{index}}" bindtouchstart="touchstart_4" bindtouchmove="touchmove_4"  wx:key="" bindlongtap='showMessage_4'data-statu="open">
+  <view class="plan-list1" style="background:url('https://dormassistant.wang/origin3-3.png'); background-size:100% 100%; ;">
+    <view class="p">
+      <view class="lable2">{{item.planName}}</view>
+    </view>
+    <view class="btn2"  type="default" plain="true"  hover-class="button-hover" data-goalid='{{item.goalId}}' disabled='true' type="default" plain="true" style="color: #fff;" ></view>
+  </view>
+  <view class="del" catchtap="del_4" data-index="{{index}}">删除</view>
+</view>
+
+
+
+<!--添加目标得弹窗-->
+<view class="drawer_screen" bindtap="drawer_1" data-statu="close" wx:if="{{showModalStatus_1}}"></view>
+
+<view animation="{{animationData_1}}" class="drawerbox" wx:if="{{showModalStatus_1}}">
+
+  <view class="drawer-title">添加目标</view>
+  <view class="line">
+    <label class="lable1">模式</label>
+    <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ctColor_1}}; border-color:#ffae49;background-color:{{cbgColor_1}};margin-left: 3%;margin-right: 8%;" hover-class="button-hover" bindtap="selectC_1">专注模式</button>
+    <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ptColor_1}}; border-color:#ffae49;background-color:{{pbgColor_1}};margin-right: 8%;" hover-class="button-hover" bindtap="selectP_1">计划模式</button>
+  </view>
+  <view class="line">
+    <label class="lable1">名称</label>
+    <view class="name-input">
+      <image src='../images/write.png' style="width: 46rpx;height: 55rpx;"></image>
+      <input type="text" name="other" placeholder="{{inputValue_1}}" style="font-size:32rpx;color:#e9833e;margin-right: 5%;" bindinput='setGoalName_1' />
+    </view>
+  </view>
+  <view class="line" style="height:15%;">
+    <label class="lable1">周期</label>
+    <button class="btn1 {{selectIndex_1==1? 'active' : 'inactive'}}" data-index="1" hover-class="button-hover" bindtap="selectOnce_1">一次</button>
+    <button class="btn1 {{selectIndex_1==2? 'active' : 'inactive'}}" data-index="2" hover-class="button-hover" bindtap="selectOnce_1">每天</button>
+    <button class="btn1 {{selectIndex_1==3? 'active' : 'inactive'}}" data-index="3" hover-class="button-hover" bindtap="selectOnce_1">自定义</button>
+  </view>
+  <view class="line" style="height:10%;" hidden="{{hiddenDate_1}}">
+    <botton class="btn3 {{item.selected ? 'active' : 'inactive'}}" wx:for="{{dates_1}}" wx:key="item.index" hover-class="button-hover" bindtap="selectDate_1" data-index="{{item.index}}" checked="{{item.selected}}"> {{item.name}}</botton>
+  </view>
+  <view class="line">
+    <label class="lable1" style="color:{{textColor_1}}">时长</label>
+    <view class="time-input" style="justify-content: center;border:{{tborder_1}}">
+      <input type="number" name="other" value="{{input_1}}" placeholder="{{timeValue_1}}" style="padding:0 5% 0 5%;font-size:32rpx;color:#e9833e;" bindinput="setGoalMinutes" disabled="{{distime_1}}" />
+      <view style="font-size:40rpx;color:{{ibColor_1}};margin:0 3% 0 3%;"> min </view>
+    </view>
+  </view>
+  <view class="btn_ok" bindtap="addGoal" data-statu="close">确定</view>
+</view>
+
+<!--修改目标的弹窗-->
+<view class="drawer_screen" bindtap="drawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+
+<view animation="{{animationData}}" class="drawerbox" wx:if="{{showModalStatus}}">
+
+  <view class="drawer-title">添加目标</view>
+  <view class="line">
+    <label class="lable1">模式</label>
+    <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ctColor}}; border-color:#ffae49;background-color:{{cbgColor}};margin-left: 3%;margin-right: 8%;" hover-class="button-hover" bindtap="selectC">专注模式</button>
+    <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ptColor}}; border-color:#ffae49;background-color:{{pbgColor}};margin-right: 8%;" hover-class="button-hover" bindtap="selectP">计划模式</button>
+  </view>
+  <view class="line">
+    <label class="lable1">名称</label>
+    <view class="name-input">
+      <image src='../images/write.png' style="width: 46rpx;height: 55rpx;"></image>
+      <input type="text" name="other" placeholder="{{inputValue}}" style="font-size:32rpx;color:#e9833e;margin-right: 5%;" bindinput='setGoalName' />
+    </view>
+  </view>
+  <view class="line" style="height:15%;">
+    <label class="lable1">周期</label>
+    <button class="btn1 {{selectIndex==1? 'active' : 'inactive'}}" data-index="1" hover-class="button-hover" bindtap="selectOnce">一次</button>
+    <button class="btn1 {{selectIndex==2? 'active' : 'inactive'}}" data-index="2" hover-class="button-hover" bindtap="selectOnce">每天</button>
+    <button class="btn1 {{selectIndex==3? 'active' : 'inactive'}}" data-index="3" hover-class="button-hover" bindtap="selectOnce">自定义</button>
+  </view>
+  <view class="line" style="height:10%;" hidden="{{hiddenDate}}">
+    <botton class="btn3 {{item.selected ? 'active' : 'inactive'}}" wx:for="{{dates}}" wx:key="item.index" hover-class="button-hover" bindtap="selectDate" data-index="{{item.index}}" checked="{{item.selected}}"> {{item.name}}</botton>
+  </view>
+  <view class="line">
+    <label class="lable1" style="color:{{textColor}}">时长</label>
+    <view class="time-input" style="justify-content: center;border:{{tborder}}">
+      <input type="number" name="other" value="{{input}}" placeholder="{{timeValue}}" style="padding:0 5% 0 5%;font-size:32rpx;color:#e9833e;" bindinput="setGoalMinutes" disabled="{{distime}}" />
+      <view style="font-size:40rpx;color:{{ibColor}};margin:0 3% 0 3%;"> min </view>
+    </view>
+  </view>
+  <view class="btn_ok" style='color:{{color_0}};' bindtap="modifyGoal" data-statu="close" disabled="{{canModify}}">保存修改</view>
+</view>
+
+
+
+
+

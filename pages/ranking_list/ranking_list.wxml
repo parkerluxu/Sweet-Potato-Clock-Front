@@ -1,0 +1,74 @@
+<import src="../common/movie-list" />
+
+<view class="drawer_screen" bindtap="drawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="drawerbox" wx:if="{{showModalStatus}}">
+
+  <view class="drawer-title">
+    <image class="pen_png" src="../images/pen.svg" />
+    <view>修改小组信息</view>
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__bd_1">
+        <input type="text" class="weui-input" value="{{group.groupName}}" disabled='{{isAbled}}'  bindinput='getInput_1' />
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells weui-cells_after-title weui-cell_2 ">
+    <view class="weui-cell weui-cell_1">
+    <image class="suona_png" src="../images/suona.png"></image>
+      <textarea class="weui-textarea text_area" value="{{text}}" fixed='true' bindinput='getInput_2' disabled='{{isAbled}}'/>
+      <view class="weui-textarea-counter">0/200</view>
+    </view>
+  </view>
+   <view class="weui-cell weui-cell_input weui-cell_3">
+      <text class="font">是否私密</text>
+      <switch bindchange ='switchChange'class="is_private_text" checked='{{isPrivate}}' disabled='{{isAbled}}' />
+</view>
+  <button class='btn_ok' bindtap='confirmAndQuit' data-statu="close">{{buttonText}}</button>
+
+</view>
+<view class="button">
+  <button class="button1" size="default" plain="true" style="color:{{color_1_1}}; border-color: {{color_1_2}}; background-color:{{color_1_3}};" hover-class="button-hover">组内排行</button>
+
+
+  <button size="default" class="button2" plain="true " style="color:{{color_2_1}}; border-color: {{color_2_2}}; background-color:{{color_2_3}};" hover-class="button-hover " bindtap="click_on_1">世界排行</button>
+
+
+
+  <button class="btn2" size="default" bindtap="drawer" data-statu="open" >
+
+    <image class="modify_png" src='../images/bianji.svg'></image>
+  </button>
+
+</view>
+<view class='divLine'>
+</view>
+<view hidden='{{isMember}}'>
+ <button type="default" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;" hover-class="button-hover" bindtap='joinGroup'>加入小组</button>
+ <view class='divLine'/>
+</view>
+<scroll-view scroll-y="true" style=" width:100%;min-height:100%; padding:0rpx 0">
+
+  <view class=" list  {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{showList}}" wx:key="">
+    <view class="{{item.isTouchMove ? 'item' : 'item'}} " >
+      <view class="index">
+        <text>{{index+1}}</text>
+      </view>
+      <image class="poster" src="{{item.avatar}}" />
+      <view class="meta">
+        <text class="title">{{item.name}}</text>
+        <view class="artists1">
+          <image class="clock_png" src="../images/clock.png"></image>
+          <view class="artists">今日已专注{{item.minutes}}分钟</view>
+        </view>
+      </view>
+      <view class="rating">
+        <image class="tree_png" src="../images/naozhong.svg"></image>
+        <text>{{item.minutesSum}}mins</text>
+      </view>
+    </view>
+   <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+  </view>
+
+</scroll-view>
