@@ -10,13 +10,15 @@
     "pages/clock/clock",
     "pages/group/group",
     "pages/personal_information/personal_information",
-    "pages/world_ranking_list/world_ranking_list"
+    "pages/world_ranking_list/world_ranking_list",
+    "pages/photo/photo",
+    "pages/album/album"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fa9857",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#bfbfbf",
