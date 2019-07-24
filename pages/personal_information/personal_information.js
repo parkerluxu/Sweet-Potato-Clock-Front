@@ -112,7 +112,7 @@ Page({
   },
   changeToTree: function() {
     wx.navigateTo({
-      url: '../my_forest/my_forest',
+      url: '../album/album',
     })
   },
   changeToRecord: function() {
