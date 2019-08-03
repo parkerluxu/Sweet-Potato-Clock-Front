@@ -1,8 +1,9 @@
-<scroll-view class="album-list" bindtap="goToAlbum" scroll-y="true" lower-threshold="loadAlbumList">
-  <view class='album-card'>
-    <image class='background' src="../images/back2.png" mode="aspectFill"></image>
+<scroll-view class="album-list" scroll-y="true" lower-threshold="loadAlbumList">
+  <view class='album-card' bindtap='changeToPhoto'>
+    <image class='background' src="../images/back2.png" mode="aspectFill" style="display: block;"></image>
     <view class='title'>
-        <text>测试123</text>
+        <view class='h2'>测试123</view>
+        <view class='num'>5/12</view>
     </view>
   </view>
 </scroll-view>

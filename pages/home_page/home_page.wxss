@@ -328,6 +328,8 @@ button::after {
   font: 45rpx;
   color: #fa8d44;
   border-top: 1px solid #fa9857;
+  background-color: #fff;
+  line-height:1;
 }
 
 .del {

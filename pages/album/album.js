@@ -63,5 +63,11 @@ Page({
    */
   onShareAppMessage: function () {
     
-  }
+  },
+
+  changeToPhoto: function () {
+    wx.navigateTo({
+      url: '../photo/photo',
+    })
+  },
 })
