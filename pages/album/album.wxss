@@ -1,0 +1,32 @@
+.album-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 90%;
+  margin-top: 3%;
+  margin-left: 5%;
+  overflow: hidden;
+  justify-content: space-between;
+  border-radius: 10rpx;
+  box-shadow: 1rpx 1rpx 15rpx #888;
+  margin-bottom: 1.5%;
+  height: 100px;
+}
+
+.background {
+  position:relative; 
+  background-size:100%;
+  z-index: -1;
+}
+
+.album-card .title{
+  color:rgb(0, 0, 0);
+  padding: 0 30rpx;
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  box-sizing: border-box;
+}

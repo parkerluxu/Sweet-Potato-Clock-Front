@@ -46,6 +46,21 @@ line-height: 60rpx;
 padding-top: -5rpx;
  box-shadow:0px 2px 1px 1px #c0c0c0;
 }
+.btn_ok::after{
+  border:0;
+}
+.btn_ok {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+  padding: 3%;
+  font: 45rpx;
+  color: #fa8d44;
+  background-color: #fff;
+  border-top: 1px solid #fa9857;
+}
 .name{
   margin-left: 10px;
 }
@@ -61,7 +76,7 @@ padding-top: -5rpx;
    overflow: hidden;
   justify-content: space-between;
   width: 100%;
-  border-bottom:1px solid #ccc;
+  border-bottom: 1rpx solid #eee;
 }
 
  .item {

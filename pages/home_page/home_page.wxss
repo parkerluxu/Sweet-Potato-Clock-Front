@@ -11,7 +11,7 @@
 .goalList-title {
   width: 70%;
   height: 50rpx;
-  padding-left: 12%;
+  padding-left: 8%;
   font-size: 36rpx;
   /*font-weight: 550;*/
   color: #fff;
@@ -23,6 +23,20 @@
   height: 42rpx;
 }
 
+.noData{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20%;
+}
+
+.noData_image{
+  width: 500rpx;
+  height: 500rpx;
+}
+
 .list-card {
   display: flex;
   flex-direction: row;
@@ -30,7 +44,6 @@
   width: 90%;
   margin-top: 3%;
   margin-left: 5%;
-  /*border: 2rpx solid #e9833e;*/
   overflow: hidden;
   justify-content: space-between;
   border-radius: 10rpx;
@@ -43,18 +56,31 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  width: 90%;
   margin-top: 3%;
   margin-left: 5%;
-  width: 90%;
   overflow: hidden;
   justify-content: space-between;
   border-radius: 10rpx;
   box-shadow: 1rpx 1rpx 15rpx #888;
-  color: #b9b6b4;
   margin-bottom: 1.5%;
 }
 
 .clock-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  margin-left: -90px;
+  color: rgb(117, 117, 117);
+}
+
+.clock-list1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -98,6 +124,19 @@
 }
 
 .plan-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  margin-left: -90px;
+  color: rgb(117, 117, 117);
+}
+.plan-list1 {
   display: flex;
   flex-direction: row;
   justify-content: center;

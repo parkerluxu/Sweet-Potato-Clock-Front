@@ -8,80 +8,56 @@ Page({
   data: {
 
     /**
- * 以_1结尾的数组表示那些今天不需要打卡的目标
- */
+     * 以_1结尾的数组表示那些今天不需要打卡的目标
+     */
 
     /**
- * 特别说明，变量以_1结尾的是服务于添加目标的，不加是服务于修改目标的
- */
+     * 特别说明，变量以_1结尾的是服务于添加目标的，不加是服务于修改目标的
+     */
 
 
 
-    clock: [{
-      clockName: "考研加油还有一年",
-      clockTime: "30min",
-      isComplete: Boolean,
-      goalId: Number,
-      period: [],
-    }],
-    plan: [{
-      isComplete: Boolean,
-      planName: "按钮？",
+    clock: [],
+    plan: [],
+    clock_1: [],
 
-      goalId: Number,
-      period: [],
-
-    }],
-    clock_1: [{
-      clockName: "考研加油还有一年",
-      clockTime: "30min",
-      isComplete: Boolean,
-      goalId: Number,
-      period: [],
-    }],
-
-    plan_1: [{
-      isComplete: Boolean,
-      planName: "按钮？",
-      goalId: Number,
-      period: [],
-    }],
+    plan_1: [],
 
     dates: [{
-      name: "Sun",
-      index: "0",
-      selected: false
-    },
-    {
-      name: "Mon",
-      index: "1",
-      selected: false
-    },
-    {
-      name: "Tue",
-      index: "2",
-      selected: false
-    },
-    {
-      name: "Wed",
-      index: "3",
-      selected: false
-    },
-    {
-      name: "Thu",
-      index: "4",
-      selected: false
-    },
-    {
-      name: "Fri",
-      index: "5",
-      selected: false
-    },
-    {
-      name: "Sat",
-      index: "6",
-      selected: false
-    },
+        name: "Sun",
+        index: "0",
+        selected: false
+      },
+      {
+        name: "Mon",
+        index: "1",
+        selected: false
+      },
+      {
+        name: "Tue",
+        index: "2",
+        selected: false
+      },
+      {
+        name: "Wed",
+        index: "3",
+        selected: false
+      },
+      {
+        name: "Thu",
+        index: "4",
+        selected: false
+      },
+      {
+        name: "Fri",
+        index: "5",
+        selected: false
+      },
+      {
+        name: "Sat",
+        index: "6",
+        selected: false
+      },
     ],
     hiddenbtn: true,
     showModalStatus: false,
@@ -120,40 +96,40 @@ Page({
     ibColor_1: "#e9833e",
     hiddenDate_1: true,
     dates_1: [{
-      name: "Sun",
-      index: "0",
-      selected: false
-    },
-    {
-      name: "Mon",
-      index: "1",
-      selected: false
-    },
-    {
-      name: "Tue",
-      index: "2",
-      selected: false
-    },
-    {
-      name: "Wed",
-      index: "3",
-      selected: false
-    },
-    {
-      name: "Thu",
-      index: "4",
-      selected: false
-    },
-    {
-      name: "Fri",
-      index: "5",
-      selected: false
-    },
-    {
-      name: "Sat",
-      index: "6",
-      selected: false
-    },
+        name: "Sun",
+        index: "0",
+        selected: false
+      },
+      {
+        name: "Mon",
+        index: "1",
+        selected: false
+      },
+      {
+        name: "Tue",
+        index: "2",
+        selected: false
+      },
+      {
+        name: "Wed",
+        index: "3",
+        selected: false
+      },
+      {
+        name: "Thu",
+        index: "4",
+        selected: false
+      },
+      {
+        name: "Fri",
+        index: "5",
+        selected: false
+      },
+      {
+        name: "Sat",
+        index: "6",
+        selected: false
+      },
     ],
     goalId: Number,
     startX: 0, //开始坐标
@@ -173,7 +149,7 @@ Page({
   },
 
   //选择“一次”、“每天”、“自定义”
-  selectOnce: function (e) {
+  selectOnce: function(e) {
     var that = this;
     let index = e.currentTarget.dataset.index;
     if (index == that.data.selectIndex_0) {
@@ -238,7 +214,7 @@ Page({
 
   },
   //设置打卡周期
-  selectDate: function (e) {
+  selectDate: function(e) {
     var that = this;
     let index = e.currentTarget.dataset.index;
     let arrs = this.data.dates;
@@ -276,7 +252,7 @@ Page({
     console.log(this.data.dates)
   },
 
-  drawer: function (e) {
+  drawer: function(e) {
     var that = this;
 
     var currentStatu = e.currentTarget.dataset.statu;
@@ -284,21 +260,28 @@ Page({
   },
 
   //确认，发送请求添加数据
-  addGoal: function (e) {
+  addGoal: function(e) {
     var that = this;
     that.setData({
       goalId: null,
     })
-    console.log(that.data.goal.isConcentrate)
-    if (that.data.goal.minutes < 10) {
+    if (that.data.goal.minutes < 10 && that.data.goal.isConcentrate == true) {
       wx.showToast({
         title: '时长过短',
         image: '../images/close.png',
         duration: 1000
       })
+    } else if (that.data.goal.name == undefined || that.data.goal.name == "") {
+      wx.showToast({
+        title: '请输入目标',
+        image: '../images/close.png',
+        duration: 1000
+      })
+    } else if (that.data.goal.isConcentrate == undefined || that.data.goal.name == "") {
+
     } else {
       wx.request({
-        url: 'http://localhost:8080/usergoal/addgoal',
+        url: 'https://clock.dormassistant.wang:8080/usergoal/addgoal',
         method: 'POST',
         data: {
           userId: wx.getStorageSync('openid'),
@@ -306,37 +289,40 @@ Page({
           concentrated: that.data.goal.isConcentrate,
           minutes: that.data.goal.minutes,
         },
-        success: function (res) {
+        success: function(res) {
           console.log(res.data)
           that.setData({
             goalId: res.data.goalId,
           })
           wx.request({
-            url: 'http://localhost:8080/goaldate/addgoaldate',
+            url: 'https://clock.dormassistant.wang:8080/goaldate/addgoaldate',
             method: 'POST',
             data: {
               goalId: that.data.goalId,
-              sunday: that.data.dates[0].selected,
-              monday: that.data.dates[1].selected,
-              tuesday: that.data.dates[2].selected,
-              wednesday: that.data.dates[3].selected,
-              thursday: that.data.dates[4].selected,
-              friday: that.data.dates[5].selected,
-              saturday: that.data.dates[6].selected,
-              disposable: that.data.disposable,
+              sunday: that.data.dates_1[0].selected,
+              monday: that.data.dates_1[1].selected,
+              tuesday: that.data.dates_1[2].selected,
+              wednesday: that.data.dates_1[3].selected,
+              thursday: that.data.dates_1[4].selected,
+              friday: that.data.dates_1[5].selected,
+              saturday: that.data.dates_1[6].selected,
+              disposable: that.data.disposable_1,
             },
-            success: function (res) {
+            success: function(res) {
               that.onShow()
+              that.setData({
+                goal: null,
+              })
+              that.drawer_1(e);
             }
           })
         }
       })
-      that.drawer(e);
     }
 
   },
 
-  util: function (currentStatu) {
+  util: function(currentStatu) {
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation = wx.createAnimation({
@@ -357,7 +343,7 @@ Page({
     })
 
     // 第5步：设置定时器到指定时候后，执行第二组动画 
-    setTimeout(function () {
+    setTimeout(function() {
       // 执行第二组动画 
       animation.opacity(1).rotateX(0).step();
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
@@ -381,7 +367,7 @@ Page({
     }
   },
   //选择了专注模式
-  selectC: function () {
+  selectC: function() {
     var that = this;
     if (that.data.chooseWhichGoal.clockTime == 0) {
       that.setData({
@@ -416,7 +402,7 @@ Page({
     console.log(that.data.goal.isConcentrate)
   },
   //选择了计划模式
-  selectP: function () {
+  selectP: function() {
     var that = this;
     that.setData({
       'chooseWhichGoal.planName': that.data.chooseWhichGoal.clockName,
@@ -447,7 +433,7 @@ Page({
   },
 
   //设置目标名称
-  setGoalName: function (e) {
+  setGoalName: function(e) {
     console.log(e.detail.value)
     var that = this
     that.setData({
@@ -481,7 +467,7 @@ Page({
   },
 
   //设置目标时间
-  setGoalMinutes: function (e) {
+  setGoalMinutes: function(e) {
     var that = this
     console.log(e.detail.value)
     var minutes = parseInt(e.detail.value)
@@ -502,7 +488,7 @@ Page({
     }
   },
 
-  hidebtn: function () {
+  hidebtn: function() {
     var that = this;
     that.setData({
       hiddenbtn: (!that.data.hiddenbtn)
@@ -511,43 +497,53 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     options.hiddenbtn == "true" ? true : false
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var that = this;
     var date = new Date()
     let showTime = util.formatTime(date)
-
     let showDate = showTime.substr(0, 10)
     that.setData({
       date: showDate,
-
+      clock: null,
+      clock_1: null,
+      plan: null,
+      plan_1: null,
     })
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygoal/displaygoal',
+      url: 'https://clock.dormassistant.wang:8080/displaygoal/displaygoal',
       method: 'GET',
       data: {
         userId: wx.getStorageSync('openid')
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.goalList)
         var goalList = res.data.goalList;
         var periodOfGoalList = res.data.periodOfGoalList;
         var goalNoTodayList = res.data.goalNoTodayList;
         var periodOfGoalNoTodayList = res.data.periodOfGoalNoTodayList;
-
+        if (goalList.length == 0 && goalNoTodayList.length == 0) {
+          that.setData({
+            noData: true,
+          })
+        } else {
+          that.setData({
+            noData: false,
+          })
+        }
         var clockNum = 0
         var planNum = 0;
         var clockNum_1 = 0;
@@ -618,7 +614,7 @@ Page({
     })
   },
 
-  finishControll: function (e) {
+  finishControll: function(e) {
     console.log(e.currentTarget.dataset)
     if (e.currentTarget.dataset['iscomplete'] == true) {
       this.unFinishPlan(e);
@@ -627,36 +623,36 @@ Page({
     }
   },
 
-  finishPlan: function (e) {
+  finishPlan: function(e) {
     var that = this;
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
-      url: 'http://localhost:8080/record/planComplete',
+      url: 'https://clock.dormassistant.wang:8080/record/planComplete',
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
         goalId: goalId,
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         that.onShow()
       }
     })
   },
 
-  unFinishPlan: function (e) {
+  unFinishPlan: function(e) {
     var that = this;
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
-      url: 'http://localhost:8080/record/planUnComplete',
+      url: 'https://clock.dormassistant.wang:8080/record/planUnComplete',
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
         goalId: goalId,
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         that.onShow()
       }
@@ -669,39 +665,39 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
-  clockStart: function (event) {
+  clockStart: function(event) {
     console.log(event.currentTarget.dataset)
     if (event.currentTarget.dataset.complete == false) {
       wx.navigateTo({
@@ -718,13 +714,13 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_1: function (e) {
+  touchstart_1: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.clock.forEach(function (v, i) {
+    this.data.clock.forEach(function(v, i) {
 
       if (v.isTouchMove) //只操作为true的
 
@@ -747,7 +743,7 @@ Page({
 
   //滑动事件处理
 
-  touchmove_1: function (e) {
+  touchmove_1: function(e) {
     var that = this;
 
     var that = this,
@@ -768,11 +764,11 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.clock.forEach(function (v, i) {
+    that.data.clock.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -816,7 +812,7 @@ Page({
   
   */
 
-  angle: function (start, end) {
+  angle: function(start, end) {
 
     var _X = end.X - start.X,
 
@@ -828,20 +824,20 @@ Page({
 
   },
 
-  del_1: function (e) {
+  del_1: function(e) {
     var that = this;
 
     console.log(e.currentTarget.dataset.index)
     console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
-      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
 
       method: 'GET',
       data: {
 
         goalId: that.data.clock[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -860,13 +856,13 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_2: function (e) {
+  touchstart_2: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.plan.forEach(function (v, i) {
+    this.data.plan.forEach(function(v, i) {
 
       if (v.isTouchMove) //只操作为true的
 
@@ -889,7 +885,7 @@ Page({
 
   //滑动事件处理
 
-  touchmove_2: function (e) {
+  touchmove_2: function(e) {
     var that = this;
 
     var that = this,
@@ -910,11 +906,11 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.plan.forEach(function (v, i) {
+    that.data.plan.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -948,15 +944,15 @@ Page({
 
   },
 
-  del_2: function (e) {
+  del_2: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -975,13 +971,13 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_3: function (e) {
+  touchstart_3: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.clock_1.forEach(function (v, i) {
+    this.data.clock_1.forEach(function(v, i) {
 
       if (v.isTouchMove) //只操作为true的
 
@@ -1004,7 +1000,7 @@ Page({
 
   //滑动事件处理
 
-  touchmove_3: function (e) {
+  touchmove_3: function(e) {
     var that = this;
 
     var that = this,
@@ -1025,11 +1021,11 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.clock_1.forEach(function (v, i) {
+    that.data.clock_1.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -1063,15 +1059,15 @@ Page({
 
   },
 
-  del_3: function (e) {
+  del_3: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -1090,13 +1086,13 @@ Page({
   },
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart_4: function (e) {
+  touchstart_4: function(e) {
     var that = this;
 
 
     //开始触摸时 重置所有删除
 
-    this.data.plan_1.forEach(function (v, i) {
+    this.data.plan_1.forEach(function(v, i) {
 
       if (v.isTouchMove) //只操作为true的
 
@@ -1119,7 +1115,7 @@ Page({
 
   //滑动事件处理
 
-  touchmove_4: function (e) {
+  touchmove_4: function(e) {
     var that = this;
 
     var that = this,
@@ -1140,11 +1136,11 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.plan_1.forEach(function (v, i) {
+    that.data.plan_1.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -1178,15 +1174,15 @@ Page({
 
   },
 
-  del_4: function (e) {
+  del_4: function(e) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
+      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success == 1) {
           wx.showToast({
             title: '删除成功',
@@ -1203,7 +1199,8 @@ Page({
 
     })
   },
-  showMessage_1: function (e) {
+
+  showMessage_1: function(e) {
     var that = this;
     var dateList = that.data.dates;
     var item = that.data.clock[e.currentTarget.dataset.index];
@@ -1275,7 +1272,7 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-  showMessage_2: function (e) {
+  showMessage_2: function(e) {
     var that = this;
     var dateList = that.data.dates;
     var item = that.data.plan[e.currentTarget.dataset.index];
@@ -1346,7 +1343,7 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-  showMessage_3: function (e) {
+  showMessage_3: function(e) {
     var that = this;
     var dateList = that.data.dates;
     var item = that.data.clock_1[e.currentTarget.dataset.index];
@@ -1418,7 +1415,7 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-  showMessage_4: function (e) {
+  showMessage_4: function(e) {
     var that = this;
     var dateList = that.data.dates;
     var item = that.data.plan_1[e.currentTarget.dataset.index];
@@ -1491,7 +1488,7 @@ Page({
     this.util(currentStatu)
   },
   //选择“一次”、“每天”、“自定义”
-  selectOnce_1: function (e) {
+  selectOnce_1: function(e) {
     var that = this;
     let index = e.currentTarget.dataset.index;
     //如果自定义就打开星期选项
@@ -1529,7 +1526,7 @@ Page({
 
   },
   //设置打卡周期
-  selectDate_1: function (e) {
+  selectDate_1: function(e) {
     let index = e.currentTarget.dataset.index;
     let arrs = this.data.dates_1;
     if (arrs[index].selected == false) {
@@ -1544,12 +1541,16 @@ Page({
     console.log(this.data.dates_1)
   },
 
-  drawer_1: function (e) {
+  drawer_1: function(e) {
     var that = this;
     var currentStatu_1 = e.currentTarget.dataset.statu;
     this.util_1(currentStatu_1)
+    var e = {
+
+    }
+    that.selectOnce_1()
   },
-  util_1: function (currentStatu_1) {
+  util_1: function(currentStatu_1) {
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation_1 = wx.createAnimation({
@@ -1570,7 +1571,7 @@ Page({
     })
 
     // 第5步：设置定时器到指定时候后，执行第二组动画 
-    setTimeout(function () {
+    setTimeout(function() {
       // 执行第二组动画 
       animation_1.opacity(1).rotateX(0).step();
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
@@ -1594,7 +1595,7 @@ Page({
     }
   },
   //选择了专注模式
-  selectC_1: function () {
+  selectC_1: function() {
     var that = this;
     that.setData({
       ctColor_1: "#fff",
@@ -1610,7 +1611,7 @@ Page({
     console.log(that.data.goal.isConcentrate_1)
   },
   //选择了计划模式
-  selectP_1: function () {
+  selectP_1: function() {
     var that = this;
     that.setData({
       ptColor_1: "#fff",
@@ -1628,7 +1629,7 @@ Page({
   },
 
   //设置目标名称
-  setGoalName_1: function (e) {
+  setGoalName_1: function(e) {
     console.log(e.detail.value)
     var that = this
     that.setData({
@@ -1637,7 +1638,7 @@ Page({
   },
 
   //设置目标时间
-  setGoalMinutes_1: function (e) {
+  setGoalMinutes_1: function(e) {
     var that = this
     console.log(e.detail.value)
     var minutes = parseInt(e.detail.value)
@@ -1646,13 +1647,15 @@ Page({
     })
   },
 
-  hidebtn_1: function () {
+  hidebtn_1: function() {
     var that = this;
     that.setData({
       hiddenbtn_1: (!that.data.hiddenbtn_1)
     })
   },
-  modifyGoal: function (e) {
+
+  //修改目标
+  modifyGoal: function(e) {
     var that = this;
     var newGoal = that.data.chooseWhichGoal
     for (var i = 0; i < 8; ++i) {
@@ -1662,78 +1665,23 @@ Page({
         newGoal.period[i] = false
       }
     }
-
-    if (newGoal.clockTime == 0 || newGoal.clockName == "时长（10~120）") {
-
-      wx.request({
-        url: 'http://localhost:8080/usergoal/modifyusergoal',
-        method: 'POST',
-        data: {
-          userId: wx.getStorageSync('openid'),
-          goalId: newGoal.goalId,
-          content: newGoal.planName,
-          complete: newGoal.isComplete,
-          concentrated: false,
-          minutes: 0,
-        },
-        success: function (res) {
-          console.log(res.data)
-          that.setData({
-            goalId: res.data.goalId,
-          })
-          wx.request({
-            url: 'http://localhost:8080/goaldate/modifygoaldate',
-            method: 'POST',
-            data: {
-              goalId: newGoal.goalId,
-              sunday: newGoal.period[0],
-              monday: newGoal.period[1],
-              tuesday: newGoal.period[2],
-              wednesday: newGoal.period[3],
-              thursday: newGoal.period[4],
-              friday: newGoal.period[5],
-              saturday: newGoal.period[6],
-              disposable: that.data.disposable,
-            },
-            success: function (res) {
-              wx.showToast({
-                title: '修改成功',
-                icon: 'success',
-                duration: 1000
-              })
-              that.onShow()
-            }
-          })
-        }
-      })
-      that.drawer(e);
-    }
-    else {
-      if (newGoal.clockTime < 10) {
-        wx.showToast({
-          title: '时长过短',
-          image: '../images/close.png',
-          duration: 1000
-        })
-      } else {
+    console.log(newGoal.planName)
+      if (newGoal.clockTime == 0 || newGoal.clockName == "时长（10~120）") {
         wx.request({
-          url: 'http://localhost:8080/usergoal/modifyusergoal',
+          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
           method: 'POST',
           data: {
             userId: wx.getStorageSync('openid'),
             goalId: newGoal.goalId,
-            content: newGoal.clockName,
+            content: newGoal.planName,
             complete: newGoal.isComplete,
-            concentrated: true,
-            minutes: newGoal.clockTime,
+            concentrated: false,
+            minutes: 0,
           },
-          success: function (res) {
+          success: function(res) {
             console.log(res.data)
-            that.setData({
-              goalId: res.data.goalId,
-            })
             wx.request({
-              url: 'http://localhost:8080/goaldate/modifygoaldate',
+              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
               method: 'POST',
               data: {
                 goalId: newGoal.goalId,
@@ -1746,7 +1694,57 @@ Page({
                 saturday: newGoal.period[6],
                 disposable: that.data.disposable,
               },
-              success: function (res) {
+              success: function(res) {
+                wx.showToast({
+                  title: '修改成功',
+                  icon: 'success',
+                  duration: 1000
+                })
+                that.onShow()
+                that.setData({
+                  goal: null,
+                })
+              }
+            })
+          }
+        })
+        that.drawer(e);
+      }else {
+      if (newGoal.clockTime < 10 || newGoal.clockTime > 120) {
+        wx.showToast({
+          title: '时长不符',
+          image: '../images/close.png',
+          duration: 1000
+        })
+      } else {
+        wx.request({
+          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
+          method: 'POST',
+          data: {
+            userId: wx.getStorageSync('openid'),
+            goalId: newGoal.goalId,
+            content: newGoal.clockName,
+            complete: newGoal.isComplete,
+            concentrated: true,
+            minutes: newGoal.clockTime,
+          },
+          success: function(res) {
+            console.log(res.data)
+            wx.request({
+              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
+              method: 'POST',
+              data: {
+                goalId: newGoal.goalId,
+                sunday: newGoal.period[0],
+                monday: newGoal.period[1],
+                tuesday: newGoal.period[2],
+                wednesday: newGoal.period[3],
+                thursday: newGoal.period[4],
+                friday: newGoal.period[5],
+                saturday: newGoal.period[6],
+                disposable: that.data.disposable,
+              },
+              success: function(res) {
                 wx.showToast({
                   title: '修改成功',
                   icon: 'success',

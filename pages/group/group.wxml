@@ -8,7 +8,11 @@
   <view class='sousuo' bindtap="serchGroup" data-statu="open">搜索</view>
 </view>
 <view class='divLine' />
-
+<view hidden='{{!noData}}' class='noData'>
+<image class='noData_image' src='../images/kong.png'></image>
+<text style='color:gray;'>您还没有加入小组</text>
+<text style='color:gray;'>点击右下角+添加小组吧！</text>
+</view>
 <scroll-view scroll-y="true" style="width:100%;">
   <view wx:for="{{groupList}}" class="list">
     <navigator class="item" url='../ranking_list/ranking_list?groupId={{item.groupId}}'>
@@ -26,7 +30,6 @@
     </navigator>
   </view>
 </scroll-view>
-<view class='divLine' />
 
 <view>
   <image src="/pages/images/new-group.png" class="img-style" animation="{{animCollect}}" bindtap="powerDrawer" data-statu="open"></image>
@@ -50,7 +53,7 @@
       <label class="title col-0">小组简介</label>
       <view class="contentView">
         <view class="textarea_bg">
-          <textarea bindinput="textareaInput2" style="height: 4em" maxlength="-1" />
+          <textarea bindinput="getGroupintro" style="height: 4em" maxlength="-1" class='textarea' />
         </view>
       </view>
     </view>
@@ -68,7 +71,7 @@
   <!--drawer content-->
   <view class="drawer_title ">加入小组</view>
   <view class="drawer_content_join">
-    <text class="drawer_title {{noData? '':'hide'}}">未找到符合条件的小组</text>
+    <text class="drawer_title {{noData1? '':'hide'}}">未找到符合条件的小组</text>
     <view hover-class='hover-class' id="id" style='display:flex; height:160rpx;border-bottom: 1px solid #DBDBDB' bindtap='joinGroup' data-groupid='{{item.groupId}}' wx:for='{{groupShowList}}' wx:key='' class="{{noData?'hide':''}}">
       <!--左边图片-->
       <view style='width:128rpx; height:128rpx; margin:20rpx;'>

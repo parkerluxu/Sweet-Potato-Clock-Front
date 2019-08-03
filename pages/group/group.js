@@ -16,10 +16,7 @@ Page({
     animInput: {}, //item位移,透明度
     ctColor: "#ffae49",
     pbgColor: "#fff",
-    newGroup: {
-      name: String,
-      intro: String,
-    },
+    newGroup:{},
     marqueePace: 1,//滚动速度
     marqueeDistance: [0],//初始滚动距离
     marqueeDistance2: [0],
@@ -27,7 +24,7 @@ Page({
     marquee2_margin: [60],
     size: 14,
     orientation: 'left',//滚动方向
-    interval: 20 // 时间间隔
+    interval: 20 // 时间间隔b
   },
   bindButtonTap: function() {
     this.setData({
@@ -54,8 +51,8 @@ Page({
   powerDrawer: function(e) {
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
+    this.selectP();
   },
-
   util: function(currentStatu) {
     /* 动画部分 */
     // 第1步：创建动画实例 
@@ -162,7 +159,7 @@ Page({
       textColor: "#000",
       tborder: "2rpx dashed #ffae49",
       ibColor: "#e9833e",
-      'newGroup.isPrivate': true,
+      'newGroup.isPrivate': 1,
     })
     console.log(that.data.newGroup.isPrivate)
   },
@@ -179,7 +176,7 @@ Page({
       tborder: "2rpx dashed #979797",
       input: "",
       ibColor: "#979797",
-      'newGroup.isPrivate': false,
+      'newGroup.isPrivate': 0,
     })
     console.log(that.data.newGroup.isPrivate)
   },
@@ -265,32 +262,37 @@ Page({
 
   addGroup: function(e) {
     var that = this
-    that.powerDrawer(e)
-    var isPrivate = 0
-    if (that.data.newGroup.isPrivate = true) {
-      isPrivate = 1
-    } else {
-      isPrivate = 0
+    if (that.data.newGroup==null||that.data.newGroup.name == null || that.data.newGroup.intro == null){
+      wx.showToast({
+        title: '请输入名称简介',
+        image:"../images/close.png",
+        duration:1000
+      })
+    }else{
+      that.powerDrawer(e)
+      wx.request({
+        url: 'https://clock.dormassistant.wang:8080/cretegroup',
+        method: 'POST',
+        data: {
+          captainId: wx.getStorageSync('openid'),
+          groupName: that.data.newGroup.name,
+          privateGroup: that.data.newGroup.isPrivate,
+          description: that.data.newGroup.intro,
+        },
+        success: function (res) {
+          console.log(res.data)
+          var toastText = "创建成功";
+          wx.showToast({
+            title: toastText,
+            icon: 'success',
+            duration: 1000
+          });
+          that.onShow();
+        }
+      })
     }
-    wx.request({
-      url: 'http://127.0.0.1:8080/cretegroup',
-      method: 'POST',
-      data: {
-        captainId: wx.getStorageSync('openid'),
-        groupName: that.data.newGroup.name,
-        privateGroup: isPrivate,
-        description: that.data.newGroup.intro,
-      },
-      success: function(res) {
-        console.log(res.data)
-        var toastText = "创建成功";
-        wx.showToast({
-          title: toastText,
-          icon: 'success',
-          duration: 1000
-        });
-        that.onShow();
-      }
+    that.setData({
+      newGroup:null
     })
   },
 
@@ -299,7 +301,7 @@ Page({
     var that=this
     console.log(e.currentTarget.dataset)
     wx.request({
-      url: 'http://127.0.0.1:8080/joinGroup',
+      url: 'https://clock.dormassistant.wang:8080/joinGroup',
       method:'GET',
       data:{
         userid:wx.getStorageSync('openid'),
@@ -314,10 +316,16 @@ Page({
             duration: 1000
           })
           that.onShow();
-        }else{
+        } else if (res.data.success == 2){
           wx.showToast({
             title: '您已在该小组',
             image:'../images/close.png',
+            duration: 1000
+          })
+        }else{
+          wx.showToast({
+            title: '系统错误',
+            image: '../images/close.png',
             duration: 1000
           })
         }
@@ -328,8 +336,11 @@ Page({
   getShowGroup:function(e){
     var that = this
     that.pDrawer(e)
+    that.setData({
+      noData1: false,
+    })
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygrouprandom/displaygrouprandom',
+      url: 'https://clock.dormassistant.wang:8080/displaygrouprandom/displaygrouprandom',
       method:'GET',
       success(res){
         console.log(res.data)
@@ -371,10 +382,11 @@ Page({
   serchGroup:function(e){
     var that=this
     that.setData({
-      groupShowList:null
+      groupShowList:null,
+      noData1:false,
     })
     wx.request({
-      url: 'http://127.0.0.1:8080/search/searchbygroupname',
+      url: 'https://clock.dormassistant.wang:8080/search/searchbygroupname',
       method:'GET',
       data:{
         groupName:that.data.searchName
@@ -401,7 +413,7 @@ Page({
           }
         }else{
           that.setData({
-            noData:true
+            noData1:true
           })
         }
       }
@@ -422,7 +434,7 @@ Page({
   onShow: function () {
     var that=this
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
+      url: 'https://clock.dormassistant.wang:8080/displaygroupbyuserid/displaygroupbyuserid',
       method: "GET",
       data: {
         userid: wx.getStorageSync('openid')
@@ -430,8 +442,14 @@ Page({
       success: function (res) {
         console.log(res.data)
         var list = res.data.groupList;
-        if(res.data.groupList==null){
-          
+        if(res.data.groupList.length==0){
+          that.setData({
+            noData:true
+          })
+        }else{
+          that.setData({
+            noData: false
+          })
         }
         for (var i = 0; i < res.data.groupList.length; ++i) {
           var k1 = 'groupList[' + i + '].groupName';

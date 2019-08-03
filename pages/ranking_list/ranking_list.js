@@ -16,7 +16,7 @@ Page({
     color_2_2: "#f66a0c",
     color_2_3: "#ffffff",
     memberList: [],
-
+    isMember:false,
     timeList: [],
     groupId: 1,
     list_1: [],
@@ -62,14 +62,12 @@ Page({
   onShow: function() {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygroupinformation/displaygroup',
+      url: 'https://clock.dormassistant.wang:8080/displaygroupinformation/displaygroup',
       method: "GET",
       data: {
         groupId: that.data.groupId
       },
-
       success: function(res) {
-
         var value = res.data.groupInformation;
         that.setData({
           captainId: value.captainId,
@@ -83,22 +81,22 @@ Page({
         if (that.data.captainId == that.data.userId) {
           that.setData({
             isCapatain: true,
-            isAbled: false
+            isAbled: false,
+            buttonText:'保存更改',
           })
         } else {
           that.setData({
             isCapatain: false,
-
-            isAbled: true
-
+            isAbled: true,
+            buttonText: '退出小组',
           })
+          
         }
 
       }
     });
-
     wx.request({
-      url: 'http://127.0.0.1:8080/displayuserlist/displayuserlist',
+      url: 'https://clock.dormassistant.wang:8080/displayuserlist/displayuserlist',
       method: "GET",
       data: {
         groupId: that.data.groupId
@@ -114,7 +112,12 @@ Page({
           var k3 = 'showList[' + i + '].minutesSum';
           var k4 = 'showList[' + i + '].minutes';
           var k5 = 'showList[' + i +'].isTouchMove';
-          var k6='showList['+i+
+          var userId=wx.getStorageSync('openid')
+          if (userId == res.data.userList[i].userId){
+            that.setData({
+              isMember:true,
+            })
+          }
           that.setData({
             [k1]: that.data.memberList[i].avatar,
             [k2]: that.data.memberList[i].userNickname,
@@ -161,21 +164,49 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    title:this.data.groupName
   },
-
+  //加入小组
+  joinGroup: function (e) {
+    var that = this
+    console.log(e.currentTarget.dataset)
+    wx.request({
+      url: 'https://clock.dormassistant.wang:8080/joinGroup',
+      method: 'GET',
+      data: {
+        userid: wx.getStorageSync('openid'),
+        groupid: that.data.groupId,
+      },
+      success(res) {
+        console.log(res.data)
+        if (res.data.success == 1) {
+          wx.showToast({
+            title: '加入成功',
+            icon: 'success',
+            duration: 1000
+          })
+        } else {
+          wx.showToast({
+            title: '您已在该小组',
+            image: '../images/close.png',
+            duration: 1000
+          })
+        }
+        that.onShow();
+      }
+    })
+  },
   click_on_1: function() {
     wx.navigateTo({
       url: '../world_ranking_list/world_ranking_list',
-
     })
   },
   getInput_1:function(e) {
     var that = this;
     that.setData({
       'group.groupName': e.detail.value
-
     })
+    console.log(that.data.group.groupName)
   },
 
   getInput_2:function(e) {
@@ -186,13 +217,18 @@ Page({
   },
   switchChange:function(e){
     var that=this;
-    that.setData({
-      'group.isPrivate':e.detail.value
-    })
+    if(e.detail.value==false){
+      that.setData({
+        'group.isPrivate': 0
+      })
+    }else{
+      that.setData({
+        'group.isPrivate': 0
+      })
+    }
+   
   },
   util: function(currentStatu) {
-
-
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation = wx.createAnimation({
@@ -216,15 +252,12 @@ Page({
 
 
     setTimeout(function() {
-
-
       // 执行第二组动画 
       animation.opacity(1).rotateX(0).step();
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
       this.setData({
         animationData: animation
       })
-
       //关闭 
       if (currentStatu == "close") {
         this.setData({
@@ -232,7 +265,6 @@ Page({
         });
       }
     }.bind(this), 100)
-
     // 显示 
     if (currentStatu == "open") {
       this.setData({
@@ -245,35 +277,62 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
-  confirm:function(){
-    var that = this;
-    wx.showModal({
-      title:'提示',
-    content: '确定修改吗？',
-      success: function(sm) {
-        if (sm.confirm == true) {
-          wx.request({
-            url: 'http://127.0.0.1:8080/group/modifyname',
-            method: "POST",
-            data: {
-              groupId: that.data.groupId,
-              groupName: that.data.group.groupName,
-              privateGroup:that.data.group.isPrivate,
-              description:that.data.group.text
-            },
-            success: function (res) {
-              if (res.data.success == 1) {
-                wx.showToast({
-                  title: '修改成功',
-                  duration: 1500,
-                })
-              }
-            }
-          })
-        }
-      }
 
-  })
+  confirmAndQuit:function(e){
+    var that = this;
+    if(that.data.isCapatain==true){
+      wx.request({
+        url: 'https://clock.dormassistant.wang:8080/group/modifyname',
+        method: "POST",
+        data: {
+          groupId: that.data.groupId,
+          groupName: that.data.group.groupName,
+          privateGroup: that.data.group.isPrivate,
+          description: that.data.group.text
+        },
+        success: function (res) {
+          if (res.data.success == 1) {
+            wx.showToast({
+              title: '修改成功',
+              duration: 1500,
+            })
+          }
+          that.onShow()
+        },
+      })
+
+    }else{
+      wx.showModal({
+        title: '退出小组',
+        content: '确认退出吗？',
+        success(e){
+          if(e.confirm==true){
+            wx.request({
+              url: 'https://clock.dormassistant.wang:8080/deletegroupmember/deletegroupmember',
+              method: 'GET',
+              data: {
+                userId: wx.getStorageSync('openid'),
+                groupId: that.data.groupId
+              }, success: function (res) {
+                if (res.data.success == 1) {
+                  that.onShow()
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                  wx.showToast({
+                    title: '退出成功',
+                    icon: 'success',
+                    duration: 1000
+                  })
+                }
+              }
+            })
+          }
+        }
+      })
+    }
+    that.drawer(e)
+    that.onShow();
   },
   //手指触摸动作开始 记录起点X坐标
 
@@ -386,7 +445,7 @@ Page({
   del: function (e) {
     var that=this;
     wx.request({
-      url: 'http://127.0.0.1:8080/deletegroupmember/deletegroupmember',
+      url: 'https://clock.dormassistant.wang:8080/deletegroupmember/deletegroupmember',
       method:'GET',
       data:{
         userId: that.data.memberList[e.currentTarget.dataset.index].userId,
@@ -405,9 +464,7 @@ Page({
     this.data.showList.splice(e.currentTarget.dataset.index, 1)
 
     this.setData({
-
       showList: this.data.showList
-
     })
 
   }

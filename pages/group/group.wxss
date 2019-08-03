@@ -20,6 +20,20 @@
   margin-top: 34rpx;
 }
 
+.noData{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20%;
+}
+
+.noData_image{
+  width: 500rpx;
+  height: 500rpx;
+}
+
 .sousuo {
   margin-left: 15rpx;
   width: 15%;
@@ -27,6 +41,7 @@
   text-align: center;
   border: 1px solid #fa9857;
   border-radius: 10rpx;
+  align-items: center;
 }
 
 .page_row {
@@ -65,10 +80,10 @@
   padding: 20rpx 40rpx;
   border-bottom: 1rpx solid #eee;
   cursor: pointer;
+  align-items: center;
 }
 
 .index {
-  margin-top: 2%;
   margin-left: 0%;
 }
 
@@ -88,7 +103,7 @@
   padding: 5rpx;
 }
 
-.image_group {
+.image_group{
   width: 50rpx;
   height: 50rpx;
 }
@@ -141,21 +156,19 @@
   height: 120rpx;
   width: 120rpx;
   position: fixed;
-  bottom: 250rpx;
+  bottom: 15rpx;
   right: 0rpx;
   z-index: 100;
-  top: 900rpx;
 }
 
 .img-style {
   height: 120rpx;
   width: 120rpx;
   position: fixed;
-  bottom: 250rpx;
+  bottom: 15rpx;
   opacity: 0;
   right: 0rpx;
   z-index: 100;
-  top: 900rpx;
 }
 
 /*button*/
@@ -209,10 +222,9 @@
 }
 
 .drawer_content {
-  height: 500rpx;
+  height: 360rpx;
   overflow-y: scroll; /*超出父盒子高度可滚动*/
 }
-
 .drawer_content_join {
   height: 550rpx;
   overflow-y: scroll; /*超出父盒子高度可滚动*/
@@ -326,11 +338,10 @@ radio {
   height: 12%;
 }
 
-.hide {
+.hide{
   display: none;
 }
-
-.item_content {
+.item_content{
   width: 400rpx;
   height: 50rpx;
   font-size: 11pt;
@@ -339,14 +350,12 @@ radio {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
-.item_from {
+.item_from{
   width: 300rpx;
   font-size: 10pt;
   color: #999;
 }
-
-.item_time {
+.item_time{
   width: 100%;
   font-size: 10pt;
   color: #999;
@@ -355,10 +364,12 @@ radio {
   overflow: hidden;
   margin-left: 40rpx;
 }
-
-.hover-class {
-  background-color: #a4d3ee;
+.hover-class{
+  background-color: #A4D3EE;
 }
+
+
+
 
 .example {
   display: block;
@@ -370,16 +381,14 @@ radio {
   width: 100%;
   position: relative;
 }
-
+.contentView {
+  width: 75%;
+  margin-top: 40rpx;
+}
 .marquee_text {
   white-space: nowrap;
   position: absolute;
   top: 0;
-}
-
-.contentView {
-  width: 75%;
-  margin-top: 40rpx;
 }
 
 .textarea_title {
@@ -395,7 +404,8 @@ radio {
   margin-right: 40rpx;
 }
 
-textarea {
+.textarea {
   width: 100%;
   padding: 20rpx 0;
+  
 }

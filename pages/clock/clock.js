@@ -13,7 +13,10 @@ const initDeg = {
   left: 45,
   right: -45,
 }
-
+var areaWidth //滑块移动区域宽度
+var viewWidth //滑块宽度
+var viewX, viewX0, viewX1 //滑块左边界坐标
+var workTime
 Page({
 
   data: {
@@ -28,6 +31,33 @@ Page({
     imageSrc: ['../images/clock-tree1.png', '../images/clock-tree2.png', '../images/clock-tree3.png'],
     imageindex:0,
     buttonText:'开始',
+    canMove: true,
+    canSet: true,
+  },
+
+
+  move: function (e) {
+    var query = wx.createSelectorQuery()
+    query.select('#movable-view').boundingClientRect(function (rect) {
+      viewX = rect.left
+      viewX1 = viewX
+      console.log("viewX1------->", viewX1)
+    }).exec()
+
+    //时间
+    workTime = Math.round((viewX1 - viewX0) / (areaWidth - viewWidth) * (99 - this.data.minutesLimit)) + parseInt(this.data.minutesLimit)
+      this.setData({
+        workTime: workTime,
+      })
+      var e = {
+        detail:{
+          value:workTime
+        }
+      }
+    this.goal_of_time(e)
+  },
+  moveend: function (e) {
+    
   },
 
   onLoad:function(option){
@@ -37,6 +67,26 @@ Page({
       minutesLimit: option.minutesLimit,
       goalId: option.id,
     });
+    var query = wx.createSelectorQuery()
+    //第一次进来应该获取节点信息，用来计算滑块长度
+    if ( viewWidth == undefined || viewWidth == null || viewX == undefined || viewX == null) {
+      setTimeout(function () { //代码多的情况下需要延时执行，否则可能获取不到节点信息
+        //获取movable的宽度，计算改变进度使用
+        query.select('#movable-area').boundingClientRect(function (rect) {
+          areaWidth = rect.width
+          console.log("areaWidth------->", areaWidth)
+        }).exec()
+        query.select('#movable-view').boundingClientRect(function (rect) {
+          viewWidth = rect.width // 节点的宽度
+          console.log("viewWidth------->", viewWidth)
+        }).exec()
+        query.select('#movable-view').boundingClientRect(function (rect) {
+          viewX = rect.left
+          viewX0 = viewX
+          console.log("viewX0------->", viewX0)
+        }).exec()
+      }, 1000)
+    }
   },
 
   onShow: function () {
@@ -75,14 +125,21 @@ Page({
     let isRuning = this.data.isRuning
     let showTime = util.formatTime1(this.data.workTime, 'HH')
     let keepTime = showTime * 60 * 1000
-    if (!isRuning) {
+    if (isRuning==false) {
       this.timer = setInterval((function () {
         this.updateTimer()
         this.startNameAnimation()
       }).bind(this), 1000)
       this.setData({
-        buttonText: '取消'
+        buttonText: '取消',
+        isRuning:true,
       })
+      this.data.log = {
+        startTime: Date.now(),
+        keepTime: keepTime,
+        endTime: keepTime + startTime,
+        action: actionName[isRuning ? 'stop' : 'start'],
+      }
     } else {
       this.stopTimer()
       this.setData({
@@ -90,18 +147,6 @@ Page({
       })
     }
 
-    this.setData({
-      isRuning: !isRuning,
-      completed: false,
-      remainTimeText: showTime + ':00',
-    })
-    
-    this.data.log = {
-      startTime: Date.now(),
-      keepTime: keepTime,
-      endTime: keepTime + startTime,
-      action: actionName[isRuning ? 'stop' : 'start'],
-    }
   },
 
   startNameAnimation: function () {
@@ -127,7 +172,7 @@ Page({
       // clear timer
       this.timer && clearInterval(that.timer)
       wx.request({
-        url: 'http://localhost:8080/record/goalcomplete',
+        url: 'https://clock.dormassistant.wang:8080/record/goalcomplete',
         method: 'POST',
         data: {
           goalId: that.data.goalId,
@@ -136,7 +181,6 @@ Page({
         },
         success: function (res) {
           console.log(res.data)
-          clearInterval(that.data.intervarID);
           var pages = getCurrentPages(); //当前页面栈
           if (pages.length > 1) {
             var beforePage = pages[pages.length - 2]; //获取上一个页面实例对象
@@ -164,14 +208,15 @@ Page({
             // reset circle progress
             that.setData({
               leftDeg: initDeg.left,
-              rightDeg: initDeg.right
+              rightDeg: initDeg.right,
+              remainTimeText: that.data.workTime + ":00",
+              isRuning:false,
             })
             // clear timer
             that.timer && clearInterval(that.timer)
           }else{
             that.setData({
               buttonText: '取消',
-              isRuning:true,
             })
           }
         }
@@ -219,13 +264,20 @@ Page({
   },
 
   onUnload: function () {
+    // reset circle progress
+    that.setData({
+      leftDeg: initDeg.left,
+      rightDeg: initDeg.right,
+      remainTimeText: that.data.workTime + ":00",
+      isRuning: false,
+      buttonText: '开始',
+    })
     // clear timer
-    this.timer && clearInterval(this.timer)
+    that.timer && clearInterval(that.timer)
   },
 
   onHide: function () {
-    // clear timer
-    this.timer && clearInterval(this.timer)
+
   },
 
 })

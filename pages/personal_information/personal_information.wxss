@@ -94,7 +94,6 @@
   justify-content: center;
   box-shadow: 1rpx 1rpx 15rpx #888888;
   border: 0;
-
 }
 .btn2{
   display: flex;

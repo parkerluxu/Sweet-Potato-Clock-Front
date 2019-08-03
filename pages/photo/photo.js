@@ -1,4 +1,4 @@
-// pages/linking_list/linking_list.js
+// pages/photo.js
 Page({
 
   /**

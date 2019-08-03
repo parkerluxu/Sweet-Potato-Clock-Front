@@ -9,7 +9,7 @@
         <view class="alert-text">获得你的公开信息（昵称、头像等）</view>
       </view>
     </view>
-   <button type="default" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;" hover-class="button-hover" open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo">确认授权</button>
+   <button type="default" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;box-shadow: 0px 10rpx 30rpx 0px rgba(0, 0, 0, 0.1);" hover-class="button-hover" open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo">确认授权</button>
   </view>
   <view class="logged" wx:else>
   <view class='image_view'>

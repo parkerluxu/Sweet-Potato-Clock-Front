@@ -40,7 +40,7 @@ Page({
                   })
                   //调用后端
                   wx.request({
-                    url: 'http://localhost:8080/WXLogin',
+                    url: 'https://clock.dormassistant.wang:8080/WXLogin',
                     data: {
                       encryptedData: res.encryptedData,
                       iv: res.iv,
@@ -70,7 +70,7 @@ Page({
             }
           })
         }
-        if (res.authSetting['scope.userInfo']) {
+        if (res.authSetting['scope.userInfo']&&wx.getStorageSync('logged')==false) {
           wx.login({
             success: function (r) {
               //获取临时凭证
@@ -84,7 +84,7 @@ Page({
                   })
                   //调用后端
                   wx.request({
-                    url: 'http://localhost:8080/WXLogin',
+                    url: 'https://clock.dormassistant.wang:8080/WXLogin',
                     data: {
                       encryptedData: res.encryptedData,
                       iv: res.iv,
@@ -136,16 +136,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
-    that.setData({
-      logged: wx.getStorageSync('logged')
-    })
-    if (that.data.logged == true) {
-      setTimeout(function () {
+    var that=this
+    if(wx.getStorageSync('logged')==true){
+      that.setData({
+        logged:true
+      })
+      setTimeout(function(){
         wx.switchTab({
           url: '../home_page/home_page',
         })
-      }, 2000)
+      },1000)
+      
     }
   },
 

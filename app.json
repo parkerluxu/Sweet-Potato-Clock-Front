@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/home_page/home_page",
     "pages/login/login",
+    "pages/home_page/home_page",
     "pages/record/record",
     "pages/my_forest/my_forest",
     "pages/ranking_list/ranking_list",
@@ -10,13 +10,15 @@
     "pages/clock/clock",
     "pages/group/group",
     "pages/personal_information/personal_information",
-    "pages/world_ranking_list/world_ranking_list"
+    "pages/world_ranking_list/world_ranking_list",
+    "pages/photo/photo",
+    "pages/album/album"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fa9857",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#bfbfbf",
