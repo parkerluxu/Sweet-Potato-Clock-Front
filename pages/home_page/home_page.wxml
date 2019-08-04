@@ -8,6 +8,19 @@
 <text style='color:gray;'>您还没有打卡目标</text>
 <text style='color:gray;'>点击右上角+添加目标吧！</text>
 </view>
+
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{isGetPotato}}"></view>
+ <view class="dialog-box" wx:if="{{isGetPotato}}">
+      <image src="../images/fanshu.png" />
+      <text>恭喜你获得{{numberOfGetPotato}}块番薯</text>
+      <button bindtap="confirm_1">确定</button>
+    </view>
+    <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{isGetEnoughPotato}}"></view>
+ <view class="dialog-box" wx:if="{{isGetEnoughPotato}}">
+      <image src="../images/fanshu.png" />
+      <text>你今日通过计划模式打卡获得的番薯已达到上限</text>
+      <button bindtap="confirm_2">确定</button>
+    </view>
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1"  bindlongtap='showMessage_1'data-statu="open">
   <view class="clock-list" style="background-image:url('https://dormassistant.wang/back3.png');">
     <view class="p">
@@ -91,9 +104,7 @@
       <view style="font-size:40rpx;color:{{ibColor_1}};margin:0 3% 0 3%;"> min </view>
     </view>
   </view>
-  <form name='pushMsgFm' report-submit="true" bindtap="addGoal">
-  <button class="btn_ok"  data-statu="close">确定</button>
-  </form>
+  <view class="btn_ok" bindtap="addGoal" data-statu="close">确定</view>
 </view>
 
 <!--修改目标的弹窗-->

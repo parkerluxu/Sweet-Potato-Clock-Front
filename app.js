@@ -72,7 +72,10 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    isGetPotato:false,
+    numberOfPotato:1
+
   },
   
 })
