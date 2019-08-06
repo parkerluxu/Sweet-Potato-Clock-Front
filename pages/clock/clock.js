@@ -182,7 +182,8 @@ Page({
         success: function (res) {
           console.log(res.data)
           var app=getApp();
-          app.global.numberOfPotato=res.data.numberOfGetPotato;
+          app.globalData.numberOfPotato=res.data.numberOfGetPotato;
+          app.globalData.isGetNewPhoto=res.data.isGetNewPhoto;
           var pages = getCurrentPages(); //当前页面栈
           if (pages.length > 1) {
             var beforePage = pages[pages.length - 2]; //获取上一个页面实例对象

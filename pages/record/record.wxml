@@ -1,27 +1,52 @@
 <!--pages/record/record.wxml-->
 <view class='weui-cell-third'>
-  <view class='calender'>
-    <calendar selected="{{selected}}" bindselect="bindselect" bindgetdate="bindgetdate" />
+
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}"  bindtap="navbarTap">{{item}}</text>
   </view>
-  <block wx:for="{{recordInfo}}" wx:key="*this">
-    <view class='weui-cell-list'>
-      <image src='../images/jilu.png' class='image_list'></image>
-      <view class='block'>
-        <view class='date-time'>
-          <view class='weui-cell-time'>{{item.year}}年{{item.month}}月{{item.day}}日</view>
-          <view class='weui-cell-time'>{{item.hour}}:{{item.timeMinute}}</view>
-        </view>
-        <view class='weui-cell-line' />
-        <view class='clock_content' wx:if="{{item.concentrated}}">
-          <view class="clock_block">
-            <view class='weui-cell-content'>{{item.content}}</view>
-            <view class='weui-cell-minutes'>{{item.minutes}}分钟</view>
+  <view hidden="{{currentTab!==0}}">
+    <view class='calender'>
+      <calendar selected="{{selected}}" bindselect="bindselect" bindgetdate="bindgetdate" />
+    </view>
+    <block wx:for="{{recordInfo}}" wx:key="*this">
+      <view class='weui-cell-list'>
+        <image src='../images/jilu.png' class='image_list'></image>
+        <view class='block'>
+          <view class='date-time'>
+            <view class='weui-cell-time'>{{item.year}}年{{item.month}}月{{item.day}}日</view>
+            <view class='weui-cell-time'>{{item.hour}}:{{item.timeMinute}}</view>
+          </view>
+          <view class='weui-cell-line' />
+          <view class='clock_content' wx:if="{{item.concentrated}}">
+            <view class="clock_block">
+              <view class='weui-cell-content'>{{item.content}}</view>
+              <view class='weui-cell-minutes'>{{item.minutes}}分钟</view>
+            </view>
+          </view>
+          <view class='clock_content' wx:else>
+            <view class='weui-cell-content plan'>{{item.content}}</view>
           </view>
         </view>
-        <view class='clock_content' wx:else>
-          <view class='weui-cell-content plan'>{{item.content}}</view>
-        </view>
       </view>
+    </block>
+  </view>
+  <view hidden="{{currentTab!==1}}">
+    <view class='divLine.mid' />
+    <view class="button">
+      <button class="button1" size="default" plain="true" style="color:{{color_1_1}}; border-color: {{color_1_2}}; background-color:{{color_1_3}};" hover-class="button-hover" bindtap="clickDay">日</button>
+      <button size="default" class="button2" plain="true " style="color:{{color_2_1}}; border-color: {{color_2_2}}; background-color:{{color_2_3}};" hover-class="button-hover " bindtap="clickWeek">周</button>
+      <button size="default" class="button2" plain="true " style="color:{{color_3_1}}; border-color: {{color_3_2}}; background-color:{{color_3_3}};" hover-class="button-hover " bindtap="clickMonth">月</button>
     </view>
-  </block>
+    <view class='divLine.mid' />
+    <view class='date'>
+      <image src='../images/left.svg' class="arrow" bindtap='dateLastCon'></image>
+      <view class='date-content'>
+        <image src='../images/rili.svg' class='clock'></image>
+        <text class="date-str">{{dateStr.year}}年{{dateStr.month}}月{{dateStr.day}}日</text>
+      </view>
+      <image src='../images/right.svg' class="arrow" bindtap='dateNextCon'></image>
+    </view>
+    <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+    <canvas canvas-id="ringCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+  </view>
 </view>

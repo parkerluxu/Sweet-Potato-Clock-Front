@@ -9,9 +9,10 @@
     "pages/logs/logs",
     "pages/clock/clock",
     "pages/group/group",
+    "pages/photo/photo",
     "pages/personal_information/personal_information",
     "pages/world_ranking_list/world_ranking_list",
-    "pages/album"
+    "pages/album/album"
   ],
   "window": {
     "backgroundTextStyle": "light",

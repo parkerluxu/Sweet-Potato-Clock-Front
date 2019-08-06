@@ -61,13 +61,14 @@ Page({
         var value = res.data.userinformation; 
         var daysSum = value.daysSum + '天';
         var minutesSum = value.minutesSum + '分钟';
-        
+        var numberOfPotato=res.data.numberOfPotato+'个';
         var item0 = 'orderItems[' + 0 + '].contentText';
         var item1 = 'orderItems[' + 1 + '].contentText';
         var item2 = 'orderItems[' + 2 + '].contentText';
         that.setData({
           [item0]: daysSum,
           [item1]: minutesSum,
+          [item2]:numberOfPotato
         })
       },
     })
@@ -109,7 +110,7 @@ Page({
   },
   changeToTree: function() {
     wx.navigateTo({
-      url: '../my_forest/my_forest',
+      url: '../album/album',
     })
   },
   changeToRecord: function() {

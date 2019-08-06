@@ -144,7 +144,9 @@ Page({
     chooseWhichGoal: String,
     isGetEnoughPotato:false,
     isGetPotato:false,
-    numberOfGetPotato:1
+    numberOfGetPotato:1,
+    isGetNewPhoto:false,
+    isGetNewPhotoShow:false
 
   },
 
@@ -508,6 +510,7 @@ Page({
       this.setData({
         isGetPotato: true,
         numberOfGetPotato: app.globalData.numberOfPotato ,
+        isGetNewPhoto:true,
       })
     }
   },
@@ -531,6 +534,7 @@ Page({
     that.setData({
       isGetPotato:app.globalData.isGetPotato,
       numberOfGetPotato:app.globalData.numberOfPotato,
+      isGetNewPhoto:app.globalData.isGetNewPhoto,
       date: showDate,
       clock: null,
       clock_1: null,
@@ -653,6 +657,10 @@ Page({
         var app=getApp();
         if(res.data.isGetPotato==1){
             app.globalData.isGetPotato=true
+            if(res.data.isGetNewPhoto==1){
+              app.globalData.isGetNewPhoto=true
+            }else
+              app.globalData.isGetNewPhoto = false
         }else if(res.data.isGetPotato==0){
           that.setData({
             isGetEnoughPotato:true
@@ -1514,7 +1522,7 @@ Page({
   //选择“一次”、“每天”、“自定义”
   selectOnce_1: function(e) {
     var that = this;
-    let index = e.currentTarget.dataset.index;
+    var index = e.currentTarget.dataset.index;
     //如果自定义就打开星期选项
     if (index == 3) {
       this.setData({
@@ -1792,13 +1800,28 @@ Page({
       numberOfGetPotato:1
     })
     var app=getApp();
-    app.globalData.isGetPotato=false
+    app.globalData.isGetPotato=false;
+    if(that.data.isGetNewPhoto==true){
+      that.setData({
+        isGetNewPhotoShow:true
+      })
+    }
   },
   //关闭获得番薯达到上限框
 confirm_2:function(){
-  var that=this
+  var that=this;
   that.setData({
     isGetEnoughPotato:false
   })
+},
+//关闭提示获得新照片的提示框
+confirm_3:function(){
+  var that=this;
+  that.setData({
+    isGetNewPhoto:false,
+    isGetNewPhotoShow:false,
+  })
+  app.globalData.isGetNewPhoto=false;
+  app.globalData.isGetNewPhotoShow=false;
 }
 })

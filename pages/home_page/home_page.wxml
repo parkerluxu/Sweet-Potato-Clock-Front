@@ -21,6 +21,13 @@
       <text>你今日通过计划模式打卡获得的番薯已达到上限</text>
       <button bindtap="confirm_2">确定</button>
     </view>
+        <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{isGetNewPhotoShow}}"></view>
+ <view class="dialog-box" wx:if="{{isGetNewPhotoShow}}">
+      <image src="../images/fanshu.png" />
+      <text>恭喜你获得一张新照片</text>
+      <button bindtap='gotoAlbum'>去相册</button>
+      <button bindtap="confirm_3">确定</button>
+    </view>
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1"  bindlongtap='showMessage_1'data-statu="open">
   <view class="clock-list" style="background-image:url('https://dormassistant.wang/back3.png');">
     <view class="p">
@@ -90,9 +97,9 @@
   </view>
   <view class="line" style="height:15%;">
     <label class="lable1">周期</label>
-    <button class="btn1 {{selectIndex_1==1? 'active' : 'inactive'}}" data-index="1" hover-class="button-hover" bindtap="selectOnce_1">一次</button>
-    <button class="btn1 {{selectIndex_1==2? 'active' : 'inactive'}}" data-index="2" hover-class="button-hover" bindtap="selectOnce_1">每天</button>
-    <button class="btn1 {{selectIndex_1==3? 'active' : 'inactive'}}" data-index="3" hover-class="button-hover" bindtap="selectOnce_1">自定义</button>
+    <button class="btn1 {{selectIndex_1==1? 'active' : 'inactive'}}" data-index='1' hover-class="button-hover" bindtap="selectOnce_1">一次</button>
+    <button class="btn1 {{selectIndex_1==2? 'active' : 'inactive'}}" data-index='2' hover-class="button-hover" bindtap="selectOnce_1">每天</button>
+    <button class="btn1 {{selectIndex_1==3? 'active' : 'inactive'}}" data-index='3' hover-class="button-hover" bindtap="selectOnce_1">自定义</button>
   </view>
   <view class="line" style="height:10%;" hidden="{{hiddenDate_1}}">
     <botton class="btn3 {{item.selected ? 'active' : 'inactive'}}" wx:for="{{dates_1}}" wx:key="item.index" hover-class="button-hover" bindtap="selectDate_1" data-index="{{item.index}}" checked="{{item.selected}}"> {{item.name}}</botton>

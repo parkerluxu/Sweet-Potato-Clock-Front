@@ -74,7 +74,9 @@ App({
   globalData: {
     userInfo: null,
     isGetPotato:false,
-    numberOfPotato:1
+    numberOfPotato:1,
+    isGetNewPhoto:false,
+    isGetNewPhotoShow:false,
 
   },
   
