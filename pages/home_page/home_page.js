@@ -1817,11 +1817,25 @@ confirm_2:function(){
 //关闭提示获得新照片的提示框
 confirm_3:function(){
   var that=this;
+  var app=getApp();
   that.setData({
     isGetNewPhoto:false,
     isGetNewPhotoShow:false,
   })
   app.globalData.isGetNewPhoto=false;
   app.globalData.isGetNewPhotoShow=false;
-}
+},
+  gotoAlbum:function(){
+    var that = this;
+    var app = getApp();
+    that.setData({
+      isGetNewPhoto: false,
+      isGetNewPhotoShow: false,
+    })
+    app.globalData.isGetNewPhoto = false;
+    app.globalData.isGetNewPhotoShow = false;
+    wx.navigateTo({
+      url: '../album/album',
+    })
+  }
 })

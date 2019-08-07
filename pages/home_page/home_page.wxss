@@ -387,3 +387,11 @@ button::after {
   margin-bottom: 40rpx;
   text-align:center;
 }
+.button-line{
+  display: flex;
+  width:100%;
+}
+.button-line button{
+  margin-right: 0%;
+  margin-left: 15%;
+}

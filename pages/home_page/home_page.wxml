@@ -25,8 +25,10 @@
  <view class="dialog-box" wx:if="{{isGetNewPhotoShow}}">
       <image src="../images/fanshu.png" />
       <text>恭喜你获得一张新照片</text>
+      <view class="button-line">
       <button bindtap='gotoAlbum'>去相册</button>
       <button bindtap="confirm_3">确定</button>
+      </view>
     </view>
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1"  bindlongtap='showMessage_1'data-statu="open">
   <view class="clock-list" style="background-image:url('https://dormassistant.wang/back3.png');">
