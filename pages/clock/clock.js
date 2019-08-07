@@ -189,7 +189,7 @@ Page({
       // clear timer
       this.timer && clearInterval(that.timer)
       wx.request({
-        url: 'https://clock.dormassistant.wang:8080/record/goalcomplete',
+        url: 'http://127.0.0.1:8080/record/goalcomplete',
         method: 'POST',
         data: {
           goalId: that.data.goalId,
@@ -198,6 +198,9 @@ Page({
         },
         success: function (res) {
           console.log(res.data)
+          var app=getApp();
+          app.globalData.numberOfPotato=res.data.numberOfGetPotato;
+          app.globalData.isGetNewPhoto=res.data.isGetNewPhoto;
           var pages = getCurrentPages(); //当前页面栈
           if (pages.length > 1) {
             var beforePage = pages[pages.length - 2]; //获取上一个页面实例对象

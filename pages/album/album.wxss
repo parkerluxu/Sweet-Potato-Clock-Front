@@ -1,3 +1,4 @@
+/* pages/album.wxss */
 .album-list {
   display: flex;
   flex-direction: row;
@@ -10,18 +11,18 @@
   border-radius: 10rpx;
   box-shadow: 1rpx 1rpx 15rpx #888;
   margin-bottom: 1.5%;
-  height: 180rpx;
+  height: 100px;
 }
 
 .background {
   position:relative; 
+  background-size:100%;
   z-index: -1;
-  width: 100%;
 }
 
 .album-card .title{
   color:rgb(0, 0, 0);
-  padding: 30rpx 30rpx;
+  padding: 0 30rpx;
   position: absolute;
   top:0;
   left: 0;
@@ -29,15 +30,4 @@
   width: 100%;
   z-index: 1;
   box-sizing: border-box;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-}
-
-.album-card .title .h2{
-  font-size: 50rpx;
-}
-
-.album-card .title .num{
-  vertical-align: bottom;
-  font-size: 30rpx;
 }

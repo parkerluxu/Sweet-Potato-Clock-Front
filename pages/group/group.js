@@ -271,7 +271,7 @@ Page({
     }else{
       that.powerDrawer(e)
       wx.request({
-        url: 'https://clock.dormassistant.wang:8080/cretegroup',
+        url: 'http://127.0.0.1:8080/cretegroup',
         method: 'POST',
         data: {
           captainId: wx.getStorageSync('openid'),
@@ -301,7 +301,7 @@ Page({
     var that=this
     console.log(e.currentTarget.dataset)
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/joinGroup',
+      url: 'http://127.0.0.1:8080/joinGroup',
       method:'GET',
       data:{
         userid:wx.getStorageSync('openid'),
@@ -340,7 +340,7 @@ Page({
       noData1: false,
     })
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displaygrouprandom/displaygrouprandom',
+      url: 'http://127.0.0.1:8080/displaygrouprandom/displaygrouprandom',
       method:'GET',
       success(res){
         console.log(res.data)
@@ -386,7 +386,7 @@ Page({
       noData1:false,
     })
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/search/searchbygroupname',
+      url: 'http://127.0.0.1:8080/search/searchbygroupname',
       method:'GET',
       data:{
         groupName:that.data.searchName
@@ -434,7 +434,7 @@ Page({
   onShow: function () {
     var that=this
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displaygroupbyuserid/displaygroupbyuserid',
+      url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
       method: "GET",
       data: {
         userid: wx.getStorageSync('openid')

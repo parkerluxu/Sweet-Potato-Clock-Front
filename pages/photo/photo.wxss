@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* pages/photo.wxss */
 
 .mainFrame {
@@ -105,3 +106,6 @@
   color: #888;
   text-align: right;
 }
+=======
+/* pages/photo/photo.wxss */
+>>>>>>> develop_branch

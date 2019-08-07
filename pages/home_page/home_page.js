@@ -14,9 +14,6 @@ Page({
     /**
      * 特别说明，变量以_1结尾的是服务于添加目标的，不加是服务于修改目标的
      */
-
-
-
     clock: [],
     plan: [],
     clock_1: [],
@@ -145,6 +142,11 @@ Page({
     color_0: "#979797",
     goalName_0: String,
     chooseWhichGoal: String,
+    isGetEnoughPotato:false,
+    isGetPotato:false,
+    numberOfGetPotato:1,
+    isGetNewPhoto:false,
+    isGetNewPhotoShow:false
 
   },
 
@@ -299,12 +301,12 @@ Page({
 
     } else {
       wx.request({
-        url: 'https://clock.dormassistant.wang:8080/usergoal/addgoal',
+        url: 'http://127.0.0.1:8080/usergoal/addgoal',
         method: 'POST',
         data: {
           userId: wx.getStorageSync('openid'),
           content: that.data.goal.name,
-          concentrated: that.data.goal.isConcentrate,
+          isConcentrated: that.data.goal.isConcentrate,
           minutes: that.data.goal.minutes,
         },
         success: function(res) {
@@ -313,7 +315,7 @@ Page({
             goalId: res.data.goalId,
           })
           wx.request({
-            url: 'https://clock.dormassistant.wang:8080/goaldate/addgoaldate',
+            url: 'http://127.0.0.1:8080/goaldate/addgoaldate',
             method: 'POST',
             data: {
               goalId: that.data.goalId,
@@ -517,6 +519,18 @@ Page({
    */
   onLoad: function(options) {
     options.hiddenbtn == "true" ? true : false
+    var app=getApp();
+    if(app.globalData.numberOfPotato==0){
+    this.setData({
+      isGetPotato: false,
+      numberOfGetPotato: 1,
+    })}else{
+      this.setData({
+        isGetPotato: true,
+        numberOfGetPotato: app.globalData.numberOfPotato ,
+        isGetNewPhoto:true,
+      })
+    }
   },
 
   /**
@@ -530,11 +544,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var app=getApp();
     var that = this;
     var date = new Date()
     let showTime = util.formatTime(date)
     let showDate = showTime.substr(0, 10)
     that.setData({
+      isGetPotato:app.globalData.isGetPotato,
+      numberOfGetPotato:app.globalData.numberOfPotato,
+      isGetNewPhoto:app.globalData.isGetNewPhoto,
       date: showDate,
       clock: null,
       clock_1: null,
@@ -542,7 +560,7 @@ Page({
       plan_1: null,
     })
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displaygoal/displaygoal',
+      url: 'http://127.0.0.1:8080/displaygoal/displaygoal',
       method: 'GET',
       data: {
         userId: wx.getStorageSync('openid')
@@ -581,7 +599,7 @@ Page({
             that.setData({
               [clockName]: goalList[i].content,
               [clockTime]: goalList[i].minutes,
-              [clockComplete]: goalList[i].complete,
+              [clockComplete]: goalList[i].isComplete,
               [clockId]: goalList[i].goalId,
               [periodOfClock]: periodOfGoalList[i],
             })
@@ -589,7 +607,7 @@ Page({
           } else {
             that.setData({
               [planName]: goalList[i].content,
-              [planComplete]: goalList[i].complete,
+              [planComplete]: goalList[i].isComplete,
               [planId]: goalList[i].goalId,
               [periodOfPlan]: periodOfGoalList[i],
               [planTime]: goalList[i].minutes,
@@ -612,7 +630,7 @@ Page({
             that.setData({
               [clockName]: goalNoTodayList[i].content,
               [clockTime]: goalNoTodayList[i].minutes,
-              [clockComplete]: goalNoTodayList[i].complete,
+              [clockComplete]: goalNoTodayList[i].isComplete,
               [clockId]: goalNoTodayList[i].goalId,
               [periodOfCLock]: periodOfGoalNoTodayList[i],
             })
@@ -620,7 +638,7 @@ Page({
           } else {
             that.setData({
               [planName]: goalNoTodayList[i].content,
-              [planComplete]: goalNoTodayList[i].complete,
+              [planComplete]: goalNoTodayList[i].isComplete,
               [planId]: goalNoTodayList[i].goalId,
               [periodOfPlan]: periodOfGoalNoTodayList[i],
               [planTime]: goalNoTodayList[i].minutes,
@@ -646,7 +664,7 @@ Page({
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/record/planComplete',
+      url: 'http://127.0.0.1:8080/record/planComplete',
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
@@ -654,7 +672,20 @@ Page({
       },
       success: function(res) {
         console.log(res.data)
+        var app=getApp();
+        if(res.data.isGetPotato==1){
+            app.globalData.isGetPotato=true
+            if(res.data.isGetNewPhoto==1){
+              app.globalData.isGetNewPhoto=true
+            }else
+              app.globalData.isGetNewPhoto = false
+        }else if(res.data.isGetPotato==0){
+          that.setData({
+            isGetEnoughPotato:true
+          })
+        }
         that.onShow()
+    
       }
     })
   },
@@ -664,13 +695,14 @@ Page({
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/record/planUnComplete',
+      url: 'http://127.0.0.1:8080/record/planUnComplete',
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
         goalId: goalId,
       },
       success: function(res) {
+        console.log(100)
         console.log(res.data)
         that.onShow()
       }
@@ -848,7 +880,7 @@ Page({
     console.log(e.currentTarget.dataset.index)
     console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
 
       method: 'GET',
       data: {
@@ -965,7 +997,7 @@ Page({
   del_2: function(e) {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan[e.currentTarget.dataset.index].goalId
@@ -1080,7 +1112,7 @@ Page({
   del_3: function(e) {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
@@ -1195,7 +1227,7 @@ Page({
   del_4: function(e) {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
+      url: 'http://127.0.0.1:8080/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId
@@ -1508,7 +1540,7 @@ Page({
   //选择“一次”、“每天”、“自定义”
   selectOnce_1: function(e) {
     var that = this;
-    let index = e.currentTarget.dataset.index;
+    var index = e.currentTarget.dataset.index;
     //如果自定义就打开星期选项
     if (index == 3) {
       this.setData({
@@ -1686,20 +1718,20 @@ Page({
     console.log(newGoal.planName)
       if (newGoal.clockTime == 0 || newGoal.clockName == "时长（10~120）") {
         wx.request({
-          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
+          url: 'http://127.0.0.1:8080/usergoal/modifyusergoal',
           method: 'POST',
           data: {
             userId: wx.getStorageSync('openid'),
             goalId: newGoal.goalId,
             content: newGoal.planName,
-            complete: newGoal.isComplete,
-            concentrated: false,
+            isComplete: newGoal.isComplete,
+            isConcentrated: false,
             minutes: 0,
           },
           success: function(res) {
             console.log(res.data)
             wx.request({
-              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
+              url: 'http://127.0.0.1:8080/goaldate/modifygoaldate',
               method: 'POST',
               data: {
                 goalId: newGoal.goalId,
@@ -1736,20 +1768,20 @@ Page({
         })
       } else {
         wx.request({
-          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
+          url: 'http://127.0.0.1:8080/usergoal/modifyusergoal',
           method: 'POST',
           data: {
             userId: wx.getStorageSync('openid'),
             goalId: newGoal.goalId,
             content: newGoal.clockName,
-            complete: newGoal.isComplete,
-            concentrated: true,
+            isComplete: newGoal.isComplete,
+            isConcentrated: true,
             minutes: newGoal.clockTime,
           },
           success: function(res) {
             console.log(res.data)
             wx.request({
-              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
+              url: 'http://127.0.0.1:8080/goaldate/modifygoaldate',
               method: 'POST',
               data: {
                 goalId: newGoal.goalId,
@@ -1777,5 +1809,51 @@ Page({
       that.drawer(e);
     }
 
+  },
+  //关闭祝贺框
+  confirm_1:function(){
+    var that=this;
+    that.setData({
+      isGetPotato:false,
+      numberOfGetPotato:1
+    })
+    var app=getApp();
+    app.globalData.isGetPotato=false;
+    if(that.data.isGetNewPhoto==true){
+      that.setData({
+        isGetNewPhotoShow:true
+      })
+    }
+  },
+  //关闭获得番薯达到上限框
+confirm_2:function(){
+  var that=this;
+  that.setData({
+    isGetEnoughPotato:false
+  })
+},
+//关闭提示获得新照片的提示框
+confirm_3:function(){
+  var that=this;
+  var app=getApp();
+  that.setData({
+    isGetNewPhoto:false,
+    isGetNewPhotoShow:false,
+  })
+  app.globalData.isGetNewPhoto=false;
+  app.globalData.isGetNewPhotoShow=false;
+},
+  gotoAlbum:function(){
+    var that = this;
+    var app = getApp();
+    that.setData({
+      isGetNewPhoto: false,
+      isGetNewPhotoShow: false,
+    })
+    app.globalData.isGetNewPhoto = false;
+    app.globalData.isGetNewPhotoShow = false;
+    wx.navigateTo({
+      url: '../album/album',
+    })
   }
 })

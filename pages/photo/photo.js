@@ -1,9 +1,11 @@
-// pages/photo.js
-
-var ARR_NEWS_DATA = []
-
+// pages/photo/photo.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
+<<<<<<< HEAD
     hidden: false,
     xinwen_list: [{
       id : 1,
@@ -19,26 +21,16 @@ Page({
     indicatordots: true,
     duration: 1000
   },
+=======
+>>>>>>> develop_branch
 
-  onLoad: function () {
-    var that = this;
-      that.setData({
-        hidden: true,
-      })
   },
 
-  onPostTap: function (event) {
-    var postId = event.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: "../video/video-listdetails?id=" + postId
-    })
-  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
 
-  onShareAppMessage: function () {
-    return {
-      title: '柳州1号+ 视听页面',
-      path: 'pages/video/video'
-    }
   },
 
   /**
@@ -88,20 +80,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  getSelectItem: function (e) {
-    var that = this;
-    var itemWidth = e.detail.scrollWidth / that.data.proList.length;//每个商品的宽度
-    var scrollLeft = e.detail.scrollLeft;//滚动宽度
-    var curIndex = Math.round(scrollLeft / itemWidth);//通过Math.round方法对滚动大于一半的位置进行进位
-    for (var i = 0, len = that.data.proList.length; i < len; ++i) {
-      that.data.proList[i].selected = false;
-    }
-    that.data.proList[curIndex].selected = true;
-    that.setData({
-      proList: that.data.proList,
-      giftNo: this.data.proList[curIndex].id
-    });
-  },
+  }
 })
