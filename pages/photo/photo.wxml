@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!--pages/photo.wxml-->
 
 <view class="mainFrame">
@@ -26,7 +25,3 @@
 <loading hidden="{{hidden}}" bindchange="loadingChange">
   加载中...
 </loading>
-=======
-<!--pages/photo/photo.wxml-->
-<text>pages/photo/photo.wxml</text>
->>>>>>> develop_branch

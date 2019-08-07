@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-<<<<<<< HEAD
     hidden: false,
     xinwen_list: [{
       id : 1,
@@ -21,10 +20,7 @@ Page({
     indicatordots: true,
     duration: 1000
   },
-=======
->>>>>>> develop_branch
 
-  },
 
   /**
    * 生命周期函数--监听页面加载

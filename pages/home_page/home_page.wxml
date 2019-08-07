@@ -113,13 +113,9 @@
       <view style="font-size:40rpx;color:{{ibColor_1}};margin:0 3% 0 3%;"> min </view>
     </view>
   </view>
-<<<<<<< HEAD
   <form name='pushMsgFm' report-submit="true" bindtap="getFormID">
   <button class="btn_ok"  data-statu="close" bindtap="addGoal">确定</button>
   </form>
-=======
-  <view class="btn_ok" bindtap="addGoal" data-statu="close">确定</view>
->>>>>>> develop_branch
 </view>
 
 <!--修改目标的弹窗-->

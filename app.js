@@ -72,17 +72,10 @@ App({
     })
   },
   globalData: {
-<<<<<<< HEAD
-    userInfo: null
-    
-=======
     userInfo: null,
     isGetPotato:false,
     numberOfPotato:1,
     isGetNewPhoto:false,
     isGetNewPhotoShow:false,
-
->>>>>>> develop_branch
   },
-  
 })
