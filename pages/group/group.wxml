@@ -9,9 +9,9 @@
 </view>
 <view class='divLine' />
 <view hidden='{{!noData}}' class='noData'>
-<image class='noData_image' src='../images/kong.png'></image>
-<text style='color:gray;'>您还没有加入小组</text>
-<text style='color:gray;'>点击右下角+添加小组吧！</text>
+  <image class='noData_image' src='../images/kong.png'></image>
+  <text style='color:gray;'>您还没有加入小组</text>
+  <text style='color:gray;'>点击右下角+添加小组吧！</text>
 </view>
 <scroll-view scroll-y="true" style="width:100%;">
   <view wx:for="{{groupList}}" class="list">
@@ -49,6 +49,18 @@
       <label class="title col-0">小组名称</label>
       <input class="input_base input_h30 col-1" name="rName" placeholder="请输入小组名称" bindinput='getGroupName'></input>
     </view>
+    <!--新建小组标签行-->
+    <view class="line" hidden="{{hiddenDate_1}}">
+      <button class="btn4 inactive" bindtap="modalinput" hidden='{{isTagMax}}' hover-class="button-hover">自定义</button>
+      <botton class="btn3 {{item.selected ? 'active' : 'inactive'}}" wx:for="{{dates_1}}" wx:key="item.index" hover-class="button-hover" bindtap="selectDate_1" data-index="{{item.index}}" checked="{{item.selected}}"> {{item.name}}</botton>
+
+    </view>
+    <!--新建小组自定义标签弹窗-->
+    <modal style="color:#ffae49 cbgColor:#ffae49" hidden="{{hiddenmodalput}}" title="自定义标签" confirm-text="提交" cancel-text="重置" bindcancel="cancel" confirm-type="done" bindconfirm="confirm">
+      <input value='' type='text' value='{{tapname}}' bindinput="inputTapName" placeholder="标签" auto-focus/>
+    </modal>
+
+
     <view class="top grid">
       <label class="title col-0">小组简介</label>
       <view class="contentView">

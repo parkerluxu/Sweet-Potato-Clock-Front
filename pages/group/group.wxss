@@ -20,7 +20,7 @@
   margin-top: 34rpx;
 }
 
-.noData{
+.noData {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@
   margin-top: 20%;
 }
 
-.noData_image{
+.noData_image {
   width: 500rpx;
   height: 500rpx;
 }
@@ -103,7 +103,7 @@
   padding: 5rpx;
 }
 
-.image_group{
+.image_group {
   width: 50rpx;
   height: 50rpx;
 }
@@ -217,7 +217,7 @@
   font: 45rpx;
   /*font-weight: 550;*/
   text-align: left;
-  color: #000;
+  color: #fff;
   background-color: #fa9857;
 }
 
@@ -225,6 +225,7 @@
   height: 360rpx;
   overflow-y: scroll; /*超出父盒子高度可滚动*/
 }
+
 .drawer_content_join {
   height: 550rpx;
   overflow-y: scroll; /*超出父盒子高度可滚动*/
@@ -335,13 +336,17 @@ radio {
 .line {
   display: flex;
   padding-top: 3%;
-  height: 12%;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.hide{
+.hide {
   display: none;
 }
-.item_content{
+
+.item_content {
   width: 400rpx;
   height: 50rpx;
   font-size: 11pt;
@@ -350,12 +355,14 @@ radio {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.item_from{
+
+.item_from {
   width: 300rpx;
   font-size: 10pt;
   color: #999;
 }
-.item_time{
+
+.item_time {
   width: 100%;
   font-size: 10pt;
   color: #999;
@@ -364,12 +371,10 @@ radio {
   overflow: hidden;
   margin-left: 40rpx;
 }
-.hover-class{
-  background-color: #A4D3EE;
+
+.hover-class {
+  background-color: #a4d3ee;
 }
-
-
-
 
 .example {
   display: block;
@@ -381,10 +386,12 @@ radio {
   width: 100%;
   position: relative;
 }
+
 .contentView {
   width: 75%;
   margin-top: 40rpx;
 }
+
 .marquee_text {
   white-space: nowrap;
   position: absolute;
@@ -407,5 +414,58 @@ radio {
 .textarea {
   width: 100%;
   padding: 20rpx 0;
-  
+}
+
+.btn3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  margin-bottom: 2%;
+  font-size: 25rpx;
+  border-radius: 50rpx;
+  background-color: #fff;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  align-content: space-around;
+  line-height: 2;
+}
+
+.btn4 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  margin-bottom: 2%;
+  font-size: 25rpx;
+  border-radius: 50rpx;
+  background-color: #fff;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  align-content: space-around;
+  line-height: 2;
+}
+
+.active {
+  color: #fff;
+  border: 2rpx solid #ffae49;
+  background-color: #ffae49;
+  padding: 8rpx;
+  margin-right: 3%;
+  width: 20%;
+}
+
+button::after {
+  border: 0;
+}
+
+.inactive {
+  color: #ffae49;
+  border: 2rpx solid #ffae49;
+  background-color: #fff;
+  padding: 8rpx;
+  margin-right: 3%;
+  width: 20%;
 }

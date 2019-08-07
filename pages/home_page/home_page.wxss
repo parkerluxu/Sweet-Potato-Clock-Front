@@ -49,7 +49,6 @@
   border-radius: 10rpx;
   box-shadow: 1rpx 1rpx 15rpx #888;
   margin-bottom: 1.5%;
-
 }
 
 .list-card_1 {
@@ -161,12 +160,10 @@
   justify-content: center;
   align-items: center;
   width: 35%;
-
   height: 49rpx;
   padding: 5%;
-  padding-right: 5rpx;
+  padding-right: 1rpx;
   font-size: 45rpx;
-
 }
 
 .btn2_1 {
@@ -317,7 +314,7 @@ button::after {
   text-align: center;
   align-items: center;
   margin-left: 7%;
-  width: 60%;
+  width: 55%;
   font-size: 40rpx;
 }
 
