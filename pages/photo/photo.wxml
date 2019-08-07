@@ -4,11 +4,6 @@
   <swiper class="container" indicator-dots="{{indicatorDots}}" indicator-dots="{{indicatordots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{xinwen_list}}" wx:for-index="index">
       <swiper-item class="vol-swiper-item" bindtap="onItemClick">
-        <view class="vol-meta-title">
-          <image class="icon_right" src="../images/left.svg"></image>
-          <text class="vol-number">来源：{{item.copyfrom}}</text>
-          <image class="icon_left" src="../images/right.svg"></image>
-        </view>
         <view class="vol-card" data-id="{{item.id}}" catchtap="onPostTap">
           <!--<view data-detail-href="{{item.detailHref}}" class="item">-->
           <!--图片-->
@@ -20,10 +15,6 @@
           <!--时间-->
           <view class="vol-meta-time">
             <text>{{item.inputtime}}</text>
-          </view>
-          <!--描述信息-->
-          <view class="vol-content">
-            <text class="vol-content-text">{{item.description}}</text>
           </view>
           <!--</view>-->
         </view>

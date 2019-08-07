@@ -259,12 +259,30 @@ Page({
     this.util(currentStatu)
   },
 
+  //获取fromId
+  getFormID: function (e) {
+    var formId = e.detail.formId
+    wx.request({
+      url: 'https://localhost:8080/addFormId',
+      method: 'GET',
+      data: {
+        userId: wx.getStorageSync('openid'),
+        formId: formId,
+      },
+      success:function(res){
+        console.log(res)
+      }
+    })
+  },
+
   //确认，发送请求添加数据
   addGoal: function(e) {
     var that = this;
     that.setData({
       goalId: null,
+      formId: e.detail.formId
     })
+    wx.setStorageSync("formId",that.data.formId)
     if (that.data.goal.minutes < 10 && that.data.goal.isConcentrate == true) {
       wx.showToast({
         title: '时长过短',

@@ -5,14 +5,14 @@ var ARR_NEWS_DATA = []
 Page({
   data: {
     hidden: false,
-    xinwen_list: {
-      id : '1',
+    xinwen_list: [{
+      id : 1,
       images:["../images/back2.png"],
       title:"测试",
       inputtime:2345,
       description:"1234",
       copyfrom:"123"
-    },
+    }],
     indicatorDots: false,
     autoplay: false,
     interval: 2000,

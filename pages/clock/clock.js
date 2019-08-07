@@ -120,7 +120,24 @@ Page({
     }
   },
 
+
+  getFormID: function (e) {
+    var formId = e.detail.formId
+    wx.request({
+      url: 'https://localhost:8080/addFormId',
+      method: 'GET',
+      data: {
+        userId: wx.getStorageSync('openid'),
+        formId: formId,
+      },
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  },
+
   startTimer: function (e) {
+    var formId=e.detail.formId
     let startTime = Date.now()
     let isRuning = this.data.isRuning
     let showTime = util.formatTime1(this.data.workTime, 'HH')
