@@ -71,8 +71,8 @@
     </view>
     <view class="line">
       <label class="title col-0">设为私密</label>
-      <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ctColor}}; border-color:#ffae49;background-color:{{cbgColor}};margin-left: 5%;margin-right: 8%;" hover-class="button-hover" bindtap="selectC">是</button>
-      <button class="btn1" type="default" plain="true" style="padding:8rpx;color:{{ptColor}}; border-color:#ffae49;background-color:{{pbgColor}};margin-right: 8%;" hover-class="button-hover" bindtap="selectP">否</button>
+      <button class="btn1" type="default" plain="true" style="color:{{ctColor}}; border-color:#ffae49;background-color:{{cbgColor}};margin-left: 5%;" hover-class="button-hover" bindtap="selectC">是</button>
+      <button class="btn1" type="default" plain="true" style="color:{{ptColor}}; border-color:#ffae49;background-color:{{pbgColor}};" hover-class="button-hover" bindtap="selectP">否</button>
     </view>
   </view>
   <view class="btn_ok" bindtap="addGroup" data-statu="close">确定</view>
