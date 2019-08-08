@@ -18,12 +18,16 @@
   margin-bottom: 10rpx;
 }
 
+.ring{
+  width: 50rpx;
+  height: 50rpx;
+}
 .newGoal {
   width: 42rpx;
   height: 42rpx;
 }
 
-.noData{
+.noData {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +36,7 @@
   margin-top: 20%;
 }
 
-.noData_image{
+.noData_image {
   width: 500rpx;
   height: 500rpx;
 }
@@ -104,9 +108,9 @@
 }
 
 .time_icon {
+  display: flex;
   height: 30rpx;
   width: 30rpx;
-  margin-left: 40rpx;
 }
 
 .lable2 {
@@ -118,8 +122,18 @@
 
 .lable3 {
   display: flex;
-  padding: 2%;
+  align-items: center;
   width: 50%;
+  margin-left: 10rpx;
+  font-size: 25rpx;
+  border: 2rpx solid #000;
+}
+
+.lable4 {
+  display: flex;
+  padding: 2%;
+  margin-left: 40rpx;
+  border: 2rpx solid #000;
 }
 
 .plan-list {
@@ -135,6 +149,7 @@
   margin-left: -90px;
   color: rgb(117, 117, 117);
 }
+
 .plan-list1 {
   display: flex;
   flex-direction: row;
@@ -213,7 +228,6 @@
 
 .drawerbox {
   width: 80%;
-  height: 50%;
   overflow: scroll;
   position: fixed;
   top: 25%;
@@ -223,13 +237,14 @@
   border-radius: 10px;
 }
 
+
 .drawer-title {
   padding: 3%;
   padding-left: 5%;
   font: 45rpx;
   /*font-weight: 550;*/
   text-align: left;
-  color: #000;
+  color: #fff;
   background-color: #fa9857;
 }
 
@@ -269,7 +284,6 @@
   justify-content: center;
   align-items: center;
   width: 30%;
-  height: 70%;
   margin-bottom: 2%;
   font-size: 25rpx;
   border-radius: 50rpx;
@@ -280,6 +294,15 @@
   color: #fff;
   border: 2rpx solid #ffae49;
   background-color: #ffae49;
+  padding: 8rpx;
+  margin-right: 3%;
+  width: 20%;
+}
+
+.inactive1 {
+  background-color: #fff;
+  border: 2rpx dashed #e2552ab6;
+  color: #e2552ab6;
   padding: 8rpx;
   margin-right: 3%;
   width: 20%;
@@ -347,4 +370,56 @@ button::after {
 .touch-move-active .content, .touch-move-active .del {
   -webkit-transform: translateX(0);
   transform: translateX(0);
+}
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.5;
+}
+
+.modal-title {
+  padding: 3%;
+  padding-left: 5%;
+  font: 45rpx;
+  font-weight: 550;
+  text-align: center;
+  color: #fa9857;
+}
+
+.modal-box {
+  width: 80%;
+  position: fixed;
+  top: 25%;
+  left: 10%;
+  z-index: 1001;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  height: 86rpx;
+  border-top: 1px solid #dedede;
+  font-size: 34rpx;
+  line-height: 86rpx;
+}
+
+.btn-cancel {
+  width: 50%;
+  color: #666;
+  text-align: center;
+  border-right: 1px solid #dedede;
+}
+
+.btn-confirm {
+  width: 50%;
+  color: #fd6615;
+  text-align: center;
 }

@@ -42,7 +42,7 @@
 <!--content-->
 <!--使用animation属性指定需要执行的动画-->
 <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
-  <!--drawer content-->
+  <!--drawer content--> 
   <view class="drawer_title">新建小组</view>
   <view class="drawer_content">
     <view class="top grid">
@@ -57,7 +57,7 @@
     </view>
     <!--新建小组自定义标签弹窗-->
     <modal style="color:#ffae49 cbgColor:#ffae49" hidden="{{hiddenmodalput}}" title="自定义标签" confirm-text="提交" cancel-text="重置" bindcancel="cancel" confirm-type="done" bindconfirm="confirm">
-      <input value='' type='text' value='{{tapname}}' bindinput="inputTapName" placeholder="标签" auto-focus/>
+      <input value='' type='text' value='{{tapname}}' bindinput="inputTapName" placeholder="请输入标签名称" auto-focus/>
     </modal>
 
 

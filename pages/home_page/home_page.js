@@ -15,7 +15,13 @@ Page({
      * 特别说明，变量以_1结尾的是服务于添加目标的，不加是服务于修改目标的
      */
 
-
+    showDialog: false,
+    hiddentag: true,
+    hiddenmodal: true,
+    deleteTag: true,
+    tagc: "#e2552ab6",
+    tagbg: "#fff",
+    tagb: "2rpx dashed #e2552ab6",
 
     clock: [],
     plan: [],
@@ -82,7 +88,7 @@ Page({
     disposable_1: false,
     inputValue_1: "请输入目标名称",
     timeValue_1: "时长(10~120)",
-    selectIndex_1: 0,
+    selectIndex_1: 2,
     hiddenbtn_1: true,
     showModalStatus_1: false,
     ptColor_1: "#ffae49",
@@ -92,43 +98,43 @@ Page({
     distime_1: true,
     textColor_1: "#000",
     tborder_1: "2rpx dashed #ffae49",
-    input_1: "",
+    input_1: "20",
     ibColor_1: "#e9833e",
     hiddenDate_1: true,
     dates_1: [{
         name: "Sun",
         index: "0",
-        selected: false
+        selected: true
       },
       {
         name: "Mon",
         index: "1",
-        selected: false
+        selected: true
       },
       {
         name: "Tue",
         index: "2",
-        selected: false
+        selected: true
       },
       {
         name: "Wed",
         index: "3",
-        selected: false
+        selected: true
       },
       {
         name: "Thu",
         index: "4",
-        selected: false
+        selected: true
       },
       {
         name: "Fri",
         index: "5",
-        selected: false
+        selected: true
       },
       {
         name: "Sat",
         index: "6",
-        selected: false
+        selected: true
       },
     ],
     goalId: Number,
@@ -146,6 +152,24 @@ Page({
     goalName_0: String,
     chooseWhichGoal: String,
 
+    tag: [{
+        name: "学习",
+        index: "0",
+        selected: false
+      },
+      {
+        name: "看书",
+        index: "1",
+        selected: false
+      },
+      {
+        name: "读英语",
+        index: "2",
+        selected: false
+      }
+    ],
+    hiddentag: false,
+    hiddenmodalput: true
   },
 
   //选择“一次”、“每天”、“自定义”
@@ -257,6 +281,7 @@ Page({
 
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
+
   },
 
   //确认，发送请求添加数据
@@ -464,6 +489,67 @@ Page({
         color_0: "#ffae49"
       })
     }
+  },
+
+  //自定义标签
+  tagModal() {
+    this.setData({
+      showDialog: !this.data.showDialog,
+    });
+  },
+  //重置按钮
+  cancel: function() {
+    this.setData({
+      tagname: null,
+      newTag: null
+    });
+
+  },
+  //输入自定义标签
+  inputTagName: function(e) {
+    var _length = this.data.tag.length;
+    var tagname = e.detail.value;
+    if (tagname != null) {
+      this.setData({
+        newTag: tagname,
+      })
+    }
+    console.log(tagname)
+    console.log(this.data.newTag)
+  },
+  //提交
+  confirm: function() {
+    var _length = this.data.tag.length;
+    let tag1 = this.data.tag;
+    if (this.data.newTag == null) {
+      wx.showToast({
+        title: '输入不能为空',
+        image: '../images/close.png'
+      });
+    } else {
+      var tagname = this.data.newTag;
+      var obj = {};
+      obj.name = tagname;
+      obj.index = _length;
+      obj.selected = false;
+      tag1.push(obj);
+
+      this.setData({
+        isTagMax: false,
+        tag: tag1,
+        tagname: "",
+        showDialog: false
+      })
+      if (_length + 1 >= 4) {
+        this.setData({
+          isTagMax: true,
+          showDialog: false
+        })
+      }
+
+    }
+    console.log(this.data.tag)
+    console.log(this.data.newTag)
   },
 
   //设置目标时间
@@ -1487,6 +1573,14 @@ Page({
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
   },
+
+  selectMore: function() {
+    this.setData({
+      hiddenmodal: !this.data.hiddenmodal
+    })
+  },
+
+
   //选择“一次”、“每天”、“自定义”
   selectOnce_1: function(e) {
     var that = this;
@@ -1666,50 +1760,50 @@ Page({
       }
     }
     console.log(newGoal.planName)
-      if (newGoal.clockTime == 0 || newGoal.clockName == "时长（10~120）") {
-        wx.request({
-          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
-          method: 'POST',
-          data: {
-            userId: wx.getStorageSync('openid'),
-            goalId: newGoal.goalId,
-            content: newGoal.planName,
-            complete: newGoal.isComplete,
-            concentrated: false,
-            minutes: 0,
-          },
-          success: function(res) {
-            console.log(res.data)
-            wx.request({
-              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
-              method: 'POST',
-              data: {
-                goalId: newGoal.goalId,
-                sunday: newGoal.period[0],
-                monday: newGoal.period[1],
-                tuesday: newGoal.period[2],
-                wednesday: newGoal.period[3],
-                thursday: newGoal.period[4],
-                friday: newGoal.period[5],
-                saturday: newGoal.period[6],
-                disposable: that.data.disposable,
-              },
-              success: function(res) {
-                wx.showToast({
-                  title: '修改成功',
-                  icon: 'success',
-                  duration: 1000
-                })
-                that.onShow()
-                that.setData({
-                  goal: null,
-                })
-              }
-            })
-          }
-        })
-        that.drawer(e);
-      }else {
+    if (newGoal.clockTime == 0 || newGoal.clockName == "时长（10~120）") {
+      wx.request({
+        url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
+        method: 'POST',
+        data: {
+          userId: wx.getStorageSync('openid'),
+          goalId: newGoal.goalId,
+          content: newGoal.planName,
+          complete: newGoal.isComplete,
+          concentrated: false,
+          minutes: 0,
+        },
+        success: function(res) {
+          console.log(res.data)
+          wx.request({
+            url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
+            method: 'POST',
+            data: {
+              goalId: newGoal.goalId,
+              sunday: newGoal.period[0],
+              monday: newGoal.period[1],
+              tuesday: newGoal.period[2],
+              wednesday: newGoal.period[3],
+              thursday: newGoal.period[4],
+              friday: newGoal.period[5],
+              saturday: newGoal.period[6],
+              disposable: that.data.disposable,
+            },
+            success: function(res) {
+              wx.showToast({
+                title: '修改成功',
+                icon: 'success',
+                duration: 1000
+              })
+              that.onShow()
+              that.setData({
+                goal: null,
+              })
+            }
+          })
+        }
+      })
+      that.drawer(e);
+    } else {
       if (newGoal.clockTime < 10 || newGoal.clockTime > 120) {
         wx.showToast({
           title: '时长不符',
@@ -1759,5 +1853,27 @@ Page({
       that.drawer(e);
     }
 
+  },
+
+  selectTag: function() {
+    this.setData({
+      deleteTag: !this.data.deleteTag,
+    })
+    if (this.data.deleteTag == true) {
+      this.setData({
+        tagc: "#e2552ab6",
+        tagbg: "#fff",
+        tagb: "2rpx dashed #e2552ab6"
+      })
+    } else {
+      this.setData({
+        tagc: "#fff",
+        tagbg: "#e2552ab6",
+        tagb: "2rpx solid #e2552ab6"
+      })
+    }
+  },
+  deleteTag: function(e) {
+   
   }
 })
