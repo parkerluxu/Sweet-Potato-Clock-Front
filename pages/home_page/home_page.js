@@ -18,7 +18,7 @@ Page({
     showDialog: false,
     hiddentag: true,
     hiddenmodal: true,
-    deleteTag: true,
+    selectTag: true,
     tagc: "#e2552ab6",
     tagbg: "#fff",
     tagb: "2rpx dashed #e2552ab6",
@@ -1857,23 +1857,27 @@ Page({
 
   selectTag: function() {
     this.setData({
-      deleteTag: !this.data.deleteTag,
+      selectTag: !this.data.selectTag,
     })
-    if (this.data.deleteTag == true) {
+    if (this.data.selectTag == true) {
       this.setData({
         tagc: "#e2552ab6",
         tagbg: "#fff",
         tagb: "2rpx dashed #e2552ab6"
       })
-    } else {
+    } else if(this.data.selectTag == false) {
       this.setData({
         tagc: "#fff",
         tagbg: "#e2552ab6",
-        tagb: "2rpx solid #e2552ab6"
+        
       })
     }
   },
-  deleteTag: function(e) {
-   
+  delTag: function(e) {
+    this.setData({
+      tagc: "#000",
+      tagbg: "#e2552ab6",
+      tagb: "2rpx solid #e2552ab6"
+    })
   }
 })

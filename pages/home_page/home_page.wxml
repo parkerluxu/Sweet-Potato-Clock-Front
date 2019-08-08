@@ -130,7 +130,7 @@
   <!--标签-->
   <view class="line" style="height:60rpx;">
     <botton class="btn3 inactive1" style="border:{{tagb}};background-color:{{tagbg}};color:{{tagc}}" wx:for="{{tag}}" wx:key="item.index" hover-class="button-hover" bindtap="selectTag" data-index="{{item.index}}" checked="{{item.selected}}"> {{item.name}}
-     <image hidden="{{deleteTag}}" src='../images/close1.png' bindtap='deleteTag' style="margin-left:10%;width: 28rpx;height: 28rpx;"></image>
+     <image hidden="{{selectTag}}" src='../images/close1.png' bindtap='delTag' style="margin-left:10%;width: 28rpx;height: 28rpx;border:2rpx solid #000;"></image>
     </botton>
     <button class="btn3 inactive1" style="padding-top:3.5%;padding-bottom:3.5%;" bindtap="tagModal" hidden='{{isTagMax}}' hover-class="button-hover">自定义</button>
   </view>
