@@ -1,45 +1,62 @@
-// pages/group/group.js 
+// pages/group/group.js
 Page({
 
-  /** 
-   * 页面的初始数据 
+  /**
+   * 页面的初始数据
    */
   data: {
     userId: wx.getStorageSync('openid'),
     focus: false,
     inputValue: '',
     groupList: [],
-    isPopping: false, //是否已经弹出 
-    animPlus: {}, //旋转动画 
-    animCollect: {}, //item位移,透明度 
-    animTranspond: {}, //item位移,透明度 
-    animInput: {}, //item位移,透明度 
+    isPopping: false, //是否已经弹出
+    animPlus: {}, //旋转动画
+    animCollect: {}, //item位移,透明度
+    animTranspond: {}, //item位移,透明度
+    animInput: {}, //item位移,透明度
     ctColor: "#ffae49",
     pbgColor: "#fff",
     newGroup: {},
-    marqueePace: 1,//滚动速度 
-    marqueeDistance: [0],//初始滚动距离 
+    marqueePace: 1, //滚动速度
+    marqueeDistance: [0], //初始滚动距离
     marqueeDistance2: [0],
     marquee2copy_status: false,
     marquee2_margin: [60],
     size: 14,
-    orientation: 'left',//滚动方向 
-    interval: 20 // 时间间隔b 
+    orientation: 'left', //滚动方向
+    interval: 20, // 时间间隔b
+    hiddenmodalput: true, //掩盖输入框
+    defaultTag: [{
+        name: "学习",
+        index: "0",
+        selected: false
+      },
+      {
+        name: "背英语",
+        index: "1",
+        selected: false
+      },
+      {
+        name: "休息",
+        index: "2",
+        selected: false
+      },
+    ]
   },
-  bindButtonTap: function () {
+  bindButtonTap: function() {
     this.setData({
       focus: true
     })
   },
-  plus: function () {
+  plus: function() {
     if (this.data.isPopping) {
-      //缩回动画 
+      //缩回动画
       this.popp();
       this.setData({
         isPopping: false
       })
     } else if (!this.data.isPopping) {
-      //弹出动画 
+      //弹出动画
       this.takeback();
       this.setData({
         isPopping: true
@@ -47,91 +64,100 @@ Page({
     }
   },
 
-  //弹窗 
-  powerDrawer: function (e) {
+  //弹窗
+  powerDrawer: function(e) {
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
     this.selectP();
+    //清空数据
+    var datas_11 = this.data.defaultTag;
+    var _length = this.data.defaultTag.length;
+    datas_11.splice(3, 3);
+    this.setData({
+      defaultTag: datas_11,
+      isTagMax: false,
+    });
   },
-  util: function (currentStatu) {
+  util: function(currentStatu) {
     /* 动画部分 */
-    // 第1步：创建动画实例  
+    // 第1步：创建动画实例 
     var animation = wx.createAnimation({
-      duration: 200, //动画时长 
-      timingFunction: "linear", //线性 
-      delay: 0 //0则不延迟 
+      duration: 200, //动画时长
+      timingFunction: "linear", //线性
+      delay: 0 //0则不延迟
     });
 
-    // 第2步：这个动画实例赋给当前的动画实例 
+    // 第2步：这个动画实例赋给当前的动画实例
     this.animation = animation;
 
-    // 第3步：执行第一组动画 
+    // 第3步：执行第一组动画
     animation.opacity(0).rotateX(-100).step();
 
-    // 第4步：导出动画对象赋给数据对象储存 
+    // 第4步：导出动画对象赋给数据对象储存
     this.setData({
       animationData: animation.export()
     })
 
-    // 第5步：设置定时器到指定时候后，执行第二组动画 
-    setTimeout(function () {
-      // 执行第二组动画 
+    // 第5步：设置定时器到指定时候后，执行第二组动画
+    setTimeout(function() {
+      // 执行第二组动画
       animation.opacity(1).rotateX(0).step();
-      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
+      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
       this.setData({
         animationData: animation
       })
 
-      //关闭 
+      //关闭
       if (currentStatu == "close") {
         this.setData({
           showModalStatus: false
         });
       }
+      console.log(this.data.defaultTag)
     }.bind(this), 200)
 
-    // 显示 
+    // 显示
     if (currentStatu == "open") {
       this.setData({
         showModalStatus: true
       });
     }
   },
-  pDrawer: function (e) {
+  pDrawer: function(e) {
     var currentStatu = e.currentTarget.dataset.statu;
     this.utill(currentStatu)
   },
-  utill: function (currentStatu) {
+  utill: function(currentStatu) {
     /* 动画部分 */
-    // 第1步：创建动画实例  
+    // 第1步：创建动画实例 
     var that = this
     var animation = wx.createAnimation({
-      duration: 200, //动画时长 
-      timingFunction: "linear", //线性 
-      delay: 0 //0则不延迟 
+      duration: 200, //动画时长
+      timingFunction: "linear", //线性
+      delay: 0 //0则不延迟
     });
 
-    // 第2步：这个动画实例赋给当前的动画实例 
+    // 第2步：这个动画实例赋给当前的动画实例
     this.animation = animation;
 
-    // 第3步：执行第一组动画 
+    // 第3步：执行第一组动画
     animation.opacity(0).rotateX(-100).step();
 
-    // 第4步：导出动画对象赋给数据对象储存 
+    // 第4步：导出动画对象赋给数据对象储存
     this.setData({
       animationData: animation.export()
     })
 
-    // 第5步：设置定时器到指定时候后，执行第二组动画 
-    setTimeout(function () {
-      // 执行第二组动画 
+    // 第5步：设置定时器到指定时候后，执行第二组动画
+    setTimeout(function() {
+      // 执行第二组动画
       animation.opacity(1).rotateX(0).step();
-      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
+      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
       this.setData({
         animationData: animation
       })
 
-      //关闭 
+      //关闭
       if (currentStatu == "close") {
         that.setData({
           showModalStat: false
@@ -139,16 +165,82 @@ Page({
       }
     }.bind(this), 200)
 
-    // 显示 
+    // 显示
     if (currentStatu == "open") {
       that.setData({
         showModalStat: true
       });
     }
   },
-  //加入小组 
-  //选择了是 
-  selectC: function () {
+  //新建小组标签多选
+  selectTag: function(e) {
+    let index = e.currentTarget.dataset.index;
+    let arrs = this.data.defaultTag;
+    if (arrs[index].selected == false) {
+      arrs[index].selected = true;
+    } else {
+      arrs[index].selected = false;
+    }
+    this.setData({
+      defaultTag: arrs,
+      hiddenDate_1: false
+    })
+    console.log(this.data.defaultTag)
+  },
+
+  //自定义
+  modalinput: function() {
+    this.setData({
+      hiddenmodalput: !this.data.hiddenmodalput
+    })
+  },
+
+  //重置按钮
+  cancel: function() {
+    this.setData({
+      tapname: '',
+      hiddenmodalput: true
+    });
+  },
+
+  //输入自定义标签
+  inputTapName: function(e) {
+    var _length = this.data.defaultTag.length;
+    var tapnme = e.detail.value;
+    this.setData({
+      newtTag: tapnme,
+    })
+    console.log(tapnme)
+  },
+
+  //提交
+  confirm: function() {
+    var _length = this.data.defaultTag.length;
+    let defaultTagNow = this.data.defaultTag;
+    var tapname = this.data.newtTag;
+    var obj = {};
+    obj.name = tapname;
+    obj.index = _length;
+    obj.selected = true;
+    defaultTagNow.push(obj);
+    this.setData({
+      isTagMax: false,
+      defaultTag: defaultTagNow,
+      tapname: '',
+      hiddenmodalput: true
+    })
+    if (_length >= 5) {
+      this.setData({
+        isTagMax: true,
+        hiddenmodalput: true
+      })
+    }
+
+  },
+
+  //加入小组
+  //选择了是
+  selectC: function() {
     var that = this;
     that.setData({
       ctColor: "#fff",
@@ -163,8 +255,8 @@ Page({
     })
     console.log(that.data.newGroup.isPrivate)
   },
-  //选择了否 
-  selectP: function () {
+  //选择了否
+  selectP: function() {
     var that = this;
     that.setData({
       ptColor: "#fff",
@@ -181,8 +273,8 @@ Page({
     console.log(that.data.newGroup.isPrivate)
   },
 
-  //获取小组名称 
-  getGroupName: function (e) {
+  //获取小组名称
+  getGroupName: function(e) {
     console.log(e.detail.value)
     var that = this
     that.setData({
@@ -190,17 +282,17 @@ Page({
     })
   },
 
-  //获取小组简介 
-  getGroupintro: function (e) {
+  //获取小组简介
+  getGroupintro: function(e) {
     console.log(e.detail.value)
     var that = this
     that.setData({
       'newGroup.intro': e.detail.value,
     })
   },
-  //弹出动画 
-  popp: function () {
-    //plus顺时针旋转 
+  //弹出动画
+  popp: function() {
+    //plus顺时针旋转
     var animationPlus = wx.createAnimation({
       duration: 500,
       timingFunction: 'ease-out'
@@ -228,9 +320,9 @@ Page({
       animInput: animationInput.export(),
     })
   },
-  //收回动画 
-  takeback: function () {
-    //plus逆时针旋转 
+  //收回动画
+  takeback: function() {
+    //plus逆时针旋转
     var animationPlus = wx.createAnimation({
       duration: 500,
       timingFunction: 'ease-out'
@@ -260,7 +352,7 @@ Page({
   },
 
 
-  addGroup: function (e) {
+  addGroup: function(e) {
     var that = this
     if (that.data.newGroup == null || that.data.newGroup.name == null || that.data.newGroup.intro == null) {
       wx.showToast({
@@ -271,7 +363,7 @@ Page({
     } else {
       that.powerDrawer(e)
       wx.request({
-        url: 'http://127.0.0.1:8080/cretegroup',
+        url: 'http://localhost:8080/creategroup',
         method: 'POST',
         data: {
           captainId: wx.getStorageSync('openid'),
@@ -279,7 +371,7 @@ Page({
           privateGroup: that.data.newGroup.isPrivate,
           description: that.data.newGroup.intro,
         },
-        success: function (res) {
+        success: function(res) {
           console.log(res.data)
           var toastText = "创建成功";
           wx.showToast({
@@ -288,6 +380,22 @@ Page({
             duration: 1000
           });
           that.onShow();
+          var groupId = res.data.success
+          var tagLength = that.data.defaultTag.length
+          for (var i = 0; i < tagLength; i++) {
+            var tagName=that.data.defaultTag[i].name
+            wx.request({
+              url: 'http://localhost:8080/addGroupTag',
+              method: 'GET',
+              data: {
+                tagName:tagName,
+                groupId:groupId,
+              },
+              success:function(res){
+                console.log(res.data.success)
+              }
+            })
+          }
         }
       })
     }
@@ -296,12 +404,12 @@ Page({
     })
   },
 
-  //加入小组 
-  joinGroup: function (e) {
+  //加入小组
+  joinGroup: function(e) {
     var that = this
     console.log(e.currentTarget.dataset)
     wx.request({
-      url: 'http://127.0.0.1:8080/joinGroup',
+      url: 'https://clock.dormassistant.wang:8080/joinGroup',
       method: 'GET',
       data: {
         userid: wx.getStorageSync('openid'),
@@ -332,15 +440,15 @@ Page({
       }
     })
   },
-  //点击加入小组时随机获取部分小组信息 
-  getShowGroup: function (e) {
+  //点击加入小组时随机获取部分小组信息
+  getShowGroup: function(e) {
     var that = this
     that.pDrawer(e)
     that.setData({
       noData1: false,
     })
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygrouprandom/displaygrouprandom',
+      url: 'https://clock.dormassistant.wang:8080/displaygrouprandom/displaygrouprandom',
       method: 'GET',
       success(res) {
         console.log(res.data)
@@ -355,38 +463,38 @@ Page({
           if (list[i].description.length > 11) {
             despcription = list[i].description.substr(0, 11) + "..."
           }
-          var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度 
+          var windowWidth = wx.getSystemInfoSync().windowWidth; // 屏幕宽度
           that.setData({
             [k1]: list[i].groupName,
             [k2]: list[i].groupId,
             [k3]: despcription,
             [textLength]: list[i].description.length,
             windowWidth: windowWidth,
-            [marquee2_margin]: list[i].description.length < windowWidth ? windowWidth - list[i].description.length : that.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白 
+            [marquee2_margin]: list[i].description.length < windowWidth ? windowWidth - list[i].description.length : that.data.marquee2_margin //当文字长度小于屏幕长度时，需要增加补白
           })
-          //that.run1();// 水平一行字滚动完了再按照原来的方向滚动 
-          //that.run2();// 第一个字消失后立即从右边出现 
+          //that.run1();// 水平一行字滚动完了再按照原来的方向滚动
+          //that.run2();// 第一个字消失后立即从右边出现
         }
       }
     })
 
   },
 
-  getSearchName: function (e) {
+  getSearchName: function(e) {
     this.setData({
       searchName: e.detail.value
     })
   },
 
-  //按名称寻找小组 
-  serchGroup: function (e) {
+  //按名称寻找小组
+  serchGroup: function(e) {
     var that = this
     that.setData({
       groupShowList: null,
       noData1: false,
     })
     wx.request({
-      url: 'http://127.0.0.1:8080/search/searchbygroupname',
+      url: 'https://clock.dormassistant.wang:8080/search/searchbygroupname',
       method: 'GET',
       data: {
         groupName: that.data.searchName
@@ -420,26 +528,26 @@ Page({
     })
   },
 
-  onLoad: function (options) {
+  onLoad: function(options) {
 
-    // 生命周期函数--监听页面加载 
+    // 生命周期函数--监听页面加载
   },
-  onReady: function () {
-    // 生命周期函数--监听页面初次渲染完成 
+  onReady: function() {
+    // 生命周期函数--监听页面初次渲染完成
   },
 
-  /** 
-   * 生命周期函数--监听页面显示 
+  /**
+   * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:8080/displaygroupbyuserid/displaygroupbyuserid',
+      url: 'http://localhost:8080/displaygroupbyuserid/displaygroupbyuserid',
       method: "GET",
       data: {
         userid: wx.getStorageSync('openid')
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         var list = res.data.groupList;
         if (res.data.groupList.length == 0) {
@@ -463,34 +571,34 @@ Page({
         }
       }
     })
-    // 生命周期函数--监听页面显示 
+    // 生命周期函数--监听页面显示
   },
-  onHide: function () {
+  onHide: function() {
     var that = this;
     that.setData({
       groupList: null
     })
   },
-  onUnload: function () {
-    // 生命周期函数--监听页面卸载 
+  onUnload: function() {
+    // 生命周期函数--监听页面卸载
   },
-  onPullDownRefresh: function () {
-    // 页面相关事件处理函数--监听用户下拉动作 
+  onPullDownRefresh: function() {
+    // 页面相关事件处理函数--监听用户下拉动作
   },
-  onReachBottom: function () {
-    // 页面上拉触底事件的处理函数 
+  onReachBottom: function() {
+    // 页面上拉触底事件的处理函数
   },
-  onShareAppMessage: function () {
-    // 用户点击右上角分享 
+  onShareAppMessage: function() {
+    // 用户点击右上角分享
     return {
-      title: 'title', // 分享标题 
-      desc: 'desc', // 分享描述 
-      path: 'path' // 分享路径 
+      title: 'title', // 分享标题
+      desc: 'desc', // 分享描述
+      path: 'path' // 分享路径
     }
   },
-  run1: function () {
+  run1: function() {
     var vm = this;
-    var interval = setInterval(function () {
+    var interval = setInterval(function() {
       for (var i = 0; i < vm.data.textLength.length; i++) {
         var marqueeDistance = 'marqueeDistance[' + i + ']'
         if (-vm.data.marqueeDistance < vm.data.textLength[i]) {
@@ -507,22 +615,22 @@ Page({
       }
     }, vm.data.interval);
   },
-  run2: function () {
+  run2: function() {
     var vm = this;
-    var interval = setInterval(function () {
+    var interval = setInterval(function() {
       for (let i = 0; i < vm.data.textLength.length; i++) {
         var marqueeDistance = 'marqueeDistance2[' + i + ']'
         var marquee2copy_status = 'marquee2copy_status[' + i + ']'
         if (-vm.data.marqueeDistance2[i] < vm.data.textLength[i]) {
-          // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示 
+          // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
           vm.setData({
             [marqueeDistance]: vm.data.marqueeDistance2[i] - vm.data.marqueePace[i],
             [marquee2copy_status]: vm.data.textLength[i] + vm.data.marqueeDistance2[i] <= vm.data.windowWidth + vm.data.marquee2_margin[i],
           });
         } else {
-          if (-vm.data.marqueeDistance2[i] >= vm.data.marquee2_margin[i]) { // 当第二条文字滚动到最左边时 
+          if (-vm.data.marqueeDistance2[i] >= vm.data.marquee2_margin[i]) { // 当第二条文字滚动到最左边时
             vm.setData({
-              [marqueeDistance]: vm.data.marquee2_margin[i] // 直接重新滚动 
+              [marqueeDistance]: vm.data.marquee2_margin[i] // 直接重新滚动
             });
             clearInterval(interval);
             vm.run2();
