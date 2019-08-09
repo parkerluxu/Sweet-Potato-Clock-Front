@@ -23,7 +23,7 @@ App({
               })
               //调用后端
               wx.request({
-                url: 'https://clock.dormassistant.wang:8080/WXLogin',
+                url: 'http://localhost:8080/WXLogin',
                 data: {
                   encryptedData: res.encryptedData,
                   iv: res.iv,
@@ -34,7 +34,7 @@ App({
                   if (result.data.status == 1) {
                     console.log(result.data.userInfo.openId);
                   } else {
-                    console.log('解密失败')
+                    console.log(result.data.status)
                   }
                 },
                 fail: function () {
