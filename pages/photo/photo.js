@@ -1,12 +1,26 @@
-// pages/photo.js
+// pages/photo/photo.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    hidden: false,
+    xinwen_list: [{
+      id : 1,
+      images:["../images/back2.png"],
+      title:"测试",
+      inputtime:2345,
+      description:"1234",
+      copyfrom:"123"
+    }],
+    indicatorDots: false,
+    autoplay: false,
+    interval: 2000,
+    indicatordots: true,
+    duration: 1000
   },
+
 
   /**
    * 生命周期函数--监听页面加载

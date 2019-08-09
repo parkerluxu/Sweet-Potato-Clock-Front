@@ -1,3 +1,4 @@
+/* pages/album.wxss */
 .album-list {
   display: flex;
   flex-direction: row;

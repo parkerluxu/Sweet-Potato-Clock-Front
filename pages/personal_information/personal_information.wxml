@@ -16,7 +16,7 @@
 <view class='divLine.mid' />
 <view class="btn-area">
   <button class="btn1"  bindtap='changeToTree'>
-    <image class="images_record" src="../images/xiangce.svg"></image>
+    <image class="images" src="../images/tree.svg"></image>
       <text>相册</text>
   </button>
   <button class="btn1"  bindtap='changeToRecord'>

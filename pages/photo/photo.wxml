@@ -1,2 +1,27 @@
 <!--pages/photo.wxml-->
-<text>pages/photo.wxml</text>
+
+<view class="mainFrame">
+  <swiper class="container" indicator-dots="{{indicatorDots}}" indicator-dots="{{indicatordots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{xinwen_list}}" wx:for-index="index">
+      <swiper-item class="vol-swiper-item" bindtap="onItemClick">
+        <view class="vol-card" data-id="{{item.id}}" catchtap="onPostTap">
+          <!--<view data-detail-href="{{item.detailHref}}" class="item">-->
+          <!--图片-->
+          <image class="vol-picture" src="{{item.images[0]}}" mode="aspectFill"></image>
+          <!--标题-->
+          <view class="vol-meta-title">
+            <text class="vol-number">{{item.title}}</text>
+          </view>
+          <!--时间-->
+          <view class="vol-meta-time">
+            <text>{{item.inputtime}}</text>
+          </view>
+          <!--</view>-->
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<loading hidden="{{hidden}}" bindchange="loadingChange">
+  加载中...
+</loading>

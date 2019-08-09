@@ -40,7 +40,7 @@ Page({
                   })
                   //调用后端
                   wx.request({
-                    url: 'https://clock.dormassistant.wang:8080/WXLogin',
+                    url: 'http://127.0.0.1:8080/WXLogin',
                     data: {
                       encryptedData: res.encryptedData,
                       iv: res.iv,
@@ -84,7 +84,7 @@ Page({
                   })
                   //调用后端
                   wx.request({
-                    url: 'https://clock.dormassistant.wang:8080/WXLogin',
+                    url: 'http://127.0.0.1:8080/WXLogin',
                     data: {
                       encryptedData: res.encryptedData,
                       iv: res.iv,

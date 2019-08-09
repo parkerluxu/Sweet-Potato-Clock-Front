@@ -38,7 +38,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       recordInfo: null,
       count: 0,
@@ -48,14 +48,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function(options) {
+  onShow: function (options) {
     var that = this
     var nowDate = new Date();
     var year = nowDate.getFullYear();
@@ -78,7 +78,7 @@ Page({
         userid: wx.getStorageSync('openid')
       },
       method: 'GET',
-      success: function(res) {
+      success: function (res) {
         console.log(res.data)
         that.setData({
           tree: res.data.treeNumber,
@@ -103,7 +103,7 @@ Page({
           userid: wx.getStorageSync('openid'),
           date: dateStr,
         },
-        success: function(res) {
+        success: function (res) {
           console.log(res.data)
           var recordList = res.data.recordList;
           var goalList = res.data.goalList;
@@ -141,7 +141,7 @@ Page({
         data: {
           userid: wx.getStorageSync('openid'),
         },
-        success: function(res) {
+        success: function (res) {
           console.log(res.data)
           var recordList = res.data.recordList;
           var goalList = res.data.goalList;
@@ -178,35 +178,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     title: this.data.groupName
   },
   bindselect(e) {
@@ -250,13 +250,13 @@ Page({
   },
 
   //控制导航栏
-  navbarTap: function(e) {
+  navbarTap: function (e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
   },
 
-  getDayStatic: function(dateStr) {
+  getDayStatic: function (dateStr) {
     var that = this
     var categories = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     wx.request({
@@ -266,7 +266,7 @@ Page({
         userId: wx.getStorageSync('openid'),
         date: dateStr,
       },
-      success: function(res) {
+      success: function (res) {
         that.setData({
           'chartData.main.data': res.data.minutesList,
           'chartData.main.categories': categories,
@@ -288,13 +288,13 @@ Page({
             name: "打卡时长",
             color: '#fa9857',
             data: that.data.chartData.main.data,
-            format: function(val, name) {
+            format: function (val, name) {
               return val.toFixed(0);
             },
 
           }],
           yAxis: {
-            format: function(val) {
+            format: function (val) {
               return val + '分钟';
             },
             min: 0,
@@ -318,7 +318,7 @@ Page({
     })
   },
 
-  getWeekStatic: function(dateStr) {
+  getWeekStatic: function (dateStr) {
     var that = this
     wx.request({
       url: 'https://clock.dormassistant.wang:8080/displayuserstastic/displayuserstasticweek',
@@ -327,7 +327,7 @@ Page({
         userId: wx.getStorageSync('openid'),
         date: dateStr,
       },
-      success: function(res) {
+      success: function (res) {
         var weekCate = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat']
         that.setData({
           'chartData.main.data': res.data.minutesList,
@@ -350,13 +350,13 @@ Page({
             name: "打卡时长",
             color: '#fa9857',
             data: that.data.chartData.main.data,
-            format: function(val, name) {
+            format: function (val, name) {
               return val.toFixed(0);
             },
 
           }],
           yAxis: {
-            format: function(val) {
+            format: function (val) {
               return val + '分钟';
             },
             min: 0,
@@ -380,7 +380,7 @@ Page({
     })
   },
 
-  getMonthStatic: function(dateStr) {
+  getMonthStatic: function (dateStr) {
     var that = this
     var categories = []
     that.setData({
@@ -394,7 +394,7 @@ Page({
         userId: wx.getStorageSync('openid'),
         date: dateStr,
       },
-      success: function(res) {
+      success: function (res) {
         for (let i = 0; i < res.data.minutesList.length; i++) {
           categories[i] = i + 1
         }
@@ -419,13 +419,13 @@ Page({
             name: "打卡时长",
             color: '#fa9857',
             data: that.data.chartData.main.data,
-            format: function(val, name) {
+            format: function (val, name) {
               return val.toFixed(0);
             },
 
           }],
           yAxis: {
-            format: function(val) {
+            format: function (val) {
               return val + '分钟';
             },
             min: 0,
@@ -449,7 +449,7 @@ Page({
     })
   },
 
-  clickDay: function() {
+  clickDay: function () {
     var that = this;
     that.setData({
       color_1_1: "#ffffff",
@@ -467,7 +467,7 @@ Page({
     var userid = wx.getStorageSync('openid')
     that.getDayStatic(dateStr)
   },
-  clickWeek: function() {
+  clickWeek: function () {
     var that = this;
     that.setData({
       color_2_1: "#ffffff",
@@ -486,7 +486,7 @@ Page({
     that.getWeekStatic(dateStr)
   },
 
-  clickMonth: function() {
+  clickMonth: function () {
     var that = this;
     that.setData({
       color_3_1: "#ffffff",
@@ -506,7 +506,7 @@ Page({
   },
 
   //日历切换至下一天
-  toNextDay: function() {
+  toNextDay: function () {
     var that = this
     //如果是大月
     var month = parseInt(that.data.dateStr.month)
@@ -619,7 +619,7 @@ Page({
   },
 
   //日历切换至上一天
-  toLastDay: function() {
+  toLastDay: function () {
     var that = this
     //如果是大月
     var lastMonth = parseInt(that.data.dateStr.month) - 1
@@ -732,7 +732,7 @@ Page({
     that.getDayStatic(dateStr)
   },
 
-  toNextWeek: function() {
+  toNextWeek: function () {
     var that = this
     var month = parseInt(that.data.dateStr.month)
     var day = parseInt(that.data.dateStr.day)
@@ -836,7 +836,7 @@ Page({
     that.getWeekStatic(dateStr)
   },
 
-  toLastWeek: function() {
+  toLastWeek: function () {
     var that = this
     var lastMonth = parseInt(that.data.dateStr.month) - 1
     var month = parseInt(that.data.dateStr.month)
@@ -941,7 +941,7 @@ Page({
     that.getWeekStatic(dateStr)
   },
 
-  toNextMonth: function() {
+  toNextMonth: function () {
     var that = this
     var month = parseInt(that.data.dateStr.month)
     var newMonth = month + 1
@@ -1007,7 +1007,7 @@ Page({
     var userid = wx.getStorageSync('openid')
     that.getMonthStatic(dateStr)
   },
-  toLastMonth: function() {
+  toLastMonth: function () {
     var that = this
     var month = parseInt(that.data.dateStr.month)
     var newMonth = month - 1
@@ -1074,16 +1074,16 @@ Page({
     that.getMonthStatic(dateStr)
   },
 
-  dateToStr: function() {
+  dateToStr: function () {
     var that = this
     //判断是否需要给日和月加“0”
-    if (that.data.dateStr.month < 10 && typeof(that.data.dateStr.month) == 'number') {
+    if (that.data.dateStr.month < 10 && typeof (that.data.dateStr.month) == 'number') {
       var month = "0" + that.data.dateStr.month
       that.setData({
         'dateStr.month': month
       })
     }
-    if (that.data.dateStr.day < 10 && typeof(that.data.dateStr.day) == 'number') {
+    if (that.data.dateStr.day < 10 && typeof (that.data.dateStr.day) == 'number') {
       var day = "0" + that.data.dateStr.day
       that.setData({
         'dateStr.day': day
@@ -1091,7 +1091,7 @@ Page({
     }
   },
 
-  dateNextCon: function() {
+  dateNextCon: function () {
     var that = this
     switch (this.data.status) {
       case 1:
@@ -1117,7 +1117,7 @@ Page({
     }
   },
 
-  dateLastCon: function() {
+  dateLastCon: function () {
     var that = this
     switch (this.data.status) {
       case 1:
@@ -1143,7 +1143,7 @@ Page({
     }
   },
 
-  getRingCanvas: function() {
+  getRingCanvas: function () {
     new wxCharts({
       canvasId: 'ringCanvas',
       type: 'ring',

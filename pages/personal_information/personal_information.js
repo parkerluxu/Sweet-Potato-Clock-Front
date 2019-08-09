@@ -51,26 +51,24 @@ Page({
   onShow: function() {
     var that = this
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/userinformation/userinformation',
+      url: 'http://127.0.0.1:8080/userinformation/userinformation',
       data: {
         userid: wx.getStorageSync('openid'),
       },
       method: 'GET',
       success: function(res) {
         console.log(res.data.userinformation);
-        var value = res.data.userinformation;
-        var treeNumber = res.data.treeNumber;
+        var value = res.data.userinformation; 
         var daysSum = value.daysSum + '天';
         var minutesSum = value.minutesSum + '分钟';
-        var score = treeNumber + '棵';
+        var numberOfPotato=res.data.numberOfPotato+'个';
         var item0 = 'orderItems[' + 0 + '].contentText';
         var item1 = 'orderItems[' + 1 + '].contentText';
-        var item2 = 'orderItems[' + 2 + '].contentText';
         var item2 = 'orderItems[' + 2 + '].contentText';
         that.setData({
           [item0]: daysSum,
           [item1]: minutesSum,
-          [item2]: score,
+          [item2]:numberOfPotato
         })
       },
     })
