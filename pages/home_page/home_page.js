@@ -292,7 +292,8 @@ Page({
   //获取fromId
   getFormID: function (e) {
     var formId = e.detail.formId
-     wx.request({
+    /**
+     *  wx.request({
       url: 'http://localhost:8080/addFormId',
       method: 'GET',
       data: {
@@ -302,7 +303,9 @@ Page({
       success:function(res){
         console.log(res)
       }
-    })    
+    })
+     */
+    
   },
 
   //确认，发送请求添加数据

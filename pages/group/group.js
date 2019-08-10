@@ -361,7 +361,6 @@ Page({
         duration: 1000
       })
     } else {
-      that.powerDrawer(e)
       wx.request({
         url: 'http://localhost:8080/creategroup',
         method: 'POST',
@@ -379,25 +378,31 @@ Page({
             icon: 'success',
             duration: 1000
           });
-          that.onShow();
           var groupId = res.data.success
           var tagLength = that.data.defaultTag.length
           for (var i = 0; i < tagLength; i++) {
-            var tagName=that.data.defaultTag[i].name
-            wx.request({
-              url: 'http://localhost:8080/addGroupTag',
-              method: 'GET',
-              data: {
-                tagName:tagName,
-                groupId:groupId,
-              },
-              success:function(res){
-                console.log(res.data.success)
-              }
-            })
+            console.log(that.data.defaultTag[i].selected)
+            //从defaultTag中选出被选中的标签
+            if (that.data.defaultTag[i].selected == true) {
+              var tagName = that.data.defaultTag[i].name
+              console.log(tagName)
+              wx.request({
+                url: 'http://localhost:8080/addGroupTag',
+                method: 'GET',
+                data: {
+                  tagName: tagName,
+                  groupId: groupId,
+                },
+                success: function(res) {
+                  console.log(res.data.success)
+                  that.powerDrawer(e);
+                }
+              })
+            }
           }
         }
       })
+      that.onShow();
     }
     that.setData({
       newGroup: null
