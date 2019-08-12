@@ -111,8 +111,8 @@
 .list .item .meta {
   width: 55%;
   margin-left: 4%;
-  display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content:flex-start;
 }
 
 .list .item .meta .title, .list .item .meta .sub-title {
@@ -542,3 +542,24 @@ button::after {
   text-align: center;
 }
 
+
+.group_card_tag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:flex-start;
+}
+
+.lable2 {
+  display: flex;
+  padding: 2%;
+  margin-left: 30rpx;
+  font-size: 40rpx;
+}
+
+.lable4 {
+  display: flex;
+  padding: 2%;
+  margin-right: 40rpx;
+  border: 2rpx solid #000;
+}

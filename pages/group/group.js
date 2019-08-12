@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showDialog:false,
+    showDialog: false,
     userId: wx.getStorageSync('openid'),
     focus: false,
     inputValue: '',
@@ -27,6 +27,7 @@ Page({
     orientation: 'left', //滚动方向
     interval: 20, // 时间间隔b
     hiddenmodalput: true, //掩盖输入框
+    selected_num: 0,
     defaultTag: [{
         name: "学习",
         index: "0",
@@ -73,11 +74,15 @@ Page({
     //清空数据
     var datas_11 = this.data.defaultTag;
     var _length = this.data.defaultTag.length;
+    var selected_num1 = this.data.selected_num;
+    selected_num1 = 0;
     datas_11.splice(3, 3);
     this.setData({
       defaultTag: datas_11,
       isTagMax: false,
+      selected_num: selected_num1
     });
+    console.log(this.data.selected_num)
   },
   util: function(currentStatu) {
     /* 动画部分 */
@@ -111,7 +116,7 @@ Page({
       //关闭
       if (currentStatu == "close") {
         this.setData({
-          showModalStatus: false
+          showModalStatus: false,
         });
       }
       console.log(this.data.defaultTag)
@@ -177,14 +182,24 @@ Page({
   selectTag: function(e) {
     let index = e.currentTarget.dataset.index;
     let arrs = this.data.defaultTag;
-    if (arrs[index].selected == false) {
-      arrs[index].selected = true;
-    } else {
-      arrs[index].selected = false;
+    let selected_num = this.data.selected_num;
+    if (arrs[index].selected == false && selected_num > 2) {
+        wx.showToast({
+          title: '已达标签上限',
+          image: '../images/close.png'
+        });
     }
+    else if (arrs[index].selected == false && selected_num < 3){
+        arrs[index].selected = true;
+        selected_num += 1;
+      } else if(arrs[index].selected == true) {
+        arrs[index].selected = false;
+        selected_num -= 1;
+      }
     this.setData({
       defaultTag: arrs,
-      hiddenDate_1: false
+      hiddenDate_1: false,
+      selected_num: selected_num
     })
     console.log(this.data.defaultTag)
   },
@@ -193,18 +208,18 @@ Page({
   tagModal: function() {
     this.setData({
       showDialog: !this.data.showDialog
-          })
+    })
   },
 
   //重置按钮
-  cancel: function () {
+  cancel: function() {
     this.setData({
       tagname: null,
       newTag: null
     });
   },
   //输入自定义标签
-  inputTagName: function (e) {
+  inputTagName: function(e) {
     var _length = this.data.defaultTag.length;
     var tagname = e.detail.value;
     if (tagname != null) {
@@ -216,7 +231,7 @@ Page({
     console.log(this.data.newTag)
   },
   //提交
-  confirm: function () {
+  confirm: function() {
     var _length = this.data.defaultTag.length;
     let tag1 = this.data.defaultTag;
     if (this.data.newTag == null) {
@@ -586,7 +601,7 @@ Page({
             [k1]: list[i].groupName,
             [k2]: list[i].groupId,
             [k3]: list[i].memberNumber,
-            [k4]: taglist[i]
+            [k4]: taglist[i],
           })
         }
       }
