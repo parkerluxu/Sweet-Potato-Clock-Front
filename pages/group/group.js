@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showDialog:false,
     userId: wx.getStorageSync('openid'),
     focus: false,
     inputValue: '',
@@ -189,53 +190,64 @@ Page({
   },
 
   //自定义
-  modalinput: function() {
+  tagModal: function() {
     this.setData({
-      hiddenmodalput: !this.data.hiddenmodalput
-    })
+      showDialog: !this.data.showDialog
+          })
   },
 
   //重置按钮
-  cancel: function() {
+  cancel: function () {
     this.setData({
-      tapname: '',
-      hiddenmodalput: true
+      tagname: null,
+      newTag: null
     });
   },
-
   //输入自定义标签
-  inputTapName: function(e) {
+  inputTagName: function (e) {
     var _length = this.data.defaultTag.length;
-    var tapnme = e.detail.value;
-    this.setData({
-      newtTag: tapnme,
-    })
-    console.log(tapnme)
-  },
-
-  //提交
-  confirm: function() {
-    var _length = this.data.defaultTag.length;
-    let defaultTagNow = this.data.defaultTag;
-    var tapname = this.data.newtTag;
-    var obj = {};
-    obj.name = tapname;
-    obj.index = _length;
-    obj.selected = true;
-    defaultTagNow.push(obj);
-    this.setData({
-      isTagMax: false,
-      defaultTag: defaultTagNow,
-      tapname: '',
-      hiddenmodalput: true
-    })
-    if (_length >= 5) {
+    var tagname = e.detail.value;
+    if (tagname != null) {
       this.setData({
-        isTagMax: true,
-        hiddenmodalput: true
+        newTag: tagname,
       })
     }
+    console.log(tagname)
+    console.log(this.data.newTag)
+  },
+  //提交
+  confirm: function () {
+    var _length = this.data.defaultTag.length;
+    let tag1 = this.data.defaultTag;
+    if (this.data.newTag == null) {
+      wx.showToast({
+        title: '输入不能为空',
+        image: '../images/close.png'
+      });
+    } else {
+      var tagname = this.data.newTag;
+      var obj = {};
+      obj.name = tagname;
+      obj.index = _length;
+      obj.selected = false;
+      tag1.push(obj);
 
+      this.setData({
+        isTagMax: false,
+        defaultTag: tag1,
+        tagname: "",
+        showDialog: false
+      })
+      if (_length + 1 >= 6) {
+        this.setData({
+          isTagMax: true,
+          showDialog: false
+        })
+      }
+
+    }
+    console.log(this.data.defaultTag)
+    console.log(this.data.newTag)
   },
 
   //加入小组
@@ -555,6 +567,7 @@ Page({
       success: function(res) {
         console.log(res.data)
         var list = res.data.groupList;
+        var taglist = res.data.tagList;
         if (res.data.groupList.length == 0) {
           that.setData({
             noData: true
@@ -568,10 +581,12 @@ Page({
           var k1 = 'groupList[' + i + '].groupName';
           var k2 = 'groupList[' + i + '].groupId';
           var k3 = 'groupList[' + i + '].memberNumber';
+          var k4 = 'groupList[' + i + '].groupTag';
           that.setData({
             [k1]: list[i].groupName,
             [k2]: list[i].groupId,
             [k3]: list[i].memberNumber,
+            [k4]: taglist[i]
           })
         }
       }
