@@ -23,7 +23,7 @@ Page({
       },
       {
         typeId: 2,
-        image_url: '../images/shu.svg',
+        image_url: '../images/potato.svg',
         content: Number,
         contentText: String
       },

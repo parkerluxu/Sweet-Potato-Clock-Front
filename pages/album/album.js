@@ -62,5 +62,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  goToAlbum:function(e){
+    
   }
+
 })

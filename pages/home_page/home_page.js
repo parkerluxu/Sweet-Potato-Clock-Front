@@ -87,7 +87,7 @@ Page({
     timeValue: "时长(10~120)",
     disposable_1: false,
     inputValue_1: "请输入目标名称",
-    timeValue_1: "时长(10~120)",
+    timeValue_1: 20,
     selectIndex_1: 2,
     hiddenbtn_1: true,
     showModalStatus_1: false,
@@ -650,6 +650,7 @@ Page({
       clock_1: null,
       plan: null,
       plan_1: null,
+
     })
     wx.request({
       url: 'http://127.0.0.1:8080/displaygoal/displaygoal',
@@ -687,7 +688,7 @@ Page({
           var planId = 'plan[' + planNum + '].goalId'
           var periodOfPlan = 'plan[' + planNum + '].period'
           var planTime = 'plan[' + planNum + '].clockTime'
-          if (goalList[i].concentrated == true) {
+          if (goalList[i].isConcentrated == true) {
             that.setData({
               [clockName]: goalList[i].content,
               [clockTime]: goalList[i].minutes,
