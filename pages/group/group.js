@@ -233,7 +233,7 @@ randompic(){
     var _length = this.data.defaultTag.length;
     var tagname = e.detail.value;
     if (tagname != null) {
-      if (tagname.length > 6) {
+      if (tagname.length >= 6) {
         wx.showToast({
           title: '不能超过6个字',
           image: '../images/close.png'
@@ -319,10 +319,20 @@ randompic(){
 
   //获取小组名称
   getGroupName: function(e) {
-    console.log(e.detail.value)
-    var that = this
+    console.log(e.detail.value);
+    var groupname = e.detail.value;
+    if (groupname != null) {
+      if (groupname.length >= 6) {
+        wx.showToast({
+          title: '不能超过6个字',
+          image: '../images/close.png'
+        })
+      }
+    }
+      groupname = groupname.slice(0, 6);
+    var that = this;
     that.setData({
-      'newGroup.name': e.detail.value,
+      'newGroup.name': groupname,
     })
   },
 

@@ -53,7 +53,7 @@
   <view class="drawer_content">
     <view class="top grid">
       <label class="title col-0">小组名称</label>
-      <input class="input_base input_h30 col-1" name="rName" placeholder="请输入小组名称" bindinput='getGroupName'></input>
+      <input class="input_base input_h30 col-1" maxlength="6" name="rName" placeholder="请输入小组名称" bindinput='getGroupName'></input>
     </view>
     <!--新建小组标签行-->
     <view class="line" hidden="{{hiddenDate_1}}">
@@ -65,7 +65,7 @@
     <view class="modal-box" wx:if="{{showDialog}}">
       <view class="modal-title">自定义标签</view>
       <view class="line">
-        <input value='' style="font-size:32rpx;width:100%;margin-left:2%" type='text' value='{{tagname}}' bindinput="inputTagName" placeholder="请输入标签名称" auto-focus/>
+        <input value='' maxlength="6" style="font-size:32rpx;width:100%;margin-left:2%" type='text' value='{{tagname}}' bindinput="inputTagName" placeholder="请输入标签名称" auto-focus/>
       </view>
       <view class="modal-footer">
         <view class="btn-cancel" bindtap="cancel" hover-class="button-hover" data-status="close">重置</view>
