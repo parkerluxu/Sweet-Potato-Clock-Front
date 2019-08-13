@@ -167,11 +167,12 @@ Page({
         index: "1",
         selected: false
       },
+      /** 
       {
         name: "读英语",
         index: "2",
         selected: false
-      }
+      }*/
     ],
     hiddentag: false,
     hiddenmodalput: true

@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    randompic: 0,
     showDialog: false,
     userId: wx.getStorageSync('openid'),
     focus: false,
@@ -178,6 +179,15 @@ Page({
       });
     }
   },
+
+randompic(){
+  var randompic1 = this.data.randompic;
+  randompic1 = Math.floor(Math.random() * 20);
+  this.setData({
+    randompic:randompic1
+  });
+},
+
   //新建小组标签多选
   selectTag: function(e) {
     let index = e.currentTarget.dataset.index;
@@ -223,18 +233,25 @@ Page({
     var _length = this.data.defaultTag.length;
     var tagname = e.detail.value;
     if (tagname != null) {
+      if (tagname.length > 6) {
+        wx.showToast({
+          title: '不能超过6个字',
+          image: '../images/close.png'
+        })
+      }
+      tagname = tagname.slice(0 , 6);
       this.setData({
         newTag: tagname,
       })
-    }
     console.log(tagname)
     console.log(this.data.newTag)
+    }
   },
   //提交
   confirm: function() {
     var _length = this.data.defaultTag.length;
     let tag1 = this.data.defaultTag;
-    if (this.data.newTag == null) {
+     if (this.data.newTag == null) {
       wx.showToast({
         title: '输入不能为空',
         image: '../images/close.png'
