@@ -14,18 +14,24 @@
   <text style='color:gray;'>点击右下角+添加小组吧！</text>
 </view>
 <scroll-view scroll-y="true" style="width:100%;">
-  <view wx:for="{{groupList}}" class="list">
+  <view wx:for="{{groupList}}" wx:for-item="cell" class="list">
     <navigator class="item" url='../ranking_list/ranking_list?groupId={{item.groupId}}'>
       <view class="index">
         <text>{{index+1}}</text>
       </view>
       <image class="poster" src="../images/xingquxiaozu.svg" />
       <view class="meta">
-        <text class="title">{{item.groupName}}</text>
+        <text class="title">{{cell.groupName}}</text>
+        <view class="group_card_tag">
+            <view class="lable4" style="font-size:25rpx;border:1rpx dashed;border-radius: 5px;margin-bottom:3%;" wx:for="{{cell.groupTag}}">
+              {{item.tagName}}
+          </view>
+        </view>
       </view>
+
       <view class="rating">
         <image src='../images/xiaozuxuanzhong.png' class='image_group'></image>
-        <text>{{item.memberNumber}}人</text>
+        <text>{{cell.memberNumber}}人</text>
       </view>
     </navigator>
   </view>
@@ -51,13 +57,21 @@
     </view>
     <!--新建小组标签行-->
     <view class="line" hidden="{{hiddenDate_1}}">
-      <button class="btn4 inactive" bindtap="modalinput" hidden='{{isTagMax}}' hover-class="button-hover">自定义</button>
+      <button class="btn4 inactive" bindtap="tagModal" hidden='{{isTagMax}}' hover-class="button-hover">自定义</button>
       <botton class="btn3 {{item.selected ? 'active' : 'inactive'}}" wx:for="{{defaultTag}}" wx:key="item.index" hover-class="button-hover" bindtap="selectTag" data-index="{{item.index}}" checked="{{item.selected}}"> {{item.name}}</botton>
     </view>
     <!--新建小组自定义标签弹窗-->
-    <modal style="color:#ffae49 cbgColor:#ffae49" hidden="{{hiddenmodalput}}" title="自定义标签" confirm-text="提交" cancel-text="重置" bindcancel="cancel" confirm-type="done" bindconfirm="confirm">
-      <input value='' type='text' value='{{tapname}}' bindinput="inputTapName" placeholder="标签" auto-focus/>
-    </modal>
+    <view class="modal-mask" bindtap="tagModal" data-statu="close" wx:if="{{showDialog}}"></view>
+    <view class="modal-box" wx:if="{{showDialog}}">
+      <view class="modal-title">自定义标签</view>
+      <view class="line">
+        <input value='' style="font-size:32rpx;width:100%;margin-left:2%" type='text' value='{{tagname}}' bindinput="inputTagName" placeholder="请输入标签名称" auto-focus/>
+      </view>
+      <view class="modal-footer">
+        <view class="btn-cancel" bindtap="cancel" hover-class="button-hover" data-status="close">重置</view>
+        <view class="btn-confirm" bindtap="confirm" hover-class="button-hover" data-status="close">确定</view>
+      </view>
+    </view>
 
 
     <view class="top grid">

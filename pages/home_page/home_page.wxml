@@ -39,7 +39,7 @@
         <view class="" style="font-size:25rpx;margin-top:5%;margin-left:5%;">--</view>
         <image class='time_icon' style="margin-top:6%;" src='../images/clock2.png'></image>
         <view style="font-size:25rpx;align-items: center;flex-direction: row;justify-content: center;padding-top:5%;">{{item.clockTime}}min</view>
-      </view>
+      </view> 个
       <view class='time_content'>
         <view class="lable4" style="font-size:28rpx;border:1rpx dashed;border-radius: 5px;margin-bottom:3%;" wx:for="{{tag}}">{{item.name}}</view>
       </view>
