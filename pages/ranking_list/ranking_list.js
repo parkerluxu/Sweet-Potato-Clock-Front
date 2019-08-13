@@ -42,6 +42,7 @@ Page({
    */
 
   onLoad: function(options) {
+    console.log(options)
     this.setData({
       groupId: options.groupId
     })
@@ -69,6 +70,7 @@ Page({
       },
       success: function(res) {
         var value = res.data.groupInformation;
+        console.log(value)
         that.setData({
           captainId: value.captainId,
           groupName: value.groupName,
