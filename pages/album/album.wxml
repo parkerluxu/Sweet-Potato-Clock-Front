@@ -1,6 +1,6 @@
-<scroll-view class="album-list" bindtap="goToAlbum" scroll-y="true" lower-threshold="loadAlbumList">
-  <view class='album-card'>
-    <image class='background' style="background-image:url('http://picture.dormassistant.wang/shuxiaofanderichang.png');" mode="aspectFill"></image>
+<scroll-view class="album-list" scroll-y="true" lower-threshold="loadAlbumList" >
+  <view class='album-card' wx:for="{{albumList}}" data-albumId='{{item.albumId}}' bindtap="goToAlbum">
+    <image class='background' style="background-image:url('{{item.coverUrl}}');" mode="aspectFill" ></image>
     <view class='title'>
         <text></text>
     </view>

@@ -26,7 +26,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+    var that=this
+    wx.request({
+      url: 'http://127.0.0.1:8080/displayUserPhoto',
+      method:'GET',
+      data:{
+        userId:wx.getStorageSync('openid'),
+        albumId:options.albumId
+      },
+      success(res){
+        console.log(res.data)
+        that.setData({
+          photoList:res.data.success
+        })
+      }
+    })
   },
 
   /**
