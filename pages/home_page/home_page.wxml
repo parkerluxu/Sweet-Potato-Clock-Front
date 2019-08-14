@@ -153,8 +153,8 @@
 
   <!--标签-->
   <view class="line" style="height:60rpx;">
-      <button class="btn3 inactive1" bindtap="tagModal" hover-class="button-hover">自定义</button>
-      <botton class="btn3 inactive1" style="border:{{tagb}};background-color:{{tagbg}};color:{{tagc}}" wx:for="{{goalTag}}" wx:key="item.index" hover-class="button-hover" bindtap="selectTag"> {{item.tagName}}</botton>
+      <button class="btn3 inactive1" bindtap="tagModal" hover-class="button-hover" hidden='{{isTagMax}}'>自定义</button>
+      <botton class="btn3 inactive1" style="border:{{tagb}};background-color:{{tagbg}};color:{{tagc}}" wx:for="{{tag}}" wx:key="item.index" hover-class="button-hover" bindtap="tagDelModal"  data-index='{{item.index}}'> {{item.tagName}}</botton>
     </view>
   <view class="modal-mask" bindtap="tagModal" data-statu="close" wx:if="{{showDialog}}"></view>
   <view class="modal-box" wx:if="{{showDialog}}">
@@ -167,9 +167,7 @@
       <view class="btn-confirm" bindtap="confirm" hover-class="button-hover" data-status="close">确定</view>
     </view>
   </view>
-
-
-  <!--长按弹窗-->
+  <!--删除弹窗-->
   <view class="modal-mask" bindtap="tagDelModal" data-statu="close" wx:if="{{deleteTag}}"></view>
   <view class="modal-box" wx:if="{{deleteTag}}">
     <view class="modal-title">确认删除标签</view>

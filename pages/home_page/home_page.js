@@ -160,7 +160,7 @@ Page({
     isGetNewPhotoShow: false,
 
 
-    tag:[],
+    tag: [],
     hiddentag: false,
     hiddenmodalput: true
   },
@@ -278,8 +278,7 @@ Page({
   //获取fromId 
   getFormID: function(e) {
     var formId = e.detail.formId
-    /** 
-     *  wx.request({ 
+     wx.request({ 
       url: 'http://localhost:8080/addFormId', 
       method: 'GET', 
       data: { 
@@ -290,7 +289,6 @@ Page({
         console.log(res) 
       } 
     }) 
-     */
 
   },
 
@@ -532,7 +530,7 @@ Page({
   },
   //提交 
   confirm: function() {
-    var _length = this.data.tag.length;
+    let _length=this.data.tag.length
     let tag1 = this.data.tag;
     if (this.data.newTag == null) {
       wx.showToast({
@@ -542,20 +540,23 @@ Page({
     } else {
       var tagname = this.data.newTag;
       var obj = {};
-      obj.name = tagname;
+      obj.tagName = tagname;
       obj.index = _length;
-      obj.selected = true;
+      obj.selected = false;
       tag1.push(obj);
-
       this.setData({
-        isTagMax: false,
         tag: tag1,
-        tagname: "",
+        newTag: "",
         showDialog: false
       })
       if (_length + 1 >= 4) {
         this.setData({
           isTagMax: true,
+          showDialog: false
+        })
+      }else{
+        this.setData({
+          isTagMax: false,
           showDialog: false
         })
       }
@@ -645,7 +646,7 @@ Page({
       data: {
         userId: wx.getStorageSync('openid')
       },
-      success: function(res) {  
+      success: function(res) {
         console.log(res.data.goalList)
         var goalList = res.data.goalList;
         var periodOfGoalList = res.data.periodOfGoalList;
@@ -667,8 +668,8 @@ Page({
         var planNum = 0;
         var clockNum_1 = 0;
         var planNum_1 = 0;
-        var tagNumbePlan=0;
-        var tagNumberClock=0;
+        var tagNumbePlan = 0;
+        var tagNumberClock = 0;
         for (var i = 0; i < goalList.length; i++) {
           var clockName = 'clock[' + clockNum + '].clockName'
           var clockId = 'clock[' + clockNum + '].goalId'
@@ -699,7 +700,7 @@ Page({
               [planId]: goalList[i].goalId,
               [periodOfPlan]: periodOfGoalList[i],
               [planTime]: goalList[i].minutes,
-              [planTag]:goalTagList[i]
+              [planTag]: goalTagList[i]
             })
             planNum += 1
           }
@@ -1353,6 +1354,17 @@ Page({
     var time = item.clockTime;
     var tagList = item.goalTag;
     var tag = that.data.tag;
+    for (let index = 0; index < tagList.length; index++) {
+      var tagName = tagList[index].tagName;
+      var newTagName = 'tag[' + index + '].tagName'
+      var newTagIndex = 'tag[' + index + '].index'
+      var newTagSelect = 'tag[' + index + '].selected'
+      that.setData({
+        [newTagName]: tagName,
+        [newTagIndex]: index,
+        [newTagSelect]: false
+      })
+    }
     that.setData({
       cbgColor_0: "#ffae49",
       goalName: name,
@@ -1380,7 +1392,7 @@ Page({
       obj.selected = false;
       tag.push(obj);
     }
-    
+
     if (periodList[7] == 1) {
       that.setData({
         selectIndex: 1,
@@ -1434,18 +1446,21 @@ Page({
     var periodList = item.period;
     var goalid = item.goalId;
     var name = item.planName;
-    var tagList=item.goalTag;
+    var tagList = item.goalTag;
     var tag = that.data.tag
     for (let index = 0; index < tagList.length; index++) {
-      var tagname = tagList[index].tagName;
-      var obj = {};
-      obj.name = tagname;
-      obj.index = index;
-      obj.selected = false;
-      tag.push(obj);
+      var tagName = tagList[index].tagName;
+      var newTagName = 'tag[' + index + '].tagName'
+      var newTagIndex = 'tag[' + index + '].index'
+      var newTagSelect = 'tag[' + index + '].selected'
+      that.setData({
+        [newTagName]: tagName,
+        [newTagIndex]: index,
+        [newTagSelect]: false
+      })
     }
     that.setData({
-      goalId:goalid,
+      goalId: goalid,
       cbgColor_0: "#fff",
       chooseWhichGoal: item,
       goalName: name,
@@ -1464,7 +1479,6 @@ Page({
       tborder: "2rpx dashed #979797",
       goalTag: tagList
     })
-
 
     console.log(that.data.tag)
     if (periodList[7] == 1) {
@@ -1523,6 +1537,17 @@ Page({
     var time = item.clockTime;
     var tagList = item.goalTag;
     var tag = that.data.tag;
+    for (let index = 0; index < tagList.length; index++) {
+      var tagName = tagList[index].tagName;
+      var newTagName = 'tag[' + index + '].tagName'
+      var newTagIndex = 'tag[' + index + '].index'
+      var newTagSelect = 'tag[' + index + '].selected'
+      that.setData({
+        [newTagName]: tagName,
+        [newTagIndex]: index,
+        [newTagSelect]: false
+      })
+    }
     that.setData({
       cbgColor_0: "#ffae49",
       chooseWhichGoal: item,
@@ -1605,6 +1630,17 @@ Page({
     var name = item.planName;
     var tagList = item.goalTag;
     var tag = that.data.tag;
+    for (let index = 0; index < tagList.length; index++) {
+      var tagName = tagList[index].tagName;
+      var newTagName = 'tag[' + index + '].tagName'
+      var newTagIndex = 'tag[' + index + '].index'
+      var newTagSelect = 'tag[' + index + '].selected'
+      that.setData({
+        [newTagName]: tagName,
+        [newTagIndex]: index,
+        [newTagSelect]: false
+      })
+    }
     that.setData({
       cbgColor_0: "#fff",
       chooseWhichGoal: item,
@@ -2063,40 +2099,28 @@ Page({
     })
   },
 
-  tagDelModal() {
+  tagDelModal(e) {
     this.setData({
       deleteTag: !this.data.deleteTag,
+      delTagIndex: e.currentTarget.dataset.index,
     });
   },
 
-  del:function(e){
+  del: function(e) {
     var that = this
     console.log(this.data.selectTag)
     that.setData({
       deleteTag: false,
     })
-    wx.request({
-      url: 'http://127.0.0.1:8080/deleteGoalTag"',
-
-      method: 'GET',
-      data: {
-        
-      },
-      success: function (res) {
-        if (res.data.success == 1) {
-          wx.showToast({
-            title: '删除成功',
-            icon: 'success',
-            duration: 1000
-          })
-        }
-      }
+    var newTag=this.data.tag
+      newTag.splice(that.data.delTag, 1)
+    that.setData({
+      tag:newTag,
     })
-    this.data.tag.splice(e.currentTarget.dataset.index, 1)
-    this.setData({
-
-      tag: this.data.tag
-
-    })
+      wx.showToast({
+        title: '删除成功',
+        icon: 'success',
+        duration: 1000
+      })
   }
 })
