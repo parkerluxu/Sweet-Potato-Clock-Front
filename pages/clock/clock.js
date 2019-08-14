@@ -123,6 +123,7 @@ Page({
 
   getFormID: function (e) {
     var formId = e.detail.formId
+    console.log(formId);
     wx.request({
       url: 'https://localhost:8080/addFormId',
       method: 'GET',

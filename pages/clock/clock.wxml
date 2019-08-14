@@ -27,7 +27,7 @@
   <progress stroke-width='4' backgroundColor='#fff' activeColor="#ffae49" percent="{{progress}}"></progress>
 </view>
 <view class="btn-area">
-  <form name='pushMsgFm' report-submit="true" bindtap="getFormID">
+  <form name='pushMsgFm' report-submit="true" bindsubmit="getFormID">
   <button class="button" form-type="submit" bindtap="startTimer" disabled="{{is_disabled}}" hover-class="button-hover" plain="true" style="color: #fa9857; border-color: #fa9857;">{{buttonText}}</button>
   </form>
 </view>
