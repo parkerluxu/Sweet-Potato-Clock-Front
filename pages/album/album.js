@@ -12,7 +12,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
   /**
@@ -26,7 +25,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    wx.request({
+      url: 'http://127.0.0.1:8080/displayAlbum',
+      method:'GET',
+      success:function(res){
+        var albumList=res.data.success
+        that.setData({
+          albumList:albumList
+        })
+      }
+    })
   },
 
   /**
@@ -62,5 +71,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  goToAlbum:function(e){
+    console.log(e.currentTarget.dataset)
+    wx.navigateTo({
+      url: '../photo/photo?albumId=' + e.currentTarget.dataset.albumid,
+    })
   }
+
 })

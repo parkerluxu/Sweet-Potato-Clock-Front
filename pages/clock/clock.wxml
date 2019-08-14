@@ -9,12 +9,13 @@
       <view class="timer_progress timer_right">
         <view class="timer_circle timer_circle--right" style="transform: rotate({{rightDeg}}deg);"></view>
       </view>
-      <image src='{{imageSrc[imageindex]}}' class='clock_tree'></image>
+      <text wx:if="{{!completed}}" class="timer_time">{{remainTimeText}}</text>
+      <text wx:if="{{completed}}" class="timer_time">00:00</text>
     </view>
   </view>
-  <text wx:if="{{!completed}}" class="timer_time">{{remainTimeText}}</text>
+  
   <text wx:if="{{isRuning}}" class="timer_taskName"></text>
-  <text wx:if="{{completed}}" class="timer_time">00:00</text>
+  
 </view>
 <view style='text-align:center'>
   <text class='timer_name'>{{clockName}}</text>
@@ -27,7 +28,7 @@
   <progress stroke-width='4' backgroundColor='#fff' activeColor="#ffae49" percent="{{progress}}"></progress>
 </view>
 <view class="btn-area">
-  <form name='pushMsgFm' report-submit="true" bindtap="getFormID">
+  <form name='pushMsgFm' report-submit="true" bindsubmit="getFormID">
   <button class="button" form-type="submit" bindtap="startTimer" disabled="{{is_disabled}}" hover-class="button-hover" plain="true" style="color: #fa9857; border-color: #fa9857;">{{buttonText}}</button>
   </form>
 </view>

@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    randompic: [],
     showDialog: false,
     userId: wx.getStorageSync('openid'),
     focus: false,
@@ -178,6 +179,20 @@ Page({
       });
     }
   },
+
+randompic(){
+  var randompic1 = this.data.randompic;
+  var index = this.data.groupList.length;
+  var i =0;
+  for( i = 0; i < index ; i++){
+    randompic1[i] = Math.floor(Math.random() * 20);
+  }
+  this.setData({
+    randompic:randompic1
+  });
+  console.log(randompic);
+},
+
   //新建小组标签多选
   selectTag: function(e) {
     let index = e.currentTarget.dataset.index;
@@ -223,18 +238,25 @@ Page({
     var _length = this.data.defaultTag.length;
     var tagname = e.detail.value;
     if (tagname != null) {
+      if (tagname.length >= 6) {
+        wx.showToast({
+          title: '不能超过6个字',
+          image: '../images/close.png'
+        })
+      }
+      tagname = tagname.slice(0 , 6);
       this.setData({
         newTag: tagname,
       })
-    }
     console.log(tagname)
     console.log(this.data.newTag)
+    }
   },
   //提交
   confirm: function() {
     var _length = this.data.defaultTag.length;
     let tag1 = this.data.defaultTag;
-    if (this.data.newTag == null) {
+     if (this.data.newTag == null) {
       wx.showToast({
         title: '输入不能为空',
         image: '../images/close.png'
@@ -302,10 +324,20 @@ Page({
 
   //获取小组名称
   getGroupName: function(e) {
-    console.log(e.detail.value)
-    var that = this
+    console.log(e.detail.value);
+    var groupname = e.detail.value;
+    if (groupname != null) {
+      if (groupname.length >= 6) {
+        wx.showToast({
+          title: '不能超过6个字',
+          image: '../images/close.png'
+        })
+      }
+    }
+      groupname = groupname.slice(0, 6);
+    var that = this;
     that.setData({
-      'newGroup.name': e.detail.value,
+      'newGroup.name': groupname,
     })
   },
 
@@ -604,7 +636,8 @@ Page({
             [k4]: taglist[i],
           })
         }
-      }
+        that.randompic();
+      },
     })
     // 生命周期函数--监听页面显示
   },

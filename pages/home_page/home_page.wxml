@@ -1,6 +1,7 @@
 <view class="list-cell">
   <text class="goalList-title">{{date}}</text>
-  <image class="ring" src='../images/ring.png' bindtap=' ' data-statu="open" style="margin-right:5%;"></image>
+  <image class="ring" src='../images/ring.png' bindtap='setIsClock' data-statu="open" style="margin-right:5%;" hidden="{{!isClock}}"></image>
+    <image class="ring" src='../images/noring.svg' bindtap='setIsClock' data-statu="open" style="margin-right:5%;" hidden="{{isClock}}"></image>
   <image class="newGoal" src='../images/new.png' bindtap='drawer_1' data-statu="open" style="margin-right:5%;"></image>
 </view>
 
@@ -34,7 +35,8 @@
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1" bindlongtap='showMessage_1' data-statu="open">
   <view class="clock-list" style="background-image:url('https://dormassistant.wang/back3.png');">
     <view class="p">
-      <view class="lable2">{{item.clockName}}
+      <view class="lable2">
+          {{item.clockName}}
         <view class="" style="font-size:25rpx;margin-top:5%;margin-left:5%;">--</view>
         <image class='time_icon' style="margin-top:6%;" src='../images/clock2.png'></image>
         <view style="font-size:25rpx;align-items: center;flex-direction: row;justify-content: center;padding-top:5%;">{{item.clockTime}}min</view>
