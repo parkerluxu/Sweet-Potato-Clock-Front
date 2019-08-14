@@ -161,22 +161,6 @@ Page({
 
 
     tag:[],
-    tag1: [{
-        name: "学习",
-        index: "0",
-        selected: false
-      },
-      {
-        name: "看书",
-        index: "1",
-        selected: false
-      },
-      {
-        name: "读英语",
-        index: "2",
-        selected: false
-      }
-    ],
     hiddentag: false,
     hiddenmodalput: true
   },
@@ -541,7 +525,6 @@ Page({
     if (tagname != null) {
       this.setData({
         newTag: tagname,
-        'tag.TagName': e.detail.value,
       })
     }
     console.log(tagname)
@@ -655,7 +638,6 @@ Page({
       clock_1: null,
       plan: null,
       plan_1: null,
-      tag:null,
     })
     wx.request({
       url: 'http://127.0.0.1:8080/displaygoal/displaygoal',
@@ -663,26 +645,15 @@ Page({
       data: {
         userId: wx.getStorageSync('openid')
       },
-      success: function(res) {
+      success: function(res) {  
         console.log(res.data.goalList)
         var goalList = res.data.goalList;
         var periodOfGoalList = res.data.periodOfGoalList;
         var goalNoTodayList = res.data.goalNoTodayList;
         var periodOfGoalNoTodayList = res.data.periodOfGoalNoTodayList;
         var goalTagList = res.data.goalTagList;
-        console.log(res.data.goalTagList)
-        var tagIndex=0;
-        for (var i = 0; i < goalTagList.length; i++){
-          var tagName='tag['+tagIndex+'].tagName'
-          var tagId = 'tag[' + tagIndex + '].tagId'
-          var tagNumber = 'tag[' + tagIndex + '].tagNumber'
-          that.setData({
-            [tagName]: goalTagList[i].content,
-            [tagId]: goalTagList[i].tagId,
-            [tagNumber]: goalTagList[i].tagNumber,
-          })
-          tagIndex += 1;
-        }
+        console.log(res.data)
+
         if (goalList.length == 0 && goalNoTodayList.length == 0) {
           that.setData({
             noData: true,
@@ -696,13 +667,17 @@ Page({
         var planNum = 0;
         var clockNum_1 = 0;
         var planNum_1 = 0;
+        var tagNumbePlan=0;
+        var tagNumberClock=0;
         for (var i = 0; i < goalList.length; i++) {
           var clockName = 'clock[' + clockNum + '].clockName'
           var clockId = 'clock[' + clockNum + '].goalId'
+          var clockTag = 'clock[' + clockNum + '].goalTag'
           var clockTime = 'clock[' + clockNum + '].clockTime'
           var clockComplete = 'clock[' + clockNum + '].isComplete'
           var periodOfClock = 'clock[' + clockNum + '].period'
           var planName = 'plan[' + planNum + '].planName'
+          var planTag = 'plan[' + planNum + '].goalTag'
           var planComplete = 'plan[' + planNum + '].isComplete'
           var planId = 'plan[' + planNum + '].goalId'
           var periodOfPlan = 'plan[' + planNum + '].period'
@@ -714,6 +689,7 @@ Page({
               [clockComplete]: goalList[i].isComplete,
               [clockId]: goalList[i].goalId,
               [periodOfClock]: periodOfGoalList[i],
+              [clockTag]: goalTagList[i]
             })
             clockNum += 1
           } else {
@@ -723,6 +699,7 @@ Page({
               [planId]: goalList[i].goalId,
               [periodOfPlan]: periodOfGoalList[i],
               [planTime]: goalList[i].minutes,
+              [planTag]:goalTagList[i]
             })
             planNum += 1
           }
@@ -730,12 +707,14 @@ Page({
         for (var i = 0; i < goalNoTodayList.length; i++) {
           var clockName = 'clock_1[' + clockNum_1 + '].clockName'
           var clockId = 'clock_1[' + clockNum_1 + '].goalId'
+          var clockTag = 'clock_1[' + clockNum + '].goalTag'
           var clockTime = 'clock_1[' + clockNum_1 + '].clockTime'
           var clockComplete = 'clock_1[' + clockNum_1 + '].isComplete'
           var periodOfCLock = 'clock_1[' + clockNum_1 + '].period'
           var planName = 'plan_1[' + planNum_1 + '].planName'
           var planComplete = 'plan_1[' + planNum_1 + '].isComplete'
           var planId = 'plan_1[' + planNum_1 + '].goalId'
+          var planTag = 'plan_1[' + planNum + '].goalTag'
           var periodOfPlan = 'plan_1[' + planNum_1 + '].period'
           var planTime = 'plan_1[' + planNum_1 + '].clockTime'
           if (goalNoTodayList[i].concentrated == true) {
@@ -745,6 +724,7 @@ Page({
               [clockComplete]: goalNoTodayList[i].isComplete,
               [clockId]: goalNoTodayList[i].goalId,
               [periodOfCLock]: periodOfGoalNoTodayList[i],
+              [clockTag]: goalTagList[i]
             })
             clockNum_1 += 1
           } else {
@@ -754,6 +734,7 @@ Page({
               [planId]: goalNoTodayList[i].goalId,
               [periodOfPlan]: periodOfGoalNoTodayList[i],
               [planTime]: goalNoTodayList[i].minutes,
+              [planTag]: goalTagList[i]
             })
             planNum_1 += 1
           }
@@ -1370,6 +1351,8 @@ Page({
     var goalid = item.goalId;
     var name = item.clockName;
     var time = item.clockTime;
+    var tagList = item.goalTag;
+    var tag = that.data.tag;
     that.setData({
       cbgColor_0: "#ffae49",
       goalName: name,
@@ -1387,7 +1370,17 @@ Page({
       textColor: "#000",
       ibColor: "#e9833e",
       tborder: "2rpx dashed #ffae49",
+      goalTag: tagList
     })
+    for (let index = 0; index < tagList.length; index++) {
+      var tagname = tagList[index].tagName;
+      var obj = {};
+      obj.name = tagname;
+      obj.index = index;
+      obj.selected = false;
+      tag.push(obj);
+    }
+    
     if (periodList[7] == 1) {
       that.setData({
         selectIndex: 1,
@@ -1441,6 +1434,16 @@ Page({
     var periodList = item.period;
     var goalid = item.goalId;
     var name = item.planName;
+    var tagList=item.goalTag;
+    var tag = that.data.tag
+    for (let index = 0; index < tagList.length; index++) {
+      var tagname = tagList[index].tagName;
+      var obj = {};
+      obj.name = tagname;
+      obj.index = index;
+      obj.selected = false;
+      tag.push(obj);
+    }
     that.setData({
       goalId:goalid,
       cbgColor_0: "#fff",
@@ -1459,7 +1462,11 @@ Page({
       textColor: "#979797",
       ibColor: "#979797",
       tborder: "2rpx dashed #979797",
+      goalTag: tagList
     })
+
+
+    console.log(that.data.tag)
     if (periodList[7] == 1) {
       that.setData({
         selectIndex: 1,
@@ -1514,6 +1521,8 @@ Page({
     var goalid = item.goalId;
     var name = item.clockName;
     var time = item.clockTime;
+    var tagList = item.goalTag;
+    var tag = that.data.tag;
     that.setData({
       cbgColor_0: "#ffae49",
       chooseWhichGoal: item,
@@ -1531,7 +1540,16 @@ Page({
       textColor: "#000",
       ibColor: "#e9833e",
       tborder: "2rpx dashed #ffae49",
+      goalTag: tagList,
     })
+    for (let index = 0; index < tagList.length; index++) {
+      var name = tagList[index].tagName;
+      var obj = {};
+      obj.name = name;
+      obj.index = index;
+      obj.selected = false;
+      tag.push(obj);
+    }
     if (periodList[7] == 1) {
       that.setData({
         selectIndex: 1,
@@ -1585,6 +1603,8 @@ Page({
     var periodList = item.period;
     var goalid = item.goalId;
     var name = item.planName;
+    var tagList = item.goalTag;
+    var tag = that.data.tag;
     that.setData({
       cbgColor_0: "#fff",
       chooseWhichGoal: item,
@@ -1602,7 +1622,16 @@ Page({
       textColor: "#979797",
       ibColor: "#979797",
       tborder: "2rpx dashed #979797",
+      goalTag: tagList,
     })
+    for (let index = 0; index < tagList.length; index++) {
+      var name = tagList[index].tagName;
+      var obj = {};
+      obj.name = name;
+      obj.index = index;
+      obj.selected = false;
+      tag.push(obj);
+    }
     if (periodList[7] == 1) {
       that.setData({
         selectIndex: 1,
@@ -2082,6 +2111,28 @@ Page({
     that.setData({
       deleteTag: false,
     })
+    wx.request({
+      url: 'http://127.0.0.1:8080/deleteGoalTag"',
 
+      method: 'GET',
+      data: {
+        
+      },
+      success: function (res) {
+        if (res.data.success == 1) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          })
+        }
+      }
+    })
+    this.data.tag.splice(e.currentTarget.dataset.index, 1)
+    this.setData({
+
+      tag: this.data.tag
+
+    })
   }
 })

@@ -99,7 +99,6 @@
 
 .p {
   width: 70%;
-  flex-direction: column;
 }
 
 .time_content {
