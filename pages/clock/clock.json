@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+    "usingComponents": {
+      "poster": "wxa-plugin-canvas/poster"
+    },
   "navigationBarTitleText": "开始打卡"
 }

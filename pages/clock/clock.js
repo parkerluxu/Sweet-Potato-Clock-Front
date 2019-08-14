@@ -33,8 +33,48 @@ Page({
     buttonText:'开始',
     canMove: true,
     canSet: true,
+    posterConfig:{
+      config:[{
+        width:300,
+        height:300
+      }],
+      blocks:[{
+        x:0,
+        y:0,
+        height:400,
+      }],
+      texts:[{
+        x:300,
+        y:0,
+        text:"123",
+        fontSize:14,
+      }], 
+      images:[{
+        x:0,
+        y:0,
+        url:'https://dormassistant.wang/back3.png',
+        width:300,
+        height:300,
+      }],
+      lines:[{
+        startX:0,
+        startY:0,
+        endX:300,
+        endY:0,
+        width:1,
+      }]
+  }
   },
 
+
+  onPosterSuccess:function(e) {
+    const { detail } = e;
+    console.log(detail)
+    wx.previewImage({
+      current: detail,
+      urls: [detail]
+    })
+  },
 
   move: function (e) {
     var query = wx.createSelectorQuery()
