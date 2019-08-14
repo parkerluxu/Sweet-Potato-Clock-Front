@@ -297,7 +297,6 @@ Page({
     var that = this;
     that.setData({
       goalId: null,
-      formId: e.detail.formId
     })
     wx.setStorageSync("formId", that.data.formId)
     if (that.data.goal.minutes < 10 && that.data.goal.isConcentrate == true) {
@@ -654,7 +653,6 @@ Page({
         var periodOfGoalNoTodayList = res.data.periodOfGoalNoTodayList;
         var goalTagList = res.data.goalTagList;
         console.log(res.data)
-
         if (goalList.length == 0 && goalNoTodayList.length == 0) {
           that.setData({
             noData: true,
@@ -683,7 +681,7 @@ Page({
           var planId = 'plan[' + planNum + '].goalId'
           var periodOfPlan = 'plan[' + planNum + '].period'
           var planTime = 'plan[' + planNum + '].clockTime'
-          if (goalList[i].concentrated == true) {
+          if (goalList[i].isConcentrated == true) {
             that.setData({
               [clockName]: goalList[i].content,
               [clockTime]: goalList[i].minutes,
@@ -718,7 +716,7 @@ Page({
           var planTag = 'plan_1[' + planNum + '].goalTag'
           var periodOfPlan = 'plan_1[' + planNum_1 + '].period'
           var planTime = 'plan_1[' + planNum_1 + '].clockTime'
-          if (goalNoTodayList[i].concentrated == true) {
+          if (goalNoTodayList[i].isConcentrated == true) {
             that.setData({
               [clockName]: goalNoTodayList[i].content,
               [clockTime]: goalNoTodayList[i].minutes,
@@ -2008,6 +2006,32 @@ Page({
                   title: '修改成功',
                   icon: 'success',
                   duration: 1000
+                })
+                wx.request({
+                  url: 'http://127.0.0.1:8080/deleteGoalTag',
+                  method: 'GET',
+                  data: {
+                    goalId: newGoal.goalId,
+                  },
+                  success(res) {
+                    console.log(res.data)
+                    for (var i = 0; i < that.data.tag.length; i++) {
+                      console.log(that.data.tag[i].tagName)
+                      var tagName = that.data.tag[i].tagName
+                      wx.request({
+                        url: 'http://127.0.0.1:8080/addGoalTag',
+                        method: 'GET',
+                        data: {
+                          goalId: newGoal.goalId,
+                          tagName: that.data.tag[i].tagName
+                        },
+                        success(res) {
+                          console.log(res.data)
+                        }
+                      })
+                    }
+                    that.onShow()
+                  }
                 })
                 that.onShow()
               }
