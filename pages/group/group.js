@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    randompic: 0,
+    randompic: [],
     showDialog: false,
     userId: wx.getStorageSync('openid'),
     focus: false,
@@ -182,10 +182,15 @@ Page({
 
 randompic(){
   var randompic1 = this.data.randompic;
-  randompic1 = Math.floor(Math.random() * 20);
+  var index = this.data.groupList.length;
+  var i =0;
+  for( i = 0; i < index ; i++){
+    randompic1[i] = Math.floor(Math.random() * 20);
+  }
   this.setData({
     randompic:randompic1
   });
+  console.log(randompic);
 },
 
   //新建小组标签多选
@@ -631,7 +636,8 @@ randompic(){
             [k4]: taglist[i],
           })
         }
-      }
+        that.randompic();
+      },
     })
     // 生命周期函数--监听页面显示
   },

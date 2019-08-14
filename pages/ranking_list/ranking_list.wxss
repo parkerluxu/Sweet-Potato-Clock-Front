@@ -191,7 +191,7 @@ position: fixed;
   font: 45rpx;
   /*font-weight: 550;*/
   text-align: left;
-  color: #000;
+  color: #fff;
   background-color: #fa9857;
 }
 .pen_png{
