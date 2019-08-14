@@ -217,7 +217,7 @@
 }
 
 .drawer_title {
-  padding: 3%;
+  padding: 2%;
   padding-left: 5%;
   font: 45rpx;
   /*font-weight: 550;*/

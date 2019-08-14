@@ -4,28 +4,38 @@
 <view animation="{{animationData}}" class="drawerbox" wx:if="{{showModalStatus}}">
 
   <view class="drawer-title">
-    <image class="pen_png" src="../images/pen.svg" />
+    <image class="pen_png" src="../images/pen.png" />
     <view>修改小组信息</view>
   </view>
+
+
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__bd_1">
-        <input type="text" class="weui-input" value="{{group.groupName}}" disabled='{{isAbled}}'  bindinput='getInput_1' />
+        <input type="text" class="weui-input" value="{{group.groupName}}" disabled='{{isAbled}}' bindinput='getInput_1' />
       </view>
     </view>
   </view>
+
+  <!--标签修改-->
+  <view class="line">
+    <button class="btn4 inactive" bindtap="tagModal" hidden='{{isTagMax}}' hover-class="button-hover">自定义</button>
+    <botton class="btn3 {{item.selected ? 'active' : 'inactive'}}" wx:for="{{defaultTag}}" wx:key="item.index" hover-class="button-hover" bindtap="selectTag" data-index="{{item.index}}" checked="{{item.selected}}"> {{item.name}}</botton>
+  </view>
+
+
   <view class="weui-cells weui-cells_after-title weui-cell_2 ">
     <view class="weui-cell weui-cell_1">
-    <image class="suona_png" src="../images/suona.png"></image>
-      <textarea class="weui-textarea text_area" value="{{text}}" fixed='true' bindinput='getInput_2' disabled='{{isAbled}}'/>
-      <view class="weui-textarea-counter">0/200</view>
+      <image class="suona_png" src="../images/suona.png"></image>
+      <textarea class="weui-textarea text_area" value="{{text}}" fixed='true' bindinput='getInput_2' disabled='{{isAbled}}' />
+      <view class="weui-textarea-counter">{{groupDetleng}}/200</view>
     </view>
   </view>
-   <view class="weui-cell weui-cell_input weui-cell_3">
-      <text class="font">是否私密</text>
-      <switch bindchange ='switchChange'class="is_private_text" checked='{{isPrivate}}' disabled='{{isAbled}}' />
-</view>
-  <button class='btn_ok' bindtap='confirmAndQuit' data-statu="close">{{buttonText}}</button>
+  <view class="weui-cell weui-cell_input weui-cell_3">
+    <text class="font">是否私密</text>
+    <switch bindchange='switchChange' class="is_private_text" checked='{{isPrivate}}' disabled='{{isAbled}}' />
+  </view>
+  <button class='btn_ok' bindtap='confirmAndQuit' data-statu="close">保存</button>
 
 </view>
 <view class="button">
@@ -36,7 +46,7 @@
 
 
 
-  <button class="btn2" size="default" bindtap="drawer" data-statu="open" >
+  <button class="btn2" size="default" bindtap="drawer" data-statu="open">
 
     <image class="modify_png" src='../images/bianji.svg'></image>
   </button>
@@ -45,13 +55,13 @@
 <view class='divLine'>
 </view>
 <view hidden='{{isMember}}'>
- <button type="default" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;" hover-class="button-hover" bindtap='joinGroup'>加入小组</button>
- <view class='divLine'/>
+  <button type="default" plain="true" style=" width:50%; margin-top:30rpx; color:#fa9857;border-color:#fa9857;" hover-class="button-hover" bindtap='joinGroup'>加入小组</button>
+  <view class='divLine' />
 </view>
 <scroll-view scroll-y="true" style=" width:100%;min-height:100%; padding:0rpx 0">
 
   <view class=" list  {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{showList}}" wx:key="">
-    <view class="{{item.isTouchMove ? 'item' : 'item'}} " >
+    <view class="{{item.isTouchMove ? 'item' : 'item'}} ">
       <view class="index">
         <text>{{index+1}}</text>
       </view>
@@ -68,7 +78,7 @@
         <text>{{item.minutesSum}}mins</text>
       </view>
     </view>
-   <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+    <view class="del" catchtap="del" data-index="{{index}}">删除</view>
   </view>
 
 </scroll-view>

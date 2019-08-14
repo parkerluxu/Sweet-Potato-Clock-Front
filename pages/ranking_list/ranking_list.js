@@ -31,9 +31,8 @@ Page({
     group: null,
     isPrivate:false,
     startX: 0, //开始坐标
-
-    startY: 0
-
+    startY: 0,
+    groupDetleng: 0,
 
   },
 
@@ -79,6 +78,7 @@ Page({
           'group.groupName': value.groupName,
           'group.text': value.description,
           'group.isPrivate': value.privateGroup,
+          groupDetleng: value.description.length
         });
         if (that.data.captainId == that.data.userId) {
           that.setData({
@@ -128,7 +128,6 @@ Page({
             [k5]:false,
           })
         }
-
       }
     })
 
@@ -213,7 +212,10 @@ Page({
 
   getInput_2:function(e) {
     var that = this;
+    var _length = that.data.groupDetleng;
+     _length = e.detail.value.length;
     that.setData({
+      groupDetleng:_length,
       'group.text': e.detail.value
     })
   },
