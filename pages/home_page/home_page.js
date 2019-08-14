@@ -16,7 +16,6 @@ Page({
      */
 
     deleteTag: false,
-
     showDialog: false,
     hiddentag: true,
     hiddenmodal: true,

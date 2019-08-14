@@ -20,7 +20,7 @@
   <!--标签修改-->
   <view class="line">
     <button class="btn4 inactive" bindtap="tagModal" hidden='{{isTagMax}}' hover-class="button-hover">自定义</button>
-    <botton class="btn3 {{item.selected ? 'active' : 'inactive'}}" wx:for="{{defaultTag}}" wx:key="item.index" hover-class="button-hover" bindtap="selectTag" data-index="{{item.index}}" checked="{{item.selected}}"> {{item.name}}</botton>
+    <botton class="btn3 {{item.selected ? 'active' : 'inactive'}}" wx:for="{{item.tag}}" wx:key="item.index" hover-class="button-hover" bindtap="selectTag"> {{item.tag.tagName}}</botton>
   </view>
 
 
