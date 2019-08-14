@@ -628,6 +628,25 @@ Page({
     var date = new Date()
     let showTime = util.formatTime(date)
     let showDate = showTime.substr(0, 10)
+    var isClockLocal
+    wx.request({
+      url: 'http://127.0.0.1:8080/userinformation/userinformation',
+      method: 'GET',
+      data: {
+        userid: wx.getStorageSync('openid')
+      },
+      success(res) {
+        console.log(res.data.userinformation.score)
+        if (res.data.userinformation.score == 100) {
+          isClockLocal = true
+        } else {
+          isClockLocal = false
+        }
+        that.setData({
+          isClock: isClockLocal
+        })
+      }
+    })
     that.setData({
       isGetPotato: app.globalData.isGetPotato,
       numberOfGetPotato: app.globalData.numberOfPotato,
@@ -2091,6 +2110,28 @@ Page({
     })
   },
 
+  setIsClock: function (e) {
+    console.log(this.data.isClock)
+    if (this.data.isClock == true) {
+      this.setData({
+        isClock: false
+      })
+    } else {
+      this.setData({
+        isClock: true
+      })
+    }
+    wx.request({
+      url: 'http://127.0.0.1:8080/setIsClock',
+      method: 'GET',
+      data: {
+        userId: wx.getStorageSync('openid')
+      },
+      success(res) {
+        console.log(res.data)
+      }
+    })
+  },
   selectTag: function(e) {
     let index = e.currentTarget.dataset.index;
     let arrs = this.data.tag;
