@@ -136,7 +136,7 @@
 
 .lable4 {
   display: flex;
-  padding: 10rpx 20rpx 10rpx;
+  padding: 7rpx 10rpx 7rpx;
   margin-left: 40rpx;
   border: 2rpx solid #000;
 }
@@ -389,9 +389,14 @@ button::after {
 
 .modal-mask {
   width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
   background: #000;
   opacity: 0.5;
+  overflow: hidden;
 }
 
 .modal-title {

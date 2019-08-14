@@ -19,7 +19,7 @@
       <view class="index">
         <text>{{index+1}}</text>
       </view>
-      <image class="poster" src="../images/group/{{randompic}}.svg" />
+      <image class="poster" src="../images/group/{{randompic[index]}}.svg" />
       <view class="meta">
         <text class="title">{{cell.groupName}}</text>
         <view class="group_card_tag">

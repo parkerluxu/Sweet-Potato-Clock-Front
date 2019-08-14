@@ -85,6 +85,10 @@
 
 .index {
   margin-left: 0%;
+  width: 40px;
+  justify-content:center;
+  display: flex;
+  margin-right: 3px;
 }
 
 .index text {
