@@ -69,7 +69,9 @@ Page({
       },
       success: function(res) {
         var value = res.data.groupInformation;
+        var tagInformation = res.data.tagInformation;
         console.log(value)
+        console.log(tagInformation)
         that.setData({
           captainId: value.captainId,
           groupName: value.groupName,
@@ -78,6 +80,7 @@ Page({
           'group.groupName': value.groupName,
           'group.text': value.description,
           'group.isPrivate': value.privateGroup,
+          'group.tag':tagInformation,
           groupDetleng: value.description.length
         });
         if (that.data.captainId == that.data.userId) {
