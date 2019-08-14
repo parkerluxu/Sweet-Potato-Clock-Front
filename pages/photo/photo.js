@@ -37,6 +37,15 @@ Page({
       },
       success(res){
         console.log(res.data)
+        if (res.data.success.length == 0) {
+          that.setData({
+            noData: true,
+          })
+        } else {
+          that.setData({
+            noData: false,
+          })
+        }
         that.setData({
           photoList:res.data.success
         })

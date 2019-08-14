@@ -67,9 +67,7 @@
 
 <!--添加目标弹窗-->
 <view class="drawer_screen" bindtap="drawer_1" data-statu="close" wx:if="{{showModalStatus_1}}"></view>
-
 <view animation="{{animationData_1}}" class="drawerbox" wx:if="{{showModalStatus_1}}">
-
   <view class="drawer-title">添加目标</view>
   <view class="line" style="height:75rpx;">
     <label class="lable1">模式</label>

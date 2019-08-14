@@ -1,4 +1,5 @@
 // pages/clock/clock.js
+import Poster from '../../miniprogram_npm/wxa-plugin-canvas/poster/poster';
 const util = require('../../utils/util.js')
 const defaultLogName = {
   work: '工作',
@@ -34,40 +35,40 @@ Page({
     canMove: true,
     canSet: true,
     posterConfig:{
-      config:[{
-        width:300,
-        height:300
+        width:500,
+        height:500,
+        backgroundColor:"#fff",
+        pixelRatio:100,
+        debug:false,
+        texts: [{
+          x: 100,
+          y: 100,
+          text: '1',
+          fontSize: 30,
+          zIndex:10,
+        }],
+      images: [{
+        x: 0,
+        y: 0,
+        url: 'https://dormassistant.wang/back3.png',
+        width: 500,
+        height: 500,
       }],
-      blocks:[{
-        x:0,
-        y:0,
-        height:400,
-      }],
-      texts:[{
-        x:300,
-        y:0,
-        text:"123",
-        fontSize:14,
-      }], 
-      images:[{
-        x:0,
-        y:0,
-        url:'https://dormassistant.wang/back3.png',
-        width:300,
-        height:300,
-      }],
-      lines:[{
-        startX:0,
-        startY:0,
-        endX:300,
-        endY:0,
-        width:1,
-      }]
-  }
+      },
   },
 
-
+  onCreatePoster() {
+    // setData配置数据
+    var k1 = 'posterConfig.images[0].url'
+    var k2 = 'posterConfig.texts[' + 0 + '].text'
+    this.setData({
+      [k1]: 'https://dormassistant.wang/back2.png',
+      [k2]: this.data.clockName, }, () => {
+      Poster.create();
+    });
+  },
   onPosterSuccess:function(e) {
+    
     const { detail } = e;
     console.log(detail)
     wx.previewImage({
