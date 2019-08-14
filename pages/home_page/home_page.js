@@ -1937,16 +1937,30 @@ Page({
                 duration: 1000
               })
               var goalId = res.data.success
-              var tagList=that.data.tag
               wx.request({
-                url: 'http://127.0.0.1:8080/modifyGoalTag',
+                url: 'http://127.0.0.1:8080/deleteGoalTag',
                 method:'GET',
                 data:{
                   goalId: newGoal.goalId,
-                  tagList:tag
                 },
                 success(res){
                   console.log(res.data)
+                  for (var i = 0; i < that.data.tag.length;i++){
+                    console.log(that.data.tag[i].tagName)
+                    var tagName = that.data.tag[i].tagName
+                    wx.request({
+                      url: 'http://127.0.0.1:8080/addGoalTag',
+                      method:'GET',
+                      data:{
+                        goalId: newGoal.goalId,
+                        tagName:that.data.tag[i].tagName
+                      },
+                      success(res){
+                        console.log(res.data)
+                      }
+                    })
+                  }
+                  that.onShow()
                 }
               })
             }
