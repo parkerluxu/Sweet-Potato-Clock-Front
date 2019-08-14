@@ -32,6 +32,6 @@
   <button class="button" form-type="submit" bindtap="startTimer" disabled="{{is_disabled}}" hover-class="button-hover" plain="true" style="color: #fa9857; border-color: #fa9857;">{{buttonText}}</button>
   </form>
 </view>
-<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bindtap="onCreatePoster" bind:fail="onPosterFail">
+<!--<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bindtap="onCreatePoster" bind:fail="onPosterFail">
     <button>点击生成海报</button>
-</poster>
+</poster>-->

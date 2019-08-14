@@ -45,8 +45,7 @@ Page({
           that.setData({
             noData: false,
           })
-        }
-        that.setData({
+        }that.setData({
           photoList:res.data.success
         })
       }
