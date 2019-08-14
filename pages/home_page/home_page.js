@@ -1900,55 +1900,19 @@ Page({
                 icon: 'success',
                 duration: 1000
               })
-
               var goalId = res.data.success
-              var tagLength = that.data.tag.length
-              for (var i = 0; i < tagLength; i++) {
-                console.log(that.data.tag[i].selected)
-                //从tag中选出被选中的标签
-                if (that.data.tag[i].selected == true) {
-                  var tagName = that.data.tag[i].name
-                  console.log(tagName)
-                  wx.request({
-                    url: 'http://localhost:8080/addGoalTag',
-                    method: 'GET',
-                    data: {
-                      tagName: tagName,
-                      goalId: goalId,
-                    },
-                    success: function (res) {
-                      console.log(res.data.success)
-                    }
-                  })
-                }
-              }
+              var tagList=that.data.tag
               wx.request({
-                url: 'http://localhost:8080/deleteGoalTag',
-                method: 'GET',
-
-                data: {
-                  tagId: that.data.tag[e.currentTarget.dataset.index].tagId,
-                  goalId: goalId
-                   },
-                success: function (res) {
-                  if (res.data.success == 1) {
-                    wx.showToast({
-                      title: '删除成功',
-                      icon: 'success',
-                      duration: 1000
-                    })
-                  }
+                url: 'http://127.0.0.1:8080/modifyGoalTag',
+                method:'GET',
+                data:{
+                  goalId: newGoal.goalId,
+                  tagList:tag
+                },
+                success(res){
+                  console.log(res.data)
                 }
               })
-              this.data.tag.splice(e.currentTarget.dataset.index, 1)
-              this.setData({
-                tag: this.data.tag
-              })
-              that.onShow()
-              that.setData({
-                goal: null,
-              })
-
             }
           })
         }
