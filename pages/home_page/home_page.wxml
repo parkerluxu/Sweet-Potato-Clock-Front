@@ -1,6 +1,7 @@
 <view class="list-cell">
   <text class="goalList-title">{{date}}</text>
-  <image class="ring" src='../images/ring.png' bindtap=' ' data-statu="open" style="margin-right:5%;"></image>
+  <image class="ring" src='../images/ring.png' bindtap='setIsClock' data-statu="open" style="margin-right:5%;" hidden="{{!isClock}}"></image>
+    <image class="ring" src='../images/noring.svg' bindtap='setIsClock' data-statu="open" style="margin-right:5%;" hidden="{{isClock}}"></image>
   <image class="newGoal" src='../images/new.png' bindtap='drawer_1' data-statu="open" style="margin-right:5%;"></image>
 </view>
 
