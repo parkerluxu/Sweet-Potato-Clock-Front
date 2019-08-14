@@ -136,7 +136,7 @@
 
 .lable4 {
   display: flex;
-  padding: 10rpx 20rpx 10rpx;
+  padding: 7rpx 10rpx 7rpx;
   margin-left: 40rpx;
   border: 2rpx solid #000;
 }
