@@ -473,7 +473,7 @@ randompic(){
     var that = this
     console.log(e.currentTarget.dataset)
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/joinGroup',
+      url: 'http://localhost:8080/joinGroup',
       method: 'GET',
       data: {
         userid: wx.getStorageSync('openid'),
@@ -512,7 +512,7 @@ randompic(){
       noData1: false,
     })
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displaygrouprandom/displaygrouprandom',
+      url: 'http://localhost:8080/displaygrouprandom/displaygrouprandom',
       method: 'GET',
       success(res) {
         console.log(res.data)
@@ -558,7 +558,7 @@ randompic(){
       noData1: false,
     })
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/search/searchbygroupname',
+      url: 'http://localhost:8080/search/searchbygroupname',
       method: 'GET',
       data: {
         groupName: that.data.searchName

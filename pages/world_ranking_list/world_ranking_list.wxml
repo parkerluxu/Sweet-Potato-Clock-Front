@@ -29,8 +29,8 @@
     </view>
       </view>
       <view class="rating">
-  <image class="tree_png" src="../images/shu.svg"></image>
-    <text>×{{item.treesSum}}</text>
+  <image class="tree_png" src="../images/potato.svg"></image>
+    <text>×{{item.potato}}</text>
   </view>
     </view>
   </view>

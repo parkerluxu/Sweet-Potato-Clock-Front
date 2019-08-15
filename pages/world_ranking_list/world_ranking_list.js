@@ -52,24 +52,24 @@ Page({
   onShow: function () {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/rank/rankGrobal',
+      url: 'http://127.0.0.1:8080/rank/rankGrobal',
       method: "GET",
 
       success: function (res) {
         that.setData({
           memberList: res.data.userList,
-          timeList: res.data.timeList,
-          treesList:res.data.treesList
+          timeList: res.data.minutesList,
+          potatoList:res.data.potatoList
         })
         for (var i = 0; i < that.data.memberList.length; ++i) {
           var k1 = 'showList[' + i + '].avatar';
           var k2 = 'showList[' + i + '].name';
-          var k3 = 'showList[' + i + '].treesSum';
+          var k3 = 'showList[' + i + '].potato';
           var k4 = 'showList[' + i + '].minutes';
           that.setData({
             [k1]: that.data.memberList[i].avatar,
             [k2]: that.data.memberList[i].userNickname,
-            [k3]: that.data.treesList[i].treeNumber,
+            [k3]: that.data.potatoList[i].potatoNumber,
             [k4]: that.data.timeList[i]
           })
         }
