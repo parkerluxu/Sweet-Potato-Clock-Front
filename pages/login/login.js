@@ -40,6 +40,7 @@ Page({
                   //调用后端
                   wx.request({
                     url: app.globalData.url+'/WXLogin',
+
                     data: {
                       encryptedData: res.encryptedData,
                       iv: res.iv,
@@ -84,6 +85,7 @@ Page({
                   //调用后端
                   wx.request({
                     url: app.globalData.url+'/WXLogin',
+
                     data: {
                       encryptedData: res.encryptedData,
                       iv: res.iv,

@@ -1,11 +1,13 @@
 // pages/group/group.js
-var app = getApp();
+const app=getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    randompic: [],
+    showDialog: false,
     userId: wx.getStorageSync('openid'),
     focus: false,
     inputValue: '',
@@ -27,7 +29,8 @@ Page({
     orientation: 'left', //滚动方向
     interval: 20, // 时间间隔b
     hiddenmodalput: true, //掩盖输入框
-    dates_1: [{
+    selected_num: 0,
+    defaultTag: [{
         name: "学习",
         index: "0",
         selected: false
@@ -71,13 +74,17 @@ Page({
     this.util(currentStatu)
     this.selectP();
     //清空数据
-    var datas_11 = this.data.dates_1;
-    var _length = this.data.dates_1.length;
+    var datas_11 = this.data.defaultTag;
+    var _length = this.data.defaultTag.length;
+    var selected_num1 = this.data.selected_num;
+    selected_num1 = 0;
     datas_11.splice(3, 3);
     this.setData({
-      dates_1: datas_11,
-      isTagMax:false,
+      defaultTag: datas_11,
+      isTagMax: false,
+      selected_num: selected_num1
     });
+    console.log(this.data.selected_num)
   },
   util: function(currentStatu) {
     /* 动画部分 */
@@ -106,15 +113,15 @@ Page({
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
       this.setData({
         animationData: animation
-      })  
+      })
 
       //关闭
       if (currentStatu == "close") {
         this.setData({
-          showModalStatus: false
+          showModalStatus: false,
         });
       }
-      console.log(this.data.dates_1)
+      console.log(this.data.defaultTag)
     }.bind(this), 200)
 
     // 显示
@@ -173,66 +180,112 @@ Page({
       });
     }
   },
+
+randompic(){
+  var randompic1 = this.data.randompic;
+  var index = this.data.groupList.length;
+  var i =0;
+  for( i = 0; i < index ; i++){
+    randompic1[i] = Math.floor(Math.random() * 20);
+  }
+  this.setData({
+    randompic:randompic1
+  });
+  console.log(randompic);
+},
+
   //新建小组标签多选
-  selectDate_1: function(e) {
+  selectTag: function(e) {
     let index = e.currentTarget.dataset.index;
-    let arrs = this.data.dates_1;
-    if (arrs[index].selected == false) {
-      arrs[index].selected = true;
-    } else {
-      arrs[index].selected = false;
+    let arrs = this.data.defaultTag;
+    let selected_num = this.data.selected_num;
+    if (arrs[index].selected == false && selected_num > 2) {
+        wx.showToast({
+          title: '已达标签上限',
+          image: '../images/close.png'
+        });
     }
+    else if (arrs[index].selected == false && selected_num < 3){
+        arrs[index].selected = true;
+        selected_num += 1;
+      } else if(arrs[index].selected == true) {
+        arrs[index].selected = false;
+        selected_num -= 1;
+      }
     this.setData({
-      dates_1: arrs,
-      hiddenDate_1: false
+      defaultTag: arrs,
+      hiddenDate_1: false,
+      selected_num: selected_num
     })
-    console.log(this.data.dates_1)
+    console.log(this.data.defaultTag)
   },
+
   //自定义
-  modalinput: function() {
+  tagModal: function() {
     this.setData({
-      hiddenmodalput: !this.data.hiddenmodalput
+      showDialog: !this.data.showDialog
     })
   },
+
   //重置按钮
   cancel: function() {
     this.setData({
-      tapname: '',
-      hiddenmodalput: true
+      tagname: null,
+      newTag: null
     });
   },
   //输入自定义标签
-  inputTapName: function(e) {
-    var _length = this.data.dates_1.length;
-    var tapnme = e.detail.value;
-    this.setData({
-      newtTag: tapnme,
-    })
-    console.log(tapnme)
+  inputTagName: function(e) {
+    var _length = this.data.defaultTag.length;
+    var tagname = e.detail.value;
+    if (tagname != null) {
+      if (tagname.length >= 6) {
+        wx.showToast({
+          title: '不能超过6个字',
+          image: '../images/close.png'
+        })
+      }
+      tagname = tagname.slice(0 , 6);
+      this.setData({
+        newTag: tagname,
+      })
+    console.log(tagname)
+    console.log(this.data.newTag)
+    }
   },
   //提交
   confirm: function() {
-    var _length = this.data.dates_1.length;
-      let dates_11 = this.data.dates_1;
-      var tapname = this.data.newtTag;
+    var _length = this.data.defaultTag.length;
+    let tag1 = this.data.defaultTag;
+     if (this.data.newTag == null) {
+      wx.showToast({
+        title: '输入不能为空',
+        image: '../images/close.png'
+      });
+    } else {
+      var tagname = this.data.newTag;
       var obj = {};
-      obj.name = tapname;
+      obj.name = tagname;
       obj.index = _length;
-      obj.selected = true;
-      dates_11.push(obj);
-      this.setData({
-        isTagMax:false,
-        dates_1: dates_11,
-        tapname: '',
-        hiddenmodalput: true
-      })
-    if (_length >= 5) {
-      this.setData({
-        isTagMax: true,
-        hiddenmodalput: true
-      })
-    }
+      obj.selected = false;
+      tag1.push(obj);
 
+      this.setData({
+        isTagMax: false,
+        defaultTag: tag1,
+        tagname: "",
+        showDialog: false
+      })
+      if (_length + 1 >= 6) {
+        this.setData({
+          isTagMax: true,
+          showDialog: false
+        })
+      }
+
+    }
+    console.log(this.data.defaultTag)
+    console.log(this.data.newTag)
   },
 
   //加入小组
@@ -272,10 +325,20 @@ Page({
 
   //获取小组名称
   getGroupName: function(e) {
-    console.log(e.detail.value)
-    var that = this
+    console.log(e.detail.value);
+    var groupname = e.detail.value;
+    if (groupname != null) {
+      if (groupname.length >= 6) {
+        wx.showToast({
+          title: '不能超过6个字',
+          image: '../images/close.png'
+        })
+      }
+    }
+      groupname = groupname.slice(0, 6);
+    var that = this;
     that.setData({
-      'newGroup.name': e.detail.value,
+      'newGroup.name': groupname,
     })
   },
 
@@ -358,9 +421,8 @@ Page({
         duration: 1000
       })
     } else {
-      that.powerDrawer(e)
       wx.request({
-        url: app.globalData.url+'/cretegroup',
+        url: app.globalData.url+'/creategroup',
         method: 'POST',
         data: {
           captainId: wx.getStorageSync('openid'),
@@ -376,9 +438,31 @@ Page({
             icon: 'success',
             duration: 1000
           });
-          that.onShow();
+          var groupId = res.data.success
+          var tagLength = that.data.defaultTag.length
+          for (var i = 0; i < tagLength; i++) {
+            console.log(that.data.defaultTag[i].selected)
+            //从defaultTag中选出被选中的标签
+            if (that.data.defaultTag[i].selected == true) {
+              var tagName = that.data.defaultTag[i].name
+              console.log(tagName)
+              wx.request({
+                url: app.globalData.url+'/addGroupTag',
+                method: 'GET',
+                data: {
+                  tagName: tagName,
+                  groupId: groupId,
+                },
+                success: function(res) {
+                  console.log(res.data.success)
+                  that.powerDrawer(e);
+                }
+              })
+            }
+          }
         }
       })
+      that.onShow();
     }
     that.setData({
       newGroup: null
@@ -531,6 +615,7 @@ Page({
       success: function(res) {
         console.log(res.data)
         var list = res.data.groupList;
+        var taglist = res.data.tagList;
         if (res.data.groupList.length == 0) {
           that.setData({
             noData: true
@@ -544,13 +629,16 @@ Page({
           var k1 = 'groupList[' + i + '].groupName';
           var k2 = 'groupList[' + i + '].groupId';
           var k3 = 'groupList[' + i + '].memberNumber';
+          var k4 = 'groupList[' + i + '].groupTag';
           that.setData({
             [k1]: list[i].groupName,
             [k2]: list[i].groupId,
             [k3]: list[i].memberNumber,
+            [k4]: taglist[i],
           })
         }
-      }
+        that.randompic();
+      },
     })
     // 生命周期函数--监听页面显示
   },

@@ -1,4 +1,5 @@
 // pages/clock/clock.js
+import Poster from '../../miniprogram_npm/wxa-plugin-canvas/poster/poster';
 const util = require('../../utils/util.js')
 var app = getApp();
 const defaultLogName = {
@@ -34,8 +35,48 @@ Page({
     buttonText:'开始',
     canMove: true,
     canSet: true,
+    posterConfig:{
+        width:500,
+        height:500,
+        backgroundColor:"#fff",
+        pixelRatio:100,
+        debug:false,
+        texts: [{
+          x: 100,
+          y: 100,
+          text: '1',
+          fontSize: 30,
+          zIndex:10,
+        }],
+      images: [{
+        x: 0,
+        y: 0,
+        url: 'https://dormassistant.wang/back3.png',
+        width: 500,
+        height: 500,
+      }],
+      },
   },
 
+  onCreatePoster() {
+    // setData配置数据
+    var k1 = 'posterConfig.images[0].url'
+    var k2 = 'posterConfig.texts[' + 0 + '].text'
+    this.setData({
+      [k1]: 'https://dormassistant.wang/back2.png',
+      [k2]: this.data.clockName, }, () => {
+      Poster.create();
+    });
+  },
+  onPosterSuccess:function(e) {
+    
+    const { detail } = e;
+    console.log(detail)
+    wx.previewImage({
+      current: detail,
+      urls: [detail]
+    })
+  },
 
   move: function (e) {
     var query = wx.createSelectorQuery()
@@ -121,7 +162,25 @@ Page({
     }
   },
 
+
+  getFormID: function (e) {
+    var formId = e.detail.formId
+    console.log(formId);
+    wx.request({
+      url: 'https://localhost:8080/addFormId',
+      method: 'GET',
+      data: {
+        userId: wx.getStorageSync('openid'),
+        formId: formId,
+      },
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  },
+
   startTimer: function (e) {
+    var formId=e.detail.formId
     let startTime = Date.now()
     let isRuning = this.data.isRuning
     let showTime = util.formatTime1(this.data.workTime, 'HH')
@@ -182,6 +241,9 @@ Page({
         },
         success: function (res) {
           console.log(res.data)
+          var app=getApp();
+          app.globalData.numberOfPotato=res.data.numberOfGetPotato;
+          app.globalData.isGetNewPhoto=res.data.isGetNewPhoto;
           var pages = getCurrentPages(); //当前页面栈
           if (pages.length > 1) {
             var beforePage = pages[pages.length - 2]; //获取上一个页面实例对象

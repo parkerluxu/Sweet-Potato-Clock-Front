@@ -1,8 +1,8 @@
-<scroll-view class="album-list" bindtap="goToAlbum" scroll-y="true" lower-threshold="loadAlbumList">
-  <view class='album-card'>
-    <image class='background' src="../images/back2.png" mode="aspectFill"></image>
+<scroll-view class="album-list" scroll-y="true" lower-threshold="loadAlbumList" >
+  <view class='album-card' wx:for="{{albumList}}" data-albumId='{{item.albumId}}' bindtap="goToAlbum">
+    <image class='background' style="background-image:url('{{item.coverUrl}}');" mode="aspectFill" ></image>
     <view class='title'>
-        <text>测试123</text>
+        <text></text>
     </view>
   </view>
 </scroll-view>

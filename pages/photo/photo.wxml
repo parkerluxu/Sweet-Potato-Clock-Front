@@ -1,2 +1,21 @@
 <!--pages/photo.wxml-->
-<text>pages/photo.wxml</text>
+
+<view class="mainFrame">
+  <swiper class="container" indicator-dots="{{indicatorDots}}" indicator-dots="{{indicatordots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{photoList}}">
+      <swiper-item class="vol-swiper-item" bindtap="onItemClick">
+        <view class="vol-card" data-id="{{item.photoId}}" catchtap="onPostTap">
+          <!--<view data-detail-href="{{item.detailHref}}" class="item">-->
+          <!--图片-->
+          <view hidden='{{!noData}}' class='noData'>
+  <image class='vol-picture1' src='../images/kong.png'></image>
+  <text style='color:gray;'>暂无卡片</text>
+  <text style='color:gray;'>快去打卡收集吧！</text>
+</view>
+          <image class="vol-picture" src="{{item.photoUrl}}" mode="aspectFill"></image>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+

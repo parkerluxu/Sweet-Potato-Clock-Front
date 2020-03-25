@@ -39,7 +39,7 @@ App({
                   if (result.data.status == 1) {
                     console.log(result.data.userInfo.openId);
                   } else {
-                    console.log('解密失败')
+                    console.log(result.data.status)
                   }
                 },
                 fail: function () {
