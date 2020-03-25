@@ -1,4 +1,5 @@
 // pages/photo.js
+var app = getApp();
 Page({
 
   /**

@@ -1,5 +1,6 @@
 // pages/clock/clock.js
 const util = require('../../utils/util.js')
+var app = getApp();
 const defaultLogName = {
   work: '工作',
   rest: '休息'
@@ -172,7 +173,7 @@ Page({
       // clear timer
       this.timer && clearInterval(that.timer)
       wx.request({
-        url: 'https://clock.dormassistant.wang:8080/record/goalcomplete',
+        url: app.globalData.url+'/record/goalcomplete',
         method: 'POST',
         data: {
           goalId: that.data.goalId,

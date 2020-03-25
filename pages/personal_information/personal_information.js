@@ -1,4 +1,5 @@
 // pages/personal_information/personal_information.js
+var app = getApp();
 Page({
 
   /**
@@ -23,7 +24,7 @@ Page({
       },
       {
         typeId: 2,
-        image_url: '../images/shu.svg',
+        image_url: '../images/potato.png',
         content: Number,
         contentText: String
       },
@@ -51,18 +52,18 @@ Page({
   onShow: function() {
     var that = this
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/userinformation/userinformation',
+      url: app.globalData.url+'/userinformation/userinformation',
       data: {
         userid: wx.getStorageSync('openid'),
       },
       method: 'GET',
       success: function(res) {
-        console.log(res.data.userinformation);
+        console.log(res.data);
         var value = res.data.userinformation;
-        var treeNumber = res.data.treeNumber;
+        var potatoNumber = res.data.numberOfPotato;
         var daysSum = value.daysSum + '天';
         var minutesSum = value.minutesSum + '分钟';
-        var score = treeNumber + '棵';
+        var score = potatoNumber + '个';
         var item0 = 'orderItems[' + 0 + '].contentText';
         var item1 = 'orderItems[' + 1 + '].contentText';
         var item2 = 'orderItems[' + 2 + '].contentText';

@@ -1,4 +1,5 @@
 // pages/ranking_list/ranking_list.js
+var app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -62,7 +63,7 @@ Page({
   onShow: function() {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displaygroupinformation/displaygroup',
+      url: app.globalData.url+'/displaygroupinformation/displaygroup',
       method: "GET",
       data: {
         groupId: that.data.groupId
@@ -96,7 +97,7 @@ Page({
       }
     });
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displayuserlist/displayuserlist',
+      url: app.globalData.url+'/displayuserlist/displayuserlist',
       method: "GET",
       data: {
         groupId: that.data.groupId
@@ -171,7 +172,7 @@ Page({
     var that = this
     console.log(e.currentTarget.dataset)
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/joinGroup',
+      url: app.globalData.url+'/joinGroup',
       method: 'GET',
       data: {
         userid: wx.getStorageSync('openid'),
@@ -282,7 +283,7 @@ Page({
     var that = this;
     if(that.data.isCapatain==true){
       wx.request({
-        url: 'https://clock.dormassistant.wang:8080/group/modifyname',
+        url: app.globalData.url+'/group/modifyname',
         method: "POST",
         data: {
           groupId: that.data.groupId,
@@ -308,7 +309,7 @@ Page({
         success(e){
           if(e.confirm==true){
             wx.request({
-              url: 'https://clock.dormassistant.wang:8080/deletegroupmember/deletegroupmember',
+              url: app.globalData.url+'/deletegroupmember/deletegroupmember',
               method: 'GET',
               data: {
                 userId: wx.getStorageSync('openid'),
@@ -445,7 +446,7 @@ Page({
   del: function (e) {
     var that=this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/deletegroupmember/deletegroupmember',
+      url: app.globalData.url+'/deletegroupmember/deletegroupmember',
       method:'GET',
       data:{
         userId: that.data.memberList[e.currentTarget.dataset.index].userId,

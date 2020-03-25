@@ -1,9 +1,14 @@
 //app.js
 
-var app = getApp();
 App({
+  globalData:{
+    // 'url':app.globalData.url+'',
+    'url':'http://localhost:8080'
+  },
+
   onLaunch: function () {
     // 展示本地存储能力
+    var that=this
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -23,7 +28,7 @@ App({
               })
               //调用后端
               wx.request({
-                url: 'https://clock.dormassistant.wang:8080/WXLogin',
+                url: that.globalData.url+'/WXLogin',
                 data: {
                   encryptedData: res.encryptedData,
                   iv: res.iv,
@@ -70,9 +75,6 @@ App({
         }
       }
     })
-  },
-  globalData: {
-    userInfo: null
   },
   
 })

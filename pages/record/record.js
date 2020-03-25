@@ -73,7 +73,7 @@ Page({
       'dateStr.day': day,
     })
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/userinformation/userinformation',
+      url: app.globalData.url+'/userinformation/userinformation',
       data: {
         userid: wx.getStorageSync('openid')
       },
@@ -97,7 +97,7 @@ Page({
     var dateStr = options
     if (options != null) {
       wx.request({
-        url: 'https://clock.dormassistant.wang:8080/displayrecord/displayrecordbydate',
+        url: app.globalData.url+'/displayrecord/displayrecordbydate',
         method: 'GET',
         data: {
           userid: wx.getStorageSync('openid'),
@@ -136,7 +136,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'https://clock.dormassistant.wang:8080/displayrecord/displayrecord',
+        url: app.globalData.url+'/displayrecord/displayrecord',
         method: 'GET',
         data: {
           userid: wx.getStorageSync('openid'),
@@ -260,7 +260,7 @@ Page({
     var that = this
     var categories = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displayuserstastic/displayuserstasticday',
+      url: app.globalData.url+'/displayuserstastic/displayuserstasticday',
       method: 'GET',
       data: {
         userId: wx.getStorageSync('openid'),
@@ -321,7 +321,7 @@ Page({
   getWeekStatic: function(dateStr) {
     var that = this
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displayuserstastic/displayuserstasticweek',
+      url: app.globalData.url+'/displayuserstastic/displayuserstasticweek',
       method: 'GET',
       data: {
         userId: wx.getStorageSync('openid'),
@@ -388,7 +388,7 @@ Page({
       'chartData.main.categories': null,
     })
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displayuserstastic/displayuserstasticmonth',
+      url: app.globalData.url+'/displayuserstastic/displayuserstasticmonth',
       method: 'GET',
       data: {
         userId: wx.getStorageSync('openid'),

@@ -1,28 +1,22 @@
 // pages/home-page/home-page.js
 const util = require('../../utils/util.js')
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
     /**
      * 以_1结尾的数组表示那些今天不需要打卡的目标
      */
-
     /**
      * 特别说明，变量以_1结尾的是服务于添加目标的，不加是服务于修改目标的
      */
-
-
-
     clock: [],
     plan: [],
     clock_1: [],
-
     plan_1: [],
-
     dates: [{
         name: "Sun",
         index: "0",
@@ -73,6 +67,10 @@ Page({
     selectIndex: 0,
     hiddenDate: true,
     goal: {
+      minutes: Number,
+      isConcentrate: Boolean,
+    },
+    goal_1: {
       minutes: Number,
       isConcentrate: Boolean,
     },
@@ -133,7 +131,6 @@ Page({
     ],
     goalId: Number,
     startX: 0, //开始坐标
-
     startY: 0,
     //储存目标的原始信息，用来判断用户是否对目标进行了修改
     cbgColor_0: String,
@@ -145,9 +142,7 @@ Page({
     color_0: "#979797",
     goalName_0: String,
     chooseWhichGoal: String,
-
   },
-
   //选择“一次”、“每天”、“自定义”
   selectOnce: function(e) {
     var that = this;
@@ -211,7 +206,6 @@ Page({
     this.setData({
       selectIndex: e.currentTarget.dataset.index
     })
-
   },
   //设置打卡周期
   selectDate: function(e) {
@@ -281,12 +275,12 @@ Page({
 
     } else {
       wx.request({
-        url: 'https://clock.dormassistant.wang:8080/usergoal/addgoal',
+        url: app.globalData.url+'/usergoal/addgoal',
         method: 'POST',
         data: {
           userId: wx.getStorageSync('openid'),
           content: that.data.goal.name,
-          concentrated: that.data.goal.isConcentrate,
+          isConcentrated: that.data.goal.isConcentrate,
           minutes: that.data.goal.minutes,
         },
         success: function(res) {
@@ -295,7 +289,7 @@ Page({
             goalId: res.data.goalId,
           })
           wx.request({
-            url: 'https://clock.dormassistant.wang:8080/goaldate/addgoaldate',
+            url: app.globalData.url+'/goaldate/addgoaldate',
             method: 'POST',
             data: {
               goalId: that.data.goalId,
@@ -524,7 +518,7 @@ Page({
       plan_1: null,
     })
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/displaygoal/displaygoal',
+      url: app.globalData.url+'/displaygoal/displaygoal',
       method: 'GET',
       data: {
         userId: wx.getStorageSync('openid')
@@ -628,7 +622,7 @@ Page({
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/record/planComplete',
+      url: app.globalData.url+'/record/planComplete',
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
@@ -646,7 +640,7 @@ Page({
     console.log(e.currentTarget.dataset['goalid'])
     var goalId = e.currentTarget.dataset['goalid']
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/record/planUnComplete',
+      url: app.globalData.url+'/record/planUnComplete',
       method: 'POST',
       data: {
         userId: wx.getStorageSync('openid'),
@@ -830,7 +824,7 @@ Page({
     console.log(e.currentTarget.dataset.index)
     console.log(that.data.clock[e.currentTarget.dataset.index].goalId)
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
+      url: app.globalData.url+'/usergoal/deleteusergoal',
 
       method: 'GET',
       data: {
@@ -947,7 +941,7 @@ Page({
   del_2: function(e) {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
+      url: app.globalData.url+'/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan[e.currentTarget.dataset.index].goalId
@@ -1062,7 +1056,7 @@ Page({
   del_3: function(e) {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
+      url: app.globalData.url+'/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.clock_1[e.currentTarget.dataset.index].goalId
@@ -1177,7 +1171,7 @@ Page({
   del_4: function(e) {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/usergoal/deleteusergoal',
+      url: app.globalData.url+'/usergoal/deleteusergoal',
       method: 'GET',
       data: {
         goalId: that.data.plan_1[e.currentTarget.dataset.index].goalId
@@ -1608,7 +1602,7 @@ Page({
       ibColor_1: "#e9833e",
       'goal.isConcentrate': true,
     })
-    console.log(that.data.goal.isConcentrate_1)
+    console.log(that.data.goal.isConcentrate)
   },
   //选择了计划模式
   selectP_1: function() {
@@ -1625,7 +1619,7 @@ Page({
       ibColor_1: "#979797",
       'goal.isConcentrate': false,
     })
-    console.log(that.data.goal.isConcentrate_1)
+    console.log(that.data.goal.isConcentrate)
   },
 
   //设置目标名称
@@ -1668,7 +1662,7 @@ Page({
     console.log(newGoal.planName)
       if (newGoal.clockTime == 0 || newGoal.clockName == "时长（10~120）") {
         wx.request({
-          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
+          url: app.globalData.url+'/usergoal/modifyusergoal',
           method: 'POST',
           data: {
             userId: wx.getStorageSync('openid'),
@@ -1681,7 +1675,7 @@ Page({
           success: function(res) {
             console.log(res.data)
             wx.request({
-              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
+              url: app.globalData.url+'/goaldate/modifygoaldate',
               method: 'POST',
               data: {
                 goalId: newGoal.goalId,
@@ -1718,7 +1712,7 @@ Page({
         })
       } else {
         wx.request({
-          url: 'https://clock.dormassistant.wang:8080/usergoal/modifyusergoal',
+          url: app.globalData.url+'/usergoal/modifyusergoal',
           method: 'POST',
           data: {
             userId: wx.getStorageSync('openid'),
@@ -1731,7 +1725,7 @@ Page({
           success: function(res) {
             console.log(res.data)
             wx.request({
-              url: 'https://clock.dormassistant.wang:8080/goaldate/modifygoaldate',
+              url: app.globalData.url+'/goaldate/modifygoaldate',
               method: 'POST',
               data: {
                 goalId: newGoal.goalId,

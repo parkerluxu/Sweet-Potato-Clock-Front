@@ -52,7 +52,7 @@ Page({
   onShow: function () {
     var that = this;
     wx.request({
-      url: 'https://clock.dormassistant.wang:8080/rank/rankGrobal',
+      url: app.globalData.url+'/rank/rankGrobal',
       method: "GET",
 
       success: function (res) {

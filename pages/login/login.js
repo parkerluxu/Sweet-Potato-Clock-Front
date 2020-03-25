@@ -1,5 +1,4 @@
 var app = getApp();
-
 Page({
 
   /**
@@ -40,7 +39,7 @@ Page({
                   })
                   //调用后端
                   wx.request({
-                    url: 'https://clock.dormassistant.wang:8080/WXLogin',
+                    url: app.globalData.url+'/WXLogin',
                     data: {
                       encryptedData: res.encryptedData,
                       iv: res.iv,
@@ -84,7 +83,7 @@ Page({
                   })
                   //调用后端
                   wx.request({
-                    url: 'https://clock.dormassistant.wang:8080/WXLogin',
+                    url: app.globalData.url+'/WXLogin',
                     data: {
                       encryptedData: res.encryptedData,
                       iv: res.iv,
@@ -136,6 +135,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log("Url:"+app.globalData.url)
     var that=this
     if(wx.getStorageSync('logged')==true){
       that.setData({
