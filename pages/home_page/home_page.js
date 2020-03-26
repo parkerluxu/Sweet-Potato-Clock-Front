@@ -81,7 +81,7 @@ Page({
     selectIndex: 0,
     hiddenDate: true,
     goal: {
-      minutes: Number,
+      minutes: 20,
       isConcentrate: Boolean,
     },
     disposable: false,
@@ -141,7 +141,6 @@ Page({
     ],
     goalId: Number,
     startX: 0, //开始坐标 
-
     startY: 0,
     //储存目标的原始信息，用来判断用户是否对目标进行了修改 
     cbgColor_0: String,
@@ -154,12 +153,10 @@ Page({
     goalName_0: String,
     chooseWhichGoal: String,
     isGetEnoughPotato: false,
-    isGetPotato: false,
     numberOfGetPotato: 1,
     isGetNewPhoto: false,
     isGetNewPhotoShow: false,
-
-
+    isGetPotato: false,
     tag: [],
     hiddentag: false,
     hiddenmodalput: true

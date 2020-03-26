@@ -1,0 +1,4 @@
+<view class="about-us">
+  <view>关于我们</view>
+  <text>本小程序目前不作为商业用途，已开源于github，地址：https://github.com/HandsomeLu/Sweet-Potato-Clock-Front</text>
+</view>

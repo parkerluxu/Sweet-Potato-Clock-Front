@@ -33,7 +33,7 @@
   </view>
 </view>
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{clock}}" data-index="{{index}}" bindtouchstart="touchstart_1" bindtouchmove="touchmove_1" bindlongtap='showMessage_1' data-statu="open">
-  <view class="clock-list" style="background-image:url('https://dormassistant.wang/back3.png');">
+  <view class="clock-list" style="background-image:url('http://picture.dormassistant.wang/back3.png');">
     <view class="p">
       <view class="lable2">
           {{item.clockName}}
@@ -52,7 +52,7 @@
   <view class="del" catchtap="del_1" data-index="{{index}}">删除</view>
 </view>
 <view class="list-card {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{plan}}" data-index="{{index}}" bindtouchstart="touchstart_2" bindtouchmove="touchmove_2" wx:key="" bindlongtap='showMessage_2' data-statu="open">
-  <view class="plan-list" style="background-image:url('https://dormassistant.wang/back2.png'); ">
+  <view class="plan-list" style="background-image:url('http://picture.dormassistant.wang/back2.png'); ">
     <view class="p">
       <view class="lable2">{{item.planName}}</view>
       <view class='time_content'>

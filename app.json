@@ -12,7 +12,8 @@
     "pages/photo/photo",
     "pages/personal_information/personal_information",
     "pages/world_ranking_list/world_ranking_list",
-    "pages/album/album"
+    "pages/album/album",
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",

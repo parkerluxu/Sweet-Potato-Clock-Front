@@ -24,3 +24,6 @@
       <text>记录</text>
   </button>
 </view>
+<view class="about-us">
+<navigator url="../about/about" class="about-navigator">关于我们</navigator>
+</view>

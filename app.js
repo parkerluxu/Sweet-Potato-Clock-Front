@@ -3,7 +3,10 @@
 App({
   globalData:{
     // 'url':app.globalData.url+'',
-    'url':'http://localhost:8080'
+    'url':'http://localhost:8080',
+    isGetPotato:false,
+    numberOfGetPotato:Number,
+    isGetNewPhoto:Boolean,
   },
 
   onLaunch: function () {

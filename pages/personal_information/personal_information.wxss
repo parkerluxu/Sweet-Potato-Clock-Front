@@ -119,4 +119,13 @@ button::after{
   height: 2.5rpx;
 }
 
+.about-us {
+  margin-top: 350rpx;
+  text-align: center;
+}
+
+.about-navigator{
+  font-size: small;
+}
+
 
